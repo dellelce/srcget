@@ -10,19 +10,44 @@
 # temporary srcHome....
 srcHome="/home/antonio/src/utils/srcget"
 profilesDir="$srcHome/profiles"
+wgetArgs="-q"
 
 ### FUNCTIONS ###
 
+# interface to wget
+
 rawget()
 {
- typeset ua="Mozilla/5.0"
- 
  typeset url="$1"
+ typeset ua="Mozilla/5.0"
 
  [ -z "$url" ] && return 1
 
- wget -U "$ua" -O - -q "$url"
+ wget -U "$ua" -O - "${wgetArgs}" "$url"
 }
+
+# latest version
+
+current_version()
+{
+ [ -z "$skipvers" ] && 
+ {
+   typeset _awk="awk"
+ } ||
+ {
+   typeset _awk="awk -vskipvers=$skipvers"
+ }
+ 
+ [ -z "$sep" ] &&
+ {
+   rawget "$srcurl" | ${_awk} -f "$fp_filter";
+ } ||
+ {
+   rawget "$srcurl" | ${_awk} -F"${sep}" -f "$fp_filter"
+ }
+}
+
+# main
 
 main()
 {
@@ -39,12 +64,24 @@ main()
 
  [ -z "srcurl" ] && { echo "invalid url: $srcurl"; return 3; }  
 
- typeset latest=$(rawget $srcurl | awk -f "$fp_filter")
+ typeset latest=$(current_version)
+ typeset fn=$(basename $latest)
 
- echo "Current version is :" $latest
- echo "Full url:          :" $baseurl/$latest
+cat << EOF
+Profile            : $pfp
+Current version is : $latest
+Full url:          : $baseurl/$latest
+Filename           : $fn
+EOF
 
- wget -q "$baseurl/$latest"
+ [ ! -f "$fn" ] && 
+ {
+  wget -q "$baseurl/$latest"
+  return $?
+ } ||
+ { 
+  echo "File $fn exists"
+ }
 }
 
 ### MAIN ###
