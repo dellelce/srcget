@@ -66,17 +66,25 @@ main()
 
  typeset latest=$(current_version)
  typeset fn=$(basename $latest)
+ typeset fullurl
+ [ -z "baseurl" ] &&
+ {
+   fullurl="$latest"
+ } || 
+ {
+   fullurl="$baseurl/$latest"
+ }
 
 cat << EOF
 Profile            : $pfp
 Current version is : $latest
-Full url:          : $baseurl/$latest
+Full url:          : $fullurl
 Filename           : $fn
 EOF
 
  [ ! -f "$fn" ] && 
  {
-  wget -q "$baseurl/$latest"
+  wget -q "$fullurl"
   return $?
  } ||
  { 
