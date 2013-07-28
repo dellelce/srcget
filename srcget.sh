@@ -67,7 +67,8 @@ main()
  typeset latest=$(current_version)
  typeset fn=$(basename $latest)
  typeset fullurl
- [ -z "baseurl" ] &&
+
+ [ -z "$baseurl" ] &&
  {
    fullurl="$latest"
  } || 
