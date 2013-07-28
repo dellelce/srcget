@@ -1,0 +1,11 @@
+Tool to download latest source 
+
+Needs:
+
+- wget
+- awk filter
+
+Configuration:
+
+- profile in profiles dir
+- awk filter
