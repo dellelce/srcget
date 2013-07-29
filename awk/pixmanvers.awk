@@ -34,7 +34,7 @@ BEGIN {
 
 # custom rules
 
-/tar.xz/ \
+/pixman/ && /tar.gz/ \
 {
   fn = $8
   if (fn ~ /\.sha1$/) { next; } 
