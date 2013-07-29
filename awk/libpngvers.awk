@@ -33,6 +33,8 @@ state == 4 { next }
 END   {
 	ver_cnt = split(ver, ver_a, "<")
         ver_cnt = split(ver_a[3], ver_a1, ">");
+        goodver = ver_a1[2]
         #ftp://ftp.simplesystems.org/pub/png/src/libpng16/libpng-1.6.3.tar.xz
-        print ver_a1[2]
+        topver = substr(goodver,1,1)""substr(goodver,3,1)
+        print "libpng"topver"/libpng-"goodver".tar.xz"
       }
