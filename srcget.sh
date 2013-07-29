@@ -8,7 +8,7 @@
 ### ENV ###
 
 # temporary srcHome....
-srcHome="/home/antonio/src/utils/srcget"
+srcHome="$(dirname $0)"
 profilesDir="$srcHome/profiles"
 wgetArgs="-q"
 
