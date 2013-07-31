@@ -2,7 +2,7 @@
 #
 # File:         srcget.sh
 # Created:      0322 210713
-# Description:  description for srcget.sh
+# Description:  Automate download of source files
 #
 
 ### ENV ###
@@ -11,6 +11,7 @@
 srcHome="$(dirname $0)"
 profilesDir="$srcHome/profiles"
 wgetArgs="-q"
+UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 
 ### FUNCTIONS ###
 
@@ -19,11 +20,10 @@ wgetArgs="-q"
 rawget()
 {
  typeset url="$1"
- typeset ua="Mozilla/5.0"
 
  [ -z "$url" ] && return 1
 
- wget -U "$ua" -O - "${wgetArgs}" "$url"
+ wget -U "$UA" -O - "${wgetArgs}" "$url"
 }
 
 # latest version
@@ -68,14 +68,21 @@ main()
  typeset fn=$(basename $latest)
  typeset fullurl
 
- [ -z "$baseurl" ] &&
+ [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
  {
-   fullurl="$latest"
- } || 
+   [ -z "$baseurl" ] &&
+   {
+     fullurl="$latest"
+   } || 
+   {
+     fullurl="$baseurl/$latest"
+   }
+ } ||
  {
-   fullurl="$baseurl/$latest"
+   fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
  }
 
+ 
 cat << EOF
 Profile            : $pfp
 Current version is : $latest
@@ -85,7 +92,7 @@ EOF
 
  [ ! -f "$fn" ] && 
  {
-  wget -q "$fullurl"
+  wget -q -O - "$fullurl" > "$fn"
   return $?
  } ||
  { 

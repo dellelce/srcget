@@ -27,7 +27,6 @@ BEGIN {
 
 END \
 {
-  #full url : http://uk3.php.net/get/php-5.5.1.tar.bz2/from/uk1.php.net/mirror
-  print "http://uk3.php.net/get/php-"bn".tar.xz/from/uk1.php.net/mirror"
+  print bn
 }
 ## EOF ##
