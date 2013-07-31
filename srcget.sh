@@ -82,7 +82,11 @@ main()
    fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
  }
 
- 
+ [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] &&
+ {
+   fn="${custom_file_prefix}${fn}${custom_file_postfix}"
+ }
+
 cat << EOF
 Profile            : $pfp
 Current version is : $latest
