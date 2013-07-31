@@ -9,3 +9,7 @@ Configuration:
 
 - profile in profiles dir
 - awk filter
+
+Todo:
+
+- dependency support
