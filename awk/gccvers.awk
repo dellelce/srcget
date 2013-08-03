@@ -30,6 +30,7 @@ function compare_versions(a, b)
 
 BEGIN {
         pos = 0
+        gvers = "0.0.0"
       }
 
 # custom rules
@@ -39,29 +40,15 @@ BEGIN {
 
 	     vers = gcc_a[1]
 	     sub(/GCC /, "", vers);
-	     vers_a[pos] = vers
-	     pos = pos + 1
+             gvers = compare_versions(gvers, vers);
 	     next
 	   }
 
 ### end loop ###
 
 END   {
-	lastv = ""
-	for (i in vers_a)
-	{
-	  if (lastv == "")
-	  {
-	    lastv = vers_a[i] 
-	  }
-	  else
-	  {
-	    bestv = compare_versions(lastv, vers_a[i])
-	    lastv = vers_a[i]
-	  }
-	}
-
-	print bestv
+        #gcc-4.8.1/gcc-
+	print "gcc-"gvers"/gcc-"gvers
       }
 
 ## EOF ##
