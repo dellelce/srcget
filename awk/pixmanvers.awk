@@ -1,7 +1,7 @@
 #
-# rubyvers.awk
+# pixmanvers.awk
 #
-# created: 0037 220713
+# created: 300713
 #
 
 ### FUNCTIONS ###

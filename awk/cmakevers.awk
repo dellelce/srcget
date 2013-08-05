@@ -1,7 +1,7 @@
 #
-# phpvers.awk
+# cmakevers.awk
 #
-# created: 310713
+# created: 010413
 #
 
 ### FUNCTIONS ###

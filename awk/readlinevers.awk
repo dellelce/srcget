@@ -1,8 +1,8 @@
 #
-# gccvers.awk
+# readlinevers.awk
 #
-# created: 0331 060513
-# updated: during 060513
+# created: 040813
+#
 
 ### FUNCTIONS ###
 

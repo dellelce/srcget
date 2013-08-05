@@ -1,7 +1,7 @@
 #
-# rubyvers.awk
+# ncursesvers.awk
 #
-# created: 0037 220713
+# created: 010813
 #
 
 ### FUNCTIONS ###

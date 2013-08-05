@@ -1,7 +1,7 @@
 #
-# phpvers.awk
+# pixmanvers.awk
 #
-# created: 310713
+# created: 010813
 #
 
 ### FUNCTIONS ###

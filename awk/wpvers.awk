@@ -1,7 +1,7 @@
 #
-# rubyvers.awk
+# wpvers.awk
 #
-# created: 0037 220713
+# created: 280713
 #
 
 ### FUNCTIONS ###

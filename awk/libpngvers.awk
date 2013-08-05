@@ -1,7 +1,7 @@
 #
-# rubyvers.awk
+# libpngvers.awk
 #
-# created: 0037 220713
+# created: 290713
 #
 
 ### FUNCTIONS ###
