@@ -13,3 +13,4 @@ Configuration:
 Todo:
 
 - dependency support
+- improve version checking, most of the filters rely on very simple checks
