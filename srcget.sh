@@ -10,7 +10,7 @@
 # temporary srcHome....
 srcHome="$(dirname $0)"
 profilesDir="$srcHome/profiles"
-wgetArgs="-q"
+wgetArgs="-q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 
 ### FUNCTIONS ###
