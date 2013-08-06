@@ -23,7 +23,7 @@ rawget()
 
  [ -z "$url" ] && return 1
 
- wget -U "$UA" -O - "${wgetArgs}" "$url"
+ wget -U "$UA" -O - ${wgetArgs} "$url"
 }
 
 # latest version
@@ -115,7 +115,7 @@ EOF
 
  [ ! -f "$fn" ] && 
  {
-  wget -q -O - "$fullurl" > "$fn"
+  wget ${wgetArgs} -O - "$fullurl" > "$fn"
   return $?
  } ||
  { 
