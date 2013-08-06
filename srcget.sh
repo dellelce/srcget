@@ -65,6 +65,13 @@ main()
  [ -z "srcurl" ] && { echo "invalid url: $srcurl"; return 3; }  
 
  typeset latest=$(current_version)
+
+ [ -z "$latest" ] && 
+ {
+   echo "couldn't retrieve latest version"
+   return 1
+ }
+
  typeset fn=$(basename $latest)
  typeset fullurl
 
@@ -93,6 +100,18 @@ Current version is : $latest
 Full url:          : $fullurl
 Filename           : $fn
 EOF
+
+ [ -z "$fullurl" ] && 
+ {
+  echo "invalid full url!"
+  return 1
+ }
+
+ [ -z "$fullurl" ] && 
+ {
+  echo "invalid full url!"
+  return 1
+ }
 
  [ ! -f "$fn" ] && 
  {
