@@ -115,12 +115,6 @@ EOF
   return 1
  }
 
- [ -z "$fullurl" ] && 
- {
-  echo "invalid full url!"
-  return 1
- }
-
  [ ! -f "$fn" ] && 
  {
   wget ${wgetArgs} -O - "$fullurl" > "$fn"
