@@ -30,21 +30,24 @@ rawget()
 
 current_version()
 {
- [ -z "$skipvers" ] && 
+ typeset _awk="awk"
+
+ [ ! -z "$skipvers" ] && 
  {
-   typeset _awk="awk"
- } ||
+   _awk="${_awk} -vskipvers=$skipvers"
+ }
+
+ [ ! -z "$extension" ] && 
  {
-   typeset _awk="awk -vskipvers=$skipvers"
+   _awk="${_awk} -vext=$extension"
  }
  
- [ -z "$sep" ] &&
+ [ ! -z "$sep" ] &&
  {
-   rawget "$srcurl" | ${_awk} -f "$fp_filter";
- } ||
- {
-   rawget "$srcurl" | ${_awk} -F"${sep}" -f "$fp_filter"
+   _awk="${_awk} -F\\${sep}"
  }
+
+ rawget "$srcurl" | ${_awk} -f "$fp_filter";
 }
 
 # main
