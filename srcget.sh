@@ -37,9 +37,14 @@ current_version()
    _awk="${_awk} -vskipvers=$skipvers"
  }
 
- [ ! -z "$extension" ] && 
+ [ ! -z "$extension_input" ] && 
  {
-   _awk="${_awk} -vext=$extension"
+   _awk="${_awk} -vext=$extension_input"
+ }
+
+ [ ! -z "$extension_url" ] && 
+ {
+   _awk="${_awk} -vexturl=$extension_url"
  }
  
  [ ! -z "$sep" ] &&
