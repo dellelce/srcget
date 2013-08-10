@@ -118,7 +118,11 @@ EOF
  [ ! -f "$fn" ] && 
  {
   wget ${wgetArgs} -O - "$fullurl" > "$fn"
-  return $?
+  rc=$?
+  [ $rc -ne 0 ] && { exit $rc; }
+  # test empty file
+  [ ! -s "$fn" ] && { echo "downloaded empty file"; exit 1; } 
+
  } ||
  { 
   echo "File $fn exists"
