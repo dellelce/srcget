@@ -123,7 +123,7 @@ EOF
 
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
- [ $rc -ne 0 ] && { rm -f "$fn"; exit $rc; }
+ [ $rc -ne 0 ] && { echo "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
  # test empty file
  [ ! -s "$fn" ] && { echo "downloaded empty file"; exit 1; } 
 }
