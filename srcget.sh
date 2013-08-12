@@ -49,7 +49,7 @@ current_version()
  
  [ ! -z "$sep" ] &&
  {
-   _awk="${_awk} -F\\${sep}"
+   _awk="${_awk} -F${sep}"
  }
 
  rawget "$srcurl" | ${_awk} -f "$fp_filter";
