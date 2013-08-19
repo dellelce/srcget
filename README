@@ -1,16 +1,24 @@
-Tool to download latest source 
+== Tool to download latest source ==
 
-Needs:
+Usage:
+
+    ./srcget.sh <name>
+
+i.e.:
+
+    ./srcget.sh zlib
+
+* Needs:
 
 - wget
 - awk filter
 
-Configuration:
+* Configuration:
 
 - profile in profiles dir
 - awk filter
 
-Todo:
+* Todo:
 
 - dependency support
 - improve version checking, most of the filters rely on very simple checks
