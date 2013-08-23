@@ -112,13 +112,13 @@ EOF
  [ -z "$fullurl" ] && 
  {
   echo "invalid full url!"
-  return 1
+  return 3
  }
 
  [ -f "$fn" ] && 
  { 
   echo "File $fn exists"
-  exit 1
+  exit 2 
  }
 
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
