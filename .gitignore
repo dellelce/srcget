@@ -1,1 +1,4 @@
 awk/*.txt
+*.tar.gz
+*.tar.xz
+*.tar.bz2
