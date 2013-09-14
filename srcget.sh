@@ -15,6 +15,12 @@ UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 
 ### FUNCTIONS ###
 
+#
+srcecho()
+{
+  echo $*
+}
+
 # interface to wget
 
 rawget()
@@ -24,6 +30,18 @@ rawget()
  [ -z "$url" ] && return 1
 
  wget -U "$UA" -O - ${wgetArgs} "$url"
+}
+
+# 
+
+info_banner()
+{
+  cat << EOF
+Profile            : $pfp
+Current version is : $latest
+Full url:          : $fullurl
+Filename           : $fn
+EOF
 }
 
 # latest version
@@ -65,18 +83,18 @@ main()
 
  typeset pfp="$profilesDir/${profile}.profile"
 
- [ ! -f "$pfp" ] && { echo "cannot find profile: $profile [$pfp]"; return 2; }
+ [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
 
  . $pfp
  fp_filter="$srcHome/$filter"
 
- [ -z "srcurl" ] && { echo "invalid url: $srcurl"; return 3; }  
+ [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
 
  typeset latest=$(current_version)
 
  [ -z "$latest" ] && 
  {
-   echo "couldn't retrieve latest version"
+   srcecho "couldn't retrieve latest version"
    return 1
  }
 
@@ -102,30 +120,25 @@ main()
    fn="${custom_file_prefix}${fn}${custom_file_postfix}"
  }
 
-cat << EOF
-Profile            : $pfp
-Current version is : $latest
-Full url:          : $fullurl
-Filename           : $fn
-EOF
+ info_banner
 
  [ -z "$fullurl" ] && 
  {
-  echo "invalid full url!"
+  srcecho "invalid full url!"
   return 3
  }
 
  [ -f "$fn" ] && 
  { 
-  echo "File $fn exists"
+  srcecho "File $fn exists"
   exit 2 
  }
 
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
- [ $rc -ne 0 ] && { echo "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
+ [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
  # test empty file
- [ ! -s "$fn" ] && { echo "downloaded empty file"; exit 1; } 
+ [ ! -s "$fn" ] && { srcecho "downloaded empty file"; exit 1; } 
 }
 
 ### MAIN ###
