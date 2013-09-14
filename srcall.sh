@@ -36,8 +36,7 @@ do
  p=${b%.profile};
 
 
- echo "========== $p";
- printf "Checking..."
+ printf "Checking ${p}..."
  srcget $p > /dev/null
  rc="$?"
 
