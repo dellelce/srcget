@@ -36,15 +36,15 @@ do
  p=${b%.profile};
 
 
- printf "Checking ${p}..."
+# printf "Checking ${p}..."
  srcget $p > /dev/null
  rc="$?"
 
  # wget appears to return 1 on success.......(!?)
- [ $rc -eq 0 -o $rc -eq 1 ] && { echo "downloaded"; continue; } 
- [ $rc -eq 2 ] && { echo "already latest"; continue; }
+ [ $rc -eq 0 -o $rc -eq 1 ] && { echo "${p}: downloaded"; continue; } 
+ [ $rc -eq 2 ] && { continue; }
 
- echo "error: $rc"
+ echo "${p}: error: $rc"
 
 done
 
