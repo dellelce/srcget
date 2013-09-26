@@ -13,12 +13,14 @@ profilesDir="$srcHome/profiles"
 wgetArgs="-q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 
+unset SILENT DEBUG
+
 ### FUNCTIONS ###
 
 #
 srcecho()
 {
-  echo $*
+  [ -z "$SILENT" ] && echo $*
 }
 
 # interface to wget
@@ -36,6 +38,7 @@ rawget()
 
 info_banner()
 {
+  [ ! -z "$SILENT" ] && return 
   cat << EOF
 Profile            : $pfp
 Current version is : $latest
@@ -77,6 +80,8 @@ current_version()
 
 main()
 {
+ [ ! -z "$DEBUG" ] && set -x
+
  typeset profile="$1"
 
  [ -z "$profile" ] && return 1;
@@ -142,6 +147,10 @@ main()
 }
 
 ### MAIN ###
+
+
+[ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
+[ "$1" == "-q" ] && { export SILENT=1; shift; }
 
 main $*
 
