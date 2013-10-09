@@ -18,6 +18,19 @@ unset SILENT DEBUG
 ### FUNCTIONS ###
 
 #
+# usage
+usage()
+{
+ cat  << EOF 
+$0 [options] program_name
+
+ -x  turn on debug mode
+ -q  quiet mode
+
+EOF
+}
+
+#
 srcecho()
 {
   [ -z "$SILENT" ] && echo $*
@@ -94,6 +107,7 @@ main()
  fp_filter="$srcHome/$filter"
 
  [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
+ [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
 
  typeset latest=$(current_version)
 
@@ -148,9 +162,9 @@ main()
 
 ### MAIN ###
 
-
 [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
 [ "$1" == "-q" ] && { export SILENT=1; shift; }
+[ -z "$*" ] && { usage; exit 0; }
 
 main $*
 
