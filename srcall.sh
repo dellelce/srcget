@@ -35,13 +35,18 @@ do
  b=$(basename $x);
  p=${b%.profile};
 
+ basename=""
+ . "$x" 
+ b="$basename"
+ [ -z "$b" ] && b="$p"
+
 
 # printf "Checking ${p}..."
  srcget $p > /dev/null
  rc="$?"
 
  # wget appears to return 1 on success.......(!?)
- [ $rc -eq 0 -o $rc -eq 1 ] && { echo "${p}: downloaded"; continue; } 
+ [ $rc -eq 0 -o $rc -eq 1 ] && { echo "${p}: downloaded: $(ls *${b}* | head -1)"; continue; } 
  [ $rc -eq 2 ] && { continue; }
 
  echo "${p}: error: $rc"
