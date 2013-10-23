@@ -5,6 +5,17 @@
 # Description:  Automate download of source files
 #
 
+# 0: get_exit_status(): WGET_EXIT_SUCCESS 
+# 1: get_exit_status(): if WGET_EXIT_UNKNOWN 1 is returned
+# 2: memory allocations,
+# 3: invalid or missing arguments, get_exit_status(): WGET_EXIT_MINIMUM, WGET_EXIT_IO_FAIL 
+# 4: get_exit_status(): WGET_EXIT_NETWORK_FAIL
+# 5: get_exit_status(): WGET_EXIT_SSL_AUTH_FAIL
+# 6: get_exit_status(): WGET_EXIT_SERVER_AUTH_FAIL 
+# 7: get_exit_status(): WGET_EXIT_PROTOCOL_ERROR 
+# 8: get_exit_status(): WGET_EXIT_SERVER_ERROR
+
+
 ### ENV ###
 
 # temporary srcHome....
