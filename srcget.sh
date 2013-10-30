@@ -77,6 +77,8 @@ current_version()
 {
  typeset _awk="awk"
 
+ [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
+
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
 
  [ ! -z "$extension_input" ] && { _awk="${_awk} -vext=$extension_input"; }
