@@ -152,17 +152,8 @@ main()
 
  info_banner
 
- [ -z "$fullurl" ] && 
- {
-  srcecho "invalid full url!"
-  return 3
- }
-
- [ -f "$fn" ] && 
- { 
-  srcecho "File $fn exists"
-  exit 2 
- }
+ [ -z "$fullurl" ] && { srcecho "invalid full url!"; return 3; }
+ [ -f "$fn" ] && { srcecho "File $fn exists"; exit 2; }
 
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
