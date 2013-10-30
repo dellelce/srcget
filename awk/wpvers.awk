@@ -50,7 +50,7 @@ BEGIN {
 
 # custom rules
 
-/wordpress-[1-9]/ && /tar.gz/ \
+/wordpress-[1-9]/ && /tar.gz/ && !/rollback/ \
 {
  gsub(/<tr/,"^"); 
  vline = $0
