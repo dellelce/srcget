@@ -46,7 +46,7 @@ do
  rc="$?"
 
  # wget appears to return 1 on success.......(!?)
- [ $rc -eq 0 -o $rc -eq 1 ] && { echo "${p}: downloaded: $(ls *${b}* | head -1)"; continue; } 
+ [ $rc -eq 0 -o $rc -eq 1 ] && { echo "${p}: downloaded: $(ls -t *${b}* | head -1)"; continue; } 
  [ $rc -eq 2 ] && { continue; }
 
  echo "${p}: error: $rc"
