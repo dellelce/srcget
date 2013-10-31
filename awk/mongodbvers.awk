@@ -6,6 +6,12 @@
 
 ### FUNCTIONS ###
 
+function dprint(msg)
+{
+  if (debug == 1) print "DEBUG: "msg;
+}
+
+
 ### MAIN LOOP ###
 
 BEGIN {
@@ -14,15 +20,23 @@ BEGIN {
 
 # custom rules
 
-/Production Release/ && state == 0 { state = 1; next; }
+/Production Release/ && state == 0 \
+{
+  dprint("Production Release Found: " NR);
+  sub(/)/,"(",$0);
+  split($0, vers_a, "(");
+  dprint("vers_a[1] = "vers_a[1] " vers_a[2] = "vers_a[2]);
+  vers = vers_a[2]
+  state = 1;
+  next;
+}
 
-state == 1 && /[0-9]+\.[0-9]+\.[0-9]+/ { vers = $1; state = 2; next; }
-
-state == 2 && $0 ~ ext \
+state == 1 && $0 ~ ext && /src/\
 {
    if (index($0, vers) > 0)
    {
-     cnt = split($0, url_a, "'");
+     dprint("Version found: "$0);
+     cnt = split($0, url_a, "\"");
      fullurl = url_a[2]
    }
 } 
