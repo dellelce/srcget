@@ -6,6 +6,11 @@
 
 ### FUNCTIONS ###
 
+function dprint(msg)
+{
+  if (debug == 1) print "DEBUG: "msg;
+}
+
 ### MAIN LOOP ###
 
 BEGIN {
@@ -14,7 +19,11 @@ BEGIN {
 
 # custom rules
 
-/Release/ { print $5 }
+/Release/ \
+{
+  dprint("Fullline "$0);
+  print $4
+}
 
 ### end loop ###
 
