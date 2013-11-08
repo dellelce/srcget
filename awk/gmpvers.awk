@@ -22,11 +22,12 @@ BEGIN {
 /Release/ \
 {
   dprint("Fullline "$0);
-  print $4
+  split($5,vers_a,".");
+  vers = vers_a[1] "." vers_a[2] "." vers_a[3]
 }
 
 ### end loop ###
 
 END   {
-	# this is the end loop
+	print vers
       }
