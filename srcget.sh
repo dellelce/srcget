@@ -150,6 +150,7 @@ main()
  [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "downloaded empty file"; exit 1; } 
+ return $rc
 }
 
 ### MAIN ###
@@ -159,5 +160,6 @@ main()
 [ -z "$*" ] && { usage; exit 0; }
 
 main $*
+exit $?
 
 ### EOF ###
