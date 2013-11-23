@@ -21,7 +21,8 @@
 # temporary srcHome....
 srcHome="$(dirname $0)"
 profilesDir="$srcHome/profiles"
-wgetArgs="-q --no-check-certificate"
+timeout="120"
+wgetArgs="-T ${timeout} -q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 
 unset SILENT DEBUG
