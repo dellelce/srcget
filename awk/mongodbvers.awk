@@ -8,7 +8,7 @@
 
 function dprint(msg)
 {
-  if (debug == 1) print "DEBUG: "msg;
+  if (debug == 1) print "#DEBUG: "msg;
 }
 
 
