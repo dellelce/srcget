@@ -5,6 +5,7 @@
 # Description:  Automate download of source files
 #
 
+# wget return codes:
 # 0: get_exit_status(): WGET_EXIT_SUCCESS 
 # 1: get_exit_status(): if WGET_EXIT_UNKNOWN 1 is returned
 # 2: memory allocations,
