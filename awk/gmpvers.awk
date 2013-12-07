@@ -8,7 +8,7 @@
 
 function dprint(msg)
 {
-  if (debug == 1) print "DEBUG: "msg;
+  if (debug == 1) print "#DEBUG: "msg;
 }
 
 ### MAIN LOOP ###
@@ -22,7 +22,10 @@ BEGIN {
 /Release/ \
 {
   dprint("Fullline "$0);
-  split($5,vers_a,".");
+  split($6,vers_a,".");
+
+  if (vers_a[2] == "" || vers_a[3] == "") { vers = ""; next; } 
+
   vers = vers_a[1] "." vers_a[2] "." vers_a[3]
 }
 
