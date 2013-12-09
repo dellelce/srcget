@@ -98,12 +98,11 @@ main()
 {
  [ ! -z "$DEBUG" ] && set -x
 
+ ## Load profile information
  typeset profile="$1"
-
  [ -z "$profile" ] && return 1;
 
  typeset pfp="$profilesDir/${profile}.profile"
-
  [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
 
  . $pfp
@@ -112,16 +111,13 @@ main()
  [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
  [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
 
+ ## Find latest software version
  typeset latest=$(current_version)
 
- [ -z "$latest" ] && 
- {
-   srcecho "couldn't retrieve latest version"
-   return 1
- }
+ [ -z "$latest" ] && { srcecho "couldn't retrieve latest version"; return 1; }
 
  typeset fn=$(basename $latest)
- typeset fullurl
+ typeset fullurl=""
 
  [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
  {
@@ -157,11 +153,11 @@ main()
 
 ### MAIN ###
 
+[ -z "$*" ] && { usage; exit 0; }
 [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
 [ "$1" == "-q" ] && { export SILENT=1; shift; }
-[ -z "$*" ] && { usage; exit 0; }
 
-main $*
-exit $?
+ main $*
+ exit $?
 
 ### EOF ###
