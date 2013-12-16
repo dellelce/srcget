@@ -20,8 +20,8 @@
 ### ENV ###
 
 # temporary srcHome....
-srcHome="$(dirname $0)"
-profilesDir="$srcHome/profiles"
+export srcHome="$(dirname $0)"
+export profilesDir="$srcHome/profiles"
 timeout="120"
 wgetArgs="-T ${timeout} -q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
@@ -41,6 +41,23 @@ $0 [options] program_name
  -q  quiet mode
 
 EOF
+}
+
+#srcget
+getlinkdir()
+{
+ typeset dest="$1"
+
+ [ -z "$dest"  -o ! -h "$dest" ] && { return 1; } 
+
+ dirname $(
+ {  for x in $(ls -lt $dest) ; do echo $x; done ; } | awk  ' 
+  BEGIN { state = 0; }
+  state == 0 && $1 == "->" { state = 1 ; next; }
+  state == 1 { print; state = 0; next; }
+'
+)
+
 }
 
 #
@@ -102,12 +119,20 @@ main()
  typeset profile="$1"
  [ -z "$profile" ] && return 1;
 
+ # try harder to make sure profilesDir is correct
+ [ ! -d "$profilesDir" -a -h "$0" ] &&
+ {
+   export srcHome=$(getlinkdir "$0")
+   export profilesDir="$srcHome/profiles"
+ }
+
  typeset pfp="$profilesDir/${profile}.profile"
  [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
 
  . $pfp
  fp_filter="$srcHome/$filter"
 
+ #Sanity checks
  [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
  [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
 
