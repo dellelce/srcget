@@ -30,11 +30,12 @@ BEGIN {
  base = url_a[url_cnt]
 
  if (vers == skipvers) { next; } 
- print vers "/" base #" " url
+
+ if (full_vers == "") { full_vers = vers "/" base; } 
 } 
 
-### end loop ###
+### end rule ###
 
 END   {
-	# this is the end loop
+	print full_vers;
       }
