@@ -9,13 +9,14 @@
 ### MAIN LOOP ###
 
 BEGIN {
-        pos = 0
+        bn=""
       }
 
 # custom rules
 
-/.tar.xz/ \
+/.tar./ \
 {
+  if (bn != "") next;
   bn = $2
   sub(/\/get\//,"", bn);
   sub(/\/from\/a\/mirror/, "", bn);
