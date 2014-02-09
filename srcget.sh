@@ -38,7 +38,8 @@ usage()
 $0 [options] program_name
 
  -x  turn on debug mode
- -q  quiet mode
+ -n  quiet mode: show filename
+ -q  quiet mode: don't show filename
 
 EOF
 }
@@ -166,23 +167,39 @@ main()
  info_banner
 
  [ -z "$fullurl" ] && { srcecho "invalid full url!"; return 3; }
- [ -f "$fn" ] && { srcecho "File $fn exists"; exit 2; }
+ [ -f "$fn" ] &&
+ {
+  [ "$NAMEONLY" -eq 1 ] && { echo $fn; exit 2; } 
+  srcecho "File $fn exists"
+  exit 2
+ }
 
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
+ [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
  [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "downloaded empty file"; exit 1; } 
+
  return $rc
 }
 
 ### MAIN ###
 
 [ -z "$*" ] && { usage; exit 0; }
-[ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
-[ "$1" == "-q" ] && { export SILENT=1; shift; }
 
- main $*
+profileName=""
+
+while [ ! -z "$1" ] 
+do
+ [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
+ [ "$1" == "-q" ] && { export SILENT=1; shift; }
+ [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; }
+
+ [ -z "$2" ] && { profileName="$1"; shift; } 
+done
+
+ main $profileName
  exit $?
 
 ### EOF ###
