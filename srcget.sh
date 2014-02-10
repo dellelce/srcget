@@ -25,6 +25,7 @@ export profilesDir="$srcHome/profiles"
 timeout="120"
 wgetArgs="-T ${timeout} -q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
+NAMEONLY=0
 
 unset SILENT DEBUG
 
