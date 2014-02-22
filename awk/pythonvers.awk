@@ -32,5 +32,8 @@ state == 1 && /class="reference external"/ \
 
 END   {
         #http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tar.xz
-	print vers"/Python-"vers
+        if (vers!="") # make sure we don't return junk
+	{ 
+          print vers"/Python-"vers
+        }
       }
