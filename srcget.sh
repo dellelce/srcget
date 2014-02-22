@@ -23,6 +23,9 @@
 export srcHome="$(dirname $0)"
 export profilesDir="$srcHome/profiles"
 timeout="120"
+[ ! -d "$TMP" ] && TMP="/tmp"
+# Accept-Encoding: we don't like gzip
+wgetHeaders='--header="Accept-Encoding:"'
 wgetArgs="-T ${timeout} -q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 NAMEONLY=0
@@ -41,6 +44,8 @@ $0 [options] program_name
  -x  turn on debug mode
  -n  quiet mode: show filename
  -q  quiet mode: don't show filename
+ -H  debug: return server HTTP headers (DEBUG ONLY!)
+ -D  testing: download remote url only (TEST/DEVELOPMENT ONLY!)
 
 EOF
 }
@@ -62,25 +67,28 @@ getlinkdir()
 
 }
 
-#
+# echo wrapper
 srcecho()
 {
   [ -z "$SILENT" ] && echo $*
 }
 
 # interface to wget
-
 rawget()
 {
  typeset url="$1"
 
  [ -z "$url" ] && return 1
 
- wget -U "$UA" -O - ${wgetArgs} "$url"
+ #temp workaround for github - there must be something wrong in github.com webserver..........maybe
+ [ $(echo $url | grep -c "github") -eq 1 ] && { unset wgetHeaders; } 
+
+ [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
+
+ wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
 }
 
 # 
-
 info_banner()
 {
   [ ! -z "$SILENT" ] && return 
@@ -97,6 +105,9 @@ EOF
 current_version()
 {
  typeset _awk="awk"
+#TBD: will be used if wget output needs any filtering, not now.
+# typeset tmpfile="$TMP/srcget.$RANDOM.$$.dat"
+# typeset tmptxt="$TMP/srcget.$RANDOM.$$.dat"
 
  [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
@@ -107,14 +118,24 @@ current_version()
  rawget "$srcurl" | ${_awk} -f "$fp_filter";
 }
 
-# main
-
-main()
+#
+# is_valid_url
+# mini-sanity chec 
+is_valid_url()
 {
- [ ! -z "$DEBUG" ] && set -x
+  typeset url="$1"
 
+  [ $(echo $url | grep -c '://') -eq 0 ] && return 1
+
+  return 0
+}
+
+
+#
+load_profile()
+{
  ## Load profile information
- typeset profile="$1"
+ export profile="$1"
  [ -z "$profile" ] && return 1;
 
  # try harder to make sure profilesDir is correct
@@ -124,11 +145,30 @@ main()
    export profilesDir="$srcHome/profiles"
  }
 
- typeset pfp="$profilesDir/${profile}.profile"
+ export pfp="$profilesDir/${profile}.profile"
  [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
 
  . $pfp
- fp_filter="$srcHome/$filter"
+ export fp_filter="$srcHome/$filter"
+ return 0
+}
+
+
+## main ##
+
+main()
+{
+ typeset profileRc=0
+ [ ! -z "$DEBUG" ] && set -x
+
+ ## Load profile information
+ typeset profile="$1"
+ [ -z "$profile" ] && return 1;
+
+ load_profile $profile
+ profileRc=$?
+
+ [ $profileRc -ne 0 ] && { srcecho "load profile failed: rc = $profileRc"; return 1; }
 
  #Sanity checks
  [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
@@ -181,6 +221,27 @@ main()
  return $rc
 }
 
+# url/profile downloader
+
+geturl()
+{
+  typeset url="$1"
+  typeset profileRc=0
+
+  is_valid_url "$url" ||
+  {
+    # url is actually a profile
+    load_profile $url 
+    profileRc=$?
+
+    [ $profileRc -ne 0 ] && return $profileRc
+
+    is_valid_url "$srcurl" && url="$srcurl" || { srcecho "badprofile"; return 2; } 
+  }
+
+  rawget $url
+}
+
 ### MAIN ###
 
 [ -z "$*" ] && { usage; exit 0; }
@@ -191,10 +252,13 @@ main="main"
 while [ ! -z "$1" ] 
 do
  [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
+ [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; } # debug headers
+ [ "$1" == "-D" ] && { main="geturl"; shift; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; }
 
  [ -z "$2" ] && { profileName="$1"; shift; } 
+ shift # catch-all shift... we should move to getopt
 done
 
  eval $main $profileName
