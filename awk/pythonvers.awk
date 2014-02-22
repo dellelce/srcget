@@ -17,7 +17,8 @@ BEGIN {
 
 #<h1 class="title">Releases</h1>
 
-state == 0 && /class="title"/ && /Releases/ \
+
+state == 0 && /class="page-title"/ && /Releases/ \
 {
    state = 1
    next
