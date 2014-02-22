@@ -190,6 +190,7 @@ main()
 [ -z "$*" ] && { usage; exit 0; }
 
 profileName=""
+main="main"
 
 while [ ! -z "$1" ] 
 do
@@ -200,7 +201,7 @@ do
  [ -z "$2" ] && { profileName="$1"; shift; } 
 done
 
- main $profileName
+ eval $main $profileName
  exit $?
 
 ### EOF ###
