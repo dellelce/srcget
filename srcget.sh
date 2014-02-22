@@ -99,13 +99,9 @@ current_version()
  typeset _awk="awk"
 
  [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
-
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
-
  [ ! -z "$extension_input" ] && { _awk="${_awk} -vext=$extension_input"; }
-
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
- 
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
 
  rawget "$srcurl" | ${_awk} -f "$fp_filter";
