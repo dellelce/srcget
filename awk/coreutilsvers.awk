@@ -28,6 +28,7 @@ function compare_versions(a, b)
 
 BEGIN {
           good_vers = "0.0"
+          initial_vers = good_vers
       }
 
 
@@ -45,5 +46,8 @@ BEGIN {
 ### end loop ###
 
 END   {
-	print good_vers
+        if (initial_vers != good_vers)
+        {
+	 print good_vers
+        }
       }
