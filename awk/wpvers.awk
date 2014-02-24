@@ -45,6 +45,7 @@ function push_version(v)
 BEGIN {
         state = 0
         goodvn = "1.0.0"
+        initialvn = goodvn
         v = ""
       }
 
@@ -77,5 +78,8 @@ BEGIN {
 
 END   {
 	# this is the end loop
-        print "http://wordpress.org/wordpress-"goodvn".tar.gz"
+        if (goodvn != initialvn)
+        {
+          print "http://wordpress.org/wordpress-"goodvn".tar.gz"
+        }
       }

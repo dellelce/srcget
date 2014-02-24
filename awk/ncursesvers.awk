@@ -30,6 +30,7 @@ function compare_versions(a, b)
 BEGIN {
         state = 0
         good_ver = "0.0.0"
+        initial_vers = good_ver
       }
 
 # custom rules
@@ -49,5 +50,8 @@ BEGIN {
 ### end loop ###
 
 END   {
-	print "ncurses-"good_ver".tar.gz"
+        if (initial_vers != good_ver)
+        {
+	  print "ncurses-"good_ver".tar.gz"
+        }
       }

@@ -48,7 +48,10 @@ BEGIN {
 
 END   {
         #gcc-4.8.1/gcc-
-	print "gcc-"gvers"/gcc-"gvers
+        if (gvers != "")
+        {
+	  print "gcc-"gvers"/gcc-"gvers
+        }
       }
 
 ## EOF ##

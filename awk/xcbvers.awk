@@ -33,6 +33,7 @@ function compare_versions(a, b)
 BEGIN {
         state = 0
         good_ver = "0.0.0"
+        initial_vers = good_ver
         prefix="libxcb"
       }
 
@@ -51,8 +52,11 @@ $0 ~ prefix && $0 ~ ext \
   good_ver = compare_versions(good_ver, ver);
 }
 
-### end loop ###
+### end rule ###
 
 END   {
-	print prefix"-"good_ver"."ext
+        if (initial_vers != good_ver)
+        {
+	  print prefix"-"good_ver"."ext
+        }
       }

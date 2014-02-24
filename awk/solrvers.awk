@@ -32,5 +32,8 @@ BEGIN {
 
 END   {
         #  http://www.mirrorservice.org/sites/ftp.apache.org/lucene/solr/4.4.0/solr-4.4.0-src.tgz
-	print vers"/solr-"vers
+        if (vers!="")
+        {
+	  print vers"/solr-"vers
+        }
       }

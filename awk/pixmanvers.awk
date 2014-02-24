@@ -30,6 +30,7 @@ function compare_versions(a, b)
 BEGIN {
         state = 0
         good_ver = "0.0.0"
+        initial_vers = good_ver
       }
 
 # custom rules
@@ -47,8 +48,13 @@ BEGIN {
   good_ver = compare_versions(good_ver, ver);
 }
 
-### end loop ###
+### end rule ###
 
 END   {
-	print "pixman-"good_ver".tar.gz"
+        if (initial_vers != good_ver)
+        {
+	  print "pixman-"good_ver".tar.gz"
+        }
       }
+
+## EOF ##

@@ -34,6 +34,7 @@ function compare_versions(a, b)
 
 BEGIN {
           good_vers = "0.0.0"
+	  initial_vers = good_vers
       }
 
 
@@ -51,5 +52,8 @@ BEGIN {
 ### end loop ###
 
 END   {
-	print "gettext-"good_vers"."ext
+        if (good_vers != initial_vers)
+        {
+	  print "gettext-"good_vers"."ext
+        }
       }

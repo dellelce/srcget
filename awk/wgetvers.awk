@@ -33,7 +33,8 @@ function compare_versions(a, b)
 # begin rule
 
 BEGIN {
-          good_vers = "0.0.0"
+        good_vers = "0.0.0"
+        initial_vers = good_vers
       }
 
 
@@ -51,5 +52,8 @@ BEGIN {
 ### end loop ###
 
 END   {
-	print "wget-"good_vers"."ext
+        if (initial_vers != good_vers)
+        {
+	   print "wget-"good_vers"."ext
+        }
       }

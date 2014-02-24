@@ -29,6 +29,7 @@ function compare_versions(a, b)
 
 BEGIN {
         gvers = "0.0.0"
+        initial_vers = gvers
       }
 
 # custom rules
@@ -46,9 +47,11 @@ $4 ~ ext && /LATEST/ \
   gvers = compare_versions(gvers, vers)
 }
 
-### end loop ###
+### end rule ###
 
 END   {
-	# this is the end loop
-	print gvers
+        if (gvers != initial_vers)
+        {
+	  print gvers
+        }
       }

@@ -31,6 +31,7 @@ function compare_versions(a, b)
 
 BEGIN {
         vers = "0.0.0"
+        initial_vers = vers
         versurl = ""
       }
 
@@ -51,8 +52,13 @@ $2 ~ /[0-9]/ &&  $0 ~ ext \
   }
 }
 
-### END RULE ###
+## END RULE ##
 
 END   {
-	print vers
+        if (initial_vers != vers)
+        {
+	  print vers
+        }
       }
+
+## EOF ##

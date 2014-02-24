@@ -30,6 +30,7 @@ function compare_versions(a, b)
 
 BEGIN {
         good_vers = "1.0.0"
+        initial_vers = good_vers
       }
 
 # custom rules
@@ -51,7 +52,10 @@ $0 ~ ext \
 ### end loop ###
 
 END   {
-        split(good_vers,gv_a, ".")
-        basename = gv_a[1]"."gv_a[2]
-	print basename"/glib-"good_vers"."exturl
+        if (initial_vers != good_vers)
+        {
+          cnt = split(good_vers,gv_a, ".")
+          basename = gv_a[1]"."gv_a[2]
+	  print basename"/glib-"good_vers"."exturl
+        }
       }
