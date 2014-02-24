@@ -30,6 +30,7 @@ function compare_versions(a, b)
 BEGIN {
         state = 0
         good_ver = "1.0.0"
+        initial_vers = good_ver
       }
 
 # custom rules
@@ -50,5 +51,8 @@ BEGIN {
 ### end loop ###
 
 END   {
-	print "cairo-"good_ver".tar.xz"
+        if (good_vers != initial_vers)
+        {
+	  print "cairo-"good_ver".tar.xz"
+        }
       }
