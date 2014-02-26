@@ -251,13 +251,14 @@ main="main"
 
 while [ ! -z "$1" ] 
 do
+ [ -z "$2" ] && { profileName="$1"; shift; } 
+
  [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; }
 
- [ -z "$2" ] && { profileName="$1"; shift; } 
  shift # catch-all shift... we should move to getopt
 done
 
