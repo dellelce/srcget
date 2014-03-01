@@ -149,11 +149,61 @@ load_profile()
  export pfp="$profilesDir/${profile}.profile"
  [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
 
+ unset basename
+ unset baseurl
+ unset custom_file_postfix
+ unset custom_file_prefix
+ unset custom_url_postfix
+ unset custom_url_prefix
+ unset extension
+ unset extension_input
+ unset extension_url
+ unset filter
+ unset sep
+ unset skipvers
+ unset srcurl
  . $pfp
  export fp_filter="$srcHome/$filter"
  return 0
 }
 
+#
+# srcall
+# check all profiles
+#
+
+srcall()
+{
+  srcgetDir="$(dirname $0)"
+
+  [ ! -d "$srcgetDir/profiles" ] &&
+  {
+    echo "Can't find profiles directory!: $srcgetDir/profiles"
+    exit 2
+  }
+
+  for x in $srcgetDir/profiles/*;
+  do
+   b=$(basename $x);
+   p=${b%.profile};
+
+   basename=""
+   . "$x"
+   b="$basename"
+   [ -z "$b" ] && b="$p"
+
+
+   # printf "Checking ${p}..."
+   main $p #> /dev/null
+   rc="$?"
+
+   # wget appears to return 1 on success.......(!?)
+   [ $rc -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${b}* | head -1)"; continue; }
+   [ $rc -eq 2 ] && { continue; }
+
+   srcecho "${p}: error: $rc"
+  done
+}
 
 ## main ##
 
@@ -205,19 +255,26 @@ main()
  info_banner
 
  [ -z "$fullurl" ] && { srcecho "invalid full url!"; return 3; }
+
+ [ ! -z "$VERSIONTEST" ] &&
+ {
+   echo $fn;
+   return 0; 
+ }
+
  [ -f "$fn" ] &&
  {
   [ "$NAMEONLY" -eq 1 ] && { echo $fn; exit 2; } 
   srcecho "File $fn exists"
-  exit 2
+  return 2
  }
 
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
  [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
- [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
+ [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
- [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; exit 1; } 
+ [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
 
  return $rc
 }
@@ -248,17 +305,18 @@ geturl()
 [ -z "$*" ] && { usage; exit 0; }
 
 profileName=""
-main="main"
+export main="main"
 
 while [ ! -z "$1" ] 
 do
- [ -z "$2" ] && { profileName="$1"; shift; } 
-
+ [ "$1" == "-A" ] && { main="srcall"; shift; continue; }
  [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; continue; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; continue; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; continue; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; continue; }
+
+ [ -z "$2" ] && { profileName="$1"; shift; } 
 
  shift # catch-all shift... we should move to getopt
 done
