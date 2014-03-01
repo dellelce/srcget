@@ -28,7 +28,7 @@ timeout="30"
 #this was a fix/workaround for python's web server behaviour.... but has too many negatives.
 #wgetHeaders='--header="Accept-Encoding:"'
 wgetArgs="-T ${timeout} -q --no-check-certificate"
-UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
+UA="Mozilla/5.0 (compatible; srcget/0.0.2; +http://github.com/dellelce/srcget/)"
 NAMEONLY=0
 
 unset SILENT DEBUG
