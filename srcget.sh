@@ -22,10 +22,11 @@
 # temporary srcHome....
 export srcHome="$(dirname $0)"
 export profilesDir="$srcHome/profiles"
-timeout="120"
+timeout="30"
 [ ! -d "$TMP" ] && TMP="/tmp"
 # Accept-Encoding: we don't like gzip
-wgetHeaders='--header="Accept-Encoding:"'
+#this was a fix/workaround for python's web server behaviour.... but has too many negatives.
+#wgetHeaders='--header="Accept-Encoding:"'
 wgetArgs="-T ${timeout} -q --no-check-certificate"
 UA="Mozilla/5.0 (http://github.com/dellelce/srcget/)"
 NAMEONLY=0
@@ -216,7 +217,7 @@ main()
  [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
  [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; exit $rc; }
  # test empty file
- [ ! -s "$fn" ] && { srcecho "downloaded empty file"; exit 1; } 
+ [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; exit 1; } 
 
  return $rc
 }
