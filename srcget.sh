@@ -179,7 +179,7 @@ srcall()
   [ ! -d "$srcgetDir/profiles" ] &&
   {
     echo "Can't find profiles directory!: $srcgetDir/profiles"
-    exit 2
+    return 20
   }
 
   for x in $srcgetDir/profiles/*;
@@ -264,7 +264,7 @@ main()
 
  [ -f "$fn" ] &&
  {
-  [ "$NAMEONLY" -eq 1 ] && { echo $fn; exit 2; } 
+  [ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
   srcecho "File $fn exists"
   return 2
  }
