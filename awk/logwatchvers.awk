@@ -1,7 +1,7 @@
 #
 # logwatchvers.awk
 #
-# created: 0310 260214
+# created: 020314
 #
 #
 
