@@ -20,6 +20,8 @@ i.e.:
 
 * Todo:
 
-- groups
+- groups/tags/categories
+- report information instead of actual download
 - dependency support
 - improve version checking, most of the filters rely on very simple checks
+- plan for python migration
