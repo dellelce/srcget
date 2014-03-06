@@ -1,5 +1,5 @@
 #
-# wgeters.awk
+# coreutilsvers.awk
 #
 # created: 191013
 #
