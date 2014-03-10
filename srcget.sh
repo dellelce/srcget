@@ -42,6 +42,7 @@ usage()
  cat  << EOF 
 $0 [options] program_name
 
+ -L  List all 'packages'
  -x  turn on debug mode
  -n  quiet mode: show filename
  -q  quiet mode: don't show filename
@@ -205,6 +206,37 @@ srcall()
   done
 }
 
+#
+# listall
+#
+
+listall()
+{
+  srcgetDir="$(dirname $0)"
+
+  [ ! -d "$srcgetDir/profiles" ] &&
+  {
+    echo "Can't find profiles directory!: $srcgetDir/profiles"
+    return 20
+  }
+
+  for x in $srcgetDir/profiles/*;
+  do
+   b=$(basename $x);
+   p=${b%.profile};
+
+   basename=""
+   . "$x"
+   b="$basename"
+   [ -z "$b" ] && b="$p"
+
+   echo $b
+
+  done
+
+
+}
+
 ## main ##
 
 main()
@@ -313,6 +345,7 @@ do
  [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; continue; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; continue; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; continue; }
+ [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; continue; }
 
