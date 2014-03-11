@@ -52,7 +52,8 @@ $0 [options] program_name
 EOF
 }
 
-#srcget
+#getlinkdir
+#
 getlinkdir()
 {
  typeset dest="$1"
@@ -88,6 +89,9 @@ rawget()
  [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
 
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
+ # keep wget return code
+ rawgetrc=$?
+ return $rawgetrc
 }
 
 # 
@@ -260,7 +264,7 @@ main()
  ## Find latest software version
  typeset latest=$(current_version)
 
- [ -z "$latest" ] && { srcecho "couldn't retrieve latest version"; return 1; }
+ [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $rawgetrc"; return 1; }
 
  typeset fn=$(basename $latest)
  typeset fullurl=""
