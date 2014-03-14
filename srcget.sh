@@ -100,8 +100,9 @@ info_banner()
   [ ! -z "$SILENT" ] && return 
   cat << EOF
 Profile            : $pfp
+Source             : $srcurl
 Current version is : $latest
-Full url:          : $fullurl
+Download url       : $fullurl
 Filename           : $fn
 EOF
 }
