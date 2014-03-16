@@ -16,6 +16,36 @@
 # 7: get_exit_status(): WGET_EXIT_PROTOCOL_ERROR 
 # 8: get_exit_status(): WGET_EXIT_SERVER_ERROR
 
+# srcget:load_profile return codes:
+# 
+# 1: no profile id passed (invalid args)
+# 2: profile file not found
+#
+# srcget:srcall
+# 
+# 20: cannot find profiles directory
+#
+# srcget:listall
+#
+# 20: cannot find profiles directory
+#
+# srcget:main return codes:
+#
+# 1: no profile passed
+# 1: cannot load profile
+# 3: srcurl in loaded profile is not set
+# 4: fp_filter in loaded profile is not set
+# 1: current_version did not return a valid version
+# 3: invalid full url
+# 2: file to be downloaded already exists
+#
+# srcget:geturl
+#
+# return value returned by load_profile if different from 0
+# 2: srcurl not valid
+#
+#
+
 
 ### ENV ###
 
@@ -209,6 +239,7 @@ srcall()
 
    srcecho "${p}: error: $rc"
   done
+  return 0
 }
 
 #
@@ -238,8 +269,7 @@ listall()
    echo $b
 
   done
-
-
+  return 0
 }
 
 ## main ##
