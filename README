@@ -25,3 +25,4 @@ i.e.:
 - dependency support
 - improve version checking, most of the filters rely on very simple checks
 - plan for python migration
+- build options
