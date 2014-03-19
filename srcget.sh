@@ -72,12 +72,13 @@ usage()
  cat  << EOF 
 $0 [options] program_name
 
+ -A  Download all packages
  -L  List all 'packages'
- -x  turn on debug mode
- -n  quiet mode: show filename
- -q  quiet mode: don't show filename
- -H  debug: return server HTTP headers (DEBUG ONLY!)
- -D  testing: download remote url only (TEST/DEVELOPMENT ONLY!)
+ -x  Turn on debug mode
+ -n  Quiet mode: show filename only
+ -q  Quiet mode: don't show anything
+ -H  Debug: return server HTTP headers (DEBUG ONLY!)
+ -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
 
 EOF
 }
