@@ -107,7 +107,7 @@ srcecho()
   [ -z "$SILENT" ] && echo $*
 }
 
-# interface to wget
+# wrapper to wget
 rawget()
 {
  typeset url="$1"
@@ -158,7 +158,7 @@ current_version()
 
 #
 # is_valid_url
-# mini-sanity chec 
+# mini-sanity check 
 is_valid_url()
 {
   typeset url="$1"
@@ -202,6 +202,89 @@ load_profile()
  . $pfp
  export fp_filter="$srcHome/$filter"
  return 0
+}
+
+#
+#
+
+main_single()
+{
+ typeset profile="$1"
+ typeset profileRc=0
+ [ ! -z "$DEBUG" ] && set -x
+
+ load_profile $profile
+ profileRc=$?
+
+ [ $profileRc -ne 0 ] && { srcecho "load profile failed: rc = $profileRc"; return 1; }
+
+ #Sanity checks
+ [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
+ [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
+
+ ## Find latest software version
+ typeset latest=$(current_version)
+
+ [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $rawgetrc"; return 1; }
+
+ typeset fn=$(basename $latest)
+ typeset fullurl=""
+
+ [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
+ {
+   [ -z "$baseurl" ] &&
+   {
+     fullurl="$latest"
+   } || 
+   {
+     fullurl="$baseurl/$latest"
+   }
+ } ||
+ {
+   fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
+ }
+
+ [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] && { fn="${custom_file_prefix}${fn}${custom_file_postfix}"; }
+
+ info_banner
+
+ [ -z "$fullurl" ] && { srcecho "invalid full url!"; return 3; }
+
+ [ ! -z "$VERSIONTEST" ] && { echo $fn; return 0; }
+
+ [ -f "$fn" ] &&
+ {
+  [ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
+  srcecho "File $fn exists"
+  return 2
+ }
+
+ wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
+ rc=$?
+ [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
+ [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
+ # test empty file
+ [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
+
+ return $rc
+}
+
+#
+# wget_pkg
+#
+
+wget_pkg()
+{
+ wget ${wgetArgs} -O - "$fullurl" > "$fn"
+ rc=$?
+ [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
+ [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
+ # test empty file
+ [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
+
+ return $rc
+
+
 }
 
 #
@@ -280,69 +363,13 @@ main()
  typeset profileRc=0
  [ ! -z "$DEBUG" ] && set -x
 
+ #Sanity checks
+ [ -z "$1" ] && return 1;
+
  ## Load profile information
  typeset profile="$1"
- [ -z "$profile" ] && return 1;
 
- load_profile $profile
- profileRc=$?
-
- [ $profileRc -ne 0 ] && { srcecho "load profile failed: rc = $profileRc"; return 1; }
-
- #Sanity checks
- [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
- [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
-
- ## Find latest software version
- typeset latest=$(current_version)
-
- [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $rawgetrc"; return 1; }
-
- typeset fn=$(basename $latest)
- typeset fullurl=""
-
- [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
- {
-   [ -z "$baseurl" ] &&
-   {
-     fullurl="$latest"
-   } || 
-   {
-     fullurl="$baseurl/$latest"
-   }
- } ||
- {
-   fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
- }
-
- [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] &&
- {
-   fn="${custom_file_prefix}${fn}${custom_file_postfix}"
- }
-
- info_banner
-
- [ -z "$fullurl" ] && { srcecho "invalid full url!"; return 3; }
-
- [ ! -z "$VERSIONTEST" ] &&
- {
-   echo $fn;
-   return 0; 
- }
-
- [ -f "$fn" ] &&
- {
-  [ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
-  srcecho "File $fn exists"
-  return 2
- }
-
- wget ${wgetArgs} -O - "$fullurl" > "$fn"
- rc=$?
- [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
- [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
- # test empty file
- [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
+ main_single "$profile"
 
  return $rc
 }
@@ -372,7 +399,7 @@ geturl()
 
 [ -z "$*" ] && { usage; exit 0; }
 
-profileName=""
+profileList=""
 export main="main"
 
 while [ ! -z "$1" ] 
@@ -385,12 +412,15 @@ do
  [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; continue; }
 
- [ -z "$2" ] && { profileName="$1"; shift; } 
+ [ "$1" == ${1#-} ] &&
+ { 
+   [ -z "$profileList" ] && profileList="$1" || profileList="${profileList} $1"
+ }
 
  shift # catch-all shift... we should move to getopt
 done
 
- eval $main $profileName
+ eval $main $profileList
  exit $?
 
 ### EOF ###
