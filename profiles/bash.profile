@@ -1,0 +1,10 @@
+# vim:syntax=sh
+filter="awk/bashvers.awk"
+srcurl="http://ftp.gnu.org/gnu/bash/"
+extension_input="tar.gz"
+extension_url="${extension_url}"
+custom_url_prefix="${srcurl}bash-"
+custom_url_postfix=".${extension_input}"
+custom_file_postfix=".${extension_input}"
+custom_file_prefix="bash-"
+sep='"'
