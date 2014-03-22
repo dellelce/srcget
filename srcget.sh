@@ -225,6 +225,7 @@ main_single()
  ## Find latest software version
  typeset latest=$(current_version)
 
+ [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "couldn't retrieve latest version: error in processing site input"; return 1; }
  [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $rawgetrc"; return 1; }
 
  typeset fn=$(basename $latest)
