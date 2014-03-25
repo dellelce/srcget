@@ -1,7 +1,7 @@
 #
 # elasticsearchvers.awk
-#
-# created: 1957 020314
+# 
+# created: 250314
 #
 
 ### FUNCTIONS ###
@@ -14,21 +14,22 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && !/kibana/ && !/logstash/ && !/sha1\.txt/ && vers == ""\
-{
-  split($0, a);
+/^$/ { next }
 
-  for (i in a)
-  {
-    if (a[i] ~ ext)
-    {
-      print a[i]
-    }
-  }
-}
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && vers == "" \
+      {
+        vers = $2
+
+        cnt = split (vers, vers_a, "/");
+
+        if (cnt > 1)
+        {
+          vers = vers_a[5]
+        }
+      }
 
 ### END RULE ###
 
 END   {
-	print vers
+        print vers
       }
