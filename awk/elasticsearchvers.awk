@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && !/kibana/ && !/sha1\.txt/ && vers == ""\
+$0 ~ ext && !/kibana/ && !/logstash/ && !/sha1\.txt/ && vers == ""\
 {
   split($0, a);
 
