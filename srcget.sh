@@ -29,7 +29,7 @@
 #
 # 20: cannot find profiles directory
 #
-# srcget:main return codes:
+# srcget:main_single return codes:
 #
 # 1: no profile passed
 # 1: cannot load profile
@@ -121,8 +121,7 @@ rawget()
 
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
  # keep wget return code
- rawgetrc=$?
- return $rawgetrc
+ return $? 
 }
 
 # 
@@ -154,6 +153,7 @@ current_version()
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
 
  rawget "$srcurl" | ${_awk} -f "$fp_filter";
+ return $? # unneeded / just a paranoia touch
 }
 
 #
@@ -224,9 +224,10 @@ main_single()
 
  ## Find latest software version
  typeset latest=$(current_version)
+ typeset latest_rc="$?"
 
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "couldn't retrieve latest version: error in processing site input"; return 1; }
- [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $rawgetrc"; return 1; }
+ [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $latestrc"; return 1; }
 
  typeset fn=$(basename $latest)
  typeset fullurl=""
