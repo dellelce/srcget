@@ -298,6 +298,7 @@ wget_pkg()
 srcall()
 {
   srcgetDir="$(dirname $0)"
+  typeset b p
 
   [ ! -d "$srcgetDir/profiles" ] &&
   {
@@ -308,15 +309,14 @@ srcall()
   for x in $srcgetDir/profiles/*;
   do
    b=$(basename $x);
-   p=${b%.profile};
+   p=${x%.profile};
 
-   load_profile "$x"
+   # profile is loaded twice, and this is not a good thing, but for now we can live with it....
+   load_profile "$p"
    [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
-   b="$basename"
-   [ -z "$b" ] && b="$p"
 
    # printf "Checking ${p}..."
-   main $p #> /dev/null
+   main_single $p #> /dev/null
    rc="$?"
 
    # wget appears to return 1 on success.......(!?)
