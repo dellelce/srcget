@@ -199,6 +199,7 @@ load_profile()
  unset sep
  unset skipvers
  unset srcurl
+ unset bulkenabled
  . $pfp
  export fp_filter="$srcHome/$filter"
  return 0
@@ -309,11 +310,10 @@ srcall()
    b=$(basename $x);
    p=${b%.profile};
 
-   basename=""
-   . "$x"
+   load_profile "$x"
+   [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
    b="$basename"
    [ -z "$b" ] && b="$p"
-
 
    # printf "Checking ${p}..."
    main $p #> /dev/null
