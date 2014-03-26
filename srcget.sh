@@ -309,7 +309,8 @@ srcall()
   for x in $srcgetDir/profiles/*;
   do
    b=$(basename $x);
-   p=${x%.profile};
+   p=${b%.profile};
+   echo $p
 
    # profile is loaded twice, and this is not a good thing, but for now we can live with it....
    load_profile "$p"
