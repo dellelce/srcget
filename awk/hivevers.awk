@@ -16,7 +16,7 @@ BEGIN {
 
 /release/&&/available/&&/[0-9]+.[0-9]+.[0-9]+/&&vers=="" \
 {
-  gsub(/<>/," ");
+  gsub(/[<>]/," ");
   split($0, array);
 
   for (item in array)
