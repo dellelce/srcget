@@ -14,9 +14,9 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && vers == ""
+vers == "" && $0 ~ ext \
 {
-  url=$4;
+  url=$4
   split(url,url_a,"#"); 
   vers = url_a[1];
 }
