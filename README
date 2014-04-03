@@ -26,3 +26,4 @@ i.e.:
 - improve version checking, most of the filters rely on very simple checks
 - plan for python migration
 - build options
+- signal handling... control-c is not handled correctly right now
