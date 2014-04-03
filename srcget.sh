@@ -314,13 +314,14 @@ srcall()
    # profile is loaded twice, and this is not a good thing, but for now we can live with it....
    load_profile "$p"
    [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
+   [ ! -z "$basename" ] && { b="$basename"; } # override if set in profile!
 
-   # printf "Checking ${p}..."
-   main_single $p #> /dev/null
+   # do not suppress output if -n was specified
+   [ -z "$NAMEONLY" ] && { main_single $p > /dev/null; } || { main_single $p; } 
    rc="$?"
 
    # wget appears to return 1 on success.......(!?)
-   [ $rc -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${b}* | head -1)"; continue; }
+   [ $rc -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${p}* | head -1)"; continue; }
    [ $rc -eq 2 ] && { continue; }
 
    srcecho "${p}: error: $rc"
