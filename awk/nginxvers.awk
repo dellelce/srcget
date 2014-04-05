@@ -9,21 +9,26 @@
 ### MAIN RULE ###
 
 BEGIN {
-        state = 0
         vers = ""
       }
 
 # custom rules
 
 
-state == 0 && $0 ~ /class="date"/ \
+/[0-9]+\.[0-9]+\.[0-9]/ && vers == "" \
 {
- vers = $7;
- sub(/<\/a>/, "", vers);
- sub(/>/, "", vers);
+ line = $0
+ gsub(/[<>,]/, " ", line);
+ cnt = split(line,vers_a, " ");
 
- state = 1; # first is ok
- next;
+ for (idx in vers_a)
+ {
+   if (vers_a[idx] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+   {
+     vers = vers_a[idx]
+   }
+ }
+ next
 }
 
 ### end rule ###
