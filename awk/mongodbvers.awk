@@ -45,5 +45,9 @@ state == 1 && $0 ~ ext && /src/\
 ### end loop ###
 
 END   {
-	if (fullurl != "") print fullurl;
+	if (fullurl != "")
+        {
+          sub(/https/, "http", fullurl);
+          print fullurl;
+        }
       }
