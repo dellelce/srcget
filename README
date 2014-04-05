@@ -27,3 +27,4 @@ i.e.:
 - plan for python migration
 - build options
 - signal handling... control-c is not handled correctly right now
+- support notifications (on failure / new versions)
