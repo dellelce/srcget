@@ -8,6 +8,7 @@ srcurl="${baseurl}/download.html"
 #baseurl=""
 comment=""
 extension_input="tar.gz"
+basename="Cabal"
 sep='"'
 custom_url_prefix="${baseurl}/"
 
