@@ -316,8 +316,8 @@ srcall()
    [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
    [ ! -z "$basename" ] && { b="$basename"; } # override if set in profile!
 
-   # do not suppress output if -n was specified
-   [ -z "$NAMEONLY" ] && { main_single $p > /dev/null; } || { main_single $p; } 
+   # always run main_single silently
+   SILENT=1 main_single $p
    rc="$?"
 
    # wget appears to return 1 on success.......(!?)
