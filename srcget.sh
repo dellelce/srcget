@@ -321,7 +321,7 @@ srcall()
    rc="$?"
 
    # wget appears to return 1 on success.......(!?)
-   [ $rc -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${p}* | head -1)"; continue; }
+   [ $rc -eq 0 ] && { srcecho "${b}: downloaded: $(ls -t *${p}* | head -1)"; continue; }
    [ $rc -eq 2 ] && { continue; }
 
    srcecho "${p}: error: $rc"
