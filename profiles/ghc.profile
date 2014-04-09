@@ -3,7 +3,7 @@
 filter="awk/ghcvers.awk"
 baseurl="https://github.com/ghc/ghc"
 srcurl="${baseurl}/releases"
-comment=""
+comment="Glasgow Haskell Compiler"
 extension_input="tar.gz"
 sep='"'
 basename="ghc"
