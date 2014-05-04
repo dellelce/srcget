@@ -34,6 +34,6 @@ END   {
 	#0.12.0/hive-0.12.0  ... I don't like the following lines ...
 	if (vers != "")
         {
-         print vers"/hive-"vers
+         print vers"/apache-hive-"vers
         }
       }
