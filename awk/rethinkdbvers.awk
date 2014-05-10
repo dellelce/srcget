@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && vers == "" \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && !/python/ && vers == "" \
       {
         vers = $2
 
