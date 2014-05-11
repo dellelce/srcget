@@ -34,7 +34,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext /&&/detail/&&/<td/&& /git-[0-9]/&&!/\.rc/ \
+$0 ~ ext &&/detail/&&/<td/&& /git-[0-9]/&&!/\.rc/ \
 {
   v = $2
   v = substr(v, index(v, "-") + 1, length(v));
