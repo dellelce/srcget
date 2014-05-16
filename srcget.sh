@@ -199,6 +199,7 @@ load_profile()
  unset sep
  unset skipvers
  unset srcurl
+ unset comment
  unset bulkenabled
  . $pfp
  export fp_filter="$srcHome/$filter"
@@ -206,6 +207,8 @@ load_profile()
 }
 
 #
+# main_single
+# this is the core of this software
 #
 
 main_single()
@@ -273,7 +276,36 @@ main_single()
 }
 
 #
+#
+#
+
+info_single()
+{
+ typeset profile="$1"
+ typeset profileRc=0
+ typeset aList="basename  baseurl  custom_file_postfix  custom_file_prefix  custom_url_postfix  custom_url_prefix  extension  extension_input  extension_url  filter  sep  skipvers  srcurl  comment  bulkenabled"
+ typeset aItem
+
+ [ ! -z "$DEBUG" ] && set -x
+
+ load_profile $profile
+ profileRc=$?
+
+ #Sanity checks
+ [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
+ [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
+ [ $profileRc -ne 0 ] && { return 5; } 
+
+ for aItem in $aList
+ do
+   aValue=$(eval echo \$$aItem)
+   [ ! -z "$aValue" ] && printf "%-20s %s\n" $aItem $aValue
+ done
+}
+
+#
 # wget_pkg
+# TO REMOVE?
 #
 
 wget_pkg()
@@ -286,8 +318,6 @@ wget_pkg()
  [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
 
  return $rc
-
-
 }
 
 #
@@ -359,10 +389,11 @@ listall()
   return 0
 }
 
-## main ##
+## infoall ##
 
-main()
+infoall()
 {
+ typeset profile=""
  typeset profileRc=0
  [ ! -z "$DEBUG" ] && set -x
 
@@ -370,9 +401,40 @@ main()
  [ -z "$1" ] && return 1;
 
  ## Load profile information
- typeset profile="$1"
 
- main_single "$profile"
+ while [ ! -z "$1" ]
+ do
+  profile="$1"
+
+  info_single "$profile"
+  rc="$?"
+  shift
+ done
+
+ return $rc
+}
+
+## main ##
+
+main()
+{
+ typeset profile=""
+ typeset profileRc=0
+ [ ! -z "$DEBUG" ] && set -x
+
+ #Sanity checks
+ [ -z "$1" ] && return 1;
+
+ ## Load profile information
+
+ while [ ! -z "$1" ]
+ do
+  profile="$1"
+
+  main_single "$profile"
+  rc="$?"
+  shift
+ done
 
  return $rc
 }
@@ -412,6 +474,7 @@ do
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; continue; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; continue; }
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
+ [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; continue; }
 
