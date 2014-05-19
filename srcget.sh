@@ -74,6 +74,7 @@ $0 [options] program_name
 
  -A  Download all packages
  -L  List all 'packages'
+ -I  Information about package
  -x  Turn on debug mode
  -n  Quiet mode: show filename only
  -q  Quiet mode: don't show anything
