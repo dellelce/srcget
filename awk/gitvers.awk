@@ -1,49 +1,37 @@
 #
-# cairovers.awk
+# gitvers.awk
 #
-# created: 290713
+# re-created: 290514
 #
 
 ### FUNCTIONS ###
 
-function compare_versions(a, b)
-{
-  c_1 = split(a, a_a, ".");
-  c_2 = split(b, b_a, ".");
-
-  if (c_1 < 2 || c_2 < 2) { return "ERRINPUT"; }
-
-  if (a_a[1] > b_a[1]) return a;
-  if (a_a[1] < b_a[1]) return b;
-
-  if (a_a[2] > b_a[2]) return a;
-  if (a_a[2] < b_a[2]) return b;
-
-  if (a_a[3] > b_a[3]) return a;
-  if (a_a[3] < b_a[3]) return b;
-
-  return  a
-}
-
-### MAIN LOOP ###
+### MAIN RULE ###
 
 BEGIN {
-        state = 0
-        good_ver = "1.0.0"
+        vers = ""
       }
 
 # custom rules
 
-$0 ~ ext &&/detail/&&/<td/&& /git-[0-9]/&&!/\.rc/ \
-{
-  v = $2
-  v = substr(v, index(v, "-") + 1, length(v));
-  v = substr(v, 1, index(v, ".tar.") - 1)
-  good_ver = compare_versions(good_ver, v)
-}
+/^$/ { next }
 
-### end loop ###
+$0 ~ ext && /\/archive\// && !/-rc/ && $2 !~ /\.[0-9]a/ && vers == "" \
+      {
+        vers = $2
+
+        cnt = split (vers, vers_a, "/");
+
+        if (cnt > 1)
+        {
+          vers = vers_a[5]
+        }
+      }
+
+### END RULE ###
 
 END   {
- 	print good_ver
+        print vers
       }
+
+### EOF ###
