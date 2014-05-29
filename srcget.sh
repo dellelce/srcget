@@ -328,17 +328,22 @@ wget_pkg()
 
 srcall()
 {
-  srcgetDir="$(dirname $0)"
-  typeset b p
+ [ ! -d "$profilesDir" -a -h "$0" ] &&
+ {
+  typeset srcHome=$(getlinkdir "$0")
+  typeset profilesDir="$srcHome/profiles"
+ }
 
-  [ ! -d "$srcgetDir/profiles" ] &&
-  {
-    echo "Can't find profiles directory!: $srcgetDir/profiles"
-    return 20
-  }
+ typeset b p
 
-  for x in $srcgetDir/profiles/*;
-  do
+ [ ! -d "$profilesDir" ] &&
+ {
+   echo "Can't find profiles directory!: $profilesDir"
+   return 20
+ }
+
+ for x in $profilesDir/*;
+ do
    b=$(basename $x);
    p=${b%.profile};
 
@@ -366,16 +371,20 @@ srcall()
 
 listall()
 {
-  srcgetDir="$(dirname $0)"
+ [ ! -d "$profilesDir" -a -h "$0" ] &&
+ {
+   export srcHome=$(getlinkdir "$0")
+   export profilesDir="$srcHome/profiles"
+ }
 
-  [ ! -d "$srcgetDir/profiles" ] &&
-  {
-    echo "Can't find profiles directory!: $srcgetDir/profiles"
-    return 20
-  }
+ [ ! -d "$profilesDir" ] &&
+ {
+   echo "Can't find profiles directory!: $profilesDir"
+   return 20
+ }
 
-  for x in $srcgetDir/profiles/*;
-  do
+ for x in $profilesDir/*;
+ do
    b=$(basename $x);
    p=${b%.profile};
 
