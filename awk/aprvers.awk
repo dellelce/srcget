@@ -24,7 +24,7 @@ $0 ~ ext && !/_mod/ && vers == "" \
   {
     item = line_a[idx]
 
-    if (item ~ ext && vers == "")
+    if (item ~ ext && item ~ /http/ && vers == "")
     {
       vers = item
     }
