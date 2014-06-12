@@ -15,18 +15,26 @@ BEGIN {
 
 # custom rules
 
-#<h1 class="title">Releases</h1>
-
-
-state == 0 && /class="page-title"/ && /Releases/ \
+state == 0 && $0 ~ /latest source release/ \
 {
-   state = 1
-   next
+ state = 1
+ next
 }
 
-state == 1 && /class="reference external"/ \
+state == 1 && $0 ~ /[0-9]\.[0-9]+\.[0-9]+/ && vers == "" \
 {
-   if (vers == "" ) vers = $4
+ split($0, vers_a, "\"");
+
+ for (idx in vers_a)
+ {
+   item = vers_a[idx];
+   if (vers == "" && item ~ ext && item ~ /[0-9]\.[0-9]+\.[0-9]+/)
+   {
+     vers = item
+     state = 2
+   }
+ }
+ next
 }
 
 ### END RULE ###
@@ -35,6 +43,6 @@ END   {
         #http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tar.xz
         if (vers!="") # make sure we don't return junk
 	{ 
-          print vers"/Python-"vers
+          print vers
         }
       }
