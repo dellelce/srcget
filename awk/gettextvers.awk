@@ -8,10 +8,10 @@
 
 function compare_versions(a, b)
 {
-  c_1 = split(a, a_a, ".");
-  c_2 = split(b, b_a, ".");
+  cnt1 = split(a, a_a, ".");
+  cnt2 = split(b, b_a, ".");
 
-  if (c_1 < 2 || c_2 < 2) { return "ERRINPUT c_1 = "c_1 " c_2 = "c_2; }
+  if (cnt1 < 2 || cnt2 < 2) { return "ERRINPUT c_1 = "cnt1 " c_2 = "cnt2 " a = " a " b = " b; }
 
   if (a_a[1] > b_a[1]) return a;
   if (a_a[1] < b_a[1]) return b;
@@ -40,7 +40,7 @@ BEGIN {
 
 # custom rules
 
-/gettext/&& $0 ~ ext && !/\.sig/ \
+/gettext/&& !/latest/ && $0 ~ ext && !/\.sig/ \
 { 
   vers = $6
   sub(/gettext-/,"",vers)
