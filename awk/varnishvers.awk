@@ -10,11 +10,18 @@
 
 BEGIN {
         vers=""
+        state = 0
       }
 
 # custom rules
 
-vers == "" && /[sS]table [rR]elease/ && /[0-9]+\.[0-9]+\.[0-9]+/ \
+state == 0 && /[Ll]atest [rR]elease/ \
+{
+  state = 1;
+  next
+}
+
+state == 1 && /[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
 {
   gsub(/[-<>\"]/, " ", $0);
   vers_cnt = split($0, vers_a)
