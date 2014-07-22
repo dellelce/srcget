@@ -37,7 +37,7 @@ BEGIN {
 
 # custom rules
 
-/m4/&& $0 ~ ext && !/\.sig/ \
+/m4/&& $0 ~ ext && !/\.sig/ && !/\.diff/ && !/latest/ \
 { 
   vers = $6
   sub(/m4-/,"",vers)
