@@ -22,19 +22,18 @@ function compare_versions(a, b)
   if (a_a[3] > b_a[3]) return a;
   if (a_a[3] < b_a[3]) return b;
 
-  return  "EQ"
+  return "EQ"
 }
 
 
 function push_version(v)
 {
-  if (v ~ /.md5$/) return;
-  if (v ~ /.sha1$/) return;
   if (v ~ /beta/) return;
   if (v ~ /-RC/) return;
 
   vn = substr(v, index(v,"wordpress-") + length("wordpress-"),length(v));
-  sub(/.tar.gz/,"",vn);
+  sub(ext,"",vn);
+  sub(/\.$/,"",vn);
 
   goodvn = compare_versions(goodvn,vn);
 }
@@ -46,29 +45,27 @@ BEGIN {
         state = 0
         goodvn = "1.0.0"
         initialvn = goodvn
-        v = ""
+        vers = ""
       }
 
 # custom rules
 
-/wordpress-[1-9]/ && /tar.gz/ && !/rollback/ \
+/Betas and Release Candidates/ && state == 0 { state = 1; next; }
+
+$0 ~ ext && vers == "" && state == 0 \
 {
- gsub(/<tr/,"^"); 
  vline = $0
- v_cnt = split(vline, l_a, "^");
+ gsub(/[<>']/," ", vline);
+
+ v_cnt = split(vline, l_a, " ");
 
  for (i in l_a)
  {
-   hline = l_a[i]
-   hline_cnt = split(hline, hl_a, "'");
+   cur = l_a[i]
 
-   for (hi in hl_a)
+   if(cur ~ ext && cur ~ /[0-9]\.[0-9]/ && cur !~ /\.md5$/ && cur !~ /\.sha1$/)
    {
-     item = hl_a[hi]
-     if (item ~ /tar.gz/ && item ~ /wordpress-/)
-     {
-       push_version(hl_a[hi]);
-     }
+     push_version(cur)
    } 
  }
 } 
@@ -83,3 +80,5 @@ END   {
           print "http://wordpress.org/wordpress-"goodvn".tar.gz"
         }
       }
+
+### EOF ###
