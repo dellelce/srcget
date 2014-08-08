@@ -52,7 +52,7 @@
 # temporary srcHome....
 export srcHome="$(dirname $0)"
 export profilesDir="$srcHome/profiles"
-timeout="30"
+timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
 # Accept-Encoding: we don't like gzip
 #this was a fix/workaround for python's web server behaviour.... but has too many negatives.
