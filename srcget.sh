@@ -80,6 +80,8 @@ $0 [options] program_name
  -q  Quiet mode: don't show anything
  -H  Debug: return server HTTP headers (DEBUG ONLY!)
  -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
+ -B  Build
+ -P  Parameter for build
 
 EOF
 }
@@ -479,6 +481,7 @@ export main="main"
 
 while [ ! -z "$1" ] 
 do
+ [ "$1" == "-B" ] && { aftermain="build"; shift; continue; }
  [ "$1" == "-A" ] && { main="srcall"; shift; continue; }
  [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; continue; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; continue; } # debug headers
@@ -497,6 +500,11 @@ do
 done
 
  eval $main $profileList
- exit $?
+ rc=$?
+ [ $rc -ne 0 ] && exit $rc
+
+ [ ! -z "$aftermain" ] && { eval $aftermain $profileList; rc=$?; }
+
+ exit $rc
 
 ### EOF ###
