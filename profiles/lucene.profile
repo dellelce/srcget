@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/lucenevers.awk"
+filter="awk/lucene.latest.awk"
 srcurl="https://lucene.apache.org/"
 baseurl="http://www.mirrorservice.org/sites/ftp.apache.org/lucene/java/"
 comment=""

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/geanyvers.awk"
+filter="awk/geany.latest.awk"
 srcurl="http://www.geany.org/Download/Releases"
 #baseurl=""
 comment=""

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/erlangvers.awk"
+filter="awk/erlang.latest.awk"
 srcurl="http://www.erlang.org/download.html"
 baseurl="http://www.erlang.org"
 comment=""

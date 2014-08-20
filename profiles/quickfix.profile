@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/quickfixvers.awk"
+filter="awk/quickfix.latest.awk"
 baseurl="https://github.com/quickfix/quickfix"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

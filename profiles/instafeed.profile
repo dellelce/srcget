@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/instafeedvers.awk"
+filter="awk/instafeed.latest.awk"
 baseurl="https://github.com/stevenschobert/instafeed.js"
 srcurl="${baseurl}/releases"
 comment=""

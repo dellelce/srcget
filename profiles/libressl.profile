@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/libresslvers.awk"
+filter="awk/libressl.latest.awk"
 srcurl="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL"
 baseurl="${srcurl}"
 comment=""

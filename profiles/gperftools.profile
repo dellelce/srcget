@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/gperftoolsvers.awk"
+filter="awk/gperftools.latest.awk"
 srcurl="https://code.google.com/p/gperftools/"
 #baseurl=""
 comment=""

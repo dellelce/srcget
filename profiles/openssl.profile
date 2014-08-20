@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 
-filter="awk/opensslvers.awk"
+filter="awk/openssl.latest.awk"
 srcurl="http://www.openssl.org/source/"
 extension_input="tar.gz"
 # if set will be used to generate url

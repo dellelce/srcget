@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/hivevers.awk"
+filter="awk/hive.latest.awk"
 srcurl="http://hive.apache.org/downloads.html"
 baseurl="http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-"
 comment=""

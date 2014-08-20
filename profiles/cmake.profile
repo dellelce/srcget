@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/cmakevers.awk"
+filter="awk/cmake.latest.awk"
 srcurl="http://www.cmake.org/cmake/resources/software.html"
 baseurl=""
 extension="tar.gz"

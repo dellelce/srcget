@@ -1,7 +1,7 @@
 # vim:syntax=sh
 # why am I keeping this? Should I just skip to lucene?
 
-filter="awk/libgit2vers.awk"
+filter="awk/libgit2.latest.awk"
 baseurl="https://github.com/libgit2/libgit2"
 srcurl="${baseurl}/releases"
 comment=""

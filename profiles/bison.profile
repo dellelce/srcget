@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/bisonvers.awk"
+filter="awk/bison.latest.awk"
 srcurl="http://ftp.gnu.org/gnu/bison"
 extension_input="tar.xz"
 basename="bison"

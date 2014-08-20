@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/djangovers.awk"
+filter="awk/django.latest.awk"
 baseurl="https://github.com/django/django"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

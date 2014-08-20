@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/redisvers.awk"
+filter="awk/redis.latest.awk"
 srcurl="http://redis.io"
 sep="'"
 extension_url="tar.gz"

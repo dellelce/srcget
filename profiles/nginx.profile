@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/nginxvers.awk"
+filter="awk/nginx.latest.awk"
 #srcurl="http://nginx.org/en/download.html"
 srcurl="http://nginx.org/"
 extension_input="tar.gz"

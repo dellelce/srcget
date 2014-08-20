@@ -1,5 +1,5 @@
 # vim:syntax=sh
-filter="awk/bashvers.awk"
+filter="awk/bash.latest.awk"
 srcurl="http://ftp.gnu.org/gnu/bash/"
 extension_input="tar.gz"
 extension_url="${extension_url}"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/v8vers.awk"
+filter="awk/v8.latest.awk"
 baseurl="https://github.com/v8/v8"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
