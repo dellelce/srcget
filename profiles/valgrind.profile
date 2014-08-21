@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/valgrindvers.awk"
+filter="awk/valgrind.latest.awk"
 srcurl="http://valgrind.org/downloads/current.html"
 baseurl="http://valgrind.org"
 comment=""

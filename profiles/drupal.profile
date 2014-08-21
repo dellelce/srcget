@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/drupalvers.awk"
+filter="awk/drupal.latest.awk"
 srcurl="https://drupal.org/project/drupal"
 extension_input="tar.gz"
 

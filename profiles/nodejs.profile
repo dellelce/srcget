@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/nodejsvers.awk"
+filter="awk/nodejs.latest.awk"
 srcurl="http://nodejs.org/download/"
 extension_input="tar.gz"
 sep='"'

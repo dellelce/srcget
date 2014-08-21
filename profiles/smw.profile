@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/smwvers.awk"
+filter="awk/smw.latest.awk"
 baseurl="https://github.com/SemanticMediaWiki/SemanticMediaWiki"
 srcurl="${baseurl}/releases"
 comment="Semantic Mediawiki"

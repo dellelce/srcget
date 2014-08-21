@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/ghcvers.awk"
+filter="awk/ghc.latest.awk"
 baseurl="https://github.com/ghc/ghc"
 srcurl="${baseurl}/releases"
 comment="Glasgow Haskell Compiler"

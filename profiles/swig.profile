@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/swigvers.awk"
+filter="awk/swig.latest.awk"
 srcurl="http://sourceforge.net/projects/swig/files/"
 extension_input="tar.gz"
 # if set will be used to generate url

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/gephivers.awk"
+filter="awk/gephi.latest.awk"
 srcurl="https://launchpad.net/gephi/+download"
 #baseurl=""
 comment=""

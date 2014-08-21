@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/mpfrvers.awk"
+filter="awk/mpfr.latest.awk"
 srcurl="http://www.mpfr.org/mpfr-current/"
 extension_input="tar.xz"
 extension_url="${extension_input}"

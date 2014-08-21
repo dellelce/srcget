@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/wgetvers.awk"
+filter="awk/wget.latest.awk"
 srcurl="http://ftp.gnu.org/gnu/wget/"
 extension_input="tar.xz"
 extension_url="${extension_url}"
