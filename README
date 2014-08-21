@@ -22,9 +22,14 @@ i.e.:
 
 - groups/tags/categories
 - report information instead of actual download
-- dependency support
+- dependency support: weak & strong dependencies
 - improve version checking, most of the filters rely on very simple checks
 - plan for python migration
-- build options
 - signal handling... control-c is not handled correctly right now
 - support notifications (on failure / new versions)
+- support for downloading a specific version
+
+* Todo Build:
+
+- merge work from "mkit" ?
+- dependency work is needed for 
