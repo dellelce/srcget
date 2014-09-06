@@ -7,7 +7,7 @@ comment=""
 extension_input="tar.bz2"
 sep='"'
 basename="gimp"
-custom_url_prefix="http://www.mirrorservice.org/sites/ftp.gimp.org/pub/gimp/"
+custom_url_prefix="http://download.gimp.org/pub/gimp/"
 
 
 ## EOF ##
