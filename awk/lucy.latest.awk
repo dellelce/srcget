@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-/[0-9]+.[0-9]+.[0-9]+/&&/Release/ && vers == "" \
+/[0-9]+.[0-9]+.[0-9]+/ && /[lL]ucy/ && /[rR]elease/ && vers == "" \
 {
   gsub(/[<>]/," ");
   split($0, array);
