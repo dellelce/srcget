@@ -143,9 +143,6 @@ EOF
 current_version()
 {
  typeset _awk="awk"
-#TBD: will be used if wget output needs any filtering, not now.
-# typeset tmpfile="$TMP/srcget.$RANDOM.$$.dat"
-# typeset tmptxt="$TMP/srcget.$RANDOM.$$.dat"
 
  [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
@@ -232,7 +229,7 @@ main_single()
  typeset latest_rc="$?"
 
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "couldn't retrieve latest version: error in processing site input"; return 1; }
- [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $latestrc"; return 1; }
+ [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $latest_rc"; return 1; }
 
  typeset fn=$(basename $latest)
  typeset fullurl=""
@@ -284,7 +281,7 @@ info_single()
 {
  typeset profile="$1"
  typeset profileRc=0
- typeset aList="basename  baseurl  custom_file_postfix  custom_file_prefix  custom_url_postfix  custom_url_prefix  extension  extension_input  extension_url  filter  sep  skipvers  srcurl  comment  bulkenabled"
+ typeset aList="basename baseurl custom_file_postfix custom_file_prefix custom_url_postfix custom_url_prefix extension extension_input extension_url filter sep skipvers srcurl comment bulkenabled"
  typeset aItem
 
  [ ! -z "$DEBUG" ] && set -x
@@ -453,21 +450,21 @@ main()
 
 geturl()
 {
-  typeset url="$1"
-  typeset profileRc=0
+ typeset url="$1"
+ typeset profileRc=0
 
-  is_valid_url "$url" ||
-  {
-    # url is actually a profile
-    load_profile $url 
-    profileRc=$?
+ is_valid_url "$url" ||
+ {
+  # url is actually a profile
+  load_profile $url 
+  profileRc=$?
 
-    [ $profileRc -ne 0 ] && return $profileRc
+  [ $profileRc -ne 0 ] && return $profileRc
 
-    is_valid_url "$srcurl" && url="$srcurl" || { srcecho "badprofile"; return 2; } 
-  }
+  is_valid_url "$srcurl" && url="$srcurl" || { srcecho "badprofile"; return 2; } 
+ }
 
-  rawget $url
+ rawget $url
 }
 
 ### MAIN ###
