@@ -5,3 +5,4 @@ awk/*.html
 *.tar.bz2
 *.tgz
 bad
+cache
