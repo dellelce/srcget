@@ -28,7 +28,7 @@ state == 1 && $0 ~ /[0-9]\.[0-9]+\.[0-9]+/ && vers == "" \
  for (idx in vers_a)
  {
    item = vers_a[idx];
-   if (vers == "" && item ~ ext && item ~ /[0-9]\.[0-9]+\.[0-9]+/)
+   if (vers == "" && item ~ /[0-9]\.[0-9]+\.[0-9]+/)
    {
      vers = item
      state = 2
