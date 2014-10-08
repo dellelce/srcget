@@ -8,8 +8,5 @@ srcurl="https://www.python.org/downloads/"
 #NEW:
 #https://www.python.org/ftp/python/3.4.1/Python-3.4.1.tar.xz
 extension_input="tar.xz"
-#custom_url_prefix="http://www.python.org/ftp/python/"
-#custom_url_postfix=".${extension_input}"
-#custom_file_postfix=".${extension_input}"
 basename="Python"
 sep='"'
