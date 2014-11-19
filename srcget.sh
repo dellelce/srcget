@@ -51,14 +51,14 @@
 
 # temporary srcHome....
 export srcHome="$(dirname $0)"
-export profilesDir="$srcHome/profiles"
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
 # Accept-Encoding: we don't like gzip
 #this was a fix/workaround for python's web server behaviour.... but has too many negatives.
 #wgetHeaders='--header="Accept-Encoding:"'
 wgetArgs="-T ${timeout} -q --no-check-certificate"
-UA="Mozilla/5.0 (compatible; srcget/0.0.2; +http://github.com/dellelce/srcget/)"
+version="0.0.5.4"
+UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/)"
 NAMEONLY=0
 
 unset SILENT DEBUG
@@ -105,7 +105,7 @@ getlinkdir()
 # echo wrapper
 srcecho()
 {
-  [ -z "$SILENT" ] && echo $*
+ [ -z "$SILENT" ] && echo $*
 }
 
 # wrapper to wget
