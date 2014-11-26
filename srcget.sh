@@ -46,16 +46,10 @@
 #
 #
 
-
 ### ENV ###
 
-# temporary srcHome....
-export srcHome="$(dirname $0)"
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
-# Accept-Encoding: we don't like gzip
-#this was a fix/workaround for python's web server behaviour.... but has too many negatives.
-#wgetHeaders='--header="Accept-Encoding:"'
 wgetArgs="-T ${timeout} -q --no-check-certificate"
 version="0.0.5.4"
 UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/)"
@@ -84,22 +78,39 @@ $0 [options] program_name
 EOF
 }
 
-#getlinkdir
+#
+# getlinkdir
 #
 getlinkdir()
 {
- typeset dest="$1"
+ typeset link="$1"
+ typeset cwd="$PWD"
+ typeset dest destdir base
 
- [ -z "$dest"  -o ! -h "$dest" ] && { return 1; } 
-
- dirname $(
- {  for x in $(ls -lt $dest) ; do echo $x; done ; } | awk  ' 
-  BEGIN { state = 0; }
-  state == 0 && $1 == "->" { state = 1 ; next; }
-  state == 1 { print; state = 0; next; }
-'
+ while [ -h $link ]
+ do
+  dest=$(
+  {
+   for x in $(ls -lt $link);
+   do
+    echo $x;
+   done
+  } | awk  \
+  ' 
+    BEGIN { state = 0; }
+    state == 0 && $1 == "->" { state = 1 ; next; }
+    state == 1 { print; state = 0; next; }
+  '
 )
+  destdir=$(dirname $dest)
+  base=$(basename $dest)
 
+  cd $destdir 2>/dev/null || { cd "$(dirname $link)/$destdir"; }
+  link="$PWD/$base"
+ done
+
+ cd "$cwd"
+ echo $(dirname $link)
 }
 
 # echo wrapper
@@ -175,7 +186,7 @@ load_profile()
  [ -z "$profile" ] && return 1;
 
  # try harder to make sure profilesDir is correct
- [ ! -d "$profilesDir" -a -h "$0" ] &&
+ [ ! -d "$profilesDir" ] &&
  {
    export srcHome=$(getlinkdir "$0")
    export profilesDir="$srcHome/profiles"
