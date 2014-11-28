@@ -150,7 +150,7 @@ current_version()
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
 
- rawget "$srcurl" | ${_awk} -f "$fp_filter";
+ rawget "$srcurl" | ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter";
  return $? # unneeded / just a paranoia touch
 }
 
