@@ -16,14 +16,12 @@ BEGIN {
 
 $2 ~ ext && $2 !~ /\.sig$/ \
 {
-#  cnt = split($2, a, "/");
-
-#  vers = a[8]
   vers = $2
-# future release
-#  sub(ext, "", vers)
-#  sub(/\.$/, "", vers)
-#  sub(/^pcre-/, "", vers)
+
+  if (vers !~ /:\/\//)
+  {
+    vers = baseurl"/"vers
+  } 
 }
 
 ### END RULE ###
