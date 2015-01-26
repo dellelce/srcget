@@ -11,7 +11,7 @@ function compare_versions(a, b)
   c_1 = split(a, a_a, ".");
   c_2 = split(b, b_a, ".");
 
-  if (c_1 != 3 || c_2 != 3) { return "ERRINPUT"; }
+  if (c_1 != 3 || c_2 != 3) { return "ERRINPUT:"c_1":"c_2; }
 
   if (a_a[1] > b_a[1]) return a;
   if (a_a[1] < b_a[1]) return b;
@@ -23,7 +23,6 @@ function compare_versions(a, b)
   if (a_a[3] < b_a[3]) return b;
 
   return  "EQ" 
-
 }
 
 ### MAIN LOOP ###
@@ -34,15 +33,25 @@ BEGIN {
       }
 
 # custom rules
-/released/ { 
-	     cnt_1 = split ($0, a, ">");
-	     cnt_2 = split (a[4], gcc_a, "<");
+/released/ \
+{ 
+  line = $0
 
-	     vers = gcc_a[1]
-	     sub(/GCC /, "", vers);
-             gvers = compare_versions(gvers, vers);
-	     next
-	   }
+  gsub(/[<>"]/, " ", line);
+  cnt = split (line, line_a, " ");
+
+  for (idx in line_a)
+  {
+    item = line_a[idx] 
+
+    if (item ~ /[0-9]+\.[0-9]+\.[0-9]/) { vers = item; }
+  }
+
+  if (vers == "") next;
+  sub(/GCC /, "", vers);
+  gvers = compare_versions(gvers, vers);
+  next
+}
 
 ### end loop ###
 
