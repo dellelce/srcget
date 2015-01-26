@@ -33,8 +33,6 @@ $0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && vers == "" \
 END   {
         if (vers != "")
         {
-          sub(/v/,"",vers);
-          split(vers,vers_a,".");
-	  print vers_a[1]"."vers_a[2]"."vers_a[3]
+         print vers
         }
       }
