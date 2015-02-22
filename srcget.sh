@@ -379,7 +379,7 @@ srcall()
 
 listall()
 {
- [ ! -d "$profilesDir" -a -h "$0" ] &&
+ [ ! -d "$profilesDir" ] &&
  {
    export srcHome=$(getlinkdir "$0")
    export profilesDir="$srcHome/profiles"
@@ -396,10 +396,12 @@ listall()
    b=$(basename $x);
    p=${b%.profile};
 
-   basename=""
-   . "$x"
-   b="$basename"
-   [ -z "$b" ] && b="$p"
+# as it is this does not wor in several cases
+#   basename=""
+#   . "$x"
+#   b="$basename"
+#   [ -z "$b" ] && b="$p"
+   b="$p"
 
    echo $b
 
