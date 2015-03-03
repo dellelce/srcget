@@ -9,15 +9,15 @@
 ### MAIN RULE ###
 
 BEGIN {
-        state = 0
+        latest=""
       }
 
 # custom rules
 
-$2 ~ ext && $2 !~ /\.sig$/ { print $2 } 
+$2 ~ ext && $2 !~ /\.sig$/ && latest == "" { latest = $2 } 
 
 ### END RULE ###
 
 END   {
-	# this is the end rule
+	if (latest != "") { print latest; }
       }
