@@ -1,5 +1,5 @@
 #
-# wpvers.awk
+# wp.latest.awk
 #
 # created: 280713
 #

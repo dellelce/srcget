@@ -1,5 +1,5 @@
 #
-# geanyvers.awk
+# geany.latest.awk
 #
 # created: 1445 160514
 #

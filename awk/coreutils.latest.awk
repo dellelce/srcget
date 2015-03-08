@@ -1,5 +1,5 @@
 #
-# coreutilsvers.awk
+# coreutils.latest.awk
 #
 # created: 191013
 #

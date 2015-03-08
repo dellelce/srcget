@@ -1,5 +1,5 @@
 #
-# networkxvers.awk
+# networkx.latest.awk
 #
 # created: 2003 310314
 #

@@ -1,5 +1,5 @@
 #
-# phpvers.awk
+# php.latest.awk
 #
 # created: 310713
 #

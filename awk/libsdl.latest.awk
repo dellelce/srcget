@@ -1,5 +1,5 @@
 #
-# libsdlvers.awk
+# libsdl.latest.awk
 #
 # created: 0747 100214
 #

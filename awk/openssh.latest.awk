@@ -1,5 +1,5 @@
 #
-# opensshvers.awk
+# openssh.latest.awk
 #
 # created: 1356 140913
 #

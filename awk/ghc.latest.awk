@@ -1,5 +1,5 @@
 #
-# ghcvers.awk
+# ghc.latest.awk
 # it's haskell babe
 #
 # created: 250314

@@ -1,5 +1,5 @@
 #
-# mediawikivers.awk
+# mediawiki.latest.awk
 #
 # created: 0300 300813
 #

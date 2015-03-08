@@ -1,5 +1,5 @@
 #
-# yumvers.awk
+# yum.latest.awk
 #
 # created: 1849 010314
 #

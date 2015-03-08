@@ -1,5 +1,5 @@
 #
-# mpcvers.awk
+# mpc.latest.awk
 #
 # created: 1241 140813
 #

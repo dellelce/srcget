@@ -1,5 +1,5 @@
 #
-# bzip2vers.awk
+# bzip2.latest.awk
 #
 # created: 1336 290913
 #

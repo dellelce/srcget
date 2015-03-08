@@ -1,5 +1,5 @@
 #
-# gimpvers.awk
+# gimp.latest.awk
 #
 # created: 0257 050414
 #

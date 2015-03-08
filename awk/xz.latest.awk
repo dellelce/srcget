@@ -1,5 +1,5 @@
 #
-# xzvers.awk
+# xz.latest.awk
 #
 # created: 0602 110114
 #

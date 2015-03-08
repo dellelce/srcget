@@ -1,5 +1,5 @@
 #
-# astrometryvers.awk
+# astrometry.latest.awk
 #
 # created: 0032 200813
 #

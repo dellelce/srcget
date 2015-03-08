@@ -1,5 +1,5 @@
 #
-# hivevers.awk
+# hive.latest.awk
 #
 # created: 1355 270314
 #

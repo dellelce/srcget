@@ -1,5 +1,5 @@
 #
-# tclvers.awk
+# tcl.latest.awk
 #
 # created: 1129 160813
 #

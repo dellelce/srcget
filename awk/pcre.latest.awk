@@ -1,5 +1,5 @@
 #
-# pcrevers.awk
+# pcre.latest.awk
 #
 # created: 0133 301213
 #

@@ -1,5 +1,5 @@
 #
-# openvpnvers.awk
+# openvpn.latest.awk
 #
 # created: 1814 090114
 #

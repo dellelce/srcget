@@ -1,5 +1,5 @@
 #
-# pixmanvers.awk
+# mysql.latest.awk
 #
 # created: 010813
 #

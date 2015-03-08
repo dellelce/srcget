@@ -1,5 +1,5 @@
 #
-# mavenvers.awk
+# maven.latest.awk
 #
 # created: 1129 280314
 #

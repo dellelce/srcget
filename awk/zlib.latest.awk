@@ -1,5 +1,5 @@
 #
-# zlibvers.awk
+# zlib.latest.awk
 #
 # created: 180813
 #

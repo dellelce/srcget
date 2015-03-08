@@ -1,5 +1,5 @@
 #
-# elrangvers.awk
+# erlang.latest.awk
 #
 # created: 1807 020414
 #

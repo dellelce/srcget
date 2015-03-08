@@ -1,5 +1,5 @@
 #
-# protobufvers.awk
+# protobuf.latest.awk
 #
 # created: 110514
 #

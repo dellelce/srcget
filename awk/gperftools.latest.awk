@@ -1,5 +1,5 @@
 #
-# gperftoolsvers.awk
+# gperftools.latest.awk
 #
 # created: 110514
 #

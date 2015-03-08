@@ -1,5 +1,5 @@
 #
-# gitvers.awk
+# git.latest.awk
 #
 # re-created: 290514
 #

@@ -1,5 +1,5 @@
 #
-# autoconfvers.awk
+# autoconf.latest.awk
 #
 # created: 290514
 #

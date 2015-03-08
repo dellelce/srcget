@@ -1,5 +1,5 @@
 #
-# cassandravers.awk
+# cassandra.latest.awk
 #
 # created: 200214
 #

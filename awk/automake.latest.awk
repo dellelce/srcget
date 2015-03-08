@@ -1,5 +1,5 @@
 #
-# automakevers.awk
+# automake.latest.awk
 #
 # created: 090714
 #

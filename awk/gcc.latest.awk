@@ -1,5 +1,5 @@
 #
-# gccvers.awk
+# gcc.latest.awk
 #
 # created: 210713
 #

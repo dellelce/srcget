@@ -1,5 +1,5 @@
 #
-# instafeedvers.awk
+# instafeed.latest.awk
 #
 # created: 290314
 #

@@ -1,5 +1,5 @@
 #
-# busyboxvers.awk
+# busybox.latest.awk
 #
 # created: 060813
 #

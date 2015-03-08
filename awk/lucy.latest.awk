@@ -1,5 +1,5 @@
 #
-# lucyvers.awk
+# lucy.latest.awk
 #
 # created: 2039 290314
 #

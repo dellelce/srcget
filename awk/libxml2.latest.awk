@@ -1,5 +1,5 @@
 #
-# phpvers.awk
+# libxml2.latest.awk
 #
 # created: 310713
 #

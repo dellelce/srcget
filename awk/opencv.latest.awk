@@ -1,5 +1,5 @@
 #
-# opencvvers.awk
+# opencv.latest.awk
 #
 # created: 140214 cloned from libeventvers.awk
 #

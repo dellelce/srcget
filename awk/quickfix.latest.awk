@@ -1,5 +1,5 @@
 #
-# quickfixvers.awk
+# quickfix.latest.awk
 #
 # created: 050314
 #

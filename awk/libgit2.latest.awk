@@ -1,5 +1,5 @@
 #
-# libgit2vers.awk
+# libgit2.latest.awk
 #
 # created: 030414
 #

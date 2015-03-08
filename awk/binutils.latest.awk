@@ -1,5 +1,5 @@
 #
-# binutilsvers.awk
+# binutils.latest.awk
 #
 # created: 210713
 #

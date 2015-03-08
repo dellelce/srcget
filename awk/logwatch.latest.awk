@@ -1,5 +1,5 @@
 #
-# logwatchvers.awk
+# logwatch.latest.awk
 #
 # created: 020314
 #

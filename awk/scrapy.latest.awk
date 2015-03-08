@@ -1,5 +1,5 @@
 #
-# scrapyvers.awk
+# scrapy.latest.awk
 #
 # created: 250514
 #

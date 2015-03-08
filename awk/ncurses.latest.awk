@@ -1,5 +1,5 @@
 #
-# ncursesvers.awk
+# ncurses.latest.awk
 #
 # created: 010813
 #

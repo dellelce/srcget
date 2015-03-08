@@ -1,5 +1,5 @@
 #
-# smwvers.awk
+# smw.latest.awk
 #
 # created: 210314
 #

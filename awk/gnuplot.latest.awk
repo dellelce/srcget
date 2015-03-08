@@ -1,5 +1,5 @@
 #
-# gnuplotvers.awk
+# gnuplot.latest.awk
 #
 # created: 0310 260214
 #

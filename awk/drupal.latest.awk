@@ -1,5 +1,5 @@
 #
-# drupalvers.awk
+# drupal.latest.awk
 #
 # created: 2205 090214
 #

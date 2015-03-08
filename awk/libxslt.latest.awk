@@ -1,5 +1,5 @@
 #
-# libxsltvers.awk
+# libxslt.latest.awk
 #
 # created: 1721 070813
 #

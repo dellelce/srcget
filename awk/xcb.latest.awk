@@ -1,5 +1,5 @@
 #
-# xcbvers.awk
+# xcb.latest.awk
 #
 # created: 280813
 #

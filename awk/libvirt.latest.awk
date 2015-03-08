@@ -1,5 +1,5 @@
 #
-# libvirtvers.awk
+# libvirt.latest.awk
 #
 # created: 1149 280514
 #

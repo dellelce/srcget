@@ -1,5 +1,5 @@
 #
-# dbusvers.awk
+# dbus.latest.awk
 #
 # created: 1416 150414
 #

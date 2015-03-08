@@ -1,5 +1,5 @@
 #
-# pixmanvers.awk
+# pkgconfig.latest.awk
 #
 # created: 050813
 #

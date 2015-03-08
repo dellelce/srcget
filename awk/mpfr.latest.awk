@@ -1,5 +1,5 @@
 #
-# mpfrvers.awk
+# mpfr.latest.awk
 #
 # created: 1755 120813
 #

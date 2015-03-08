@@ -1,5 +1,5 @@
 #
-# libpngvers.awk
+# libpng.latest.awk
 #
 # created: 290713
 #

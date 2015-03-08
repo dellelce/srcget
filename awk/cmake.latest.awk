@@ -1,5 +1,5 @@
 #
-# cmakevers.awk
+# cmake.latest.awk
 #
 # created: 010413
 #

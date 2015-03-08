@@ -1,5 +1,5 @@
 #
-# liboggvers.awk
+# libogg.latest.awk
 #
 # created: 0105 200314
 #

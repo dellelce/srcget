@@ -1,5 +1,5 @@
 #
-# pixmanvers.awk
+# pixman.latest.awk
 #
 # created: 300713
 #

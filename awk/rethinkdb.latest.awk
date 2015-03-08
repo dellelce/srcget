@@ -1,5 +1,5 @@
 #
-# rethinkdbvers.awk
+# rethinkdb.latest.awk
 #
 # created: 040314
 #

@@ -1,5 +1,5 @@
 #
-# libgcryptvers.awk
+# libgcrypt.latest.awk
 #
 # created: 090813
 #

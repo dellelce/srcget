@@ -1,5 +1,5 @@
 #
-# gmpvers.awk
+# gmp.latest.awk
 #
 # created: 0121 130813
 #

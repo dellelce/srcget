@@ -1,5 +1,5 @@
 #
-# cabalvers.awk
+# cabal.latest.awk
 #
 # created: 0423 290314
 #

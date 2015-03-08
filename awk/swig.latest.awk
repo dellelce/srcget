@@ -1,5 +1,5 @@
 #
-# swigvers.awk
+# swig.latest.awk
 #
 # created: 230314
 #

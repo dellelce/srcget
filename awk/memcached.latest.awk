@@ -1,5 +1,5 @@
 #
-# memcachedvers.awk
+# memcached.latest.awk
 #
 # created: 1353 071213
 #

@@ -1,5 +1,5 @@
 #
-# eximvers.awk
+# exim.latest.awk
 #
 # created: 0258 190414
 #

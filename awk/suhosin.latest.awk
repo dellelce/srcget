@@ -1,5 +1,5 @@
 #
-# suhosinvers.awk
+# suhosin.latest.awk
 #
 # re-created: 210714
 #

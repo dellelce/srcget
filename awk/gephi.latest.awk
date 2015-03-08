@@ -1,5 +1,5 @@
 #
-# gephivers.awk
+# gephi.latest.awk
 #
 # created: 1421 250514
 #

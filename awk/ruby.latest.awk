@@ -1,5 +1,5 @@
 #
-# rubyvers.awk
+# ruby.latest.awk
 #
 # created: 0037 220713
 #

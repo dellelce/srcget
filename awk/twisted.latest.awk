@@ -1,5 +1,5 @@
 #
-# twistedvers.awk
+# twisted.latest.awk
 #
 # created: 0306 310314
 #

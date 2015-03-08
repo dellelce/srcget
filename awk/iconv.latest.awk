@@ -1,5 +1,5 @@
 #
-# pixmanvers.awk
+# iconv.latest.awk
 #
 # created: 050813
 #

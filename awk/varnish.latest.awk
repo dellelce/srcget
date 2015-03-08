@@ -1,5 +1,5 @@
 #
-# varnishvers.awk
+# varnish.latest.awk
 #
 # created: 1310 220314
 #

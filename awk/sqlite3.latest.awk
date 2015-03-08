@@ -1,5 +1,5 @@
 #
-# sqlite3vers.awk
+# sqlite3.latest.awk
 #
 # created: 0455 221013
 #

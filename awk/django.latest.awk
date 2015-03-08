@@ -1,5 +1,5 @@
 #
-# djangovers.awk
+# django.latest.awk
 #
 # created: 180214
 #

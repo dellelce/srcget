@@ -1,5 +1,5 @@
 #
-# nginxvers.awk
+# nginx.latest.awk
 #
 # created: 0411 061013
 #

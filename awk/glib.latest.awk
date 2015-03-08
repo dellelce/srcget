@@ -1,5 +1,5 @@
 #
-# glibvers.awk
+# glib.latest.awk
 #
 # created: 1722 100813
 #
