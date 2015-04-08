@@ -40,13 +40,42 @@ BEGIN {
 
 # custom rules
 
-/libressl/&& !/latest/ && $0 ~ ext && !/\.sig/ \
-{ 
-  vers = $6
-  sub(/libressl-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+$0 ~ ext && /[0-9]+\.[0-9]+\.[0-9]+/ && /libressl/ && !/latest/ && !/\.asc/ && !/\.txt/ \
+{
+  line = $0 
+  gsub(/["<>]/, " ", line);
 
-  good_vers = compare_versions(good_vers, vers);
+  split (line, line_a, " ");
+
+  if (line_a[8] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+  {
+    vers = line_a[8]
+
+    sub(/libressl-/,"",vers)
+#    print vers "  --> ext = " ext  " --> index(vers,ext) = " index(vers,ext)
+    vers = substr(vers,1,index(vers,ext)-2)
+
+#    print vers
+
+    good_vers = compare_versions(good_vers, vers);
+  }
+
+#  for (i in line_a)
+#  {
+#    item = line_a[i];
+#
+#    if (item ~ ext && item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+#    {
+#      vers = item
+#      print FNR " " i " "  vers
+#      sub(/libressl-/,"",vers)
+#      vers = substr(vers,1,index(vers,ext)-2)
+#
+#      print vers
+#
+#      good_vers = compare_versions(good_vers, vers);
+#    }
+#  }
 }
 
 ### end loop ###
