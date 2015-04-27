@@ -16,9 +16,14 @@ BEGIN {
 
 # custom rules
 
-/[gG]nuplot [Vv]ersion/ && vers=="" \
+ /[0-9]\.[0-9]\.[0-9]/ && vers=="" \
 {
-  split($0,a);
+  line = $0;
+  gsub(/[\/-]/, " ", line); 
+  fext="."ext
+  gsub(fext, " ", line);
+  split(line,a, " ");
+
   for (x in a)
   {
     if (a[x] ~ /[0-9]\.[0-9]\.[0-9]/)
