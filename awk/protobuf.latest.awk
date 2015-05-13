@@ -1,12 +1,12 @@
 #
 # protobuf.latest.awk
 #
-# created: 110514
+# created: 130515 re-copied from scrapy... as they moved to github
 #
 
 ### FUNCTIONS ###
 
-### MAIN LOOP ###
+### MAIN RULE ###
 
 BEGIN {
         vers = ""
@@ -14,29 +14,24 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && /<td/&& /[0-9]\.[0-9]/ &&!/\.rc/ && vers == "" \
-{
-#detail?name=protobuf-2.5.0.tar.bz2&amp
-  line = $0;
-  gsub(/[=&]/, " ", line);
-  split(line, line_a, " ");
+/^$/ { next }
 
-  for (idx in line_a)
-  {
-    item = line_a[idx]
-    if (item ~ ext && item ~ /[0-9]\.[0-9]/)
-    {
-      vers = item
-      break    
-    }
-  }
-}
+$0 ~ ext && /\/archive\// && !/alpha/ && $2 !~ /\.[0-9]a/ && vers == "" \
+      {
+        vers = $2
 
-### end loop ###
+        cnt = split (vers, vers_a, "/");
 
-END   {
-        if (vers != "")
+        if (cnt > 1)
         {
- 	  print vers
+          vers = vers_a[5]
         }
       }
+
+### END RULE ###
+
+END   {
+        print vers
+      }
+
+### EOF ###
