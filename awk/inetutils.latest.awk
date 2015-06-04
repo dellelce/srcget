@@ -1,5 +1,5 @@
 #
-# inetutilsers.awk
+# inetutils.latest.awk
 #
 # created: 060314
 #
@@ -19,6 +19,9 @@ function compare_versions(a, b)
   if (a_a[2] > b_a[2]) return a;
   if (a_a[2] < b_a[2]) return b;
 
+  if (a_a[3] > b_a[3]) return a;
+  if (a_a[3] < b_a[3]) return b;
+
   return  "EQ"
 }
 
@@ -34,7 +37,7 @@ BEGIN {
 
 # custom rules
 
-/inetutils/&& $0 ~ ext && !/\.sig/ \
+/inetutils/&& $0 ~ ext && !/\.sig/ && !/\.diff/ \
 { 
   vers = $6
   sub(/inetutils-/,"",vers)
