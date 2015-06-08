@@ -40,20 +40,31 @@ BEGIN {
 
 # custom rules
 
-/automake/&& $0 ~ ext && !/\.sig/ \
+/automake/&& $0 ~ ext && !/\.sig/ && !/\.diff/ \
 { 
-  vers = $6
-  sub(/automake-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+  line = $0
+  gsub(/[\"<>]/, " ", line);
+  split (line, line_a, " ");
 
-  good_vers = compare_versions(good_vers, vers);
+  for (idx in line_a)
+  {
+    item = line_a[idx]
+
+    if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ || item ~ /[0-9]+\.[0-9]+/)
+    {
+      vers = item
+      next
+    }
+  }
 }
 
-### end loop ###
+### end rule ###
 
 END   {
-        if (initial_vers != good_vers)
+        if (vers != "")
         {
-	   print "automake-"good_vers"."ext
+	   print vers
         }
       }
+
+### EOF ###
