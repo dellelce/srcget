@@ -229,18 +229,18 @@ main_single()
  load_profile $profile
  profileRc=$?
 
- [ $profileRc -ne 0 ] && { srcecho "load profile failed: rc = $profileRc"; return 1; }
+ [ $profileRc -ne 0 ] && { srcecho "${profie}: load profile failed: rc = $profileRc"; return 1; }
 
  #Sanity checks
- [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
- [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
+ [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }  
+ [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; } 
 
  ## Find latest software version
  typeset latest=$(current_version)
  typeset latest_rc="$?"
 
- [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "couldn't retrieve latest version: error in processing site input"; return 1; }
- [ -z "$latest" ] && { srcecho "couldn't retrieve latest version: wget rc = $latest_rc"; return 1; }
+ [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "${profile}: couldn't retrieve latest version: error in processing site input"; return 1; }
+ [ -z "$latest" ] && { srcecho "${profile}: couldn't retrieve latest version: wget rc = $latest_rc"; return 1; }
 
  typeset fn=$(basename $latest)
  typeset fullurl=""
@@ -263,7 +263,7 @@ main_single()
 
  info_banner
 
- [ -z "$fullurl" ] && { srcecho "invalid full url!"; return 3; }
+ [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
 
  [ ! -z "$VERSIONTEST" ] && { echo $fn; return 0; }
 
@@ -274,12 +274,15 @@ main_single()
   return 2
  }
 
+ set -x
  wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
+ set +x
+
  [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
- [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
+ [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
- [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
+ [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
 
  return $rc
 }
