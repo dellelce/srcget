@@ -103,7 +103,9 @@ getlinkdir()
   '
 )
   destdir=$(dirname $dest)
-  base=$(basename $dest)
+  base=$(basename $dest 2>/dev/null)
+
+  [ "$?" -ne 0 ] && { return 1; }
 
   cd $destdir 2>/dev/null || { cd "$(dirname $link)/$destdir"; }
   link="$PWD/$base"
@@ -111,6 +113,7 @@ getlinkdir()
 
  cd "$cwd"
  echo $(dirname $link)
+ return $?
 }
 
 # echo wrapper
@@ -242,7 +245,11 @@ main_single()
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "${profile}: couldn't retrieve latest version: error in processing site input"; return 1; }
  [ -z "$latest" ] && { srcecho "${profile}: couldn't retrieve latest version: wget rc = $latest_rc"; return 1; }
 
- typeset fn=$(basename $latest)
+ typeset fn=$(basename $latest 2>/dev/null)
+
+ # sanity tests
+ [ $? -ne 0 ] && { echo "${profile}: error processing latest version: $latest"; return 1; }
+
  typeset fullurl=""
 
  [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
@@ -262,6 +269,8 @@ main_single()
  [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] && { fn="${custom_file_prefix}${fn}${custom_file_postfix}"; }
 
  info_banner
+
+ [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] && { echo "failed getting download url"; return 3; }
 
  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
 
