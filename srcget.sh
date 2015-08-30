@@ -283,10 +283,8 @@ main_single()
   return 2
  }
 
- set -x
  wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
- set +x
 
  [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
