@@ -36,9 +36,18 @@ BEGIN {
 
 /coreutils/&& $0 ~ ext && !/\.sig/ \
 { 
-  vers = $6
-  sub(/wget-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+  gsub(/[<>"]/, " ", $0);
+  cnt = split($0, a, " ");
+
+  for (i in a)
+  {
+    if (a[i] ~ ext)
+    {
+      vers = a[i]
+      sub(/coreutils-/,"",vers)
+      vers = substr(vers,1,index(vers,ext)-2)
+    }
+  }
 
   good_vers = compare_versions(good_vers, vers);
 }
