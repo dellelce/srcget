@@ -42,7 +42,7 @@ do
 
 
 # printf "Checking ${p}..."
- srcget $p > /dev/null
+ srcget -n $p
  rc="$?"
 
  # wget appears to return 1 on success.......(!?)
