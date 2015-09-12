@@ -66,6 +66,7 @@ usage()
  cat  << EOF 
 $0 [options] program_name
 
+ -h  Display this help message
  -A  Download all packages
  -L  List all 'packages'
  -I  Information about package
@@ -270,7 +271,7 @@ main_single()
 
  info_banner
 
- [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] && { echo "failed getting download url"; return 3; }
+ [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] && { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
 
  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
 
@@ -278,15 +279,16 @@ main_single()
 
  [ -f "$fn" ] &&
  {
-  [ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
-  srcecho "File $fn exists"
+  #[ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
+  srcecho "${profile}: File $fn exists"
   return 2
  }
 
  wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
 
- [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
+ [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "${profile}: downloaded: $fn"; } 
+ [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } 
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
@@ -507,6 +509,7 @@ do
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
  [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; continue; }
+ [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
 
  [ "$1" == ${1#-} ] &&
  { 
@@ -516,7 +519,10 @@ do
  shift # catch-all shift... we should move to getopt
 done
 
- eval $main $profileList
- exit $?
+ [ ! -z "$main" ] &&
+ {
+   eval $main $profileList
+   exit $?
+ }
 
 ### EOF ###
