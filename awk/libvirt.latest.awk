@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && !/snapshot/ \
+$0 ~ ext && !/snapshot/ && !/\.asc/ && !/-rc/ \
 {
   line = $0;
   gsub(/["<>]/, " ", line);

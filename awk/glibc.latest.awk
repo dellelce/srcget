@@ -42,9 +42,18 @@ BEGIN {
 
 /glibc/&& $0 ~ ext && !/\.sig/ && !/ports/ && !/libidn/ && !/diff/ && !/linuxthreads/ && !/crypt/ \
 { 
-  vers = $6
-  sub(/glibc-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+  gsub(/[<>"]/, " ", $0);
+  cnt = split($0, a, " ");
+
+  for (i in a)
+  {
+    if (a[i] ~ ext)
+    {
+      vers = a[i]
+      sub(/glibc-/,"",vers)
+      vers = substr(vers,1,index(vers,ext)-2)
+    }
+  }
 
   good_vers = compare_versions(good_vers, vers);
 }

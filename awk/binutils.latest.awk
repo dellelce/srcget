@@ -6,41 +6,28 @@
 
 ### FUNCTIONS ###
 
-# we don't need this at binutils site is already oredered.
-function getVersion(fn)
-{
-  sub(/binutils-/,"",fn);
-  sub(/\.tar\.bz2/,"",fn);
-
-  return fn;
-}
-
 ### MAIN LOOP ###
 
 # begin rule
 
-BEGIN {
-          max = ""
-      }
-
-
 # custom rules
 
-/binutils/&&/\.bz2/ \
+/binutils/&& $0 ~ ext &&!/\.sig/ \
 { 
-  cnt = split($0, outArray, "\"");
+  gsub(/[<>"]/, " ", $0);
+  cnt = split($0, a, " ");
 
-  if (cnt != 7) next; # ignore all lines that do not match our "format" 
-
-  fn = outArray[6]
-
-  if (fn !~ /tar\.bz2$/) { next; }  # ignore all .sig and possibly other files
-
-  max = fn
+  for (i in a)
+  {
+    if (a[i] ~ ext)
+    {
+      vers = a[i]
+    }
+  }
 }
 
 ### end loop ###
 
 END   {
-	print max
+	print vers
       }

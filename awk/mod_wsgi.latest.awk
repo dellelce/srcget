@@ -1,7 +1,7 @@
 #
-# elasticsearch.latest.awk
-# 
-# created: 250314
+# mod_wsgi.latest.awk
+#
+# created: 180214
 #
 
 ### FUNCTIONS ###
@@ -14,22 +14,18 @@ BEGIN {
 
 # custom rules
 
-/^$/ { next }
-
-$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && !/beta/ && vers == "" \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
       {
         vers = $2
 
         cnt = split (vers, vers_a, "/");
 
-        if (cnt > 1)
-        {
-          vers = vers_a[5]
-        }
+        vers = vers_a[5]
       }
 
 ### END RULE ###
 
 END   {
+	# this is the end rule
         print vers
       }
