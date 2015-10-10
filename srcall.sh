@@ -19,7 +19,6 @@ srcget()
 
 ### ENV ###
 
-
 srcgetDir="$(dirname $0)"
 
 ### MAIN ###
@@ -40,18 +39,15 @@ do
  b="$basename"
  [ -z "$b" ] && b="$p"
 
-
 # printf "Checking ${p}..."
  srcget -n $p
  rc="$?"
 
- # wget appears to return 1 on success.......(!?)
- [ $rc -eq 0 ] && { echo "${p}: downloaded: $(ls -t *${b}* | head -1)"; continue; } 
- [ $rc -eq 2 ] && { continue; }
+ # 2 = file already exiests
+ [ $rc -eq 2 -o $rc -eq 0 ] && { continue; }
 
  echo "${p}: error: $rc"
 
 done
-
 
 ### EOF ###
