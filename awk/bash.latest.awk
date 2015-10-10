@@ -57,9 +57,12 @@ BEGIN {
 
 ### end loop ###
 
-END   {
-        if (initial_vers != good_vers)
-        {
-	 print good_vers
-        }
-      }
+END \
+{
+  if (initial_vers != good_vers)
+  {
+    print good_vers
+  }
+}
+
+### EOF ###
