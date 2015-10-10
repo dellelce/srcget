@@ -15,7 +15,7 @@ BEGIN {
 # custom rules
 
 # this is the first version let's keep it simple
-!/-dev/  && $2 ~ ext && url == "" { url = $2; } 
+!/-dev/  && !/-rc/ && $2 ~ ext && url == "" { url = $2; } 
 
 ### END RULE ###
 
