@@ -23,7 +23,7 @@ BEGIN {
 /Current Stable Release/ && state == 0 \
 {
   dprint("Production Release Found: " NR);
-  gsub(/[)"]/," ",$0);
+  gsub(/[()"]/," ",$0);
   split($0, vers_a, " ");
 
   for (idx in vers_a)
@@ -46,7 +46,9 @@ state == 1 && $0 ~ ext && /src/\
 {
   if (index($0, vers) > 0)
   {
-    cnt = split($0, url_a, "\"");
+    line=$0;
+    gsub(/['"]/, " ", line);
+    cnt = split(line, url_a, " ");
      
     for (idx in url_a)
     {
