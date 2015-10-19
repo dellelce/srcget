@@ -1,5 +1,5 @@
 #
-# wgeters.awk
+# wget.latest.awk
 #
 # created: 10813
 #
@@ -37,23 +37,35 @@ BEGIN {
         initial_vers = good_vers
       }
 
-
 # custom rules
 
-/wget/&& $0 ~ ext && !/\.sig/ \
+$0 ~ ext && !/\.sig/ && vers == "" \
 { 
-  vers = $6
-  sub(/wget-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+  gsub(/[<>"]/, " ", $0);
+  cnt = split($0, a, " ");
+
+  for (i in a)
+  {
+    if (a[i] ~ ext)
+    { 
+      vers = a[i]
+      sub(/wget-/,"",vers)
+      vers = substr(vers,1,index(vers,ext)-2)
+    }
+  }
 
   good_vers = compare_versions(good_vers, vers);
 }
 
+
 ### end loop ###
 
-END   {
-        if (initial_vers != good_vers)
-        {
-	   print "wget-"good_vers"."ext
-        }
-      }
+END \
+{
+ if (initial_vers != good_vers)
+ {
+  print "wget-"good_vers"."ext
+ }
+}
+
+### EOF ###
