@@ -15,43 +15,30 @@ BEGIN {
 
 # custom rules
 
-/currently selected mirror/ { state = 1; next; } 
-state == 1 \
-{ 
-   gsub(/[<>"]/, " ");
-   split($0, array, " ");
 
-   for (item in array)
-   {
-     if (array[item] ~ /http:\/\//)
-     {
-       mirror = array[item]
-     }
-   } 
-   state = 0
-}
-  
-
-/[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
+/[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" && $0 ~ ext \
 {
-   gsub(/[()]/, " ");
-   split($0, array, " ");
+  gsub(/[()"<>]/, " ");
+  split($0, array, " ");
 
-   for (item in array)
-   {
-     if (array[item] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
-     {
-       vers = array[item]
-     }
-   } 
+  for (idx in array)
+  {
+    item = array[idx]
+    if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && item ~ /http/)
+    {
+      vers = item
+    }
+  } 
 }
 
 ### END RULE ###
 
-END   {
-	if (vers != "" && mirror != "")
-        {
-          #http://mirror.gopotato.co.uk/apache/maven/maven-3/3.2.1/source/apache-maven-3.2.1-src.tar.gz
-          print mirror"maven/maven-3/"vers"/source/apache-maven-"vers"-src."ext
-        }
-      }
+END \
+{
+ if (vers != "") 
+ {
+   print vers
+ }
+}
+
+## EOF ##
