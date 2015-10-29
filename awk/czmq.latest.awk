@@ -8,22 +8,28 @@
 
 ### MAIN RULE ###
 
-BEGIN {
-        vers = ""
-      }
+BEGIN \
+{
+  vers = ""
+}
 
 # custom rules
 
-/[0-9]+.[0-9]+.[0-9]+/ && !/rc/ && vers == "" && $0 ~ ext \
+#/[0-9]+.[0-9]+.[0-9]+/ && !/rc/ && vers == "" && $0 ~ ext \
+# !/rc/ && vers == "" && $0 ~ ext \
+
+$0 ~ ext && !/-rc/ && !/beta/ && /zeromq/ && !/alpha/ \
 {
   gsub(/[<>#]/," ");
   split($0, array, " ");
 
-  for (item in array)
+  for (idx in array)
   {
-    if (array[item] ~ /[0-9]+.[0-9]+.[0-9]+/)
+    item = array[idx]
+
+    if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
     {
-      vers = array[item]
+      vers = item
     }
   }
 }
@@ -31,6 +37,9 @@ BEGIN {
 
 ### END RULE ###
 
-END   {
-        if (vers != "") print vers;
-      }
+END \
+{
+ if (vers != "") print vers;
+}
+
+### EOF ###
