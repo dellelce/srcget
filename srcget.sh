@@ -348,7 +348,7 @@ wget_pkg()
 
 srcall()
 {
- [ ! -d "$profilesDir" -a -h "$0" ] &&
+ [ ! -d "$profilesDir" ] &&
  {
   typeset srcHome=$(getlinkdir "$0")
   typeset profilesDir="$srcHome/profiles"
