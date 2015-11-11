@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && /\/archive\// && vers == "" \
+$0 ~ ext && /\/archive\// && !/_pr/ && vers == "" \
       {
         vers = $2
 
