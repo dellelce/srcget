@@ -233,7 +233,7 @@ main_single()
  load_profile $profile
  profileRc=$?
 
- [ $profileRc -ne 0 ] && { srcecho "${profie}: load profile failed: rc = $profileRc"; return 1; }
+ [ $profileRc -ne 0 ] && { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
 
  #Sanity checks
  [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }  
