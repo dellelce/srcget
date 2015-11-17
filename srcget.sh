@@ -143,7 +143,7 @@ rawget()
 # 
 info_banner()
 {
-  [ ! -z "$SILENT" ] && return 
+  [ ! -z "$SILENT" -o "$NAMEONLY" -ne 0 ] && return 
   cat << EOF
 Profile            : $pfp
 Source             : $srcurl
@@ -279,7 +279,7 @@ main_single()
 
  [ -f "$fn" ] &&
  {
-  #[ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
+  [ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
   srcecho "${profile}: File $fn exists"
   return 2
  }
@@ -508,7 +508,7 @@ do
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
  [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
- [ "$1" == "-n" ] && { export SILENT=1; export NAMEONLY=1; shift; continue; }
+ [ "$1" == "-n" ] && { export NAMEONLY=1; shift; continue; }
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
 
  [ "$1" == ${1#-} ] &&
