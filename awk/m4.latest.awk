@@ -39,9 +39,18 @@ BEGIN {
 
 /m4/&& $0 ~ ext && !/\.sig/ && !/\.diff/ && !/latest/ \
 { 
-  vers = $6
-  sub(/m4-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+  gsub(/[<>"]/, " ", $0);
+  cnt = split($0, a, " ");
+
+  for (i in a)
+  {
+    if (a[i] ~ ext)
+    {
+      vers = a[i]
+      sub(/bash-/,"",vers)
+      vers = substr(vers,1,index(vers,ext)-2)
+    } 
+  }
 
   good_vers = compare_versions(good_vers, vers);
 }
@@ -51,6 +60,6 @@ BEGIN {
 END   {
         if (initial_vers != good_vers)
         {
-	 print "m4-"good_vers"."ext
+	 print good_vers"."ext
         }
       }
