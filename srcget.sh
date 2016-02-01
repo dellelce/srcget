@@ -159,6 +159,7 @@ current_version()
 {
  typeset _awk="awk"
 
+ # setup awk args
  [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
  [ ! -z "$extension_input" ] && { _awk="${_awk} -vext=$extension_input"; }
@@ -172,6 +173,7 @@ current_version()
 #
 # is_valid_url
 # mini-sanity check 
+#
 is_valid_url()
 {
   typeset url="$1"
@@ -277,9 +279,10 @@ main_single()
 
  [ ! -z "$VERSIONTEST" ] && { echo $fn; return 0; }
 
+ # check if file already exists
  [ -f "$fn" ] &&
  {
-  [ "$NAMEONLY" -eq 1 ] && { echo $fn; return 2; } 
+  [ "$NAMEONLY" -eq 1 ] && { return 2; } 
   srcecho "${profile}: File $fn exists"
   return 2
  }
@@ -287,8 +290,9 @@ main_single()
  wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
 
- [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "${profile}: downloaded: $fn"; } 
- [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } 
+ #[ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "${profile}: downloaded: $fn"; } 
+ [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "$fn"; }  # print only-name and successful
+ [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } # print only-name and failed
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
@@ -297,7 +301,7 @@ main_single()
 }
 
 #
-#
+# info_single
 #
 
 info_single()
@@ -319,8 +323,8 @@ info_single()
 
  for aItem in $aList
  do
-   aValue=$(eval echo \$$aItem)
-   [ ! -z "$aValue" ] && printf "%-20s %s\n" $aItem $aValue
+  aValue=$(eval echo \$$aItem)
+  [ ! -z "$aValue" ] && printf "%-20s %s\n" $aItem $aValue
  done
 }
 
@@ -358,31 +362,31 @@ srcall()
 
  [ ! -d "$profilesDir" ] &&
  {
-   echo "Can't find profiles directory!: $profilesDir"
-   return 20
+  echo "Can't find profiles directory!: $profilesDir"
+  return 20
  }
 
  for x in $profilesDir/*;
  do
-   b=$(basename $x);
-   p=${b%.profile};
+  b=$(basename $x);
+  p=${b%.profile};
 
-   # profile is loaded twice, and this is not a good thing, but for now we can live with it....
-   load_profile "$p"
-   [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
-   [ -z "$basename" ] && { basename="${p}"; } # override if set in profile!
+  # profile is loaded twice, and this is not a good thing, but for now we can live with it....
+  load_profile "$p"
+  [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
+  [ -z "$basename" ] && { basename="${p}"; } # override if set in profile!
 
-   # always run main_single silently
-   SILENT=1 main_single $p
-   rc="$?"
+  # always run main_single silently
+  SILENT=1 main_single $p
+  rc="$?"
 
-   # wget appears to return 1 on success.......(!?)
-   [ $rc -eq 0 -a "$NAMEONLY" -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"; continue; }
-   [ $rc -eq 2 ] && { continue; }
+  # wget appears to return 1 on success.......(!?)
+  [ $rc -eq 0 -a "$NAMEONLY" -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"; continue; }
+  [ $rc -eq 2 ] && { continue; }
 
-   srcecho "${p}: error: $rc"
-  done
-  return 0
+  srcecho "${p}: error: $rc"
+ done
+ return 0
 }
 
 #
@@ -513,7 +517,7 @@ do
 
  [ "$1" == ${1#-} ] &&
  { 
-   [ -z "$profileList" ] && profileList="$1" || profileList="${profileList} $1"
+  [ -z "$profileList" ] && profileList="$1" || profileList="${profileList} $1"
  }
 
  shift # catch-all shift... we should move to getopt
@@ -521,8 +525,8 @@ done
 
  [ ! -z "$main" ] &&
  {
-   eval $main $profileList
-   exit $?
+  eval $main $profileList
+  exit $?
  }
 
 ### EOF ###
