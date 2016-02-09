@@ -27,6 +27,10 @@ END \
  pos = index(line, match_0)
  vers_0 = substr(line, length(match_0) + pos, length(line))
  split(vers_0, vers_a, ":")
- print vers_a[1]
+
+ vers = vers_a[1]
+ sub(/v/, "", vers);
+ print vers
 }
+
 ## EOF ##
