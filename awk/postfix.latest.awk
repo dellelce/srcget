@@ -28,6 +28,7 @@ BEGIN {
     if (item ~ /[0-9]+\.[0-9]+\.[0-9]/ && vers == "")
     {
       vers = item
+      sub(/\.$/, "", vers);
     }
   }
 }
