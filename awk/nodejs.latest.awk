@@ -16,9 +16,19 @@ BEGIN {
 
 /Current [vV]ersion/ \
 {
-  split($0, o_a, ">");
-  vers = o_a[3];
-  sub(/<\/b/,"",vers);
+ line = $0
+ gsub(/[<>]/, " ", line);
+ split(line, vers_a, " ");
+
+ for(idx in vers_a)
+ {
+  item = vers_a[idx]
+
+  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+  {
+    vers = item
+  }
+ }
 }
 
 
