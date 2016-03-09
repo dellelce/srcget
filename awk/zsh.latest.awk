@@ -16,13 +16,15 @@ BEGIN {
 
 vers == "" && !/-doc/ && $0 ~ ext \
 {
- vers_cnt = split($0, line_a, "\"")
+ line = $0
+ gsub(/\"/, " ", line);
+ vers_cnt = split(line, line_a, " ")
 
  for (item in line_a)
  {
    val = line_a[item]
 
-   if (vers == "" && val ~ ext && val ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+   if (vers == "" && val ~ ext && val ~ /[0-9]+\.[0-9]+/)
    {
      vers = val
    }
