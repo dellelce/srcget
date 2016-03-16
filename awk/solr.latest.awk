@@ -14,17 +14,22 @@ BEGIN {
 
 # custom rules
 
-/download-desc/ \
+/[0-9]+\.[0-9]/ && /announce/ \
 {
-  vers = $4;
-  cnt = split(vers, vers_a,"<");
-  vers =  vers_a[1];
-  vers_cnt = split(vers, vers_a2, ".")
+  line=$0
+  gsub(/[<>]/, " ", line);
 
-  if (vers_cnt == 2)
+  split(line, line_a, " ");
+
+  for (idx in line_a)
   {
-    vers = vers_a2[1]"."vers_a2[2]".0"
-  } 
+   item = line_a[idx]
+
+   if (item ~ /[0-9]+\.[0-9]/)
+   {
+    vers = item;
+   }
+  }
 }
 
 
@@ -34,6 +39,7 @@ END   {
         #  http://www.mirrorservice.org/sites/ftp.apache.org/lucene/solr/4.4.0/solr-4.4.0-src.tgz
         if (vers!="")
         {
+          sub(/\.$/, "", vers);
 	  print vers"/solr-"vers
         }
       }
