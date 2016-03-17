@@ -39,7 +39,18 @@ BEGIN {
 
 /inetutils/&& $0 ~ ext && !/\.sig/ && !/\.diff/ \
 { 
-  vers = $6
+  line=$0
+  gsub(/[<>"]/, " ", line);
+  split(line, line_a, " ");
+  for (idx in line_a)
+  {
+   item = line_a[idx]
+   if (item ~ ext)
+   { 
+    vers = item
+   }
+  }
+ 
   sub(/inetutils-/,"",vers)
   vers = substr(vers,1,index(vers,ext)-2)
 
