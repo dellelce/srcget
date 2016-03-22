@@ -1,11 +1,10 @@
 # vim:syntax=sh
 
 filter="awk/gperftools.latest.awk"
-srcurl="https://code.google.com/p/gperftools/"
-#baseurl=""
-comment=""
+baseurl="https://github.com/gperftools/gperftools"
+srcurl="${baseurl}/releases"
 extension_input="tar.gz"
 sep='"'
-basename="gperftools"
+custom_url_prefix="${baseurl}/archive/"
 
 ## EOF ##

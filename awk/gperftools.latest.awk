@@ -1,8 +1,8 @@
 #
-# gperftools.latest.awk
+# gperftool.latest.awk
 #
-# created: 110514
-#
+# created: 180214
+# re-written: 220316 from mod_wsgi
 
 ### FUNCTIONS ###
 
@@ -14,32 +14,18 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && /[0-9]\.[0-9]/ && vers == "" \
-{
-  line = $0
-  gsub(/[<>"]/, " ", line);
-  
-  split(line, line_a, " ");
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
+      {
+        vers = $2
 
-  for (idx in line_a)
-  {
-    item = line_a[idx]
+        cnt = split (vers, vers_a, "/");
 
-    # latest release appears to be released on google drive - only
-    if (item ~ ext && item ~ /[0-9]\.[0-9]/ && item ~ /http/ && vers == "")
-    {
-      vers = item
-    }
-  }
-}
-
-
+        vers = vers_a[5]
+      }
 
 ### END RULE ###
 
 END   {
-	if (vers != "")
-        {
-           print vers
-        }
+	# this is the end rule
+        print vers
       }
