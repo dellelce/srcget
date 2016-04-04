@@ -2,5 +2,7 @@
 
 filter="awk/astrometry.latest.awk"
 baseurl="http://astrometry.net"
-srcurl="${baseurl}/use.html"
+srcurl="${baseurl}/downloads/"
+custom_url_prefix="${srcurl}"
+extension_input="tar.gz"
 sep='"'

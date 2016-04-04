@@ -14,10 +14,26 @@ BEGIN {
 
 # custom rules
 
-/tar\.bz2/ { print $2 }
+$0 ~ ext && /astrometry\.net/ && !/-pre/ \
+{
+ line = $0
+ gsub(/[<>"]/, " ", line);
 
-### end loop ###
+ split(line, line_a, " ");
+
+ for(idx in line_a)
+ {
+  item = line_a[idx]
+
+  if (item ~ ext && item ~ /[0-9]+\.[0-9]+/)
+  {
+   vers = item
+  }
+ }
+}
+
+### end rule ###
 
 END   {
-	# this is the end loop
+	print vers
       }
