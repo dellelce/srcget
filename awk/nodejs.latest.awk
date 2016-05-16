@@ -17,14 +17,15 @@ BEGIN {
 /Current [vV]ersion/ \
 {
  line = $0
- gsub(/[<>]/, " ", line);
+ gsub(/[<>()]/, " ", line);
  split(line, vers_a, " ");
+ vers = ""
 
  for(idx in vers_a)
  {
   item = vers_a[idx]
 
-  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && vers == "")
   {
     vers = item
   }
