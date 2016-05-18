@@ -6,25 +6,6 @@
 
 ### FUNCTIONS ###
 
-function compare_versions(a, b)
-{
-  c_1 = split(a, a_a, ".");
-  c_2 = split(b, b_a, ".");
-
-  if (c_1 < 2 || c_2 < 2) { return "ERRINPUT"; }
-
-  if (a_a[1] > b_a[1]) return a;
-  if (a_a[1] < b_a[1]) return b;
-
-  if (a_a[2] > b_a[2]) return a;
-  if (a_a[2] < b_a[2]) return b;
-
-  if (a_a[3] > b_a[3]) return a;
-  if (a_a[3] < b_a[3]) return b;
-
-  return  "EQ"
-}
-
 ### MAIN LOOP ###
 
 BEGIN {
@@ -34,24 +15,42 @@ BEGIN {
 
 # custom rules
 
-NR == 1 { extl="."ext; } 
-
-#bad rule - won't work due to font tag, quick "simple" alternative
-#$2 ~ ext && /openssl-[0-9]/ && !/beta/ && !/BOGUS/ \
-$4 ~ ext && /LATEST/ \
+# Find out the current stable "series"
+tolower($0) ~ /stable/ \
 {
-  vers=$4
-  sub(/openssl-/,"", vers);
-  sub(extl, "", vers);
+ stable_cnt = split($0, stable_a, " ");
 
-  gvers = compare_versions(gvers, vers)
+ for (stable_i in stable_a)
+ {
+  item = stable_a[stable_i]
+
+  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+  {
+    stable = item
+  }
+ }
+}
+
+$4 ~ ext && $0 ~ stable \
+{
+ line = $0
+ gsub(/[<>"]/, " ", line);
+ vers_cnt = split(line, line_a, " ");
+
+ for(line_i in line_a)
+ { 
+  item = line_a[line_i]
+
+  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && item ~ ext && item !~ /\.sha/ && item !~ /\.asc/)
+  {
+    vers = item
+  }
+ }
 }
 
 ### end rule ###
 
-END   {
-        if (gvers != initial_vers)
-        {
-	  print gvers
-        }
-      }
+END \
+{
+ print vers
+}
