@@ -282,7 +282,7 @@ main_single()
  # check if file already exists
  [ -f "$fn" ] &&
  {
-  [ "$NAMEONLY" -eq 1 ] && { return 2; } 
+  [ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 2; } 
   srcecho "${profile}: File $fn exists"
   return 2
  }
