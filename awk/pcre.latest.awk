@@ -16,11 +16,18 @@ BEGIN {
 
 $2 ~ ext && $2 !~ /\.sig$/ \
 {
-  vers = $2
+  line = $2
 
-  if (vers !~ /:\/\// && baseurl != "")
+  vers_cnt = split(line, vers_a, "/");
+
+  for (idx in vers_a)
   {
-    vers = baseurl"/"vers
+   vers_i = vers_a[idx]
+
+   if (vers_i ~ ext)
+   {
+    vers = vers_i
+   }
   } 
 }
 
@@ -29,3 +36,5 @@ $2 ~ ext && $2 !~ /\.sig$/ \
 END   {
 	print vers
       }
+
+### EOF ###
