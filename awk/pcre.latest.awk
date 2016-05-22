@@ -18,7 +18,7 @@ $2 ~ ext && $2 !~ /\.sig$/ \
 {
   vers = $2
 
-  if (vers !~ /:\/\//)
+  if (vers !~ /:\/\// && baseurl != "")
   {
     vers = baseurl"/"vers
   } 
