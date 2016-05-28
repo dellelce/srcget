@@ -14,13 +14,16 @@ BEGIN {
 
 # custom rules
 
-/pkg-config/ && /tar.gz/ \
+/pkg-config/ && /tar.gz/ && !/\.asc/ \
 {
   ver = $8
 }
 
 ### end loop ###
 
-END   {
-	print ver
-      }
+END \
+{
+  print ver
+}
+
+### EOF ###
