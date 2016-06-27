@@ -279,8 +279,8 @@ main_single()
 
  [ ! -z "$VERSIONTEST" ] && { echo $fn; return 0; }
 
- # check if file already exists
- [ -f "$fn" ] &&
+ # check if file already exists and is not empty
+ [ -s "$fn" ] &&
  {
   [ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 2; } 
   srcecho "${profile}: File $fn exists"
