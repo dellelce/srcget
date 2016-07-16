@@ -8,10 +8,10 @@ i.e.:
 
     ./srcget.sh zlib
 
-* Needs:
+* Depends on:
 
 - wget
-- awk
+- GNU awk
 
 * Configuration:
 
@@ -20,16 +20,29 @@ i.e.:
 
 * Todo:
 
-- groups/tags/categories
-- report information instead of actual download
-- dependency support: weak & strong dependencies
-- improve version checking, most of the filters rely on very simple checks
-- plan for python migration
-- signal handling... control-c is not handled correctly right now
-- support notifications (on failure / new versions)
-- support for downloading a specific version
+- Support for downloading a specific version
+- Groups/tags/categories
+- Dependency support: weak & strong dependencies
+- Improve version checking, most of the filters rely on very simple checks
+- Python migration: not to be done, but instead a new fork (srcgetpy) to happen
+- Signal handling: control-c is to be improved
+- Support for: Content-Disposition header 
 
 * Todo Build:
 
-- merge work from "mkit" ?
 - dependency work is needed for 
+
+* Options:
+
+  (Improvement needed)
+
+ -h  Display this help message
+ -A  Download all packages
+ -L  List all 'packages'
+ -I  Information about package
+ -x  Turn on debug mode
+ -n  Quiet mode: show filename only
+ -q  Quiet mode: don't show anything
+ -H  Debug: return server HTTP headers (DEBUG ONLY!)
+ -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
+
