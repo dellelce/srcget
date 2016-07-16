@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-$2 ~ ext && $2 !~ /\.sig$/ \
+$2 ~ ext && $2 !~ /\.sig$/ && !/pcre2/ \
 {
   line = $2
 
