@@ -8,26 +8,20 @@
 
 ### MAIN RULE ###
 
-BEGIN {
-        vers=""
-        state = 0
-      }
+BEGIN \
+{
+ vers=""
+}
 
 # custom rules
 
-state == 0 && /[Ll]atest [rR]elease/ \
-{
-  state = 1;
-  next
-}
-
-state == 1 && /[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
+/[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
 {
   gsub(/[-<>\"]/, " ", $0);
   vers_cnt = split($0, vers_a)
   for (item in vers_a)
   {
-    if (vers_a[item] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+    if (vers == "" && vers_a[item] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
     {
       vers = vers_a[item]
     }
@@ -37,6 +31,7 @@ state == 1 && /[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
 
 ### END RULE ###
 
-END   {
-	print vers
-      }
+END \
+{
+ print vers
+}
