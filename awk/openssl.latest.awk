@@ -1,56 +1,35 @@
 #
 # openssl.latest.awk
 #
-# created: 0323 280813
-#
+# created: 280813
+# re-written: 021016 from gperftools
 
 ### FUNCTIONS ###
 
-### MAIN LOOP ###
+### MAIN RULE ###
 
-BEGIN {
-        gvers = "0.0.0"
-        initial_vers = gvers
-      }
+BEGIN \
+{
+ vers = ""
+}
 
 # custom rules
 
-# Find out the current stable "series"
-tolower($0) ~ /stable/ \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
 {
- stable_cnt = split($0, stable_a, " ");
+ vers = $2
 
- for (stable_i in stable_a)
- {
-  item = stable_a[stable_i]
+ cnt = split (vers, vers_a, "/");
 
-  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
-  {
-    stable = item
-  }
- }
+ vers = vers_a[5]
 }
 
-$4 ~ ext && $0 ~ stable \
-{
- line = $0
- gsub(/[<>"]/, " ", line);
- vers_cnt = split(line, line_a, " ");
-
- for(line_i in line_a)
- { 
-  item = line_a[line_i]
-
-  if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && item ~ ext && item !~ /\.sha/ && item !~ /\.asc/)
-  {
-    vers = item
-  }
- }
-}
-
-### end rule ###
+### END RULE ###
 
 END \
 {
+ # this is the end rule
  print vers
 }
+
+### EOF ###
