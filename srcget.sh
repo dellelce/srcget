@@ -176,11 +176,11 @@ current_version()
 #
 is_valid_url()
 {
-  typeset url="$1"
+ typeset url="$1"
 
-  [ $(echo $url | grep -c '://') -eq 0 ] && return 1
+ [ $(echo $url | grep -c '://') -eq 0 ] && return 1
 
-  return 0
+ return 0
 }
 
 
@@ -308,7 +308,8 @@ info_single()
 {
  typeset profile="$1"
  typeset profileRc=0
- typeset aList="basename baseurl custom_file_postfix custom_file_prefix custom_url_postfix custom_url_prefix extension extension_input extension_url filter sep skipvers srcurl comment bulkenabled"
+ typeset aList="basename baseurl custom_file_postfix custom_file_prefix custom_url_postfix custom_url_prefix extension 
+		extension_input extension_url filter sep skipvers srcurl comment bulkenabled"
  typeset aItem
 
  [ ! -z "$DEBUG" ] && set -x
@@ -324,7 +325,7 @@ info_single()
  for aItem in $aList
  do
   aValue=$(eval echo \$$aItem)
-  [ ! -z "$aValue" ] && printf "%-20s %s\n" $aItem $aValue
+  [ ! -z "$aValue" ] && printf "%-20s %s\n" "$aItem" "$aValue"
  done
 }
 
@@ -409,20 +410,14 @@ listall()
 
  for x in $profilesDir/*;
  do
-   b=$(basename $x);
-   p=${b%.profile};
+  b=$(basename $x);
+  p=${b%.profile};
 
-# as it is this does not wor in several cases
-#   basename=""
-#   . "$x"
-#   b="$basename"
-#   [ -z "$b" ] && b="$p"
-   b="$p"
+  b="$p"
 
-   echo $b
-
-  done
-  return 0
+  echo $b
+ done
+ return 0
 }
 
 ## infoall ##
