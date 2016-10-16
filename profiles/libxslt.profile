@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/libxslt.latest.awk"
+latest="awk/libxslt.latest.awk"
 srcurl="ftp://xmlsoft.org/libxml2/"
 baseurl=""
 extension="tar.gz"

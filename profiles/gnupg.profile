@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/gnupg.latest.awk"
+latest="awk/gnupg.latest.awk"
 srcurl="http://www.gnupg.org/"
 extension_url="tar.bz2"
 custom_url_prefix="ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-"

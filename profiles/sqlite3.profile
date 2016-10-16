@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/sqlite3.latest.awk"
+latest="awk/sqlite3.latest.awk"
 srcurl="http://sqlite.org/download.html"
 extension_input="tar.gz"
 baseurl="http://sqlite.org"

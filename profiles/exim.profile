@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/exim.latest.awk"
+latest="awk/exim.latest.awk"
 #http://mirror.switch.ch/ftp/mirror/exim/exim/exim4/exim-4.82.tar.bz2
 srcurl="http://www.exim.org/"
 baseurl="http://mirror.switch.ch"

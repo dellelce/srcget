@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/clownfish.latest.awk"
+latest="awk/clownfish.latest.awk"
 srcurl="http://lucy.apache.org/download.html"
 baseurl="http://www.mirrorservice.org/sites/ftp.apache.org/lucy/clownfish/"
 comment=""

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/coreutils.latest.awk"
+latest="awk/coreutils.latest.awk"
 srcurl="http://ftp.gnu.org/gnu/coreutils/"
 extension_input="tar.xz"
 custom_url_prefix="${srcurl}coreutils-"

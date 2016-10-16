@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/czmq.latest.awk"
+latest="awk/czmq.latest.awk"
 baseurl="http://download.zeromq.org"
 srcurl="${baseurl}"
 comment=""

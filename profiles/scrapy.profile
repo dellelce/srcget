@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/scrapy.latest.awk"
+latest="awk/scrapy.latest.awk"
 baseurl="https://github.com/scrapy/scrapy"
 srcurl="${baseurl}/releases"
 comment="python bot"

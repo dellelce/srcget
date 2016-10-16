@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/m4.latest.awk"
+latest="awk/m4.latest.awk"
 srcurl="http://ftp.gnu.org/gnu/m4/"
 #baseurl=""
 comment=""

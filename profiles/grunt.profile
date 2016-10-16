@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/grunt.latest.awk"
+latest="awk/grunt.latest.awk"
 baseurl="https://github.com/gruntjs/grunt"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

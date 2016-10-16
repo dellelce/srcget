@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/gimp.latest.awk"
+latest="awk/gimp.latest.awk"
 srcurl="http://www.gimp.org/downloads/"
 #baseurl=""
 comment=""

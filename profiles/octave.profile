@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/octave.latest.awk"
+latest="awk/octave.latest.awk"
 srcurl="ftp://ftp.gnu.org/gnu/octave/"
 baseurl="${srcurl}"
 comment=""

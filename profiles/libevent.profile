@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/libevent.latest.awk"
+latest="awk/libevent.latest.awk"
 srcurl="https://github.com/libevent/libevent/releases"
 extension_input="tar.gz"
 sep='"'

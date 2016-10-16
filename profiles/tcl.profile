@@ -2,7 +2,7 @@
 #
 #ftp://ftp.tcl.tk/pub/tcl/tcl8_6/tcl8.6.0-src.tar.gz
 
-filter="awk/tcl.latest.awk"
+latest="awk/tcl.latest.awk"
 srcurl="http://www.tcl.tk/software/tcltk/download.html"
 sep='/'
 extension_url="tar.gz"

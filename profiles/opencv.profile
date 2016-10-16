@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/opencv.latest.awk"
+latest="awk/opencv.latest.awk"
 baseurl="https://github.com/itseez/opencv"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

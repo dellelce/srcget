@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/systemd.latest.awk"
+latest="awk/systemd.latest.awk"
 srcurl="http://www.freedesktop.org/software/systemd/"
 baseurl="${srcurl}"
 comment=""

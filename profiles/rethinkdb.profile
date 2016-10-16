@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/rethinkdb.latest.awk"
+latest="awk/rethinkdb.latest.awk"
 baseurl="https://github.com/rethinkdb/rethinkdb"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/perl.latest.awk"
+latest="awk/perl.latest.awk"
 srcurl="https://www.perl.org/get.html"
 baseurl="http://www.cpan.org/src/5.0"
 comment=""

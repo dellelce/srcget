@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/bzip2.latest.awk"
+latest="awk/bzip2.latest.awk"
 srcurl="http://www.bzip.org/downloads.html"
 extension_input="tar.gz"
 basename="bzip2"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/protobuf.latest.awk"
+latest="awk/protobuf.latest.awk"
 baseurl="https://github.com/google/protobuf"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

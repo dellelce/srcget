@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/lucy.latest.awk"
+latest="awk/lucy.latest.awk"
 srcurl="http://lucy.apache.org/download.html"
 #http://apache.mirror.anlx.net/lucy/apache-lucy-0.3.3.tar.gz
 baseurl="http://www.mirrorservice.org/sites/ftp.apache.org/lucy/"

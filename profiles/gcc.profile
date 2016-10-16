@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/gcc.latest.awk"
+latest="awk/gcc.latest.awk"
 srcurl="https://gcc.gnu.org/"
 extension="tar.bz2"
 #gcc-4.8.1/gcc-4.8.1.tar.bz2"

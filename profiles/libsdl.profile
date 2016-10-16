@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/libsdl.latest.awk"
+latest="awk/libsdl.latest.awk"
 srcurl="http://www.libsdl.org/release/"
 extension_input="tar.gz"
 basename="SDL2"

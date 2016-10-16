@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-filter="awk/networkx.latest.awk"
+latest="awk/networkx.latest.awk"
 srcurl="http://networkx.github.io/"
 baseurl="https://pypi.python.org/packages/source/n/networkx/"
 comment=""
