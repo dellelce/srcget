@@ -210,14 +210,14 @@ load_profile()
  unset extension
  unset extension_input
  unset extension_url
- unset filter
+ unset latest
  unset sep
  unset skipvers
  unset srcurl
  unset comment
  unset bulkenabled
  . $pfp
- export fp_filter="$srcHome/$filter"
+ export fp_filter="$srcHome/$latest"
  return 0
 }
 
