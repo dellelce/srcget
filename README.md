@@ -1,4 +1,4 @@
-== Tool to download latest *stable* source ==
+# Tool to download latest *stable* source
 
 Usage:
 
@@ -10,13 +10,13 @@ i.e.:
 
 * Depends on:
 
-- wget
-- GNU awk
+  - wget
+  - GNU awk
 
 * Configuration:
 
-- profile in profiles dir
-- awk filter
+  - profile in profiles dir
+  - awk filter
 
 * Todo:
 
