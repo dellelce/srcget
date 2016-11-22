@@ -9,17 +9,16 @@
 ### MAIN RULE ###
 
 BEGIN {
-        state = 0
+       vers = ""
       }
 
 # custom rules
 
-/Current [vV]ersion/ \
+$0 ~ ext && $0 ~ /[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
 {
  line = $0
- gsub(/[<>()]/, " ", line);
+ gsub(/["<>()]/, " ", line);
  split(line, vers_a, " ");
- vers = ""
 
  for(idx in vers_a)
  {
@@ -40,7 +39,7 @@ BEGIN {
  END {
        if (vers!="")
        {
-         print vers"/node-"vers
+         print vers
        }
      }
 
