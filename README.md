@@ -36,13 +36,13 @@ i.e.:
 
   (Improvement needed)
 
-   -h  Display this help message
-   -A  Download all packages
-   -L  List all 'packages'
-   -I  Information about package
-   -x  Turn on debug mode
-   -n  Quiet mode: show filename only
-   -q  Quiet mode: don't show anything
-   -H  Debug: return server HTTP headers (DEBUG ONLY!)
-   -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
+   - -h  Display this help message
+   - -A  Download all packages
+   - -L  List all 'packages'
+   - -I  Information about package
+   - -x  Turn on debug mode
+   - -n  Quiet mode: show filename only
+   - -q  Quiet mode: don't show anything
+   - -H  Debug: return server HTTP headers (DEBUG ONLY!)
+   - -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
 
