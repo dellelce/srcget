@@ -15,7 +15,7 @@ BEGIN \
 
 # custom rules
 
-$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
+$0 ~ ext && /\/archive\// && !/-fips/ && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
 {
  vers = $2
 
