@@ -6,7 +6,6 @@
 
 ### FUNCTIONS ###
 
-
 ### MAIN LOOP ###
 
 BEGIN {
@@ -28,8 +27,13 @@ state == 1 \
 
 ### end loop ###
 
-END   {
-        print vers
-      }
+END \
+{
+  gsub("."ext, "", vers);
+  split(vers, vers_a, "-");
+  vers = vers_a[2]
+  
+  print vers
+}
 
 ## EOF ##
