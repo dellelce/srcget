@@ -245,6 +245,7 @@ main_single()
  typeset latest=$(current_version)
  typeset latest_rc="$?"
 
+ [ "$latest_rc" -ne 0 ] && { srcecho "${profile}: current_version failed with return code ${latest_rc}"; return ${latest_rc}; }
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "${profile}: couldn't retrieve latest version: error in processing site content"; return 1; }
  [ -z "$latest" ] && { srcecho "${profile}: couldn't retrieve latest version: wget rc = $latest_rc"; return 1; }
 
