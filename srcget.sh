@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # File:         srcget.sh
-# Created:      0322 210713
+# Created:      210713
 # Description:  Automate download of source files
 #
 
@@ -153,7 +153,12 @@ Filename           : $fn
 EOF
 }
 
-# latest version
+
+#
+# current_version: extract "laest" version from source url given in profile
+#
+# Issues: expects profile to be already loaded and attributes set in environment
+#
 
 current_version()
 {
@@ -167,7 +172,7 @@ current_version()
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
 
  rawget "$srcurl" | ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter";
- return $? # unneeded / just a paranoia touch
+ return $? # unneeded?
 }
 
 #
