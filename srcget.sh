@@ -14,13 +14,27 @@ cookieFile="$TMP/cookies.srcget.${timestamp}.$RANDOM$RANDOM.txt"
 #       --load-cookies=FILE         load cookies from FILE before session
 #       --save-cookies=FILE         save cookies to FILE after session
 wgetArgs="-T ${timeout} -q --no-check-certificate --load-cookies=$cookieFile --save-cookies=$cookieFile"
-version="0.0.5.4"
+version="0.0.6.6"
 UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/)"
 NAMEONLY=0
 
 unset SILENT DEBUG
 
 ### FUNCTIONS ###
+
+#
+# fileType
+# 
+
+fileType()
+{
+ typeset fn="$1"
+ [ -z "$fn" ] && return 1
+
+ file -b "$fn" |awk ' { print $1 } ' 
+ return 0
+}
+
 
 #
 # cleanup
@@ -257,12 +271,13 @@ main_single()
  # check if file already exists and is not empty
  [ -s "$fn" ] &&
  {
-  [ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 2; } 
+  #[ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 2; } 
   srcecho "${profile}: File $fn exists"
   return 2
  }
 
- wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
+ #wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
+ rawget "$fullurl" > "$fn"
  rc=$?
 
  #[ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "${profile}: downloaded: $fn"; } 
@@ -271,6 +286,7 @@ main_single()
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
+ [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] && { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
 
  return $rc
 }
