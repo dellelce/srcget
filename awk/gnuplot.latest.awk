@@ -1,12 +1,9 @@
 #
 # gnuplot.latest.awk
 #
-# created: 0310 260214
+# created: 260214
 #
 #
-
-
-### FUNCTIONS ###
 
 ### MAIN LOOP ###
 
@@ -16,7 +13,7 @@ BEGIN {
 
 # custom rules
 
- /[0-9]\.[0-9]\.[0-9]/ && vers=="" \
+$0 ~ /[0-9]\.[0-9]\.[0-9]/ && $0 ~ ext && vers=="" \
 {
   line = $0;
   gsub(/[\/-]/, " ", line); 
@@ -35,10 +32,12 @@ BEGIN {
 
 ### end rule ###
 
-END   {
-	if (vers != "")
-        {
-          #http://cznic.dl.sourceforge.net/project/gnuplot/gnuplot/4.6.5/gnuplot-4.6.5.tar.gz
-          print vers"/gnuplot-"vers 
-        }
-      }
+END \
+{
+ if (vers != "")
+ {
+  print vers"/gnuplot-"vers
+ }
+}
+
+## EOF ##
