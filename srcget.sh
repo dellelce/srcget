@@ -254,8 +254,6 @@ main_single()
 
  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
 
- [ ! -z "$VERSIONTEST" ] && { echo $fn; return 0; }
-
  # check if file already exists and is not empty
  [ -s "$fn" ] &&
  {
