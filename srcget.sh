@@ -9,7 +9,11 @@
 
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
-wgetArgs="-T ${timeout} -q --no-check-certificate"
+timeStamp="$(date +%s)"
+cookieFile="$TMP/cookies.srcget.${timestamp}.$RANDOM$RANDOM.txt"
+#       --load-cookies=FILE         load cookies from FILE before session
+#       --save-cookies=FILE         save cookies to FILE after session
+wgetArgs="-T ${timeout} -q --no-check-certificate --load-cookies=$cookieFile --save-cookies=$cookieFile"
 version="0.0.5.4"
 UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/)"
 NAMEONLY=0
@@ -17,6 +21,14 @@ NAMEONLY=0
 unset SILENT DEBUG
 
 ### FUNCTIONS ###
+
+#
+# cleanup
+#
+ cleanup()
+ {
+  rm -f $cookieFile
+ }
 
 #
 # usage
@@ -486,7 +498,10 @@ done
  [ ! -z "$main" ] &&
  {
   eval $main $profileList
-  exit $?
+  rc=$?
+  cleanup
+
+  exit $rc
  }
 
 ### EOF ###
