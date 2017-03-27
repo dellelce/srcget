@@ -1,37 +1,32 @@
 #
 # systemd.latest.awk
 #
-# created: 0510 081014
+# created: 081014
+# re-created 270317 from django
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
 BEGIN {
-        env = ""
+        vers = ""
       }
 
 # custom rules
 
-$0 ~ ext && !/systemd-ui/ \
-{
-  line = $0;
-  gsub(/[<>\"]/, " ", line);
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
+      {
+        vers = $2
 
-  split(line, line_a, " ");
+        cnt = split (vers, vers_a, "/");
 
-  for (item in line_a)
-  {
-    if (line_a[item] ~ ext)
-    {
-      env = line_a[item]
-    }
-  }
-}
+        vers = vers_a[5]
+      }
 
 ### END RULE ###
 
 END   {
-	if (env != "") print env;
+	# this is the end rule
+        print vers
       }
+
+### EOF ###
