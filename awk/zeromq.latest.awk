@@ -1,24 +1,32 @@
 #
 # zeromq.latest.awk
 #
-# created: 0428 011213
+# 011213 Created
+# 230717 Receated from systemd (migration to github)
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
 BEGIN {
-        vers=""
+        vers = ""
       }
 
 # custom rules
 
-vers == "" && $2 ~ ext \
-{ vers = $2 } 
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
+      {
+        vers = $2
+
+        cnt = split (vers, vers_a, "/");
+
+        vers = vers_a[5]
+      }
 
 ### END RULE ###
 
 END   {
-	print vers
+	# this is the end rule
+        print vers
       }
+
+### EOF ###
