@@ -23,7 +23,7 @@ unset SILENT DEBUG
 ### FUNCTIONS ###
 
 #
-# fileType
+# fileType: return initial portion of "file"
 # 
 
 fileType()
