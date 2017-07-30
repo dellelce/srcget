@@ -271,18 +271,18 @@ main_single()
  # check if file already exists and is not empty
  [ -s "$fn" ] &&
  {
-  #[ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 2; } 
+  [ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 0; }
   srcecho "${profile}: File $fn exists"
-  return 2
+  return 0
  }
 
  #wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rawget "$fullurl" > "$fn"
  rc=$?
 
- #[ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "${profile}: downloaded: $fn"; } 
  [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "$fn"; }  # print only-name and successful
  [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } # print only-name and failed
+
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
@@ -329,7 +329,7 @@ wget_pkg()
 {
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
  rc=$?
- [ "$NAMEONLY" -eq 1 ] && { echo $fn; } 
+ [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo $fn; return 0; }
  [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
  [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
