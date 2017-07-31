@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/expat1.latest.awk"
+latest="awk/expat.latest.awk"
 srcurl="https://sourceforge.net/projects/expat/files/expat/"
 extension_input="tar.bz2"
 #
