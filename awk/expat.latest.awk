@@ -1,10 +1,10 @@
 #
 # expat.latest.awk
 #
-# 240717 Created
+# created: 310717 from swig?
 #
 
-### MAIN RULE ###
+### MAIN LOOP ###
 
 BEGIN {
         vers = ""
@@ -12,20 +12,32 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
-      {
-        vers = $2
+$0 ~ /[0-9]\.[0-9]\.[0-9]/ && $0 ~ ext && vers=="" \
+{
+  line = $0;
+  gsub(/[\/-]/, " ", line); 
+  fext="."ext
+  gsub(fext, " ", line);
+  split(line,a, " ");
 
-        cnt = split (vers, vers_a, "/");
+  for (x in a)
+  {
+    if (a[x] ~ /[0-9]\.[0-9]\.[0-9]/)
+    {
+      vers= a[x];
+    }
+  } 
+}
 
-        vers = vers_a[5]
-      }
+### end rule ###
 
-### END RULE ###
+END \
+{
+ if (vers != "")
+ {
+  #-3.0.12
+  print vers"/expat-"vers
+ }
+}
 
-END   {
-	# this is the end rule
-        print vers
-      }
-
-### EOF ###
+## EOF ##
