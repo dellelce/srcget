@@ -10,7 +10,7 @@
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
 timeStamp="$(date +%s)"
-cookieFile="$TMP/cookies.srcget.${timestamp}.$RANDOM$RANDOM.txt"
+cookieFile="$TMP/cookies.srcget.${timeStamp}.$RANDOM$RANDOM.txt"
 #       --load-cookies=FILE         load cookies from FILE before session
 #       --save-cookies=FILE         save cookies to FILE after session
 wgetArgs="-T ${timeout} -q --no-check-certificate --load-cookies=$cookieFile --save-cookies=$cookieFile"
