@@ -15,7 +15,8 @@ cookieFile="$TMP/cookies.srcget.${timestamp}.$RANDOM$RANDOM.txt"
 #       --save-cookies=FILE         save cookies to FILE after session
 wgetArgs="-T ${timeout} -q --no-check-certificate --load-cookies=$cookieFile --save-cookies=$cookieFile"
 version="0.0.6.6"
-UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/)"
+# https://downloads.sourceforge.net/project/expat/expat/expat-2.2.2/expat-2.2.2.tar.bz2
+UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/) Dummy/0.0.0 (KHTML, like Gecko)"
 NAMEONLY=0
 
 unset SILENT DEBUG
