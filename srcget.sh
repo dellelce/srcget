@@ -10,13 +10,13 @@
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
 timeStamp="$(date +%s)"
+#
 cookieFile="$TMP/cookies.srcget.${timeStamp}.$RANDOM$RANDOM.txt"
-#       --load-cookies=FILE         load cookies from FILE before session
-#       --save-cookies=FILE         save cookies to FILE after session
-wgetArgs="-T ${timeout} -q --no-check-certificate --load-cookies=$cookieFile --save-cookies=$cookieFile"
+cookieOptions="--load-cookies=$cookieFile --save-cookies=$cookieFile"
+wgetArgs="-T ${timeout} -q --no-check-certificate ${cookieOptions}"
 version="0.0.6.6"
-# https://downloads.sourceforge.net/project/expat/expat/expat-2.2.2/expat-2.2.2.tar.bz2
-UA="Mozilla/5.0 (compatible; srcget/${version}; +http://github.com/dellelce/srcget/) Dummy/0.0.0 (KHTML, like Gecko)"
+homePage="http://github.com/dellelce/srcget/"
+UA="Mozilla/5.0 (compatible; srcget/${version}; +${homePage}) Dummy/0.0.0 (KHTML, like Gecko)"
 NAMEONLY=0
 
 unset SILENT DEBUG
