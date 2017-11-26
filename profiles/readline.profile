@@ -1,6 +1,6 @@
 # vim:syntax=sh
 latest="awk/readline.latest.awk"
-srcurl="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html"
+srcurl="https://tiswww.case.edu/php/chet/readline/rltop.html"
 baseurl="http://ftp.gnu.org/gnu/readline/"
 extension_input="tar.gz"
 custom_url_prefix="${baseurl}readline-"
