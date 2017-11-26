@@ -7,3 +7,5 @@ awk/*.html
 bad
 cache
 archives
+*.warc
+*.warc.gz
