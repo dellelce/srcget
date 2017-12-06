@@ -122,6 +122,7 @@ rawget()
  [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
 
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
+
  # keep wget return code
  return $? 
 }
@@ -249,19 +250,22 @@ main_single()
 
  [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
  {
-   [ -z "$baseurl" ] &&
-   {
-     fullurl="$latest"
-   } || 
-   {
-     fullurl="$baseurl/$latest"
-   }
+  [ -z "$baseurl" ] &&
+  {
+   fullurl="$latest"
+  } ||
+  {
+    fullurl="$baseurl/$latest"
+  }
  } ||
  {
-   fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
+  fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
  }
 
- [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] && { fn="${custom_file_prefix}${fn}${custom_file_postfix}"; }
+ [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] &&
+ {
+  fn="${custom_file_prefix}${fn}${custom_file_postfix}";
+ }
 
  info_banner
 
