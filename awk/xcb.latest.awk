@@ -43,6 +43,7 @@ $0 ~ prefix && $0 ~ ext \
 {
   fn = $8
   if (fn ~ /\.sha1$/) { next; } 
+  if (fn ~ /\.sig/) { next; }
   if (fn ~ /\.sha1\.asc$/) { next; } 
 
   ver = fn
