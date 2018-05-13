@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 latest="awk/mpc.latest.awk"
-srcurl="http://multiprecision.org/index.php?prog=mpc&page=download"
+srcurl="http://www.multiprecision.org/mpc/download.html"
 sep='"'
 extension_input="tar.gz"
 
