@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 latest="awk/twisted.latest.awk"
-srcurl="https://twistedmatrix.com/trac/"
+srcurl="https://twistedmatrix.com/trac/wiki/Downloads"
 #baseurl=""
 basename="Twisted"
 comment=""
