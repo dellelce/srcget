@@ -26,7 +26,6 @@ unset SILENT DEBUG
 #
 # fileType: return initial portion of "file"
 # 
-
 fileType()
 {
  typeset fn="$1"
@@ -146,7 +145,6 @@ EOF
 #
 # Issues: expects profile to be already loaded and attributes set in environment
 #
-
 current_version()
 {
  typeset _awk="awk"
@@ -174,7 +172,6 @@ is_valid_url()
 
  return 0
 }
-
 
 #
 load_profile()
@@ -217,7 +214,6 @@ load_profile()
 # main_single
 # this is the core of this software
 #
-
 main_single()
 {
  typeset profile="$1"
@@ -227,7 +223,8 @@ main_single()
  load_profile $profile
  profileRc=$?
 
- [ $profileRc -ne 0 ] && { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
+ [ $profileRc -ne 0 ] &&
+  { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
 
  #Sanity checks
  [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }  
@@ -269,7 +266,8 @@ main_single()
 
  info_banner
 
- [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] && { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
+ [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] &&
+ { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
 
  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
 
@@ -290,8 +288,10 @@ main_single()
 
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
+
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
- [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] && { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
+ [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&i
+  { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
 
  return $rc
 }
@@ -299,7 +299,6 @@ main_single()
 #
 # info_single
 #
-
 info_single()
 {
  typeset profile="$1"
@@ -329,7 +328,6 @@ info_single()
 # wget_pkg
 # TO REMOVE?
 #
-
 wget_pkg()
 {
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
@@ -346,7 +344,6 @@ wget_pkg()
 # srcall
 # check all profiles
 #
-
 srcall()
 {
  [ ! -d "$profilesDir" ] &&
@@ -389,7 +386,6 @@ srcall()
 #
 # listall
 #
-
 listall()
 {
  [ ! -d "$profilesDir" ] &&
@@ -416,8 +412,8 @@ listall()
  return 0
 }
 
-## infoall ##
-
+#
+# infoall
 infoall()
 {
  typeset profile=""
@@ -441,8 +437,8 @@ infoall()
  return $rc
 }
 
-## main ##
-
+#
+# main
 main()
 {
  typeset profile=""
@@ -467,7 +463,6 @@ main()
 }
 
 # url/profile downloader
-
 geturl()
 {
  typeset url="$1"
