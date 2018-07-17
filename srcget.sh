@@ -290,7 +290,7 @@ main_single()
  # test empty file
 
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
- [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&i
+ [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
   { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
 
  return $rc
