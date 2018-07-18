@@ -491,7 +491,7 @@ geturl()
 profileList=""
 export main="main"
 export DEBUG=""
-export SILENT=0
+export SILENT=""
 export NAMEONLY=0
 
 while [ ! -z "$1" ] 
