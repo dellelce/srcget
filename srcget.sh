@@ -1,8 +1,9 @@
 #!/bin/bash
 #
+# Automate download of source files
+#
 # File:         srcget.sh
 # Created:      210713
-# Description:  Automate download of source files
 #
 
 ### ENV ###
@@ -77,9 +78,9 @@ getlinkdir()
  do
   dest=$(
   {
-   for x in $(ls -lt $link);
+   for item in $(ls -lt $link);
    do
-    echo $x;
+    echo $item;
    done
   } | awk  \
   ' 
@@ -279,7 +280,6 @@ main_single()
   return 0
  }
 
- #wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rawget "$fullurl" > "$fn"
  rc=$?
 
@@ -352,7 +352,7 @@ srcall()
   typeset profilesDir="$srcHome/profiles"
  }
 
- typeset b p
+ typeset b p item
 
  [ ! -d "$profilesDir" ] &&
  {
@@ -360,9 +360,9 @@ srcall()
   return 20
  }
 
- for x in $profilesDir/*;
+ for item in $profilesDir/*;
  do
-  b=$(basename $x);
+  b=$(basename $item);
   p=${b%.profile};
 
   # profile is loaded twice, and this is not a good thing, but for now we can live with it....
@@ -388,6 +388,8 @@ srcall()
 #
 listall()
 {
+ typeset item b p
+
  [ ! -d "$profilesDir" ] &&
  {
    export srcHome=$(getlinkdir "$0")
@@ -400,9 +402,9 @@ listall()
    return 20
  }
 
- for x in $profilesDir/*;
+ for item in $profilesDir/*;
  do
-  b=$(basename $x);
+  b=$(basename $item);
   p=${b%.profile};
 
   b="$p"
@@ -417,7 +419,7 @@ listall()
 infoall()
 {
  typeset profile=""
- typeset profileRc=0
+ typeset profileRc=0 rc=0
  [ ! -z "$DEBUG" ] && set -x
 
  #Sanity checks
@@ -488,17 +490,20 @@ geturl()
 
 profileList=""
 export main="main"
+export DEBUG=""
+export SILENT=0
+export NAMEONLY=0
 
 while [ ! -z "$1" ] 
 do
  [ "$1" == "-A" ] && { main="srcall"; shift; continue; }
- [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; continue; }
+ [ "$1" == "-x" ] && { DEBUG=1; set -x; shift; continue; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; continue; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; continue; }
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
- [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
- [ "$1" == "-n" ] && { export NAMEONLY=1; shift; continue; }
+ [ "$1" == "-q" ] && { SILENT=1; shift; continue; }
+ [ "$1" == "-n" ] && { NAMEONLY=1; shift; continue; }
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
 
  [ "$1" == ${1#-} ] &&
@@ -506,7 +511,7 @@ do
   [ -z "$profileList" ] && profileList="$1" || profileList="${profileList} $1"
  }
 
- shift # catch-all shift... we should move to getopt
+ shift
 done
 
  [ ! -z "$main" ] &&
