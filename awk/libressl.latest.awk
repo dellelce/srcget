@@ -22,9 +22,6 @@ function compare_versions(a, b)
   if (a_a[3] > b_a[3]) return a;
   if (a_a[3] < b_a[3]) return b;
 
-  if (a_a[4] > b_a[4]) return a;
-  if (a_a[4] < b_a[4]) return b;
-
   return  "EQ"
 }
 
@@ -42,41 +39,26 @@ BEGIN {
 
 $0 ~ ext && /[0-9]+\.[0-9]+\.[0-9]+/ && /libressl/ && !/latest/ && !/\.asc/ && !/\.txt/ \
 {
-  line = $0 
+  line = $0
   gsub(/["<>]/, " ", line);
 
   split (line, line_a, " ");
 
-  if (line_a[8] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+  for (idx in line_a)
   {
-    vers = line_a[8]
+    if (line_a[idx] ~ /[0-9]+\.[0-9]+\.[0-9]+/)
+    {
+      vers = line_a[idx]
 
-    sub(/libressl-/,"",vers)
-#    print vers "  --> ext = " ext  " --> index(vers,ext) = " index(vers,ext)
-    vers = substr(vers,1,index(vers,ext)-2)
+      sub(/libressl-/,"",vers)
+      vers = substr(vers,1,index(vers,ext)-2)
 
-#    print vers
-
-    good_vers = compare_versions(good_vers, vers);
+      good_vers = compare_versions(good_vers, vers);
+      next
+    }
   }
-
-#  for (i in line_a)
-#  {
-#    item = line_a[i];
-#
-#    if (item ~ ext && item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
-#    {
-#      vers = item
-#      print FNR " " i " "  vers
-#      sub(/libressl-/,"",vers)
-#      vers = substr(vers,1,index(vers,ext)-2)
-#
-#      print vers
-#
-#      good_vers = compare_versions(good_vers, vers);
-#    }
-#  }
 }
+
 
 ### end loop ###
 
