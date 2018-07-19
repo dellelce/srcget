@@ -1,10 +1,8 @@
 #
-# python.latest.awk
+# python3.latest.awk
 #
-# created: 0545 110114
+# created: 110114
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
