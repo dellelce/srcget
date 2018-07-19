@@ -2,7 +2,7 @@
 # zeromq.latest.awk
 #
 # 011213 Created
-# 230717 Receated from systemd (migration to github)
+# 230717 Recreated from systemd (migration to github)
 #
 
 ### MAIN RULE ###
