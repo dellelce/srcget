@@ -10,17 +10,17 @@ i.e.:
 
     ./srcget.sh zlib
 
-* Depends on:
+## Depends on:
 
   - wget
   - GNU awk
 
-* Configuration:
+## Configuration:
 
   - profile in profiles dir
   - awk filter
 
-* Todo:
+## Todo:
 
   - Support for downloading a specific version
   - Groups/tags/categories
@@ -30,21 +30,21 @@ i.e.:
   - Signal handling: control-c is to be improved
   - Support for: Content-Disposition header 
 
-* Todo Build:
+## Todo Build:
 
   - dependency work is needed for 
 
-* Options:
+## Options:
 
-  (Improvement needed)
-
-   - -h  Display this help message
-   - -A  Download all packages
-   - -L  List all 'packages'
-   - -I  Information about package
-   - -x  Turn on debug mode
-   - -n  Quiet mode: show filename only
-   - -q  Quiet mode: don't show anything
-   - -H  Debug: return server HTTP headers (DEBUG ONLY!)
-   - -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
+|Option|Description                         |
+|------|------------------------------------|
+| `-h` | Display this help message          |
+| `-A` | Download all packages              |
+| `-L` | List all 'packages'                |
+| `-I` | Information about package          |
+| `-x` | Turn on debug mode                 |
+| `-n` | Quiet mode: show filename only     |
+| `-q` | Quiet mode: don't show anything    |
+| `-H` | Debug: return server HTTP headers  |
+| `-D` | Testing: download remote url only  |
 

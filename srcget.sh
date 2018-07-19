@@ -1,8 +1,9 @@
 #!/bin/bash
 #
+# Automate download of source files
+#
 # File:         srcget.sh
 # Created:      210713
-# Description:  Automate download of source files
 #
 
 ### ENV ###
@@ -26,7 +27,6 @@ unset SILENT DEBUG
 #
 # fileType: return initial portion of "file"
 # 
-
 fileType()
 {
  typeset fn="$1"
@@ -78,9 +78,9 @@ getlinkdir()
  do
   dest=$(
   {
-   for x in $(ls -lt $link);
+   for item in $(ls -lt $link);
    do
-    echo $x;
+    echo $item;
    done
   } | awk  \
   ' 
@@ -146,7 +146,6 @@ EOF
 #
 # Issues: expects profile to be already loaded and attributes set in environment
 #
-
 current_version()
 {
  typeset _awk="awk"
@@ -174,7 +173,6 @@ is_valid_url()
 
  return 0
 }
-
 
 #
 load_profile()
@@ -217,7 +215,6 @@ load_profile()
 # main_single
 # this is the core of this software
 #
-
 main_single()
 {
  typeset profile="$1"
@@ -227,7 +224,8 @@ main_single()
  load_profile $profile
  profileRc=$?
 
- [ $profileRc -ne 0 ] && { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
+ [ $profileRc -ne 0 ] &&
+  { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
 
  #Sanity checks
  [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }  
@@ -269,7 +267,8 @@ main_single()
 
  info_banner
 
- [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] && { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
+ [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] &&
+ { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
 
  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
 
@@ -281,7 +280,6 @@ main_single()
   return 0
  }
 
- #wget -U "$UA" ${wgetArgs} -O - "$fullurl" > "$fn"
  rawget "$fullurl" > "$fn"
  rc=$?
 
@@ -290,8 +288,10 @@ main_single()
 
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
+
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
- [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] && { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
+ [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
+  { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
 
  return $rc
 }
@@ -299,7 +299,6 @@ main_single()
 #
 # info_single
 #
-
 info_single()
 {
  typeset profile="$1"
@@ -329,7 +328,6 @@ info_single()
 # wget_pkg
 # TO REMOVE?
 #
-
 wget_pkg()
 {
  wget ${wgetArgs} -O - "$fullurl" > "$fn"
@@ -346,7 +344,6 @@ wget_pkg()
 # srcall
 # check all profiles
 #
-
 srcall()
 {
  [ ! -d "$profilesDir" ] &&
@@ -355,7 +352,7 @@ srcall()
   typeset profilesDir="$srcHome/profiles"
  }
 
- typeset b p
+ typeset b p item
 
  [ ! -d "$profilesDir" ] &&
  {
@@ -363,9 +360,9 @@ srcall()
   return 20
  }
 
- for x in $profilesDir/*;
+ for item in $profilesDir/*;
  do
-  b=$(basename $x);
+  b=$(basename $item);
   p=${b%.profile};
 
   # profile is loaded twice, and this is not a good thing, but for now we can live with it....
@@ -389,9 +386,10 @@ srcall()
 #
 # listall
 #
-
 listall()
 {
+ typeset item b p
+
  [ ! -d "$profilesDir" ] &&
  {
    export srcHome=$(getlinkdir "$0")
@@ -404,9 +402,9 @@ listall()
    return 20
  }
 
- for x in $profilesDir/*;
+ for item in $profilesDir/*;
  do
-  b=$(basename $x);
+  b=$(basename $item);
   p=${b%.profile};
 
   b="$p"
@@ -416,12 +414,12 @@ listall()
  return 0
 }
 
-## infoall ##
-
+#
+# infoall
 infoall()
 {
  typeset profile=""
- typeset profileRc=0
+ typeset profileRc=0 rc=0
  [ ! -z "$DEBUG" ] && set -x
 
  #Sanity checks
@@ -441,8 +439,8 @@ infoall()
  return $rc
 }
 
-## main ##
-
+#
+# main
 main()
 {
  typeset profile=""
@@ -467,7 +465,6 @@ main()
 }
 
 # url/profile downloader
-
 geturl()
 {
  typeset url="$1"
@@ -493,17 +490,20 @@ geturl()
 
 profileList=""
 export main="main"
+export DEBUG=""
+export SILENT=""
+export NAMEONLY=0
 
 while [ ! -z "$1" ] 
 do
  [ "$1" == "-A" ] && { main="srcall"; shift; continue; }
- [ "$1" == "-x" ] && { export DEBUG=1; set -x; shift; continue; }
+ [ "$1" == "-x" ] && { DEBUG=1; set -x; shift; continue; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S";  set -x; shift; continue; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; continue; }
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
- [ "$1" == "-q" ] && { export SILENT=1; shift; continue; }
- [ "$1" == "-n" ] && { export NAMEONLY=1; shift; continue; }
+ [ "$1" == "-q" ] && { SILENT=1; shift; continue; }
+ [ "$1" == "-n" ] && { NAMEONLY=1; shift; continue; }
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
 
  [ "$1" == ${1#-} ] &&
@@ -511,7 +511,7 @@ do
   [ -z "$profileList" ] && profileList="$1" || profileList="${profileList} $1"
  }
 
- shift # catch-all shift... we should move to getopt
+ shift
 done
 
  [ ! -z "$main" ] &&

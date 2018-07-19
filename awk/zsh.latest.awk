@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 
-vers == "" && !/-doc/ && $0 ~ ext \
+!/-doc/ && $0 ~ ext \
 {
  line = $0
  gsub(/\"/, " ", line);
