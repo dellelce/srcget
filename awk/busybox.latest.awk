@@ -14,7 +14,7 @@ BEGIN {
 
 # custom rules
 # snapshot rule ignore the nightly snapshot
-/busybox/ && /tar.bz2/ && !/tar\.bz2\.sign/ && !/snapshot/ \
+/busybox/ && /tar.bz2/ && !/tar\.bz2\.sign/ && !/snapshot/ && !/\.sig/ \
 {
   ver = $6
 }
