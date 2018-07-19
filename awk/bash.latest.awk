@@ -37,7 +37,7 @@ BEGIN {
 
 # custom rules
 
-/bash/&& !/bash-doc/ && $0 ~ ext && !/\.sig/ \
+/bash/&& !/bash-doc/ && $0 ~ ext && !/\.sig/ && !/alpha/ \
 { 
   gsub(/[<>"]/, " ", $0);
   cnt = split($0, a, " ");
