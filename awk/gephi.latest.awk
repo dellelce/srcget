@@ -1,10 +1,9 @@
 #
 # gephi.latest.awk
 #
-# created: 1421 250514
+# created: 250514
+# migrated to github: 190718
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
@@ -14,30 +13,20 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && /sources/ && vers == "" \
-{
-  line = $0
-  gsub(/"/, " ", line);
-  split(line, line_a, " ");
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
+      {
+        vers = $2
 
-  for (line_i in line_a)
-  {
-    item = line_a[line_i]
+        cnt = split (vers, vers_a, "/");
 
-    if (item ~ ext && vers == "")
-    {
-      vers = item
-    }
-  }
-}
+        vers = vers_a[5]
+      }
 
 ### END RULE ###
 
 END   {
-	if (vers != "")
-        {
-          print vers
-        }
+	# this is the end rule
+        print vers
       }
 
 ### EOF ###
