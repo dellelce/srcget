@@ -4,8 +4,6 @@
 # created: 060813
 #
 
-### FUNCTIONS ###
-
 ### MAIN LOOP ###
 
 BEGIN {
@@ -13,8 +11,7 @@ BEGIN {
       }
 
 # custom rules
-# snapshot rule ignore the nightly snapshot
-/busybox/ && /tar.bz2/ && !/tar\.bz2\.sign/ && !/snapshot/ && !/\.sig/ \
+/busybox/ && $0 ~ ext && !/snapshot/ && !/\.sig/ && !/\.sha256/ \
 {
   ver = $6
 }
@@ -24,3 +21,4 @@ BEGIN {
 END   {
 	print ver
       }
+### EOF ##
