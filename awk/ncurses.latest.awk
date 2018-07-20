@@ -22,7 +22,7 @@ function compare_versions(a, b)
   if (a_a[3] > b_a[3]) return a;
   if (a_a[3] < b_a[3]) return b;
 
-  return  "EQ"
+  return a
 }
 
 ### MAIN LOOP ###
@@ -35,16 +35,28 @@ BEGIN {
 
 # custom rules
 
-/ncurses/ && /tar.gz/ \
+/ncurses/ && $0 ~ ext && !/\.sig/ && !/\.asc/ \
 {
-  fn = $6
-  if (fn ~ /\.sig$/) { next; } 
+  line = $0
+  gsub(/"/, " ", line);
+  gsub(/[<>]/, " ", line);
+  split(line, line_a, " ");
 
-  ver = fn
-  sub(/ncurses-/,"",ver);
-  sub(/\.tar\.gz/,"",ver);
+  for (idx in line_a)
+  {
+   item = line_a[idx]
 
-  good_ver = compare_versions(good_ver, ver);
+   if (item ~ ext)
+   {
+    ver = item
+    sub(/ncurses-/,"",ver);
+    sub("."ext,"",ver);
+
+    good_ver = compare_versions(good_ver, ver);
+    next
+   }
+  }
+
 }
 
 ### end loop ###
@@ -52,6 +64,6 @@ BEGIN {
 END   {
         if (initial_vers != good_ver)
         {
-	  print "ncurses-"good_ver".tar.gz"
+	  print "ncurses-"good_ver"."ext
         }
       }
