@@ -24,15 +24,13 @@ unset SILENT DEBUG
 
 ### FUNCTIONS ###
 
-#
-# fileType: return initial portion of "file"
-# 
+# function: fileType: return initial portion of "file"
 fileType()
 {
  typeset fn="$1"
  [ -z "$fn" ] && return 1
 
- file -b "$fn" |awk ' { print $1 } ' 
+ file -b "$fn" |awk ' { print $1 } '
  return 0
 }
 
@@ -49,7 +47,7 @@ fileType()
 # usage
 usage()
 {
- cat  << EOF 
+ cat  << EOF
 $0 [options] program_name
 
  -h  Display this help message
@@ -83,7 +81,7 @@ getlinkdir()
     echo $item;
    done
   } | awk  \
-  ' 
+  '
     BEGIN { state = 0; }
     state == 0 && $1 == "->" { state = 1 ; next; }
     state == 1 { print; state = 0; next; }
@@ -103,13 +101,13 @@ getlinkdir()
  return $?
 }
 
-# echo wrapper
+# function: echo wrapper
 srcecho()
 {
  [ -z "$SILENT" ] && echo $*
 }
 
-# wrapper to wget
+# function: wrapper to wget
 rawget()
 {
  typeset url="$1"
@@ -117,20 +115,20 @@ rawget()
  [ -z "$url" ] && return 1
 
  #temp workaround for github - there must be something wrong in github.com webserver..........maybe
- [ $(echo $url | grep -c "github") -eq 1 ] && { unset wgetHeaders; } 
+ [ $(echo $url | grep -c "github") -eq 1 ] && { unset wgetHeaders; }
 
  [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
 
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
 
  # keep wget return code
- return $? 
+ return $?
 }
 
-# 
+# function: info_banner: display download details (usually interactive mode only)
 info_banner()
 {
-  [ ! -z "$SILENT" -o "$NAMEONLY" -ne 0 ] && return 
+  [ ! -z "$SILENT" -o "$NAMEONLY" -ne 0 ] && return
   cat << EOF
 Profile            : $pfp
 Source             : $srcurl
@@ -141,14 +139,19 @@ EOF
 }
 
 
-#
-# current_version: extract "laest" version from source url given in profile
-#
-# Issues: expects profile to be already loaded and attributes set in environment
-#
+# function: current_version: extract "latest" version from source url given in profile
+# TODO: use arguments instead of global variables!
 current_version()
 {
  typeset _awk="awk"
+ typeset rc=0
+ typeset tmpid="currentversion_${RANDOM}${RANDOM}"
+ typeset awkoutput="$TMP/${tmpid}.awk.txt"
+ typeset getoutput="$TMP/${tmpid}.get.txt"
+ typeset cnt
+ typeset legacy_version=""
+ typeset version=""
+ typeset versionpath=""
 
  # setup awk args
  [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
@@ -157,14 +160,32 @@ current_version()
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
 
- rawget "$srcurl" | ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter";
- return $? # unneeded?
+ rawget "$srcurl" > "$getoutput"
+ rc=$?
+ [ "$rc" -ne 0 ] && { rm "$awkoutput"; return $rc; }
+
+ ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter" < "$getoutput" > "$awkoutput"
+ rc=$?
+
+ # migrating to a better "filter" ouput
+ # if first line of output is set we are "Legacy mode"
+ eval $(
+ cat "$awkoutput" |
+ awk ' FNR == 1 && !/^$/ { print "legacy_version=\""$0"\""; next; } { print }'
+)
+ [ -z "$legacy_version" -a ! -z "$DEBUG" ] && 
+ {
+  awk '{ print ": DEBUG AWK "FNR" "$0  " ;" }' $awkoutput
+ }
+
+ echo $legacy_version
+
+ rm -f "$awkoutput" "$getoutput"
+
+ return $rc
 }
 
-#
-# is_valid_url
-# mini-sanity check 
-#
+# function: is_valid_url: mini-sanity check
 is_valid_url()
 {
  typeset url="$1"
@@ -174,7 +195,7 @@ is_valid_url()
  return 0
 }
 
-#
+# function: load_profile: load a single profile
 load_profile()
 {
  ## Load profile information
@@ -206,15 +227,13 @@ load_profile()
  unset srcurl
  unset comment
  unset bulkenabled
+ unset version_holder
  . $pfp
  export fp_filter="$srcHome/$latest"
  return 0
 }
 
-#
-# main_single
-# this is the core of this software
-#
+# function: main_single: this is the core of this software
 main_single()
 {
  typeset profile="$1"
@@ -227,11 +246,11 @@ main_single()
  [ $profileRc -ne 0 ] &&
   { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
 
- #Sanity checks
- [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }  
- [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; } 
+ # Sanity checks
+ [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }
+ [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
- ## Find latest software version
+ # Find latest software version
  typeset latest=$(current_version)
  typeset latest_rc="$?"
 
@@ -246,7 +265,7 @@ main_single()
 
  typeset fullurl=""
 
- [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] && 
+ [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] &&
  {
   [ -z "$baseurl" ] &&
   {
@@ -267,7 +286,7 @@ main_single()
 
  info_banner
 
- [ "${fullurl}" != "${fullurl/ERRINPUT//}" ] &&
+ [ "${fullurl}" != "${fullurl/ERRINPUT/}" ] &&
  { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
 
  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
@@ -280,6 +299,7 @@ main_single()
   return 0
  }
 
+ # Main package download entrypoint
  rawget "$fullurl" > "$fn"
  rc=$?
 
@@ -289,21 +309,20 @@ main_single()
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
  # test empty file
 
- [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; } 
+ [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; }
  [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
   { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
 
  return $rc
 }
 
-#
-# info_single
-#
+# function: info_single
 info_single()
 {
  typeset profile="$1"
  typeset profileRc=0
- typeset aList="basename baseurl custom_file_postfix custom_file_prefix custom_url_postfix custom_url_prefix extension 
+ typeset aList="basename baseurl custom_file_postfix
+                custom_file_prefix custom_url_postfix custom_url_prefix extension
 		extension_input extension_url filter sep skipvers srcurl comment bulkenabled"
  typeset aItem
 
@@ -312,10 +331,10 @@ info_single()
  load_profile $profile
  profileRc=$?
 
- #Sanity checks
- [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }  
- [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; } 
- [ $profileRc -ne 0 ] && { return 5; } 
+ # Sanity checks
+ [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }
+ [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; }
+ [ $profileRc -ne 0 ] && { return 5; }
 
  for aItem in $aList
  do
@@ -324,26 +343,7 @@ info_single()
  done
 }
 
-#
-# wget_pkg
-# TO REMOVE?
-#
-wget_pkg()
-{
- wget ${wgetArgs} -O - "$fullurl" > "$fn"
- rc=$?
- [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo $fn; return 0; }
- [ $rc -ne 0 ] && { srcecho "wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
- # test empty file
- [ ! -s "$fn" ] && { srcecho "downloaded empty file"; rm -f "$fn"; return 10; } 
-
- return $rc
-}
-
-#
-# srcall
-# check all profiles
-#
+# function: srcall: check all profiles
 srcall()
 {
  [ ! -d "$profilesDir" ] &&
@@ -354,20 +354,18 @@ srcall()
 
  typeset b p item
 
- [ ! -d "$profilesDir" ] &&
- {
-  echo "Can't find profiles directory!: $profilesDir"
-  return 20
- }
+ [ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; return 20; }
 
  for item in $profilesDir/*;
  do
   b=$(basename $item);
   p=${b%.profile};
 
-  # profile is loaded twice, and this is not a good thing, but for now we can live with it....
+  # profile is loaded twice, and this is not a good thing
   load_profile "$p"
-  [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue # ignore profiles not enabled for bulk (srcall): profiles in development
+
+  # ignore profiles not enabled for bulk (srcall): profiles in development
+  [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue
   [ -z "$basename" ] && { basename="${p}"; } # override if set in profile!
 
   # always run main_single silently
@@ -383,9 +381,7 @@ srcall()
  return 0
 }
 
-#
-# listall
-#
+# function: listall
 listall()
 {
  typeset item b p
@@ -396,11 +392,7 @@ listall()
    export profilesDir="$srcHome/profiles"
  }
 
- [ ! -d "$profilesDir" ] &&
- {
-   echo "Can't find profiles directory!: $profilesDir"
-   return 20
- }
+ [ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; return 20; }
 
  for item in $profilesDir/*;
  do
@@ -414,19 +406,17 @@ listall()
  return 0
 }
 
-#
-# infoall
+# function: infoall
 infoall()
 {
  typeset profile=""
  typeset profileRc=0 rc=0
  [ ! -z "$DEBUG" ] && set -x
 
- #Sanity checks
+ # Sanity checks
  [ -z "$1" ] && return 1;
 
- ## Load profile information
-
+ # Load profile information
  while [ ! -z "$1" ]
  do
   profile="$1"
@@ -439,19 +429,17 @@ infoall()
  return $rc
 }
 
-#
-# main
+# function: main
 main()
 {
  typeset profile=""
  typeset profileRc=0
  [ ! -z "$DEBUG" ] && set -x
 
- #Sanity checks
+ # Sanity checks
  [ -z "$1" ] && return 1;
 
- ## Load profile information
-
+ # Load profile information
  while [ ! -z "$1" ]
  do
   profile="$1"
@@ -464,7 +452,7 @@ main()
  return $rc
 }
 
-# url/profile downloader
+# function: geturl: url/profile downloader
 geturl()
 {
  typeset url="$1"
@@ -473,12 +461,12 @@ geturl()
  is_valid_url "$url" ||
  {
   # url is actually a profile
-  load_profile $url 
+  load_profile $url
   profileRc=$?
 
   [ $profileRc -ne 0 ] && return $profileRc
 
-  is_valid_url "$srcurl" && url="$srcurl" || { srcecho "badprofile"; return 2; } 
+  is_valid_url "$srcurl" && url="$srcurl" || { srcecho "badprofile"; return 2; }
  }
 
  rawget $url
@@ -494,7 +482,7 @@ export DEBUG=""
 export SILENT=""
 export NAMEONLY=0
 
-while [ ! -z "$1" ] 
+while [ ! -z "$1" ]
 do
  [ "$1" == "-A" ] && { main="srcall"; shift; continue; }
  [ "$1" == "-x" ] && { DEBUG=1; set -x; shift; continue; }
@@ -507,10 +495,9 @@ do
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
 
  [ "$1" == ${1#-} ] &&
- { 
+ {
   [ -z "$profileList" ] && profileList="$1" || profileList="${profileList} $1"
  }
-
  shift
 done
 
