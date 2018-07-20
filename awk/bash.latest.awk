@@ -37,10 +37,11 @@ BEGIN {
 
 # custom rules
 
-/bash/&& !/bash-doc/ && $0 ~ ext && !/\.sig/ && !/alpha/ \
+/bash/ && !/bash-doc/ && $0 ~ ext && !/\.sig/ && !/alpha/ && !/-rc/ && !/beta/ \
 { 
-  gsub(/[<>"]/, " ", $0);
-  cnt = split($0, a, " ");
+  line=$0
+  gsub(/[<>"]/, " ", line);
+  cnt = split(line, a, " ");
 
   for (i in a)
   {
