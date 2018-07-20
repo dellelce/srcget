@@ -4,27 +4,38 @@
 # created: 200214
 #
 
-### FUNCTIONS ###
-
 ### MAIN LOOP ###
 
 BEGIN {
         vers=""
+        state = 0
       }
 
 # custom rules
 
-/-src/ && $2 ~ ext && vers=="" \
-{
-  current = $2;
-  cnt = split(current, current_a,"/");
-  vers =  current_a[7];
-}
+/latest-version/ && state = 0 { state = 1; next; }
 
-#/The latest stable release of Apache Cassandra is / && vers="" \
-#{
-#   vers = $9
-#}
+state = 1 && $0 ~ ext && vers=="" \
+{
+  line=$0
+  split(line, line_a, "\"");
+
+  for (idx in line_a)
+  {
+   item = line_a[idx]
+
+   if (item ~ /[0-9]+\.[0-9]/ && item ~ ext)
+   {
+     vers_url = item
+     split(vers_url, vu_a, "/");
+     for (idx in vu_a)
+     {
+      vu_item = vu_a[idx]
+      if (vu_item ~ /[0-9]$/) { vers = vu_item; state = 2; next; }
+     }
+   }
+  }
+}
 
 ### end loop ###
 
