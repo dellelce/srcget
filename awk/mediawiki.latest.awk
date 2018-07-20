@@ -1,10 +1,8 @@
 #
 # mediawiki.latest.awk
 #
-# created: 0300 300813
+# created: 300813
 #
-
-### FUNCTIONS ###
 
 ### MAIN LOOP ###
 
@@ -22,8 +20,22 @@ state == 0 && /Current [vV]ersion/ \
 
 state == 1 && /Release notes/ \
 {
-  vers =  $5
-  sub(/<\/a/,"",vers);
+  line = $0
+  gsub(/\//," ",line);
+  gsub(/\"/," ",line);
+  gsub(/[<>]/," ",line);
+
+  split(line, vers_a, " ");
+
+  for (idx in vers_a)
+  {
+   item = vers_a[idx]
+
+   if (item ~ /[0-9]+\.[0-9]+/)
+   {
+     vers = item
+   }
+  }
   state = 0
   next
 }
