@@ -25,7 +25,7 @@ function compare_versions(a, b)
   if (a_a[4] > b_a[4]) return a;
   if (a_a[4] < b_a[4]) return b;
 
-  return  "EQ"
+  return a
 }
 
 ### MAIN LOOP ###
@@ -53,6 +53,8 @@ BEGIN {
     if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ || item ~ /[0-9]+\.[0-9]+/)
     {
       vers = item
+      sub("."ext,"",vers);
+      good_vers = compare_versions(good_vers, vers);
       next
     }
   }
@@ -61,9 +63,9 @@ BEGIN {
 ### end rule ###
 
 END   {
-        if (vers != "")
+        if (good_vers != "")
         {
-	   print vers
+	   print good_vers"."ext
         }
       }
 
