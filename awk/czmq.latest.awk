@@ -1,10 +1,9 @@
 #
 # czmq.latest.awk
 #
-# created: 1338 011014
+# 011014 Created
+# 220718 Recreated from zeromq
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
@@ -15,31 +14,20 @@ BEGIN \
 
 # custom rules
 
-#/[0-9]+.[0-9]+.[0-9]+/ && !/rc/ && vers == "" && $0 ~ ext \
-# !/rc/ && vers == "" && $0 ~ ext \
-
-$0 ~ ext && !/-rc/ && !/beta/ && /zeromq/ && !/alpha/ \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
 {
-  gsub(/[<>#]/," ");
-  split($0, array, " ");
+  vers = $2
 
-  for (idx in array)
-  {
-    item = array[idx]
+  cnt = split (vers, vers_a, "/");
 
-    if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/)
-    {
-      vers = item
-    }
-  }
+  vers = vers_a[5]
 }
-
 
 ### END RULE ###
 
 END \
 {
- if (vers != "") print vers;
+  print vers
 }
 
 ### EOF ###
