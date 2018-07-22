@@ -18,6 +18,7 @@ BEGIN {
 {
   line = $0
   gsub(/[<>]/, " ", line);
+  gsub(/,/, " ", line);
 
   split(line, line_a, " ");
 
