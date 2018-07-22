@@ -263,7 +263,7 @@ main_single()
  # sanity tests
  [ $? -ne 0 ] && { echo "${profile}: error processing latest version: $latest"; return 1; }
 
- typeset fullurl=""
+ export fullurl="" # export to allow visibility upstream
 
  [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] &&
  {
@@ -376,7 +376,11 @@ srcall()
   [ $rc -eq 0 -a "$NAMEONLY" -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"; continue; }
   [ $rc -eq 2 ] && { continue; }
 
-  srcecho "${p}: error: $rc"
+  typeset msg="${p}: error: $rc"
+
+  [ $rc -eq 8 ] && { msg="$msg (NOT FOUND: $fullurl)"; }
+
+  srcecho "$msg"
  done
  return 0
 }
