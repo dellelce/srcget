@@ -1,46 +1,33 @@
 #
 # glib.latest.awk
 #
-# created: 1722 100813
+# 100813 Created
+# 220718 Recreated from czmq
 #
 
-### FUNCTIONS ###
+### MAIN RULE ###
 
-function getbasename(inp)
+BEGIN \
 {
-  cnt = split(inp, in_a, "/")
-
-  return in_a[cnt]
+  vers = ""
 }
-
-### MAIN LOOP ###
-
-BEGIN {
-        vers = ""
-      }
 
 # custom rules
 
-$0 ~ ext && vers == "" \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
 {
-  versl = $0 # version line
-  gsub(/['<>]/, " ", versl);
-  split(versl, versl_a, " ")
+  vers = $2
 
-  for (versl_i in versl_a)
-  { 
-    if (versl_a[versl_i] ~ ext)
-    {
-      vers = versl_a[versl_i]
-    }
-  }
+  cnt = split (vers, vers_a, "/");
+
+  vers = vers_a[5]
 }
 
-### end loop ###
+### END RULE ###
 
-END   {
-        if (vers != "")
-        {
-          print vers
-        }
-      }
+END \
+{
+  print vers
+}
+
+### EOF ###
