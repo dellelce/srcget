@@ -4,8 +4,6 @@
 # created: 010413
 #
 
-### FUNCTIONS ###
-
 ### MAIN LOOP ###
 
 BEGIN {
@@ -33,11 +31,14 @@ END \
   sub(/\(/, ")", vers);
   split(vers, vers_a, ")")
   #http://www.cmake.org/files/v2.8/cmake-2.8.11.2.tar.gz
+  #https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz
   good_vers = vers_a[2]
 
   if (good_vers != "")
   {
-    print substr(good_vers,1,3)"/cmake-"good_vers
+    split(good_vers, gv_a, ".");
+    gv_leading = gv_a[1]"."gv_a[2]
+    print gv_leading"/cmake-"good_vers
   }
   
   
