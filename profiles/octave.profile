@@ -7,6 +7,5 @@ comment=""
 extension_input="tar.bz2"
 sep='"'
 basename="octave"
-custom_url_prefix="${baseurl}"
 
 ## EOF ##
