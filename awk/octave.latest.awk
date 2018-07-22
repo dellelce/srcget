@@ -1,10 +1,8 @@
 #
 # octave.latest.awk
 #
-# created: 1833 120514
+# created: 120514
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
@@ -25,6 +23,20 @@ $0 ~ ext && !/\.sig/ \
      if (line_a[idx] ~ ext)
      {
        vers = line_a[idx]
+
+       if (vers ~ /ftp:\//)
+       {
+         split(vers,vers_a, "/");
+         for (idx_v in vers_a)
+         {
+           vers_item = vers_a[idx_v]
+           if (vers_item ~ ext)
+           {
+             vers = vers_item
+             next
+           }
+         }
+       }
      }
    }
 }
