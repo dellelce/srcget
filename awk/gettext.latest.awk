@@ -25,7 +25,7 @@ function compare_versions(a, b)
   if (a_a[4] > b_a[4]) return a;
   if (a_a[4] < b_a[4]) return b;
 
-  return  "EQ"
+  return a
 }
 
 ### MAIN LOOP ###
@@ -41,12 +41,24 @@ BEGIN {
 # custom rules
 
 /gettext/&& !/latest/ && $0 ~ ext && !/\.sig/ \
-{ 
-  vers = $6
-  sub(/gettext-/,"",vers)
-  vers = substr(vers,1,index(vers,ext)-2)
+{
+  line=$0
+  gsub(/\"/, " ", line);
+  gsub(/[<>]/, " ", line);
+  split(line, line_a, " ");
 
-  good_vers = compare_versions(good_vers, vers);
+  for (idx in line_a)
+  {
+    item = line_a[idx]
+    if (item ~ ext && !/\.sig/)
+    {
+      vers = item
+      sub(/gettext-/,"",vers)
+      vers = substr(vers,1,index(vers,ext)-2)
+
+      good_vers = compare_versions(good_vers, vers);
+    }
+  }
 }
 
 ### end loop ###
