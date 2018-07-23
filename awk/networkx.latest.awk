@@ -1,40 +1,33 @@
 #
 # networkx.latest.awk
 #
-# created: 2003 310314
+# 310314 Created
+# 230718 Migrated to github
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
-BEGIN {
-        state = 0
-        vers = ""
-      }
+BEGIN \
+{
+  vers = ""
+}
 
 # custom rules
 
-state == 0 && /Latest Release/ { state = 1; next; } 
-
-state == 1 &&  /[0-9]+\.[0-9]+/ \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]+a/ && $2 !~ /\.[0-9]+b/ && vers == "" \
 {
-  split($0, vers_a)
-  
-  for (idx in vers_a)
-  {
-    if (vers_a[idx] ~ /[0-9]+\.[0-9]+/)
-    {
-      vers = vers_a[idx]
-      state = 2
-      next
-    }
-  }
-}
+  vers = $2
 
+  cnt = split (vers, vers_a, "/");
+
+  vers = vers_a[5]
+}
 
 ### END RULE ###
 
-END   {
-	if (vers != "") print vers;
-      }
+END \
+{
+  print vers
+}
+
+### EOF ###
