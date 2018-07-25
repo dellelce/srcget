@@ -1,62 +1,33 @@
 #
-# xcb.latest.awk
+# libbsd.latest.awk
 #
-# created: 280813
+# 280813 Created
+# 250718 Temporarily migrated to github
 #
 
-### FUNCTIONS ###
+### MAIN RULE ###
 
-function compare_versions(a, b)
+BEGIN \
 {
-  c_1 = split(a, a_a, ".");
-  c_2 = split(b, b_a, ".");
-
-  if (c_1 < 2 || c_2 < 2) { return "ERRINPUT"; }
-
-  if (a_a[1] > b_a[1]) return a;
-  if (a_a[1] < b_a[1]) return b;
-
-  if (a_a[2] > b_a[2]) return a;
-  if (a_a[2] < b_a[2]) return b;
-
-  if (a_a[3] > b_a[3]) return a;
-  if (a_a[3] < b_a[3]) return b;
-
-  if (a_a[4] > b_a[4]) return a;
-  if (a_a[4] < b_a[4]) return b;
-
-  return  "EQ"
+  vers = ""
 }
-
-### MAIN LOOP ###
-
-BEGIN {
-        state = 0
-        good_ver = "0.0.0"
-        initial_vers = good_ver
-        prefix="libbsd"
-      }
 
 # custom rules
 
-$0 ~ prefix && $0 ~ ext && !/\.asc/ \
+$0 ~ ext && /\/archive\// && vers == "" \
 {
-  fn = $8
-  if (fn ~ /\.sha1$/) { next; } 
-  if (fn ~ /\.sha1\.asc$/) { next; } 
+  vers = $2
 
-  ver = fn
-  sub(prefix"-","",ver);
-  sub("."ext,"",ver);
+  cnt = split (vers, vers_a, "/");
 
-  good_ver = compare_versions(good_ver, ver);
+  vers = vers_a[5]
 }
 
-### end rule ###
+### END RULE ###
 
-END   {
-        if (initial_vers != good_ver)
-        {
-	  print prefix"-"good_ver"."ext
-        }
-      }
+END \
+{
+  print vers
+}
+
+### EOF ###
