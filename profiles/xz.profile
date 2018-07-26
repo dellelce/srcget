@@ -1,7 +1,8 @@
 # vim:syntax=sh
 
 latest="awk/xz.latest.awk"
-srcurl="http://tukaani.org/xz/"
-custom_url_prefix="${srcurl}"
-extension_input="tar.bz2"
+srcurl="https://tukaani.org/xz/"
 sep='"'
+extension_input="tar.gz"
+#
+custom_url_prefix="https://kent.dl.sourceforge.net/project/lzmautils/"
