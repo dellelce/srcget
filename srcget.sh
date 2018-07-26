@@ -228,6 +228,7 @@ load_profile()
  unset comment
  unset bulkenabled
  unset version_holder
+ unset custom_url
  . $pfp
  export fp_filter="$srcHome/$latest"
  return 0
@@ -267,18 +268,22 @@ main_single()
 
  export fullurl="" # export to allow visibility upstream
 
- [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] &&
+ # if custom_url is set it will be used exclusively to set fullurl
+ [ -z "$custom_url" ] &&
  {
-  [ -z "$baseurl" ] &&
+  [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] &&
   {
-   fullurl="$latest"
+   [ -z "$baseurl" ] &&
+   {
+    fullurl="$latest"
+   } ||
+   {
+     fullurl="$baseurl/$latest"
+   }
   } ||
   {
-    fullurl="$baseurl/$latest"
+   fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
   }
- } ||
- {
-  fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
  }
 
  [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] &&
@@ -286,12 +291,22 @@ main_single()
   fn="${custom_file_prefix}${fn}${custom_file_postfix}";
  }
 
- info_banner
+ [ -z "$custom_url"  ] &&
+ {
+  echo "$here"
+  info_banner
 
- [ "${fullurl}" != "${fullurl/ERRINPUT/}" ] &&
- { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
+  [ "${fullurl}" != "${fullurl/ERRINPUT/}" ] &&
+  { echo "${profile}: failed retrieving download url from website: ${srcurl}"; return 3; }
 
- [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
+  [ -z "$fullurl" ] && { srcecho "${profile}: invalid full url!"; return 3; }
+ }
+
+ # issue with "||" as "else" will use two test blocks for now
+ [ ! -z "$custom_url" ] &&
+ {
+  fullurl="$custom_url"
+ }
 
  # check if file already exists and is not empty
  [ -s "$fn" ] &&
@@ -299,6 +314,16 @@ main_single()
   [ "$NAMEONLY" -eq 1 ] && { echo "$fn"; return 0; }
   srcecho "${profile}: File $fn exists"
   return 0
+ }
+
+ # Check if fullurl has version_holder if so replace appropriately
+ [ ! -z "$version_holder" ] &&
+ {
+  typeset new_fullurl="${fullurl//${version_holder}/${latest}}"
+
+  [ "$new_fullurl" != "$fullurl" ] && fullurl="$new_fullurl"
+
+  info_banner
  }
 
  # Main package download entrypoint
