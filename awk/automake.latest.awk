@@ -45,12 +45,12 @@ BEGIN {
   line = $0
   gsub(/[\"<>]/, " ", line);
   split (line, line_a, " ");
-
+  print "# DEBUG "line" ;"
   for (idx in line_a)
   {
     item = line_a[idx]
 
-    if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ || item ~ /[0-9]+\.[0-9]+/)
+    if ((item ~ /[0-9]+\.[0-9]+\.[0-9]+/ || item ~ /[0-9]+\.[0-9]+/) && item ~ ext)
     {
       vers = item
       sub("."ext,"",vers);
@@ -65,7 +65,7 @@ BEGIN {
 END   {
         if (good_vers != "")
         {
-	   print good_vers"."ext
+	   print "latest="good_vers"."ext
         }
       }
 
