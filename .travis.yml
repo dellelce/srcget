@@ -1,1 +1,1 @@
-script: wget --version && echo && awk --version && echo && ./srcget.sh -A
+script: wget --version && echo && awk --version && echo && ./srcget.sh -x -A
