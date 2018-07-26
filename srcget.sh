@@ -379,6 +379,8 @@ srcall()
   b=$(basename $item);
   p=${b%.profile};
 
+  [ "$b" == "$p" ] && continue
+
   # profile is loaded twice, and this is not a good thing
   load_profile "$p"
 
