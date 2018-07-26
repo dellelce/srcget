@@ -148,10 +148,10 @@ current_version()
  typeset tmpid="currentversion_${RANDOM}${RANDOM}"
  typeset awkoutput="$TMP/${tmpid}.awk.txt"
  typeset getoutput="$TMP/${tmpid}.get.txt"
- typeset cnt
  typeset legacy_version=""
  typeset version=""
  typeset versionpath=""
+ typeset awkfail=0
 
  # setup awk args
  [ ! -z "$DEBUG" ] && { set -x; _awk="${_awk} -vdebug=1"; }
@@ -171,16 +171,16 @@ current_version()
  # if first line of output is set we are "Legacy mode"
  eval $(
  cat "$awkoutput" |
- awk ' FNR == 1 && !/^$/ { print "legacy_version=\""$0"\""; next; } { print }'
+ awk ' FNR == 1 && !/^$/ { print "legacy_version=\""$0"\""; next; }
+       FNR > 1 { next }'
 )
- [ -z "$legacy_version" -a ! -z "$DEBUG" ] && 
- {
-  awk '{ print ": DEBUG AWK "FNR" "$0  " ;" }' $awkoutput
- }
+ [ $? -ne 0 ] && { awkfail=1; }
 
- echo $legacy_version
+ [ -z "$legacy_version" ] && cat $awkoutput
+ [ ! -z "$legacy_version" ] && echo "latest="$legacy_version
 
- rm -f "$awkoutput" "$getoutput"
+ rm -f "$awkoutput"
+ rm -f "$getoutput"
 
  return $rc
 }
@@ -238,6 +238,8 @@ main_single()
 {
  typeset profile="$1"
  typeset profileRc=0
+ typeset latest="" legacy_version="" # set by current_version function
+
  [ ! -z "$DEBUG" ] && set -x
 
  load_profile $profile
@@ -251,7 +253,7 @@ main_single()
  [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
  # Find latest software version
- typeset latest=$(current_version)
+ eval $(current_version)
  typeset latest_rc="$?"
 
  [ "$latest_rc" -ne 0 ] && { srcecho "${profile}: current_version failed with return code ${latest_rc}"; return ${latest_rc}; }
@@ -379,6 +381,7 @@ srcall()
   typeset msg="${p}: error: $rc"
 
   [ $rc -eq 8 ] && { msg="$msg (NOT FOUND: $fullurl)"; }
+  [ $rc -eq 11 ] && { msg="$msg (INVALID FORMAT: $fullurl)"; }
 
   srcecho "$msg"
  done
