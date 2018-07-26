@@ -293,7 +293,6 @@ main_single()
 
  [ -z "$custom_url"  ] &&
  {
-  echo "$here"
   info_banner
 
   [ "${fullurl}" != "${fullurl/ERRINPUT/}" ] &&
