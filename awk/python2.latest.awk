@@ -4,8 +4,6 @@
 # created: 220516
 #
 
-### FUNCTIONS ###
-
 ### MAIN RULE ###
 
 BEGIN {
@@ -23,7 +21,10 @@ state == 0 && $0 ~ /latest source release/ \
 
 state == 1 && $0 ~ /2\.[0-9]+\.[0-9]+/ && vers == "" \
 {
- split($0, vers_a, "\"");
+ line = $0
+ gsub(/[<>]/, " ", line);
+ gsub(/\"/, " ", line);
+ split(line, vers_a, " ");
 
  for (idx in vers_a)
  {
