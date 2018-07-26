@@ -10,3 +10,4 @@ archives
 *.warc
 *.warc.gz
 *.swp
+tmp
