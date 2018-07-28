@@ -1,0 +1,10 @@
+# vim:syntax=sh
+latest="awk/haproxy.latest.awk"
+srcurl="http://www.haproxy.org"
+baseurl="${srcurl}/download/"
+extension_input="tar.gz"
+custom_url_prefix="${baseurl}"
+custom_url_postfix=".${extension_input}"
+custom_file_postfix=".${extension_input}"
+custom_file_prefix=""
+sep='"'
