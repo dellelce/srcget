@@ -14,6 +14,7 @@ function dprint(msg)
 ### MAIN LOOP ###
 
 BEGIN {
+        print ""
         state = 0
       }
 
@@ -24,7 +25,7 @@ BEGIN {
   dprint("Fullline "$0);
   split($6,vers_a,".");
 
-  if (vers_a[2] == "" || vers_a[3] == "") { vers = ""; next; } 
+  if (vers_a[2] == "" || vers_a[3] == "") { vers = ""; next; }
 
   vers = vers_a[1] "." vers_a[2] "." vers_a[3]
 }
@@ -32,5 +33,5 @@ BEGIN {
 ### end loop ###
 
 END   {
-	print vers
+	if (vers != "") print "latest="vers
       }
