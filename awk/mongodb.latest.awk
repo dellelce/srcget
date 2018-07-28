@@ -15,6 +15,7 @@ function dprint(msg)
 
 BEGIN {
         state = 0
+        print ""
       }
 
 # custom rules
@@ -48,6 +49,6 @@ BEGIN {
 END   {
 	if (vers != "")
         {
-          print vers;
+          print "latest="vers;
         }
       }
