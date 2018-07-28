@@ -9,6 +9,7 @@
 BEGIN \
 {
   vers = ""
+  print ""
 }
 
 # custom rules
@@ -26,7 +27,7 @@ $0 ~ ext && /\/archive\// && vers == "" \
 
 END \
 {
-  print vers
+  print "latest="vers
 }
 
 ### EOF ###
