@@ -364,6 +364,9 @@ info_single()
 # function: srcall: check all profiles
 srcall()
 {
+ typeset errcnt=0
+ typeset fails=""
+
  [ ! -d "$profilesDir" ] &&
  {
   typeset srcHome=$(getlinkdir "$0")
@@ -400,9 +403,26 @@ srcall()
 
   [ $rc -eq 8 ] && { msg="$msg (NOT FOUND: $fullurl)"; }
   [ $rc -eq 11 ] && { msg="$msg (INVALID FORMAT: $fullurl)"; }
+  let errcnt="(( $errcnt + 1 ))"
+  fails="$fails $p"
 
   srcecho "$msg"
  done
+
+ [ "$errcnt" -eq 1 ] &&
+ {
+   echo
+   echo "There download for $fails has failed."
+   return 1
+ }
+
+ [ "$errcnt" -gt 1 ] &&
+ {
+   echo
+   echo "There have been $errcnt failed downloads: $fail"
+   return 1
+ }
+
  return 0
 }
 
