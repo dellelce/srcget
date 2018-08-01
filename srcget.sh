@@ -361,7 +361,7 @@ info_single()
  done
 }
 
-# function: srcall: check all profiles
+# function: srcall: download all profiles
 srcall()
 {
  typeset errcnt=0
@@ -419,7 +419,7 @@ srcall()
  [ "$errcnt" -gt 1 ] &&
  {
    echo
-   echo "There have been $errcnt failed downloads: $fail"
+   echo "There have been $errcnt failed downloads: $fails"
    return 1
  }
 
