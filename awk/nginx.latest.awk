@@ -1,10 +1,8 @@
 #
 # nginx.latest.awk
 #
-# created: 0411 061013
+# created: 061013
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
@@ -14,8 +12,7 @@ BEGIN {
 
 # custom rules
 
-
-/[0-9]+\.[0-9]+\.[0-9]/ && vers == "" \
+/[0-9]+\.[0-9]+\.[0-9]/ && /nginx-/ &&  vers == "" \
 {
  line = $0
  gsub(/[<>,]/, " ", line);
