@@ -2,7 +2,7 @@
 
 latest="awk/clownfish.latest.awk"
 srcurl="http://lucy.apache.org/download.html"
-baseurl="http://www.mirrorservice.org/sites/ftp.apache.org/lucy/clownfish/"
+baseurl="http://archive.apache.org/dist/lucy/clownfish/"
 comment=""
 extension_input="tar.gz"
 basename="apache-clownfish"
