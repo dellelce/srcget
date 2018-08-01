@@ -22,7 +22,7 @@ function compare_versions(a, b)
   if (a_a[3] > b_a[3]) return a;
   if (a_a[3] < b_a[3]) return b;
 
-  return  "EQ"
+  return a
 }
 
 
@@ -35,7 +35,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ exturl && /tcl[0-9]/ \
+$0 ~ exturl && /tcl[0-9]/ && !/[0-9]a/ \
 {
   v_cnt = split($5, v_a, "-")
 
