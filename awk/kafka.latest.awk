@@ -13,7 +13,7 @@ BEGIN {
 
 # custom rules
 
-/latest release/ && $0 ~ /[0-9]\.[0-9]/ && vers == "" \
+/latest release/ && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 {
   line=$0
   gsub(/[<>]/, " ", line);
@@ -25,7 +25,7 @@ BEGIN {
   {
     item=line_a[idx]
     print "# DEBUG : iterating line: item= "item
-    if (item ~ /[0-9]\.[0-9]\.[0-9]+/ && !/\.$/)
+    if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && !/\.$/)
     {
       vers = item
       print "# DEBUG: version found: "vers
@@ -33,7 +33,6 @@ BEGIN {
     }
   }
 }
-
 
 ### end loop ###
 
