@@ -1,3 +1,4 @@
+language: c
 script: wget --version && echo && awk --version && echo && ./srcget.sh -x -A
 notifications:
    slack: skydreams:1FLUnEeqaNLinKq1p0lJf9F5
