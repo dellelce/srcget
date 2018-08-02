@@ -8,6 +8,7 @@
 
 BEGIN {
         state = 0
+        print ""
       }
 
 # custom rules
@@ -26,6 +27,7 @@ state == 1 && /Release notes/ \
   gsub(/[<>]/," ",line);
 
   split(line, vers_a, " ");
+  print "# DEBUG : "line
 
   for (idx in vers_a)
   {
@@ -49,6 +51,6 @@ END   {
           vers_cnt = split(vers,vers_a,".");
 
           if (vers_cnt == 2) { vers=vers".0"; } # if minor missing consider it 0
-          print vers_a[1]"."vers_a[2]"/mediawiki-"vers"."ext
+          print "latest="vers_a[1]"."vers_a[2]"/mediawiki-"vers"."ext
         }
       }
