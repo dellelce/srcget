@@ -22,7 +22,7 @@ BEGIN {
   for (idx in line_a)
   {
     item=line_a[idx]
-    if (item ~ /[0-9]\.[0-9]\.[0-9]+/)
+    if (item ~ /[0-9]\.[0-9]\.[0-9]+/ && !/\.$/)
     {
       vers = item
       next
