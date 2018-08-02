@@ -13,12 +13,17 @@ BEGIN {
 
 # custom rules
 
+/^$/ { next }
+
+!/latest release/ { other=$0; next; }
+
 /latest release/ && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 {
   line=$0
   gsub(/[<>]/, " ", line);
   split(line, line_a, " ");
 
+  print "# DEBUG: previous line: " other
   print "# DEBUG: " line
 
   for (idx in line_a)
