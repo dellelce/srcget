@@ -24,6 +24,7 @@ state == 1 && /Release notes/ \
   line = $0
   gsub(/\//," ",line);
   gsub(/\"/," ",line);
+  gsub(/#/," ",line);
   gsub(/[<>]/," ",line);
 
   split(line, vers_a, " ");
