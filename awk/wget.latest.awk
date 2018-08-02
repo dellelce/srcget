@@ -25,7 +25,7 @@ function compare_versions(a, b)
   if (a_a[4] > b_a[4]) return a;
   if (a_a[4] < b_a[4]) return b;
 
-  return  "EQ"
+  return a
 }
 
 ### MAIN LOOP ###
@@ -35,11 +35,12 @@ function compare_versions(a, b)
 BEGIN {
         good_vers = "0.0.0"
         initial_vers = good_vers
+        print ""
       }
 
 # custom rules
 
-$0 ~ ext && !/\.sig/ && vers == "" \
+$0 ~ ext && !/\.sig/ \
 { 
   gsub(/[<>"]/, " ", $0);
   cnt = split($0, a, " ");
@@ -64,7 +65,8 @@ END \
 {
  if (initial_vers != good_vers)
  {
-  print "wget-"good_vers"."ext
+  print "version="good_vers
+  print "latest=wget-"good_vers"."ext
  }
 }
 
