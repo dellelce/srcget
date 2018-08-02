@@ -19,6 +19,8 @@ BEGIN {
   gsub(/[<>]/, " ", line);
   split(line, line_a, " ");
 
+  print "# DEBUG: " line
+
   for (idx in line_a)
   {
     item=line_a[idx]
