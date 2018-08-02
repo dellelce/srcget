@@ -13,15 +13,19 @@
 BEGIN {
         vers = ""
         state = 0
+        print ""
       }
 
 # custom rules
 
-/for the latest version/ && state == 0 { state = 1; next; }
+/latest version/ && state == 0 { state = 1; next; }
 
-state = 1 && vers=="" \
+state = 1 && $0 ~ ext && vers=="" \
 {
-  split($0,a);
+  line=$0
+  gsub(/[<>]/, " ", line);
+  split(line,a);
+
   for (x in a)
   {
     if (a[x] ~ /[0-9]\.[0-9]\.[0-9]/)
@@ -53,7 +57,7 @@ END   {
             sub(/logwatch-/,"",vers);
             split(vers,vers_a,".");
             base_vers=vers_a[1]"."vers_a[2]"."vers_a[3]
-	    print base_vers"/logwatch-"base_vers
+	    print "latest="base_vers"/logwatch-"base_vers
           }
         }
       }
