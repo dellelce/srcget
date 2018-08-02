@@ -407,6 +407,7 @@ srcall()
   fails="$fails $p"
 
   srcecho "$msg"
+  unset fullurl
  done
 
  [ "$errcnt" -eq 1 ] &&
