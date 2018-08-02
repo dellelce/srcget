@@ -24,9 +24,11 @@ BEGIN {
   for (idx in line_a)
   {
     item=line_a[idx]
+    print "# DEBUG : iterating line: item= "item
     if (item ~ /[0-9]\.[0-9]\.[0-9]+/ && !/\.$/)
     {
       vers = item
+      print "# DEBUG: version found: "vers
       next
     }
   }
