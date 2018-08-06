@@ -403,6 +403,7 @@ srcall()
 
   [ $rc -eq 8 ] && { msg="$msg (NOT FOUND: $fullurl)"; }
   [ $rc -eq 11 ] && { msg="$msg (INVALID FORMAT: $fullurl)"; }
+  [ $rc -eq 4 ] && { msg="$msg (URL: $fullurl)"; }
   let errcnt="(( $errcnt + 1 ))"
   fails="$fails $p"
 
