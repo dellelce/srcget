@@ -32,6 +32,7 @@ BEGIN {
     print "# DEBUG : iterating line: idx= " idx " item= "item
     if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && !/\.$/)
     {
+      sub(/\.$/,"",item)
       vers = item
       print "# DEBUG: version found: "vers
       next
