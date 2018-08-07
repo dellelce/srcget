@@ -375,6 +375,7 @@ info_single()
 srcall()
 {
  typeset errcnt=0
+ typeset okcnt=0
  typeset fails=""
 
  [ ! -d "$profilesDir" ] &&
@@ -406,7 +407,12 @@ srcall()
   rc="$?"
 
   # wget appears to return 1 on success.......(!?)
-  [ $rc -eq 0 -a "$NAMEONLY" -eq 0 ] && { srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"; continue; }
+  [ $rc -eq 0 -a "$NAMEONLY" -eq 0 ] &&
+  {
+   let okcnt="(( $okcnt + 1 ))"
+   srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"
+   continue
+  }
   [ $rc -eq 2 ] && { continue; }
 
   typeset msg="${p}: error: $rc"
@@ -421,18 +427,23 @@ srcall()
   unset fullurl
  done
 
+ echo
+
  [ "$errcnt" -eq 1 ] &&
  {
-   echo
    echo "There download for $fails has failed."
    return 1
  }
 
  [ "$errcnt" -gt 1 ] &&
  {
-   echo
    echo "There have been $errcnt failed downloads: $fails"
    return 1
+ }
+
+ [ "$okcnt" -gt 0 ] &&
+ {
+   echo "There have been ${okcnt} successful downloads."
  }
 
  return 0
