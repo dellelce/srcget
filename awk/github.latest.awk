@@ -17,6 +17,7 @@ BEGIN \
 $0 ~ ext && /\/archive\// && !/-rc/ && vers == "" \
 {
   vers = $2
+  print "# DEBUG: "vers
 
   cnt = split (vers, vers_a, "/");
 
