@@ -211,7 +211,7 @@ load_profile()
  unset extension
  unset extension_input
  unset extension_url
- unset latest
+ unset latest latestawk
  unset sep
  unset skipvers
  unset srcurl
@@ -220,7 +220,8 @@ load_profile()
  unset version_holder
  unset custom_url
  . $pfp
- export fp_filter="$srcHome/$latest"
+ latestawk="$latest"; unset latest
+ export fp_filter="$srcHome/$latestawk"
  return 0
 }
 
