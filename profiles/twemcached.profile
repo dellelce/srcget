@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/twemcached.latest.awk"
+latest="awk/github.latest.awk"
 srcurl="https://github.com/twitter/twemcache/releases"
 extension_input="tar.gz"
 sep='"'

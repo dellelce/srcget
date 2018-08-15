@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/underscore.latest.awk"
+latest="awk/github.latest.awk"
 srcurl="https://github.com/jashkenas/underscore/releases"
 extension_input="tar.gz"
 sep='"'
