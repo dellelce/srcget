@@ -19,7 +19,7 @@ BEGIN {
 
 $0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && !/-rc/ && !/-start/ && vers == "" \
       {
-        vers = $2
+        vers = $4
 
         cnt = split (vers, vers_a, "/");
 

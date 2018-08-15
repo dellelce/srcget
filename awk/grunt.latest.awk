@@ -16,7 +16,7 @@ BEGIN {
 
 $0 ~ ext && /\/archive\// && !/_pr/ && vers == "" \
       {
-        vers = $2
+        vers = $4
 
         cnt = split (vers, vers_a, "/");
 
