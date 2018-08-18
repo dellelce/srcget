@@ -3,10 +3,6 @@
 #
 # created: 020314
 #
-#
-
-
-### FUNCTIONS ###
 
 ### MAIN LOOP ###
 
@@ -49,15 +45,16 @@ state = 1 && $0 ~ ext && vers=="" \
 
 ### end rule ###
 
-END   {
-	if (vers != "")
-        {
-          if (vers ~ /^logwatch-/)
-          {
-            sub(/logwatch-/,"",vers);
-            split(vers,vers_a,".");
-            base_vers=vers_a[1]"."vers_a[2]"."vers_a[3]
-	    print "latest="base_vers"/logwatch-"base_vers
-          }
-        }
-      }
+END \
+{
+  if (vers != "")
+  {
+    if (vers ~ /^logwatch-/)
+    {
+      sub(/logwatch-/,"",vers);
+      split(vers,vers_a,".");
+      base_vers=vers_a[1]"."vers_a[2]"."vers_a[3]
+      print "latest="base_vers"/logwatch-"base_vers
+    }
+  }
+}
