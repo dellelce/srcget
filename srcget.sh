@@ -463,14 +463,14 @@ listall()
 
  [ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; return 20; }
 
- for item in $profilesDir/*;
+ for item in $profilesDir/*
  do
-  b=$(basename $item);
-  p=${b%.profile};
+  bitem=$(basename $item)
+  withoutprofile=${bitem%.profile}
 
-  b="$p"
+  [ "$withoutprofile" == "$bitem" ] && { continue; } # ignore files that do not have .profile
 
-  echo $b
+  echo "$withoutprofile"
  done
  return 0
 }
