@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 latest="awk/github.latest.awk"
-baseurl="https://github.com/TheApacheCats/bzip2/"
+baseurl="https://github.com/TheApacheCats/bzip2"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
 basename="bzip2"
