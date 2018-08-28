@@ -221,7 +221,15 @@ load_profile()
  unset custom_url
  . $pfp
  latestawk="$latest"; unset latest
- export fp_filter="$srcHome/$latestawk"
+ #
+ for filter in \
+   "$srcHome/${latestawk}" \
+   "$srcHome/${latestawk}.latest.awk" \
+   "$srcHome/latest/${latestawk}" \
+   "$srcHome/latest/${latestawk}.latest.awk"
+ do
+  [ -f "$filter" ] && { export fp_filter="$filter"; break; }
+ done
  return 0
 }
 
