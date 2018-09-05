@@ -215,6 +215,7 @@ load_profile()
  unset sep
  unset skipvers
  unset srcurl
+ unset fullurl
  unset comment
  unset bulkenabled
  unset version_holder
