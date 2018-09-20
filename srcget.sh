@@ -226,6 +226,8 @@ load_profile()
  for filter in \
    "$srcHome/${latestawk}" \
    "$srcHome/${latestawk}.latest.awk" \
+   "$srcHome/awk/${latestawk}" \
+   "$srcHome/awk/${latestawk}.latest.awk" \
    "$srcHome/latest/${latestawk}" \
    "$srcHome/latest/${latestawk}.latest.awk"
  do
