@@ -17,7 +17,7 @@ BEGIN \
 
 state == 1 { next }
 
-$0 ~ ext && /\/archive\// && !/-rc/ && !/beta/ vers == "" \
+$0 ~ ext && /\/archive\// && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
@@ -33,6 +33,20 @@ $0 ~ ext && /\/archive\// && !/-rc/ && !/beta/ vers == "" \
     {
       vers = item
       print "# DEBUG: "vers " ext = "ext " idx = "idx
+
+      if (vers ~ /-rc/)
+      {
+        print "# DEBUG: filter out rc"
+        vers = ""
+        next
+      }
+
+      if (vers ~ /beta/)
+      {
+        print "# DEBUG: filter out beta"
+        vers = ""
+        next
+      }
 
       cnt = split (vers, vers_a, "/");
 
