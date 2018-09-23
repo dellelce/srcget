@@ -17,7 +17,7 @@ BEGIN \
 
 state == 1 { next }
 
-$0 ~ ext && /\/archive\// && !/-rc/ && vers == "" \
+$0 ~ ext && /\/archive\// && !/-rc/ && !/beta/ vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
