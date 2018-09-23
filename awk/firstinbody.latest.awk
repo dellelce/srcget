@@ -15,7 +15,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 ~ !/\.sig/ \
+$0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 !~ /\.sig/ && $0 !~ /\.asc/ \
 {
   line=$0
   gsub(/\"/, " ", line);
@@ -28,7 +28,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 ~ !/\.sig/ \
   for (idx in line_a)
   {
     item=line_a[idx]
-    if (item ~ ext && item ~ /[0-9]+\.[0-9]+/ && item !~ /\.sig/)
+    if (item ~ ext && item ~ /[0-9]+\.[0-9]+/)
     {
       vers = item
       print "# DEBUG: version found: "vers
