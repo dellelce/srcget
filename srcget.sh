@@ -202,6 +202,7 @@ load_profile()
  export pfp="$profilesDir/${profile}.profile"
  [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
 
+ # TODO: Improve handling of variables
  unset basename
  unset baseurl
  unset custom_file_postfix
@@ -414,8 +415,7 @@ srcall()
   [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue
   [ -z "$basename" ] && { basename="${p}"; } # override if set in profile!
 
-  # always run main_single silently
-  SILENT=1 main_single $p
+  SILENT=1 main_single $p # always run main_single silently
   rc="$?"
 
   # wget appears to return 1 on success.......(!?)
@@ -425,7 +425,8 @@ srcall()
    srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"
    continue
   }
-  [ $rc -eq 2 ] && { continue; }
+
+  [ $rc -eq 2 ] && { continue; } # = Ignore rc=2 as it is not a real error...
 
   typeset msg="${p}: error: $rc"
 
@@ -441,21 +442,12 @@ srcall()
 
  echo
 
- [ "$errcnt" -eq 1 ] &&
- {
-   echo "There download for $fails has failed."
-   return 1
- }
-
+ [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
+ [ "$okcnt" -gt 0 ] && { echo "There have been ${okcnt} successful downloads."; }
  [ "$errcnt" -gt 1 ] &&
  {
    echo "There have been $errcnt failed downloads: $fails"
    return 1
- }
-
- [ "$okcnt" -gt 0 ] &&
- {
-   echo "There have been ${okcnt} successful downloads."
  }
 
  return 0
@@ -492,8 +484,7 @@ infoall()
  typeset profile=""
  typeset profileRc=0 rc=0
 
- # Sanity checks
- [ -z "$1" ] && return 1;
+ [ -z "$1" ] && return 1; # Sanity checks
 
  # Load profile information
  while [ ! -z "$1" ]
