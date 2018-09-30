@@ -158,6 +158,7 @@ current_version()
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
  [ ! -z "$extension_input" ] && { _awk="${_awk} -vext=$extension_input"; }
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
+ [ ! -z "$opt_match" ] && { _awk="${_awk} -vopt_match=$opt_match"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
 
  rawget "$srcurl" > "$getoutput"
@@ -221,6 +222,7 @@ load_profile()
  unset bulkenabled
  unset version_holder
  unset custom_url
+ unset opt_match
  . $pfp
  latestawk="$latest"; unset latest
  #
@@ -442,8 +444,8 @@ srcall()
 
  echo
 
- [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
  [ "$okcnt" -gt 0 ] && { echo "There have been ${okcnt} successful downloads."; }
+ [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
  [ "$errcnt" -gt 1 ] &&
  {
    echo "There have been $errcnt failed downloads: $fails"
