@@ -1,0 +1,11 @@
+# vim:syntax=sh
+latest="awk/postgresql.latest.awk"
+srcurl="https://www.postgresql.org/ftp/source/"
+baseurl="https://ftp.postgresql.org/pub/source"
+extension_input="tar.bz2"
+ext_match="v9"
+custom_url_prefix="${baseurl}/"
+custom_url_postfix=".${extension_input}"
+custom_file_postfix=".${extension_input}"
+custom_file_prefix=""
+sep='"'
