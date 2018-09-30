@@ -4,13 +4,12 @@
 # created: 180718
 #
 
-### FUNCTIONS ###
-
 ### MAIN LOOP ###
 
 BEGIN {
         state = 0
         version=""
+        print ""
       }
 
 # custom rules
@@ -22,6 +21,13 @@ version=="" && state == 1 && !/beta/ && /[0-9]+\.[0-9]+/ \
  gsub(/\"/, " ", line);
  gsub(/\//, " ", line);
  line_cnt = split(line, line_a, " ");
+ print "#DEBUG: "line
+
+ if (opt_match != "" && $0 !~ opt_match)
+ {
+  print "#DEBUG opt_match="opt_match" not matched."
+  next
+ }
 
  for (idx in line_a)
  {
@@ -42,7 +48,7 @@ version=="" && state == 1 && !/beta/ && /[0-9]+\.[0-9]+/ \
 
 END \
 {
-  print full_version
+  print "latest="full_version
 }
 
 ## EOF ##
