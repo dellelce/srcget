@@ -16,7 +16,7 @@ BEGIN {
 
 /^$/ { next }
 
-$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && !/-RC/ && vers == "" \
+$0 ~ ext && /\/archive\// && $2 !~ /\.[0-9]a/ && tolower($0) !~ /-rc/ && vers == "" \
       {
         vers = $2
 
