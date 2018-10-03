@@ -1,23 +1,27 @@
 #
 # libxslt.latest.awk
 #
-# created: 1721 070813
+# created: 070813
 #
-
-### FUNCTIONS ###
 
 ### MAIN LOOP ###
 
 BEGIN {
         state = 0
+        print ""
       }
 
 # custom rules
 
-/libxslt/&&/tar.gz/&& /LATEST/ { latest = $9 } 
+/libxslt/ && $0 ~ ext && $0 !~ /-rc/ && /LATEST/ \
+{
+ latest = $9
+}
 
-### end loop ###
+## end rule ##
 
 END   {
-	 print latest
+	 print "latest="latest
       }
+
+## EOF ##
