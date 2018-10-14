@@ -6,9 +6,11 @@
 
 ### MAIN LOOP ###
 
-BEGIN {
-        pos = 0
-      }
+BEGIN \
+{
+ pos = 0
+ print ""
+}
 
 # custom rules
 
@@ -38,7 +40,9 @@ END \
   {
     split(good_vers, gv_a, ".");
     gv_leading = gv_a[1]"."gv_a[2]
-    print gv_leading"/cmake-"good_vers
+
+    print "version="good_vers
+    print "latest="gv_leading"/cmake-"good_vers
   }
   
   
