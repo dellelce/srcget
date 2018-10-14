@@ -4,26 +4,26 @@
 # created: 040813
 #
 
-### FUNCTIONS ###
-
-
 ### MAIN LOOP ###
 
-BEGIN {
-        state = 0
-      }
+BEGIN \
+{
+ state = 0
+ print ""
+}
 
 # custom rules
 state == 0 && /[dD]ownload/  { state = 1 }
 
-state == 1 && !/tar\.gz/ { next } 
+state == 1 && $0 !~ ext { next }
 
-state == 1 && /tar\.gz/ { vers = $2 } 
+state == 1 && $0 ~ ext { vers = $2 }
 
 ### end loop ###
 
-END   {
-        print vers
-      }
+END \
+{
+ if (vers!="") print "latest="vers
+}
 
 ## EOF ##
