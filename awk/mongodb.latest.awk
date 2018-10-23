@@ -20,7 +20,7 @@ BEGIN {
 
 # custom rules
 
-/downloads-table-release-source/ && state == 0 \
+$0 ~ ext && state == 0 \
 {
   dprint("Production Release Found: " NR);
   line = $0
@@ -46,9 +46,10 @@ BEGIN {
 
 ### end loop ###
 
-END   {
-	if (vers != "")
-        {
-          print "latest="vers;
-        }
+END \
+{
+  if (vers != "")
+  {
+    print "latest="vers;
+  }
       }
