@@ -1,7 +1,7 @@
 #
-# wgeters.awk
+# glibc.awk
 #
-# created: 10813
+# created: 030315
 #
 
 ### FUNCTIONS ###
@@ -35,8 +35,8 @@ function compare_versions(a, b)
 BEGIN {
         good_vers = "0.0.0"
         initial_vers = good_vers
+        print ""
       }
-
 
 # custom rules
 
@@ -44,6 +44,8 @@ BEGIN {
 { 
   gsub(/[<>"]/, " ", $0);
   cnt = split($0, a, " ");
+
+  print "#DEBUG: line: "$0
 
   for (i in a)
   {
@@ -63,6 +65,6 @@ BEGIN {
 END   {
         if (initial_vers != good_vers)
         {
-	   print "glibc-"good_vers"."ext
+	   print "latest=glibc-"good_vers"."ext
         }
       }
