@@ -2,5 +2,5 @@
 
 latest="gnu"
 srcurl="http://ftp.gnu.org/gnu/gdb/"
-extension_input="tar.gz"
+extension_input="tar.xz"
 custom_url_prefix="${srcurl}"
