@@ -34,23 +34,24 @@ function compare_versions(a, b)
 
 function get_pkg_version(name)
 {
- c = split(name, name_a, "[.-]")
+ cnt = split(name, name_a, "[.-]")
  v = ""
+ idx = 1
 
- for (idx in name_a)
+ while(idx <= cnt)
  {
   i = name_a[idx]
 
   if (i ~ /[0-9]+/)
   {
-   if (v == "") { v=i; continue; }
+   if (v == "") { v = i; idx += 1; continue; }
    v=v"."i
   }
+  idx += 1
  }
 
  return v
 }
-
 
 ### MAIN LOOP ###
 
