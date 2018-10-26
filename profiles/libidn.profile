@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-profile="libidn2"
+pkgprofile="libidn2"
 latest="gnu"
 srcurl="http://ftp.gnu.org/gnu/libidn/"
 extension_input="tar.lz"

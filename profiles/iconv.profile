@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-profile="libiconv"
+pkgprofile="libiconv"
 latest="gnu"
 srcurl="http://ftp.gnu.org/pub/gnu/libiconv"
 baseurl="$srcurl"

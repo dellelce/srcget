@@ -161,7 +161,7 @@ current_version()
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
  [ ! -z "$opt_match" ] && { _awk="${_awk} -vopt_match=$opt_match"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
- [ ! -z "$profile" ] && { _awk="${_awk} -vprofile=$profile"; }
+ [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$profile"; }
 
  rawget "$srcurl" > "$getoutput"
  rc=$?

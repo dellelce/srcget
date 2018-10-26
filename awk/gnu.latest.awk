@@ -65,7 +65,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ ext && $0 ~ profile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ \
+$0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ \
 { 
   gsub(/[<>"]/, " ", $0);
   cnt = split($0, a, " ");
