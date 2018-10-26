@@ -2,6 +2,7 @@ awk/*.txt
 awk/*.html
 *.tar.gz
 *.tar.xz
+*.tar.lz
 *.tar.bz2
 *.tgz
 bad
