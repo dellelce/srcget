@@ -57,6 +57,7 @@ $0 [options] program_name
  -x  Turn on debug mode
  -n  Quiet mode: show filename only
  -q  Quiet mode: don't show anything
+ -F  Force Filter
  -H  Debug: return server HTTP headers (DEBUG ONLY!)
  -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
 
@@ -224,7 +225,7 @@ load_profile()
  unset custom_url
  unset opt_match
  . $pfp
- latestawk="$latest"; unset latest
+ [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
  #
  for filter in \
    "$srcHome/${latestawk}" \
@@ -551,6 +552,7 @@ geturl()
 
 profileList=""
 export main="main"
+export FORCEFILTER=""
 export DEBUG=""
 export SILENT=""
 export NAMEONLY=0
@@ -559,6 +561,7 @@ while [ ! -z "$1" ]
 do
  [ "$1" == "-A" ] && { main="srcall"; shift; continue; }
  [ "$1" == "-x" ] && { DEBUG=1; shift; continue; }
+ [ "$1" == "-F" ] && { shift; FORCEFILTER="$1"; shift; continue; }
  [ "$1" == "-H" ] && { wgetArgs="$wgetArgs -S"; shift; continue; } # debug headers
  [ "$1" == "-D" ] && { main="geturl"; shift; continue; }
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
