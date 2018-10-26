@@ -225,7 +225,7 @@ load_profile()
  unset version_holder
  unset custom_url
  unset opt_match
- unset profile
+ unset pkgprofile
  . $pfp
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
  #
