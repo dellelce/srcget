@@ -161,6 +161,7 @@ current_version()
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
  [ ! -z "$opt_match" ] && { _awk="${_awk} -vopt_match=$opt_match"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
+ [ ! -z "$profile" ] && { _awk="${_awk} -vprofile=$profile"; }
 
  rawget "$srcurl" > "$getoutput"
  rc=$?
@@ -224,6 +225,7 @@ load_profile()
  unset version_holder
  unset custom_url
  unset opt_match
+ unset profile
  . $pfp
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
  #
