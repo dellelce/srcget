@@ -1,7 +1,5 @@
 # vim:syntax=sh
 #
-#ftp://ftp.tcl.tk/pub/tcl/tcl8_6/tcl8.6.0-src.tar.gz
-
 latest="tcl"
 srcurl="http://www.tcl.tk/software/tcltk/download.html"
 sep='/'
