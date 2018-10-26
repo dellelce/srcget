@@ -2,7 +2,7 @@
 
 sep="\""
 skipvers="2.0"
-latest="awk/ruby.latest.awk"
+latest="ruby"
 srcurl="http://www.ruby-lang.org/en/downloads/"
 extension="tar.gz"
 baseurl="https://cache.ruby-lang.org/pub/ruby"

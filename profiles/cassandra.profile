@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/cassandra.latest.awk"
+latest="cassandra"
 srcurl="http://cassandra.apache.org/download/"
 extension_input="tar.gz"
 # if set will be used to generate url

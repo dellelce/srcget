@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/kafka.latest.awk"
+latest="kafka"
 srcurl="https://kafka.apache.org/downloads"
 comment=""
 basename="kafka"

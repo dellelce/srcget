@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/httpd.latest.awk"
+latest="httpd"
 srcurl="http://httpd.apache.org/download.cgi"
 #baseurl=""
 comment=""

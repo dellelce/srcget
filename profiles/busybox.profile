@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/busybox.latest.awk"
+latest="busybox"
 srcurl="http://www.busybox.net/downloads"
 baseurl="$srcurl"
 sep='"'

@@ -1,5 +1,5 @@
 # vim:syntax=sh
 
-latest="awk/doxygen.latest.awk"
+latest="doxygen"
 srcurl="http://www.stack.nl/~dimitri/doxygen/download.html"
 sep='"'

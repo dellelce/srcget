@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 sep="\""
-latest="awk/wp.latest.awk"
+latest="wp"
 srcurl="http://wordpress.org/download/release-archive/"
 extension_input="tar.gz"
 #full url returned by awk

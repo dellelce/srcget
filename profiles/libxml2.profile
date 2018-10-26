@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/libxml2.latest.awk"
+latest="libxml2"
 srcurl="http://www.xmlsoft.org/news.html"
 baseurl=""
 extension="tar.gz"

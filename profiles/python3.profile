@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/python3.latest.awk"
+latest="python3"
 #srcurl="http://www.python.org/download/releases/"
 srcurl="https://www.python.org/downloads/"
 #OLD:

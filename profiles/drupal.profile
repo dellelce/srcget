@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 #https://ftp.drupal.org/files/projects/drupal-8.1.1.tar.gz
-latest="awk/drupal.latest.awk"
+latest="drupal"
 srcurl="https://drupal.org/project/drupal"
 extension_input="tar.gz"
 baseurl="https://ftp.drupal.org/files/projects/drupal-"

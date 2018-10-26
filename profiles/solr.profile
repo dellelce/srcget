@@ -2,7 +2,7 @@
 
 
 #http://www.mirrorservice.org/sites/ftp.apache.org/lucene/solr/4.4.0/solr-4.4.0-src.tgz
-latest="awk/solr.latest.awk"
+latest="solr"
 srcurl="http://lucene.apache.org/solr/"
 extension_input="tgz"
 # if set will be used to generate url

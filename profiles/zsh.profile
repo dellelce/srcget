@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/zsh.latest.awk"
+latest="zsh"
 srcurl="http://www.zsh.org/pub/"
 baseurl="${srcurl}"
 comment=""

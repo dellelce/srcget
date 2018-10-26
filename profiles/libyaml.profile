@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/libyaml.latest.awk"
+latest="libyaml"
 srcurl="http://pyyaml.org/wiki/LibYAML"
 extension_input="tar.gz"
 sep='"'

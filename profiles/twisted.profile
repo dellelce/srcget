@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/twisted.latest.awk"
+latest="twisted"
 srcurl="https://twistedmatrix.com/trac/wiki/Downloads"
 #baseurl=""
 basename="Twisted"

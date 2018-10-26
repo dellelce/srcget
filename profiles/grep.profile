@@ -1,5 +1,5 @@
 # vim:syntax=sh
-latest="awk/grep.latest.awk"
+latest="grep"
 srcurl="http://ftp.gnu.org/gnu/grep/"
 extension_input="tar.xz"
 extension_url="${extension_url}"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/pcre.latest.awk"
+latest="pcre"
 srcurl="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/"
 #basename="$srcurl"
 custom_url_prefix="${srcurl}"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/php.latest.awk"
+latest="php"
 srcurl="http://www.php.net/downloads.php"
 baseurl=""
 sep='"'

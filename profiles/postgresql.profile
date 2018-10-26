@@ -1,5 +1,5 @@
 # vim:syntax=sh
-latest="awk/postgresql.latest.awk"
+latest="postgresql"
 srcurl="https://www.postgresql.org/ftp/source/"
 baseurl="https://ftp.postgresql.org/pub/source"
 extension_input="tar.bz2"

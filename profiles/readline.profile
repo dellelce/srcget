@@ -1,5 +1,5 @@
 # vim:syntax=sh
-latest="awk/readline.latest.awk"
+latest="readline"
 srcurl="https://tiswww.case.edu/php/chet/readline/rltop.html"
 baseurl="http://ftp.gnu.org/gnu/readline/"
 extension_input="tar.gz"

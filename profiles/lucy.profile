@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/lucy.latest.awk"
+latest="lucy"
 srcurl="http://lucy.apache.org/download.html"
 baseurl="http://archive.apache.org/dist/lucy/"
 comment=""

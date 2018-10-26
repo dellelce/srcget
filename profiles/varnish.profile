@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/varnish.latest.awk"
+latest="varnish"
 srcurl="https://www.varnish-cache.org/releases"
 #http://repo.varnish-cache.org/source/varnish-3.0.5.tar.gz
 extension_input="tar.gz"

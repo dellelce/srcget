@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/cpio.latest.awk"
+latest="cpio"
 srcurl="http://ftp.snt.utwente.nl/pub/software/gnu/cpio/"
 comment=""
 basename=""

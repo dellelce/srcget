@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/yum.latest.awk"
+latest="yum"
 srcurl="http://yum.baseurl.org/"
 extension_input="tar.gz"
 # if set will be used to generate url

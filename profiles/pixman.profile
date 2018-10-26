@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/pixman.latest.awk"
+latest="pixman"
 srcurl="http://cairographics.org/releases/"
 baseurl="$srcurl"
 sep='"'

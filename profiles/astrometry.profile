@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/astrometry.latest.awk"
+latest="astrometry"
 baseurl="http://astrometry.net"
 srcurl="${baseurl}/downloads/"
 custom_url_prefix="${srcurl}"

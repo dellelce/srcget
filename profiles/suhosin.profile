@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/suhosin.latest.awk"
+latest="suhosin"
 baseurl="https://github.com/stefanesser/suhosin"
 srcurl="${baseurl}/releases"
 comment=""

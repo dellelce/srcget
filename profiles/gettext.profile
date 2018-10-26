@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/gettext.latest.awk"
+latest="gettext"
 srcurl="http://ftp.gnu.org/gnu/gettext/"
 extension_input="tar.xz"
 extension_url="${extension_url}"

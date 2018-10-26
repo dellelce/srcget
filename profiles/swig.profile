@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/swig.latest.awk"
+latest="swig"
 srcurl="https://sourceforge.net/projects/swig/files/swig/"
 extension_input="tar.gz"
 #https://netix.dl.sourceforge.net/project/swig/swig/swig-3.0.12/swig-3.0.12.tar.gz

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/autoconf.latest.awk"
+latest="autoconf"
 srcurl="http://ftp.gnu.org/gnu/autoconf/"
 baseurl="${srcurl}"
 comment=""

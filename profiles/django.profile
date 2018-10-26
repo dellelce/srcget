@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/django.latest.awk"
+latest="django"
 baseurl="https://github.com/django/django"
 srcurl="${baseurl}/releases"
 comment=""

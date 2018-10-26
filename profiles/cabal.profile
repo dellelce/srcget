@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/cabal.latest.awk"
+latest="cabal"
 #http://www.haskell.org/cabal/release/cabal-1.18.1.3/Cabal-1.18.1.3.tar.gz
 #release/cabal-1.18.1.3/Cabal-1.18.1.3.tar.gz
 baseurl="http://www.haskell.org/cabal/"

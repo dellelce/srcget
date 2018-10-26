@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/runit.latest.awk"
+latest="runit"
 srcurl="http://smarden.org/runit/install.html"
 baseurl="http://smarden.org/runit"
 extension_input="tar.gz"

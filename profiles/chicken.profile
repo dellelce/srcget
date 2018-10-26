@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/chicken.latest.awk"
+latest="chicken"
 srcurl="http://code.call-cc.org/"
 comment=""
 basename=""

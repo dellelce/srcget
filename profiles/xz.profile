@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/xz.latest.awk"
+latest="xz"
 srcurl="https://tukaani.org/xz/"
 sep='"'
 extension_input="tar.gz"

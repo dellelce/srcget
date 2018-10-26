@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/valgrind.latest.awk"
+latest="valgrind"
 srcurl="http://valgrind.org/downloads/current.html"
 comment=""
 extension_input="tar.bz2"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/gcc.latest.awk"
+latest="gcc"
 srcurl="https://gcc.gnu.org/"
 extension="tar.xz"
 custom_url_prefix="http://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/"

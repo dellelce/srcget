@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/mysql.latest.awk"
+latest="mysql"
 srcurl="http://dev.mysql.com/downloads/"
 baseurl=""
 extension="tar.gz"

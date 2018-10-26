@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/maven.latest.awk"
+latest="maven"
 srcurl="http://maven.apache.org/download.cgi"
 #baseurl=""
 comment=""

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/cfengine.latest.awk"
+latest="cfengine"
 srcurl="https://cfengine.com/product/community/source-code/"
 comment=""
 basename=""

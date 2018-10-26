@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/systemd.latest.awk"
+latest="systemd"
 baseurl="https://github.com/systemd/systemd"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

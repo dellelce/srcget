@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/libvirt.latest.awk"
+latest="libvirt"
 srcurl="http://libvirt.org/sources/"
 baseurl="${srcurl}"
 comment=""

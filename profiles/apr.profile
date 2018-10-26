@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/apr.latest.awk"
+latest="apr"
 srcurl="http://apr.apache.org/download.cgi"
 #baseurl=""
 comment=""

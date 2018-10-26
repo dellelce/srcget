@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/glib.latest.awk"
+latest="glib"
 baseurl="https://github.com/GNOME/glib"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

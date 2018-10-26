@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/libgit2.latest.awk"
+latest="libgit2"
 baseurl="https://github.com/libgit2/libgit2"
 srcurl="${baseurl}/releases"
 comment=""

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/libgcrypt.latest.awk"
+latest="libgcrypt"
 srcurl="ftp://ftp.gnupg.org/gcrypt/libgcrypt/" # ending slahs must be used
 baseurl=""
 extension="tar.bz2"

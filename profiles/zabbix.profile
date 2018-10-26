@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/zabbix.latest.awk"
+latest="zabbix"
 srcurl="https://sourceforge.net/projects/zabbix/files/ZABBIX%20Latest%20Stable/"
 extension_input="tar.gz"
 # if set will be used to generate url

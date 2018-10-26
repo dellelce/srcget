@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/gephi.latest.awk"
+latest="gephi"
 baseurl="https://github.com/gephi/gephi"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

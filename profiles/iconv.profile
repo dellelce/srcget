@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/iconv.latest.awk"
+latest="iconv"
 srcurl="http://ftp.gnu.org/pub/gnu/libiconv"
 baseurl="$srcurl"
 extension_input="tar.gz"

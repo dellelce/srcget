@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/mod_wsgi.latest.awk"
+latest="mod_wsgi"
 baseurl="https://github.com/GrahamDumpleton/mod_wsgi"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

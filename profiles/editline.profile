@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/editline.latest.awk"
+latest="editline"
 srcurl="http://www.thrysoee.dk/editline"
 extension_input="tar.gz"
 baseurl="$srcurl"

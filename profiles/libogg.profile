@@ -1,5 +1,5 @@
 # vim:syntax=sh
 
-latest="awk/libogg.latest.awk"
+latest="libogg"
 srcurl="http://xiph.org/downloads/"
 sep='"'

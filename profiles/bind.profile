@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/bind.latest.awk"
+latest="bind"
 srcurl="http://www.isc.org/downloads/"
 baseurl="${srcurl}"
 comment=""

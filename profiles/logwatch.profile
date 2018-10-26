@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/logwatch.latest.awk"
+latest="logwatch"
 srcurl="http://sourceforge.net/projects/logwatch/files/"
 extension_input="tar.gz"
 # if set will be used to generate url

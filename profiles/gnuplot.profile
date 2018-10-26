@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/gnuplot.latest.awk"
+latest="gnuplot"
 srcurl="http://sourceforge.net/projects/gnuplot/files/gnuplot/"
 extension_input="tar.gz"
 #http://tenet.dl.sourceforge.net/project/gnuplot/gnuplot/5.0.3/gnuplot-5.0.3.tar.gz

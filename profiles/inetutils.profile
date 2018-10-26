@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/inetutils.latest.awk"
+latest="inetutils"
 srcurl="http://ftp.gnu.org/gnu/inetutils/"
 extension_input="tar.xz"
 extension_url="${extension_url}"

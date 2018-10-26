@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/dbus.latest.awk"
+latest="dbus"
 srcurl="http://dbus.freedesktop.org/releases/dbus/"
 comment=""
 extension_input="tar.gz"

@@ -1,7 +1,7 @@
 # vim:syntax=sh
 # why am I keeping this? Should I just skip to lucene?
 
-latest="awk/elasticsearch.latest.awk"
+latest="elasticsearch"
 baseurl="https://github.com/elasticsearch/elasticsearch"
 srcurl="${baseurl}/releases"
 comment=""

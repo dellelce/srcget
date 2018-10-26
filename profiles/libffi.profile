@@ -1,5 +1,5 @@
 # vim:syntax=sh
 
-latest="awk/libffi.latest.awk"
+latest="libffi"
 srcurl="http://sourceware.org/libffi/"
 baseurl="ftp://sourceware.org/pub/libffi"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/zeromq.latest.awk"
+latest="zeromq"
 baseurl="https://github.com/zeromq/libzmq"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

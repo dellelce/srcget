@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/openssl.latest.awk"
+latest="openssl"
 baseurl="https://github.com/openssl/openssl"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

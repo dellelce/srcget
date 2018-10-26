@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/mediawiki.latest.awk"
+latest="mediawiki"
 srcurl="https://www.mediawiki.org/wiki/MediaWiki"
 extension_input="tar.gz"
 #http://download.wikimedia.org/mediawiki/1.21/mediawiki-1.21.1.tar.gz

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/uwsgi.latest.awk"
+latest="uwsgi"
 baseurl="https://github.com/unbit/uwsgi"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/lzip.latest.awk"
+latest="lzip"
 srcurl="http://download.savannah.gnu.org/releases/lzip"
 comment=""
 basename="lzip"

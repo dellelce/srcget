@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/postfix.latest.awk"
+latest="postfix"
 srcurl="http://www.postfix.org/announcements.html"
 #http://mirror.tje.me.uk/pub/mirrors/postfix-release/official/postfix-2.11.1.tar.gz
 baseurl="http://de.postfix.org/ftpmirror/official/postfix-"

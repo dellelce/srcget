@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/glibc.latest.awk"
+latest="glibc"
 srcurl="http://ftpmirror.gnu.org/libc/"
 extension_input="tar.xz"
 extension_url="${extension_url}"

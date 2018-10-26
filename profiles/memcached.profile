@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/memcached.latest.awk"
+latest="memcached"
 srcurl="http://memcached.org/"
 extension_input="tar.gz"
 sep='"'

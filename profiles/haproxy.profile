@@ -1,5 +1,5 @@
 # vim:syntax=sh
-latest="awk/haproxy.latest.awk"
+latest="haproxy"
 srcurl="http://www.haproxy.org"
 baseurl="${srcurl}/download/"
 extension_input="tar.gz"

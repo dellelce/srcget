@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/python2.latest.awk"
+latest="python2"
 srcurl="https://www.python.org/downloads/"
 extension_input="tar.xz"
 # https://www.python.org/ftp/python/2.7.15/Python-2.7.15.tar.xz

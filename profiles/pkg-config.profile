@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/pkgconfig.latest.awk"
+latest="pkgconfig"
 srcurl="http://pkgconfig.freedesktop.org/releases"
 baseurl="$srcurl"
 sep='"'

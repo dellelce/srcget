@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="awk/gmp.latest.awk"
+latest="gmp"
 srcurl="http://gmplib.org/"
 sep='/'
 extension_url="tar.xz"
