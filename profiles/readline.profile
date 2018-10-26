@@ -1,10 +1,7 @@
 # vim:syntax=sh
-latest="readline"
-srcurl="https://tiswww.case.edu/php/chet/readline/rltop.html"
+latest="gnu"
 baseurl="http://ftp.gnu.org/gnu/readline/"
+srcurl="${baseurl}"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}readline-"
-custom_url_postfix=".${extension_input}"
-custom_file_postfix=".${extension_input}"
-custom_file_prefix="readline-"
+custom_url_prefix="${baseurl}"
 sep='"'

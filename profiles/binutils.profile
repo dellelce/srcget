@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="binutils"
+latest="gnu"
 srcurl="http://ftp.gnu.org/gnu/binutils/"
 extension_input="tar.bz2"
 baseurl="$srcurl"

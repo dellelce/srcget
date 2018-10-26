@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="wget"
+latest="gnu"
 srcurl="http://ftp.gnu.org/gnu/wget/"
 extension_input="tar.gz"
 extension_url="${extension_url}"

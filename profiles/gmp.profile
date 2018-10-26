@@ -1,9 +1,6 @@
 # vim:syntax=sh
 
-latest="gmp"
-srcurl="http://gmplib.org/"
-sep='/'
-extension_url="tar.xz"
-custom_url_prefix="ftp://ftp.gnu.org/gnu/gmp/"
-custom_url_postfix=".${extension_url}"
-custom_file_postfix=".${extension_url}"
+latest="gnu"
+srcurl="http://ftp.gnu.org/gnu/gmp/"
+custom_url_prefix="${srcurl}"
+extension_input="tar.xz"

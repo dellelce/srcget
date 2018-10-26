@@ -1,11 +1,11 @@
 # vim:syntax=sh
 
-latest="octave"
-srcurl="ftp://ftp.gnu.org/gnu/octave/"
+latest="gnu"
+srcurl="http://ftp.gnu.org/gnu/octave/"
 baseurl="${srcurl}"
 comment=""
-extension_input="tar.bz2"
-sep='"'
+extension_input="tar.xz"
 basename="octave"
+sep='"'
 
 ## EOF ##
