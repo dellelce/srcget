@@ -56,7 +56,6 @@ function get_pkg_version(name)
 ### MAIN LOOP ###
 
 # begin rule
-
 BEGIN {
         good_vers = "0.0.0"
         initial_vers = good_vers
@@ -64,7 +63,6 @@ BEGIN {
       }
 
 # custom rules
-
 $0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ \
 { 
   gsub(/[<>"]/, " ", $0);
@@ -90,8 +88,7 @@ $0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !
   }
 }
 
-
-### end loop ###
+### end rule ###
 
 END \
 {
