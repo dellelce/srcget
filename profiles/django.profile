@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="django"
+latest="github"
 baseurl="https://github.com/django/django"
 srcurl="${baseurl}/releases"
 comment=""

@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="libgit2"
+latest="github"
 baseurl="https://github.com/libgit2/libgit2"
 srcurl="${baseurl}/releases"
 comment=""

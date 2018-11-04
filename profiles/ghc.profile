@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="ghc"
+latest="github"
 baseurl="https://github.com/ghc/ghc"
 srcurl="${baseurl}/releases"
 comment="Glasgow Haskell Compiler"

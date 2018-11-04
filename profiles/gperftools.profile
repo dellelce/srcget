@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="gperftools"
+latest="github"
 baseurl="https://github.com/gperftools/gperftools"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

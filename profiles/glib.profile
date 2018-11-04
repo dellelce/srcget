@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="glib"
+latest="github"
 baseurl="https://github.com/GNOME/glib"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

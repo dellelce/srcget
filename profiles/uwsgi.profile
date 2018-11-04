@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="uwsgi"
+latest="github"
 baseurl="https://github.com/unbit/uwsgi"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

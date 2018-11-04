@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="czmq"
+latest="github"
 baseurl="https://github.com/zeromq/czmq"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

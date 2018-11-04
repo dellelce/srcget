@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="opencv"
+latest="github"
 baseurl="https://github.com/itseez/opencv"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

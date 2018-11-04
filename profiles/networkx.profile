@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="networkx"
+latest="github"
 baseurl="https://github.com/networkx/networkx"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

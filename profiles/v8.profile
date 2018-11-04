@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="v8"
+latest="github"
 baseurl="https://github.com/v8/v8"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

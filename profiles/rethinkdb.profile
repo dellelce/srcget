@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="rethinkdb"
+latest="github"
 baseurl="https://github.com/rethinkdb/rethinkdb"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

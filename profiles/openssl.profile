@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="openssl"
+latest="github"
 baseurl="https://github.com/openssl/openssl"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

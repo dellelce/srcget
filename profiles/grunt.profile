@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="grunt"
+latest="github"
 baseurl="https://github.com/gruntjs/grunt"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"

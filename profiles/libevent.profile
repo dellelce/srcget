@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="libevent"
+latest="github"
 srcurl="https://github.com/libevent/libevent/releases"
 extension_input="tar.gz"
 sep='"'

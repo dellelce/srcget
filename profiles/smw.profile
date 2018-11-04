@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="smw"
+latest="github"
 baseurl="https://github.com/SemanticMediaWiki/SemanticMediaWiki"
 srcurl="${baseurl}/releases"
 comment="Semantic Mediawiki"
