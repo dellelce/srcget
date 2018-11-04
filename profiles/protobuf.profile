@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="protobuf"
+latest="github"
 baseurl="https://github.com/google/protobuf"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
