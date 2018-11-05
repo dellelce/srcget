@@ -129,11 +129,13 @@ rawget()
 # function: info_banner: display download details (usually interactive mode only)
 info_banner()
 {
-  [ ! -z "$SILENT" -o "$NAMEONLY" -ne 0 ] && return
-  cat << EOF
+ typeset info_version
+ [ ! -z "$SILENT" -o "$NAMEONLY" -ne 0 ] && return
+ [ ! -z "$version" ] && info_version="$version" || info_version="$latest"
+ cat << EOF
 Profile            : $pfp
 Source             : $srcurl
-Current version is : $latest
+Current version is : $info_version
 Download url       : $fullurl
 Filename           : $fn
 EOF
@@ -320,6 +322,13 @@ main_single()
  [ ! -z "$custom_url" ] &&
  {
   fullurl="$custom_url"
+ }
+
+ # check if: Download Option has been chosen
+ [ "$NODOWNLOAD" -eq 1 ] &&
+ {
+  [ "$NAMEONLY" -ne 0 ] && { echo "$fn"; }
+  return 0
  }
 
  # check if file already exists and is not empty
@@ -558,6 +567,7 @@ export FORCEFILTER=""
 export DEBUG=""
 export SILENT=""
 export NAMEONLY=0
+export NODOWNLOAD=0
 
 while [ ! -z "$1" ]
 do
@@ -569,6 +579,7 @@ do
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
  [ "$1" == "-q" ] && { SILENT=1; shift; continue; }
+ [ "$1" == "-N" ] && { NODOWNLOAD=1; shift; continue; }
  [ "$1" == "-n" ] && { NAMEONLY=1; shift; continue; }
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
 

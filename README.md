@@ -46,5 +46,6 @@ i.e.:
 | `-n` | Quiet mode: show filename only     |
 | `-q` | Quiet mode: don't show anything    |
 | `-H` | Debug: return server HTTP headers  |
+| `-N` | Show only version do not download  |
 | `-D` | Testing: download remote url only  |
 
