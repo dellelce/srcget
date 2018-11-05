@@ -15,11 +15,14 @@ timeStamp="$(date +%s)"
 cookieFile="$TMP/cookies.srcget.${timeStamp}.$RANDOM$RANDOM.txt"
 cookieOptions="--load-cookies=$cookieFile --save-cookies=$cookieFile"
 wgetArgs="-T ${timeout} -q --no-check-certificate ${cookieOptions}"
-version="0.0.6.6"
 homePage="http://github.com/dellelce/srcget/"
-UA="Mozilla/5.0 (compatible; srcget/${version}; +${homePage}) Dummy/0.0.0 (KHTML, like Gecko)"
+
 NAMEONLY=0
 ERR4SLEEP=2  # time to sleep before error 4 (can be a temporary network issue)
+
+# User Agent
+srcget_version="0.0.9.1"
+UA="Mozilla/5.0 (compatible; srcget/${srcget_version}; +${homePage}) Dummy/0.0.0 (KHTML, like Gecko)"
 
 unset SILENT DEBUG
 
