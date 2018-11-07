@@ -65,6 +65,10 @@ BEGIN {
 # custom rules
 $0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
 { 
+  if (customout != "" && $0 ~ customout)
+  {
+    next
+  }
   gsub(/[<>"]/, " ", $0);
   cnt = split($0, a, " ");
 
