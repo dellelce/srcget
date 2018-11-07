@@ -167,6 +167,7 @@ current_version()
  [ ! -z "$opt_match" ] && { _awk="${_awk} -vopt_match=$opt_match"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
  [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$pkgprofile"; }
+ [ ! -z "$customout" ] && { _awk="${_awk} -vcustomout=$customout"; }
 
  rawget "$srcurl" > "$getoutput"
  rc=$?
@@ -231,6 +232,7 @@ load_profile()
  unset custom_url
  unset opt_match
  unset pkgprofile
+ unset customout
  . $pfp
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
  #
