@@ -1,24 +1,33 @@
 #
 # cabal.latest.awk
 #
-# created: 0423 290314
+# created: 290314
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
 BEGIN {
         vers=""
+        print ""
       }
 
 # custom rules
 
-#<p>Source download: <a href="release/cabal-install-1.18.0.2/cabal-install-1.18.0.2.tar.gz">cabal-install-1.18.0.2.tar.gz</a></p>
-
-/cabal-[0-9]+\.[0-9]+\.[0-9]/ && vers == "" \
+$0 ~ ext && /cabal-[0-9]+\.[0-9]+\.[0-9]/ && vers == "" \
 {
-  vers=$2
+  gsub(/[<>\"]/, " ");
+  c = split($0, a, " ");
+  print "# DEBUG: " $0
+
+  for (idx in a)
+  {
+    item = a[idx]
+    if (item ~ ext)
+    {
+      vers=item
+      next
+    }
+  }
 }
 
 ### END RULE ###
@@ -26,6 +35,6 @@ BEGIN {
 END   {
 	if (vers != "")
         {
-          print vers
+          print "latest="vers
         }
       }
