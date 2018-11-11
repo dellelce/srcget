@@ -8,6 +8,5 @@ sep='"'
 #example url: http://uk1.php.net/get/php-5.5.8.tar.xz/from/this/mirror
 custom_url_prefix="http://de2.php.net/get/php-"
 custom_url_postfix=".tar.bz2/from/this/mirror"
-#php-5.5.1.tar.xz
 custom_file_prefix="php-"
 custom_file_postfix=".tar.bz2"
