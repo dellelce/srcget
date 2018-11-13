@@ -41,10 +41,10 @@ fileType()
 #
 # cleanup
 #
- cleanup()
- {
-  rm -f $cookieFile
- }
+cleanup()
+{
+ rm -f $cookieFile
+}
 
 #
 # usage
@@ -271,7 +271,17 @@ main_single()
  current_version > $version_output
  typeset latest_rc="$?"  # wget failures
 
+ typeset output_cnt=$(cat $version_output | wc -l)
+
+ #TODO: error management needs to be reviewed
+ [ "$output_cnt" -eq 0 ] &&
+ {
+   srcecho "${profile}: couldn't process website: rc = $latest_rc"
+   return 12
+ }
+
  [ ! -z "$DEBUG" -a -f "$version_output" ] && cat "$version_output"
+
  [ "$latest_rc" -ne 0 ] &&
  {
   srcecho "${profile}: current_version failed with return code ${latest_rc}"
@@ -285,7 +295,7 @@ main_single()
  [ ! -z "$legacy_version" ] && latest="$legacy_version"
 
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "${profile}: couldn't retrieve latest version: error in processing site content"; return 1; }
- [ -z "$latest" ] && { srcecho "${profile}: couldn't retrieve latest version: rc = $version_rc"; return 1; }
+ [ -z "$latest"  ] && { srcecho "${profile}: couldn't retrieve latest version: rc = $version_rc"; return 1; }
 
  typeset fn=$(basename $latest 2>/dev/null)
 
