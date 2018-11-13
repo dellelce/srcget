@@ -29,7 +29,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
     if (item ~ ext && item ~ /[0-9]+\.[0-9]+/)
     {
       vers = item
-      lightves = vers
+      lightvers = vers
 
       if (vers ~ /\.sig/ || vers ~ /\.asc/) continue;
 
