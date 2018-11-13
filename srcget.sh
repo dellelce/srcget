@@ -329,7 +329,7 @@ main_single()
 
  [ ! -z "$version_holder" ] &&
  {
-  vh_latest=${version:-${latest}}
+  typeset vh_latest=${version:-${latest}}
   fn="${fn//${version_holder}/${vh_latest}}"
  }
 
@@ -367,7 +367,7 @@ main_single()
  # Check if fullurl has version_holder if so replace appropriately
  [ ! -z "$version_holder" ] &&
  {
-  vh_latest=${version:-${latest}}
+  typeset vh_latest=${version:-${latest}}
   typeset new_fullurl="${fullurl//${version_holder}/${vh_latest}}"
 
   [ "$new_fullurl" != "$fullurl" ] && fullurl="$new_fullurl"
