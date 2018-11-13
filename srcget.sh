@@ -233,6 +233,8 @@ load_profile()
  unset opt_match
  unset pkgprofile
  unset customout
+ unset version
+ unset custom_file
  . $pfp
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
  #
@@ -255,6 +257,7 @@ main_single()
  typeset profile="$1"
  typeset profileRc=0
  typeset latest="" legacy_version="" # set by current_version function
+ fn="" # needs to be empty but cannot be local
 
  load_profile $profile
  profileRc=$?
@@ -297,7 +300,7 @@ main_single()
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "${profile}: couldn't retrieve latest version: error in processing site content"; return 1; }
  [ -z "$latest"  ] && { srcecho "${profile}: couldn't retrieve latest version: rc = $version_rc"; return 1; }
 
- [ -z "$custom_file" ] && { typeset fn=$(basename $latest 2>/dev/null); } || typeset fn="$custom_file"
+ [ -z "$custom_file" ] && { fn=$(basename $latest 2>/dev/null); } || fn="$custom_file"
 
  # sanity tests
  [ $? -ne 0 ] && { echo "${profile}: error processing latest version: $latest"; return 1; }
@@ -349,7 +352,7 @@ main_single()
   fullurl="$custom_url"
  }
 
- # check if: Download Option has been chosen
+ # check if: NO Download Option has been chosen
  [ "$NODOWNLOAD" -eq 1 ] &&
  {
   [ "$NAMEONLY" -ne 0 ] && { echo "$fn"; }
@@ -447,7 +450,7 @@ srcall()
   b=$(basename $item);
   p=${b%.profile};
 
-  [ "$b" == "$p" ] && continue
+  [ "$b" == "$p" ] && continue # no .profile extension: ignore
 
   # profile is loaded twice, and this is not a good thing
   load_profile "$p"
@@ -463,7 +466,7 @@ srcall()
   [ $rc -eq 0 -a "$NAMEONLY" -eq 0 ] &&
   {
    let okcnt="(( $okcnt + 1 ))"
-   srcecho "${p}: downloaded: $(ls -t *${basename}* | head -1)"
+   srcecho "${p}: downloaded: ${fn}"
    continue
   }
 
