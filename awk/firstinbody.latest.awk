@@ -3,10 +3,7 @@
 #
 # created: 200918
 #
-
 # pattern: first in body
-
-### MAIN LOOP ###
 
 BEGIN {
         vers=""
@@ -15,7 +12,7 @@ BEGIN {
 
 # custom rules
 
-$0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 !~ /\.sig/ && $0 !~ /\.asc/ \
+$0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
 {
   line=$0
   gsub(/\"/, " ", line);
@@ -27,12 +24,14 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 !~ /\.sig/ && $0 !~ /\.asc
 
   for (idx in line_a)
   {
-    item=line_a[idx]
+    item = line_a[idx]
 
     if (item ~ ext && item ~ /[0-9]+\.[0-9]+/)
     {
       vers = item
-      lightvers=vers
+      lightves = vers
+
+      if (vers ~ /\.sig/ || vers ~ /\.asc/) continue;
 
       sub("."ext, "", lightvers)
       split(lightvers, lightvers_a, "-");
@@ -48,6 +47,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 !~ /\.sig/ && $0 !~ /\.asc
        {
          lv = lv_test
          print "# DEBUG: version found: "lv
+         next
        }
       }
 
@@ -57,10 +57,11 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 !~ /\.sig/ && $0 !~ /\.asc
   }
 }
 
-### end loop ###
+### end rule ###
 
 END \
 {
+  print "# DEBUG: END FNR = " FNR
   if (lv != "")
   {
     print "version="lv
