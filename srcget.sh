@@ -297,7 +297,7 @@ main_single()
  [ "$latest" != "${latest#ERRINPUT}" ] && { srcecho "${profile}: couldn't retrieve latest version: error in processing site content"; return 1; }
  [ -z "$latest"  ] && { srcecho "${profile}: couldn't retrieve latest version: rc = $version_rc"; return 1; }
 
- typeset fn=$(basename $latest 2>/dev/null)
+ [ -z "$custom_file" ] && { typeset fn=$(basename $latest 2>/dev/null); } || typeset fn="$custom_file"
 
  # sanity tests
  [ $? -ne 0 ] && { echo "${profile}: error processing latest version: $latest"; return 1; }
@@ -325,6 +325,12 @@ main_single()
  [ ! -z "$custom_file_prefix" -o ! -z "$custom_file_postfix" ] &&
  {
   fn="${custom_file_prefix}${fn}${custom_file_postfix}";
+ }
+
+ [ ! -z "$version_holder" ] &&
+ {
+  vh_latest=${version:-${latest}}
+  fn="${fn//${version_holder}/${vh_latest}}"
  }
 
  [ -z "$custom_url"  ] &&
@@ -361,7 +367,8 @@ main_single()
  # Check if fullurl has version_holder if so replace appropriately
  [ ! -z "$version_holder" ] &&
  {
-  typeset new_fullurl="${fullurl//${version_holder}/${latest}}"
+  vh_latest=${version:-${latest}}
+  typeset new_fullurl="${fullurl//${version_holder}/${vh_latest}}"
 
   [ "$new_fullurl" != "$fullurl" ] && fullurl="$new_fullurl"
 
@@ -383,12 +390,12 @@ main_single()
  [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "$fn"; }  # print only-name and successful
  [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } # print only-name and failed
 
- [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f "$fn"; return $rc; }
+ [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f -- "$fn"; return $rc; }
  # test empty file
 
- [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f "$fn"; return 10; }
+ [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f -- "$fn"; return 10; }
  [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
-  { srcecho "${profile}: invalid output format: HTML"; rm "$fn"; return 11; }
+  { srcecho "${profile}: invalid output format: HTML"; rm -- "$fn"; return 11; }
 
  return $rc
 }
