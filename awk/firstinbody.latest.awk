@@ -34,8 +34,23 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
       if (vers ~ /\.sig/ || vers ~ /\.asc/) continue;
 
       sub("."ext, "", lightvers)
-      split(lightvers, lightvers_a, "-");
+      lv_cnt = split(lightvers, lightvers_a, "-");
       print "# DEBUG: light vers:" lightvers
+      print "# DEBUG: light vers base:" lightvers_a[lv_cnt-1]
+
+      # this test is only if pkgbasse is set
+      if (pkgbase != "")
+      {
+       base_cnt = split(lightvers_a[lv_cnt-1], base_a, "/")
+       base = base_a[base_cnt]
+
+       if (pkgbase !~ base)
+       {
+        print "# DEBUG: base test failed: base ="base
+        vers=""
+        next
+       }
+      }
 
       for (item_lv in lightvers_a)
       {
