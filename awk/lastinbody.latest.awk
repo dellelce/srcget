@@ -25,6 +25,12 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-r
 
   print "# DEBUG: " line
 
+  if (pkgprofile != "" && line !~ pkgprofile)
+  {
+   print "# DEBUG: filtering out line as missing pkgprofile="pkgprofile
+   next
+  }
+
   for (idx in line_a)
   {
     item=line_a[idx]
