@@ -11,6 +11,8 @@ function compare_versions(a, b)
   c_1 = split(a, a_a, ".");
   c_2 = split(b, b_a, ".");
 
+  print "#DEBUG: compare_versions = a:"a " b:"b
+
   if (c_1 < 2 || c_2 < 2)
   {
     print "#DEBUG: compare_version: ERRINPUT c_1 = "c_1 " c_2 = "c_2
@@ -64,7 +66,7 @@ BEGIN {
 
 # custom rules
 $0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
-{ 
+{
   if (customout != "" && $0 ~ customout)
   {
     next
@@ -75,9 +77,10 @@ $0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !
   for (i in a)
   {
     if (a[i] ~ ext)
-    { 
+    {
       tmpvers=a[i]
       fullvers_temp = tmpvers
+      sub("."ext, "", tmpvers)
       vers = get_pkg_version(tmpvers)
     }
   }
