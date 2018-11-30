@@ -34,7 +34,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-r
   for (idx in line_a)
   {
     item=line_a[idx]
-    if (item ~ ext && item ~ /[0-9]+\.[0-9]+/ && item !~ /\.sig/ && $0 ~ !/\.asc/)
+    if (item ~ ext && item ~ /[0-9]+\./ && item !~ /\.sig/ && $0 ~ !/\.asc/)
     {
       vers = item
       print "# DEBUG: version found: "vers
