@@ -61,8 +61,9 @@ $0 [options] program_name
  -n  Quiet mode: show filename only
  -q  Quiet mode: don't show anything
  -F  Force Filter
- -H  Debug: return server HTTP headers (DEBUG ONLY!)
- -D  Testing: download remote url only (TEST/DEVELOPMENT ONLY!)
+ -H  Debug: return server HTTP headers
+ -D  Testing: download remote url only
+ -N  Do not download: used to check latest version
 
 EOF
 }
