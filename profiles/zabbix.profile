@@ -7,7 +7,7 @@ extension_input="tar.gz"
 sep='/'
 comment=""
 #https://downloads.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/3.4.12/zabbix-3.4.12.tar.gz
-custom_url_prefix="https://kent.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/"
+custom_url_prefix="https://vorboss.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/"
 custom_url_postfix=".${extension_input}"
 custom_file_postfix=".${extension_input}"
 
