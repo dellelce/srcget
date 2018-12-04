@@ -26,6 +26,8 @@ UA="Mozilla/5.0 (compatible; srcget/${srcget_version}; +${homePage}) Dummy/0.0.0
 
 unset SILENT DEBUG
 
+export LANG="en_GB.UTF-8" # to have more consitence in output across all platforms
+
 ### FUNCTIONS ###
 
 # function: fileType: return initial portion of "file"
