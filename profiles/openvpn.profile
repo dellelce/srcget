@@ -1,6 +1,10 @@
 # vim:syntax=sh
 
-latest="openvpn"
-srcurl="http://openvpn.net/index.php/download/community-downloads.html"
+latest="github"
+baseurl="https://github.com/OpenVPN/openvpn"
+srcurl="${baseurl}/releases"
 extension_input="tar.gz"
 sep='"'
+custom_url_prefix="${baseurl}/archive/"
+basename="openvpn"
+custom_file_prefix="${basename}-"
