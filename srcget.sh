@@ -285,7 +285,7 @@ main_single()
  [ "$output_cnt" -eq 0 ] &&
  {
    srcecho "${profile}: couldn't process website: rc = $latest_rc"
-   return 12
+   return $latest_rc
  }
 
  [ ! -z "$DEBUG" -a -f "$version_output" ] && cat "$version_output"
