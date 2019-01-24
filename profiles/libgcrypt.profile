@@ -1,11 +1,8 @@
 # vim:syntax=sh
 
-latest="libgcrypt"
-srcurl="ftp://ftp.gnupg.org/gcrypt/libgcrypt/" # ending slahs must be used
+latest="firstinbody"
+srcurl="https://www.gnupg.org/ftp/gcrypt/libgcrypt/"
 baseurl=""
-extension="tar.bz2"
+extension_input="tar.bz2"
 sep='"'
-#custom_url_prefix="${srcurl}"
-#custom_url_postfix=".${extension}"
-#custom_file_prefix="libxslt-"
-#custom_file_postfix=".${extension}"
+custom_url_prefix="${srcurl}"
