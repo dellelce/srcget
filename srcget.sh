@@ -264,6 +264,8 @@ main_single()
  typeset latest="" legacy_version="" # set by current_version function
  fn="" # needs to be empty but cannot be local
 
+ [ ! -z "$DEBUG" ] && { echo "DEBUG: profile: $profile"; }
+
  load_profile $profile
  profileRc=$?
 
