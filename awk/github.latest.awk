@@ -30,7 +30,7 @@ $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && !/-windows/ && vers == "" \
     print "# DEBUG: item = "item " idx = "idx
 
     #
-    if (cnt == 8)
+    if (cnt == 8 && /systemd/)
     {
       print "#DEBUG: temp fix to systemd tag with slash"
       next
