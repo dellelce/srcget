@@ -8,17 +8,31 @@
 
 BEGIN {
         state = 0
+        print ""
       }
 
 # custom rules
-/busybox/ && $0 ~ ext && !/snapshot/ && !/\.sig/ && !/\.sha256/ \
+
+$0 ~ ext && ($0 ~ !/snapshot/ && !/\.sig/ && !/\.sha256/) \
 {
-  ver = $6
+  gsub(/["<>]/, " ");
+  cnt = split($0, a, " ");
+  for (idx in a)
+  {
+    item = a[idx]
+    if (item ~ /[0-9]+.[0-9]+/ && item ~ ext)
+    {
+      print "# DEBUG: match: " item
+      ver = item
+      next
+    }
+  }
 }
 
 ### end loop ###
 
 END   {
-	print ver
+	print "latest="ver
       }
+
 ### EOF ##
