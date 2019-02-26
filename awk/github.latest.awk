@@ -29,6 +29,13 @@ $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && !/-windows/ && vers == "" \
     item = line_a[idx]
     print "# DEBUG: item = "item " idx = "idx
 
+    #
+    if (cnt == 8)
+    {
+      print "#DEBUG: temp fix to systemd tag with slash"
+      next
+    }
+
     if (item ~ ext)
     {
       vers = item
