@@ -1,4 +1,4 @@
 language: c
-script: wget --version && echo && cat /proc/meminfo && awk --version && echo && ./srcget.sh -A
+script: wget --version && echo && cat /proc/meminfo && awk --version && echo && ./srcget.sh -A -x
 notifications:
    slack: skydreams:1FLUnEeqaNLinKq1p0lJf9F5
