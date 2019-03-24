@@ -277,7 +277,7 @@ main_single()
  [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
  # Find latest software version
- typeset version_output="/tmp/current_version.${RANDOM}${RANDOM}.txt"
+ typeset version_output="${TMP}/current_version.${RANDOM}${RANDOM}.txt"
  current_version > $version_output
  typeset latest_rc="$?"  # wget failures
 
