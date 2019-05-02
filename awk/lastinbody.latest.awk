@@ -18,7 +18,7 @@ BEGIN {
 $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-rc/ \
 {
   line=$0
-  gsub(/\"/, " ", line);
+  gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
