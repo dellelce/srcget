@@ -41,6 +41,13 @@ $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ && vers == "" \
       vers = item
       print "# DEBUG: "vers " ext = "ext " idx = "idx
 
+      if (vers ~ /-alpha/)
+      {
+        print "# DEBUG: filter out alphas!"
+        vers = ""
+        next
+      }
+
       if (vers ~ /-rc/)
       {
         print "# DEBUG: filter out rc"
