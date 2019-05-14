@@ -10,6 +10,7 @@
 
 BEGIN {
         bn=""
+	print ""
       }
 
 # custom rules
@@ -28,6 +29,7 @@ BEGIN {
 
 END \
 {
-  print bn
+  gsub(/\/distributions\//,"",bn);
+  print "latest="bn
 }
 ## EOF ##
