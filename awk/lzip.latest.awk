@@ -16,7 +16,7 @@ BEGIN {
 $0 ~ /[0-9]+\.[0-9]+/ && /lzip-/ && !/-pre/ && !/-rc/ && !/\.sig/ && $0 ~ ext \
 {
   line=$0
-  gsub(/\"/, " ", line);
+  gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
   split(line, line_a, " ");
 

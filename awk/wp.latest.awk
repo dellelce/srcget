@@ -20,7 +20,7 @@ BEGIN {
 $0 ~ ext && vers == "" && state == 1 \
 {
  vline = $0
- gsub(/\"/," ", vline);
+ gsub(/"/," ", vline);
  gsub(/[<>']/," ", vline);
 
  v_cnt = split(vline, l_a, " ");

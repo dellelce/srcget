@@ -18,7 +18,7 @@ BEGIN {
 version=="" && state == 1 && !/beta/ && /[0-9]+\.[0-9]+/ \
 {
  line = $0;
- gsub(/\"/, " ", line);
+ gsub(/"/, " ", line);
  gsub(/\//, " ", line);
  line_cnt = split(line, line_a, " ");
  print "#DEBUG: "line

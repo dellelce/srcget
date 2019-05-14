@@ -23,7 +23,7 @@ BEGIN {
 /stable/ && $0 ~ ext && state == 0 \
 {
   line=$0
-  gsub(/[<>\"]/, " ", line);
+  gsub(/[<>"]/, " ", line);
   split(line, line_a, " ");
 
   for (idx in line_a)

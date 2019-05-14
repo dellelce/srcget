@@ -23,7 +23,7 @@ state == 1 && $0 ~ /2\.[0-9]+\.[0-9]+/ && vers == "" \
 {
  line = $0
  gsub(/[<>]/, " ", line);
- gsub(/\"/, " ", line);
+ gsub(/"/, " ", line);
  split(line, vers_a, " ");
 
  for (idx in vers_a)

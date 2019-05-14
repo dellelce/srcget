@@ -17,7 +17,7 @@ BEGIN {
 !/-doc/ && $0 ~ ext \
 {
  line = $0
- gsub(/\"/, " ", line);
+ gsub(/"/, " ", line);
  vers_cnt = split(line, line_a, " ")
 
  for (item in line_a)

@@ -18,7 +18,7 @@ BEGIN {
 $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 ~ !/\.sig/ \
 {
   line=$0
-  gsub(/\"/, " ", line);
+  gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");

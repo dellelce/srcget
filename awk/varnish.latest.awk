@@ -17,7 +17,7 @@ BEGIN \
 
 /[0-9]+\.[0-9]+\.[0-9]+/ && vers == "" \
 {
-  gsub(/[-<>\"]/, " ", $0);
+  gsub(/[-<>"]/, " ", $0);
   vers_cnt = split($0, vers_a)
   for (item in vers_a)
   {
