@@ -15,7 +15,7 @@ BEGIN {
 $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
 {
   line=$0
-  gsub(/\"/, " ", line);
+  gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
