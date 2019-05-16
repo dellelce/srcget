@@ -40,12 +40,12 @@ fileType()
  return 0
 }
 
-#
-# cleanup
-#
 cleanup()
 {
+ [ ! -z "$DEBUG" ] && return 0 # do not cleanup if debugging
  rm -f $cookieFile
+ [ ! -z "$version_output" ] && rm -f "$version_output"
+ [ ! -z "$get_output" ] && rm -f "$get_output"
 }
 
 #
@@ -154,13 +154,11 @@ current_version()
 {
  typeset _awk="awk"
  typeset rc=0
- typeset tmpid="currentversion_${RANDOM}${RANDOM}"
- # this is needs to be exported (= global) for DEBUGging
- export awkoutput="$TMP/${tmpid}.awk.txt"
- typeset getoutput="$TMP/${tmpid}.get.txt"
  typeset legacy_version=""
  typeset version=""
  typeset versionpath=""
+ typeset tmpid="currentversion_${RANDOM}${RANDOM}"
+ get_output="$TMP/${tmpid}.get.txt" # not local so it can be picked by cleanup function
 
  # setup awk args
  [ ! -z "$DEBUG" ] && { _awk="${_awk} -vdebug=1"; }
@@ -173,17 +171,17 @@ current_version()
  [ ! -z "$pkgbase" ] && { _awk="${_awk} -vpkgbase=$pkgbase"; }
  [ ! -z "$customout" ] && { _awk="${_awk} -vcustomout=$customout"; }
 
- rawget "$srcurl" > "$getoutput"
+ rawget "$srcurl" > "$get_output"
  rc=$?
 
  [ $rc -ne 0 ] && return $rc
 
- ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter" < "$getoutput"      |
+ ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter" < "$get_output"      |
  awk ' FNR == 1 && !/^$/ && $1 !~ /^#/ { print "legacy_version=\""$0"\""; next; }
        FNR > 1 { print }'
  rc=$?
 
- rm -f "$getoutput"
+ rm -f "$get_output"
 
  return $rc
 }
@@ -277,7 +275,7 @@ main_single()
  [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
  # Find latest software version
- typeset version_output="${TMP}/current_version.${RANDOM}${RANDOM}.txt"
+ version_output="${TMP}/current_version.${RANDOM}${RANDOM}.txt"
  current_version > $version_output
  typeset latest_rc="$?"  # wget failures
 
