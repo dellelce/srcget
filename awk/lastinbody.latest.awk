@@ -14,7 +14,6 @@ BEGIN {
       }
 
 # custom rules
-
 $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-rc/ \
 {
   line=$0
@@ -24,6 +23,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-r
   split(line, line_a, " ");
 
   print "# DEBUG: " line
+  if (line ~ /\.sha256/ || line ~ /\.sig/) { print "#DEBUG skipping line"; next; }
 
   if (pkgprofile != "" && line !~ pkgprofile)
   {
