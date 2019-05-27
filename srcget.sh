@@ -120,10 +120,6 @@ rawget()
  typeset url="$1"
 
  [ -z "$url" ] && return 1
-
- #temp workaround for github - there must be something wrong in github.com webserver..........maybe
- #[ $(echo $url | grep -c "github") -eq 1 ] && { unset wgetHeaders; }
-
  [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
 
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
