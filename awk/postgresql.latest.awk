@@ -10,6 +10,7 @@ BEGIN {
         state = 0
         version=""
         print ""
+        opt_match=ENVIRON["opt_match"]
       }
 
 # custom rules

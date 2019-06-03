@@ -15,14 +15,14 @@ timeStamp="$(date +%s)"
 cookieFile="$TMP/cookies.srcget.${timeStamp}.$RANDOM$RANDOM.txt"
 cookieOptions="--load-cookies=$cookieFile --save-cookies=$cookieFile"
 wgetArgs="-T ${timeout} -q --no-check-certificate ${cookieOptions}"
-homePage="http://github.com/dellelce/srcget/"
 
 NAMEONLY=0
 ERR4SLEEP=2  # time to sleep before error 4 (can be a temporary network issue)
 
-# User Agent
-srcget_version="0.0.9.1"
-UA="Mozilla/5.0 (compatible; srcget/${srcget_version}; +${homePage}) Dummy/0.0.0 (KHTML, like Gecko)"
+# User Agent: sourceforge sends us html if we use anything Mozilla/5.0 so this was changed
+srcget_version="0.0.9.11"
+homePage="http://github.com/dellelce/srcget/"
+UA="srcget/${srcget_version} (+${homePage})"
 
 unset SILENT DEBUG
 
@@ -149,35 +149,36 @@ EOF
 current_version()
 {
  typeset _awk="awk"
+ typeset _args=""
  typeset rc=0
  typeset tmpid="currentversion_${RANDOM}${RANDOM}"
- # this is needs to be exported (= global) for DEBUGging
- export awkoutput="$TMP/${tmpid}.awk.txt"
  typeset getoutput="$TMP/${tmpid}.get.txt"
  typeset legacy_version=""
  typeset version=""
  typeset versionpath=""
-
- # setup awk args
- [ ! -z "$DEBUG" ] && { _awk="${_awk} -vdebug=1"; }
- [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
- [ ! -z "$extension_input" ] && { _awk="${_awk} -vext=$extension_input"; }
- [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
- [ ! -z "$opt_match" ] && { _awk="${_awk} -vopt_match=$opt_match"; }
- [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
- [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$pkgprofile"; }
- [ ! -z "$pkgbase" ] && { _awk="${_awk} -vpkgbase=$pkgbase"; }
- [ ! -z "$customout" ] && { _awk="${_awk} -vcustomout=$customout"; }
 
  rawget "$srcurl" > "$getoutput"
  rc=$?
 
  [ $rc -ne 0 ] && return $rc
 
- ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter" < "$getoutput"      |
+ # setup awk args
+ [ ! -z "$DEBUG" ] && { _args="${_args} -vdebug=1"; }
+ [ ! -z "$skipvers" ] && { _args="${_args} -vskipvers=$skipvers"; }
+ [ ! -z "$extension_input" ] && { _args="${_args} -vext=$extension_input"; }
+ [ ! -z "$extension_url" ] && { _args="${_args} -vexturl=$extension_url"; }
+ [ ! -z "$sep" ] && { _args="${_args} -F${sep}"; }
+ [ ! -z "$pkgprofile" ] && { _args="${_args} -vpkgprofile=$pkgprofile"; }
+ [ ! -z "$pkgbase" ] && { _args="${_args} -vpkgbase=$pkgbase"; }
+ [ ! -z "$customout" ] && { _args="${_args} -vcustomout=$customout"; }
+
+ export opt_match
+ ${_awk} ${_args} -vbaseurl="${baseurl}" \
+                    -f "$fp_filter" < "$getoutput"  |
  awk ' FNR == 1 && !/^$/ && $1 !~ /^#/ { print "legacy_version=\""$0"\""; next; }
        FNR > 1 { print }'
  rc=$?
+ unset opt_match # we don't need it anywhere else
 
  rm -f "$getoutput"
 
@@ -269,7 +270,7 @@ main_single()
   { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
 
  # Sanity checks
- [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }
+ [ -z "srcurl" ] && { srcecho "${profile}: invalid url: $srcurl"; return 3; }
  [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
  # Find latest software version
@@ -370,7 +371,7 @@ main_single()
   return 0
  }
 
- # Check if fullurl has version_holder if so replace appropriately
+ # Check if fullurl has version_holder if so replace with found version
  [ ! -z "$version_holder" ] &&
  {
   typeset vh_latest=${version:-${latest}}
