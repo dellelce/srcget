@@ -45,10 +45,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 END \
 {
   print "# DEBUG: END FNR = " FNR
-  if (lv != "")
-  {
-    print "version="lv
-  }
+  sub(/\.$/, "", vers); #trailing dots not part of a version
   if (vers != "")
   {
     print "latest="vers
