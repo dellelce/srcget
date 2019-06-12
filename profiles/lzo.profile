@@ -2,7 +2,7 @@
 
 latest="firstinbody"
 srcurl="http://www.oberhumer.com/opensource/lzo"
-baseurl="${srcurl}"
+baseurl="${srcurl}/download"
 extension_input="tar.gz"
 comment=""
 

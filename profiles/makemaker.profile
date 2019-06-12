@@ -2,7 +2,7 @@
 
 latest="firstinbody"
 srcurl="https://metacpan.org/pod/ExtUtils::MakeMaker"
-baseurl=""
+baseurl="http://biopython.org/DIST"
 extension_input="tar.gz"
 comment=""
 
