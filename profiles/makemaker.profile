@@ -2,7 +2,7 @@
 
 latest="firstinbody"
 srcurl="https://metacpan.org/pod/ExtUtils::MakeMaker"
-baseurl="http://biopython.org/DIST"
+baseurl="https://cpan.metacpan.org/authors/id/B/BI/BINGOS"
 extension_input="tar.gz"
 comment=""
 
