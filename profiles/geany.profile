@@ -1,11 +1,10 @@
 # vim:syntax=sh
 
-latest="geany"
-srcurl="http://www.geany.org/Download/Releases"
-#baseurl=""
-comment=""
-extension_input="tar.bz2"
-sep='"'
+latest="firstaftermatchword"
 basename="geany"
+srcurl="http://www.geany.org/download/releases"
+opt_match="Source"
+comment="programmer text editor"
+extension_input="tar.bz2"
 
 ## EOF ##
