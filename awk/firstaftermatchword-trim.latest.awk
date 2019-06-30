@@ -20,7 +20,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
-  gsub(/[<>]/, " ", line);
+  gsub(/[<>\/]/, " ", line);
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
@@ -49,6 +49,7 @@ END \
   sub("."ext,"",vers);
   hyphen_cnt = split(vers,vers_a,"-"); if (hyphen_cnt == 2) vers = vers_a[2];
   sub(/\.$/, "", vers); #trailing dots not part of a version
+  sub(/^v/, "", vers); #don't need an initial v
   if (vers != "")
   {
     print "latest="vers
