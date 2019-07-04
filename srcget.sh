@@ -210,7 +210,10 @@ load_profile()
  }
 
  export pfp="$profilesDir/${profile}.profile"
- [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
+ export pfch="${profile:0:1}"
+ export altpfp="$profilesDir/${pfch}/${profile}.profile"
+ [ ! -f "$pfp" -a ! -f "${altpfp}" ] && { srcecho "cannot find profile: $profile"; return 2; }
+ [ ! -f "$pfp" ] && pfp="${altpfp}"
 
  # TODO: Improve handling of variables
  unset basename
