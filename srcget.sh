@@ -200,20 +200,21 @@ load_profile()
 {
  ## Load profile information
  export profile="$1"
+
  [ -z "$profile" ] && return 1;
 
- # try harder to make sure profilesDir is correct
- [ ! -d "$profilesDir" ] &&
+ [ -f "$profile" ] &&
  {
-   export srcHome=$(getlinkdir "$0")
-   export profilesDir="$srcHome/profiles"
- }
+  pfp="$profile"
+ } ||
+ {
+  export pfp="$profilesDir/${profile}.profile"
+  export pfch="${profile:0:1}"
+  export altpfp="$profilesDir/${pfch}/${profile}.profile"
 
- export pfp="$profilesDir/${profile}.profile"
- export pfch="${profile:0:1}"
- export altpfp="$profilesDir/${pfch}/${profile}.profile"
- [ ! -f "$pfp" -a ! -f "${altpfp}" ] && { srcecho "cannot find profile: $profile"; return 2; }
- [ ! -f "$pfp" ] && pfp="${altpfp}"
+  [ ! -f "$pfp" -a ! -f "${altpfp}" ] && { srcecho "cannot find profile: $profile"; return 2; }
+  [ ! -f "$pfp" ] && pfp="${altpfp}"
+ }
 
  # TODO: Improve handling of variables
  unset basename
@@ -441,6 +442,7 @@ srcall()
  typeset errcnt=0
  typeset okcnt=0
  typeset fails=""
+ typeset item
 
  [ ! -d "$profilesDir" ] &&
  {
@@ -448,25 +450,23 @@ srcall()
   typeset profilesDir="$srcHome/profiles"
  }
 
- typeset b p item
-
  [ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; return 20; }
 
- for item in $profilesDir/*;
+ for item in $profilesDir/*/*.profile $profilesDir/*.profile;
  do
-  b=$(basename $item);
-  p=${b%.profile};
+  [ ! -f "$item" ] && { continue; }
 
-  [ "$b" == "$p" ] && continue # no .profile extension: ignore
+  p=$(basename $item); # short profile name
+  p=${p%.profile}
 
   # profile is loaded twice, and this is not a good thing
-  load_profile "$p"
+  load_profile "$item"
 
   # ignore profiles not enabled for bulk (srcall): profiles in development
   [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue
   [ -z "$basename" ] && { basename="${p}"; } # override if set in profile!
 
-  SILENT=1 main_single $p # always run main_single silently
+  SILENT=1 main_single $item # always run main_single silently
   rc="$?"
 
   # wget appears to return 1 on success.......(!?)
@@ -498,8 +498,8 @@ srcall()
  [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
  [ "$errcnt" -gt 1 ] &&
  {
-   echo "There have been $errcnt failed downloads: $fails"
-   return 1
+  echo "There have been $errcnt failed downloads: $fails"
+  return 1
  }
 
  return 0
