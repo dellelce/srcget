@@ -597,6 +597,14 @@ geturl()
 
 [ -z "$*" ] && { usage; exit 0; }
 
+[ ! -d "$profilesDir" ] &&
+{
+ typeset srcHome=$(getlinkdir "$0")
+ typeset profilesDir="$srcHome/profiles"
+}
+
+[ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; exit 20; }
+
 profileList=""
 export main="main"
 export FORCEFILTER=""
