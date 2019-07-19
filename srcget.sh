@@ -173,12 +173,15 @@ current_version()
  [ ! -z "$customout" ] && { _args="${_args} -vcustomout=$customout"; }
 
  export opt_match
+ export opt_nonmatch
  ${_awk} ${_args} -vbaseurl="${baseurl}" \
                     -f "$fp_filter" < "$getoutput"  |
  awk ' FNR == 1 && !/^$/ && $1 !~ /^#/ { print "legacy_version=\""$0"\""; next; }
        FNR > 1 { print }'
  rc=$?
- unset opt_match # we don't need it anywhere else
+ # we don't need "opt_*" anywhere else
+ unset opt_match
+ unset opt_nonmatch
 
  rm -f "$getoutput"
 
@@ -236,6 +239,7 @@ load_profile()
  unset version_holder
  unset custom_url
  unset opt_match
+ unset opt_nonmatch
  unset pkgprofile
  unset pkgbase
  unset customout
