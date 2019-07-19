@@ -270,11 +270,9 @@ main_single()
  load_profile $profile
  profileRc=$?
 
- [ $profileRc -ne 0 ] &&
-  { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
-
  # Sanity checks
- [ -z "srcurl" ] && { srcecho "${profile}: invalid url: $srcurl"; return 3; }
+ [ -z "$srcurl" -o -z "$fp_filter" ] && { return $profileRc; } # just return if any of these are empty
+ [ $profileRc -ne 0 ] && { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
  [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
  # Find latest software version
@@ -425,7 +423,7 @@ info_single()
  profileRc=$?
 
  # Sanity checks
- [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }
+ [ -z "$srcurl" -o -z "$fp_filter" ] && { return $profileRc; } # just return if any of these are empty
  [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; }
  [ $profileRc -ne 0 ] && { return 5; }
 
