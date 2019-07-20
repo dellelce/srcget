@@ -22,7 +22,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
-  gsub(/[<>\/]/, " ", line);
+  gsub(/[<>\/,]/, " ", line);
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
