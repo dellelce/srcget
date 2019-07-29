@@ -24,15 +24,17 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   gsub(/"/, " ", line);
   gsub(/[<>\/,]/, " ", line);
   gsub(/&nbsp;/, " ", line);
-  split(line, line_a, " ");
+  cnt = split(line, line_a, " ");
 
+  print "# DEBUG: line array cnt: " cnt
   print "# DEBUG: " line
 
   for (idx in line_a)
   {
     item = line_a[idx]
+    print "# DEBUG: item = "item " index = "idx
 
-    if (item ~ /[0-9]+\.[0-9]+/)
+    if (item ~ /[0-9]+\.[0-9]+/ && vers == "")
     {
       vers = item
 
