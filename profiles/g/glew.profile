@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword"
+latest="firstaftermatchword-trim"
 srcurl="http://glew.sourceforge.net"
 extension_input="tar.gz"
 sep='"'
