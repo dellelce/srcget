@@ -249,12 +249,12 @@ load_profile()
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
  #
  for filter in \
-   "$srcHome/${latestawk}" \
-   "$srcHome/${latestawk}.latest.awk" \
-   "$srcHome/awk/${latestawk}" \
    "$srcHome/awk/${latestawk}.latest.awk" \
+   "$srcHome/awk/${latestawk}" \
+   "$srcHome/latest/${latestawk}.latest.awk" \
    "$srcHome/latest/${latestawk}" \
-   "$srcHome/latest/${latestawk}.latest.awk"
+   "$srcHome/${latestawk}.latest.awk" \
+   "$srcHome/${latestawk}"
  do
   [ -f "$filter" ] && { export fp_filter="$filter"; break; }
  done
@@ -456,7 +456,7 @@ srcall()
 
  for item in $profilesDir/*/*.profile $profilesDir/*.profile;
  do
-  [ ! -f "$item" ] && { continue; }
+  [ ! -f "$item" ] && continue
 
   p=$(basename $item); # short profile name
   p=${p%.profile}
@@ -498,11 +498,7 @@ srcall()
 
  [ "$okcnt" -gt 0 ] && { echo "There have been ${okcnt} successful downloads."; }
  [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
- [ "$errcnt" -gt 1 ] &&
- {
-  echo "There have been $errcnt failed downloads: $fails"
-  return 1
- }
+ [ "$errcnt" -gt 1 ] && { echo "There have been $errcnt failed downloads: $fails" return 1; }
 
  return 0
 }
