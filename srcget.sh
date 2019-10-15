@@ -11,7 +11,7 @@
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
 timeStamp="$(date +%s)"
-#
+#wget options to manage cookies
 cookieFile="$TMP/cookies.srcget.${timeStamp}.$RANDOM$RANDOM.txt"
 cookieOptions="--load-cookies=$cookieFile --save-cookies=$cookieFile"
 wgetArgs="-T ${timeout} -q --no-check-certificate ${cookieOptions}"
@@ -62,7 +62,8 @@ $0 [options] program_name
  -x  Turn on debug mode
  -n  Quiet mode: show filename only
  -q  Quiet mode: don't show anything
- -F  Force Filter
+ -d  Delete file after download (for testing)
+ -F  Force specific Filter
  -H  Debug: return server HTTP headers
  -D  Testing: download remote url only
  -N  Do not download: used to check latest version
@@ -410,6 +411,9 @@ main_single()
  [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
   { srcecho "${profile}: invalid output format: HTML"; rm -- "$fn"; return 11; }
 
+ # Delete file if asked (used for bulk testing)
+ [ "$DELETEFILE" -eq 1 ] && { rm -f "$fn"; }
+
  return $rc
 }
 
@@ -608,6 +612,7 @@ export DEBUG=""
 export SILENT=""
 export NAMEONLY=0
 export NODOWNLOAD=0
+export DELETEFILE=0
 
 while [ ! -z "$1" ]
 do
@@ -619,6 +624,7 @@ do
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
  [ "$1" == "-q" ] && { SILENT=1; shift; continue; }
+ [ "$1" == "-d" ] && { DELETEFILE=1; shift; continue; }
  [ "$1" == "-N" ] && { NODOWNLOAD=1; shift; continue; }
  [ "$1" == "-n" ] && { NAMEONLY=1; shift; continue; }
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
