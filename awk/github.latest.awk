@@ -15,14 +15,29 @@ BEGIN \
 
 # custom rules
 
-state == 1 { next }
+state == 1 { next } # found our "release" skip everything else
 
-$0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ && $0 !~ /-dev/ && vers == "" \
+# try to filter out "Pre-release"s; this needs to introduce "multi-page" github traversal
+/Pre-release/ \
+{
+  state = 2
+  print "#DEBUG: skipped Pre-release"
+  next
+}
+
+state == 2 && /Latest release/ \
+{
+  state = 0
+  print "#DEBUG: found Latest"
+  next
+}
+
+state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ && $0 !~ /-dev/ && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
   cnt = split(line, line_a, " ");
-  print "# DEBUG: cnt = " cnt " line = " line
+  print "# DEBUG: state = " state " cnt = " cnt " line = " line
 
   for (idx in line_a)
   {
