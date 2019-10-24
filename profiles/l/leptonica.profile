@@ -10,5 +10,6 @@ custom_url="http://www.leptonica.org/source/leptonica-#version#.${extension_inpu
 basename="leptonica"
 custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
+comment="raster image library"
 
 ## EOF ##
