@@ -1,9 +1,9 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword-slim"
+latest="firstaftermatchword-trim"
 srcurl="https://sourceforge.net/projects/math-atlas/files/Stable/"
 comment=""
-opt_match="Latest Version"
+opt_match="download-bar"
 extension_input="tar.bz2"
 basename="atlas"
 version_holder="#version#"
