@@ -200,6 +200,11 @@ is_valid_url()
 }
 
 # function: load_profile: load a single profile
+# return codes:
+#   1    Invalid arguments
+#   2    Profile not found
+#   3    Filter not found
+#
 load_profile()
 {
  ## Load profile information
@@ -248,8 +253,9 @@ load_profile()
  unset custom_file
  . $pfp
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
- #
- for filter in \
+ export filter="$latestawk" # un-resolved filter name
+
+ for fp_filter in \
    "$srcHome/awk/${latestawk}.latest.awk" \
    "$srcHome/awk/${latestawk}" \
    "$srcHome/latest/${latestawk}.latest.awk" \
@@ -257,8 +263,10 @@ load_profile()
    "$srcHome/${latestawk}.latest.awk" \
    "$srcHome/${latestawk}"
  do
-  [ -f "$filter" ] && { export fp_filter="$filter"; break; }
+  [ -f "$fp_filter" ] && { export fp_filter; break; }
  done
+
+ [ ! -f "$fp_filter" ] && return 3
  return 0
 }
 
@@ -276,9 +284,9 @@ main_single()
  profileRc=$?
 
  # Sanity checks
+ [ $profileRc -eq 3 ] && { srcecho "${profile}: filter not found: ${filter}"; return 4; }
  [ -z "$srcurl" -o -z "$fp_filter" ] && { return $profileRc; } # just return if any of these are empty
  [ $profileRc -ne 0 ] && { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
- [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
 
  # Find latest software version
  typeset version_output="${TMP}/current_version.${RANDOM}${RANDOM}.txt"
@@ -636,13 +644,13 @@ do
  shift
 done
 
- [ ! -z "$main" ] &&
- {
-  eval $main $profileList
-  rc=$?
-  cleanup
+[ ! -z "$main" ] &&
+{
+ eval $main $profileList
+ rc=$?
+ cleanup
 
-  exit $rc
- }
+ exit $rc
+}
 
 ### EOF ###
