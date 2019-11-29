@@ -11,18 +11,18 @@
 timeout="10"
 [ ! -d "$TMP" ] && TMP="/tmp"
 timeStamp="$(date +%s)"
-#
+#wget options to manage cookies
 cookieFile="$TMP/cookies.srcget.${timeStamp}.$RANDOM$RANDOM.txt"
 cookieOptions="--load-cookies=$cookieFile --save-cookies=$cookieFile"
 wgetArgs="-T ${timeout} -q --no-check-certificate ${cookieOptions}"
-homePage="http://github.com/dellelce/srcget/"
 
 NAMEONLY=0
 ERR4SLEEP=2  # time to sleep before error 4 (can be a temporary network issue)
 
-# User Agent
-srcget_version="0.0.9.1"
-UA="Mozilla/5.0 (compatible; srcget/${srcget_version}; +${homePage}) Dummy/0.0.0 (KHTML, like Gecko)"
+# User Agent: sourceforge sends us html if we use anything Mozilla/5.0 so this was changed
+srcget_version="0.0.9.11"
+homePage="http://github.com/dellelce/srcget/"
+UA="srcget/${srcget_version} (+${homePage})"
 
 unset SILENT DEBUG
 
@@ -62,7 +62,8 @@ $0 [options] program_name
  -x  Turn on debug mode
  -n  Quiet mode: show filename only
  -q  Quiet mode: don't show anything
- -F  Force Filter
+ -d  Delete file after download (for testing)
+ -F  Force specific Filter
  -H  Debug: return server HTTP headers
  -D  Testing: download remote url only
  -N  Do not download: used to check latest version
@@ -120,10 +121,6 @@ rawget()
  typeset url="$1"
 
  [ -z "$url" ] && return 1
-
- #temp workaround for github - there must be something wrong in github.com webserver..........maybe
- #[ $(echo $url | grep -c "github") -eq 1 ] && { unset wgetHeaders; }
-
  [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
 
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
@@ -153,6 +150,7 @@ EOF
 current_version()
 {
  typeset _awk="awk"
+ typeset _args=""
  typeset rc=0
  typeset legacy_version=""
  typeset version=""
@@ -160,6 +158,7 @@ current_version()
  typeset tmpid="currentversion_${RANDOM}${RANDOM}"
  get_output="$TMP/${tmpid}.get.txt" # not local so it can be picked by cleanup function
 
+<<<<<<< HEAD
  # setup awk args
  [ ! -z "$DEBUG" ] && { _awk="${_awk} -vdebug=1"; }
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
@@ -176,10 +175,26 @@ current_version()
 
  [ $rc -ne 0 ] && return $rc
 
- ${_awk} -vbaseurl="${baseurl}" -f "$fp_filter" < "$get_output"      |
+ # setup awk args
+ [ ! -z "$DEBUG" ] && { _args="${_args} -vdebug=1"; }
+ [ ! -z "$skipvers" ] && { _args="${_args} -vskipvers=$skipvers"; }
+ [ ! -z "$extension_input" ] && { _args="${_args} -vext=$extension_input"; }
+ [ ! -z "$extension_url" ] && { _args="${_args} -vexturl=$extension_url"; }
+ [ ! -z "$sep" ] && { _args="${_args} -F${sep}"; }
+ [ ! -z "$pkgprofile" ] && { _args="${_args} -vpkgprofile=$pkgprofile"; }
+ [ ! -z "$pkgbase" ] && { _args="${_args} -vpkgbase=$pkgbase"; }
+ [ ! -z "$customout" ] && { _args="${_args} -vcustomout=$customout"; }
+
+ export opt_match
+ export opt_nonmatch
+ ${_awk} ${_args} -vbaseurl="${baseurl}" \
+                    -f "$fp_filter" < "$getoutput"  |
  awk ' FNR == 1 && !/^$/ && $1 !~ /^#/ { print "legacy_version=\""$0"\""; next; }
        FNR > 1 { print }'
  rc=$?
+ # we don't need "opt_*" anywhere else
+ unset opt_match
+ unset opt_nonmatch
 
  rm -f "$get_output"
 
@@ -197,21 +212,30 @@ is_valid_url()
 }
 
 # function: load_profile: load a single profile
+# return codes:
+#   1    Invalid arguments
+#   2    Profile not found
+#   3    Filter not found
+#
 load_profile()
 {
  ## Load profile information
  export profile="$1"
+
  [ -z "$profile" ] && return 1;
 
- # try harder to make sure profilesDir is correct
- [ ! -d "$profilesDir" ] &&
+ [ -f "$profile" ] &&
  {
-   export srcHome=$(getlinkdir "$0")
-   export profilesDir="$srcHome/profiles"
- }
+  pfp="$profile"
+ } ||
+ {
+  export pfp="$profilesDir/${profile}.profile"
+  export pfch="${profile:0:1}"
+  export altpfp="$profilesDir/${pfch}/${profile}.profile"
 
- export pfp="$profilesDir/${profile}.profile"
- [ ! -f "$pfp" ] && { srcecho "cannot find profile: $profile [$pfp]"; return 2; }
+  [ ! -f "$pfp" -a ! -f "${altpfp}" ] && { srcecho "cannot find profile: $profile"; return 2; }
+  [ ! -f "$pfp" ] && pfp="${altpfp}"
+ }
 
  # TODO: Improve handling of variables
  unset basename
@@ -233,6 +257,7 @@ load_profile()
  unset version_holder
  unset custom_url
  unset opt_match
+ unset opt_nonmatch
  unset pkgprofile
  unset pkgbase
  unset customout
@@ -240,17 +265,20 @@ load_profile()
  unset custom_file
  . $pfp
  [ -z "$FORCEFILTER" ] && { latestawk="$latest"; unset latest; } || { latestawk="$FORCEFILTER"; }
- #
- for filter in \
-   "$srcHome/${latestawk}" \
-   "$srcHome/${latestawk}.latest.awk" \
-   "$srcHome/awk/${latestawk}" \
+ export filter="$latestawk" # un-resolved filter name
+
+ for fp_filter in \
    "$srcHome/awk/${latestawk}.latest.awk" \
+   "$srcHome/awk/${latestawk}" \
+   "$srcHome/latest/${latestawk}.latest.awk" \
    "$srcHome/latest/${latestawk}" \
-   "$srcHome/latest/${latestawk}.latest.awk"
+   "$srcHome/${latestawk}.latest.awk" \
+   "$srcHome/${latestawk}"
  do
-  [ -f "$filter" ] && { export fp_filter="$filter"; break; }
+  [ -f "$fp_filter" ] && { export fp_filter; break; }
  done
+
+ [ ! -f "$fp_filter" ] && return 3
  return 0
 }
 
@@ -267,12 +295,10 @@ main_single()
  load_profile $profile
  profileRc=$?
 
- [ $profileRc -ne 0 ] &&
-  { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
-
  # Sanity checks
- [ -z "srcurl" ] && { srcecho "${profille}: invalid url: $srcurl"; return 3; }
- [ ! -f "$fp_filter" ] && { srcecho "${profile}: invalid filter file: $fp_filter"; return 4; }
+ [ $profileRc -eq 3 ] && { srcecho "${profile}: filter not found: ${filter}"; return 4; }
+ [ -z "$srcurl" -o -z "$fp_filter" ] && { return $profileRc; } # just return if any of these are empty
+ [ $profileRc -ne 0 ] && { srcecho "${profile}: load profile failed: rc = $profileRc"; return $profileRc; }
 
  # Find latest software version
  version_output="${TMP}/current_version.${RANDOM}${RANDOM}.txt"
@@ -372,7 +398,7 @@ main_single()
   return 0
  }
 
- # Check if fullurl has version_holder if so replace appropriately
+ # Check if fullurl has version_holder if so replace with found version
  [ ! -z "$version_holder" ] &&
  {
   typeset vh_latest=${version:-${latest}}
@@ -405,6 +431,9 @@ main_single()
  [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
   { srcecho "${profile}: invalid output format: HTML"; rm -- "$fn"; return 11; }
 
+ # Delete file if asked (used for bulk testing)
+ [ "$DELETEFILE" -eq 1 ] && { rm -f "$fn"; }
+
  return $rc
 }
 
@@ -422,7 +451,7 @@ info_single()
  profileRc=$?
 
  # Sanity checks
- [ -z "srcurl" ] && { srcecho "invalid url: $srcurl"; return 3; }
+ [ -z "$srcurl" -o -z "$fp_filter" ] && { return $profileRc; } # just return if any of these are empty
  [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; }
  [ $profileRc -ne 0 ] && { return 5; }
 
@@ -439,6 +468,7 @@ srcall()
  typeset errcnt=0
  typeset okcnt=0
  typeset fails=""
+ typeset item
 
  [ ! -d "$profilesDir" ] &&
  {
@@ -446,25 +476,23 @@ srcall()
   typeset profilesDir="$srcHome/profiles"
  }
 
- typeset b p item
-
  [ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; return 20; }
 
- for item in $profilesDir/*;
+ for item in $profilesDir/*/*.profile $profilesDir/*.profile;
  do
-  b=$(basename $item);
-  p=${b%.profile};
+  [ ! -f "$item" ] && continue
 
-  [ "$b" == "$p" ] && continue # no .profile extension: ignore
+  p=$(basename $item); # short profile name
+  p=${p%.profile}
 
   # profile is loaded twice, and this is not a good thing
-  load_profile "$p"
+  load_profile "$item"
 
   # ignore profiles not enabled for bulk (srcall): profiles in development
   [ "$bulkenabled" == "no" -o "$bulkenabled" == "n" ] && continue
   [ -z "$basename" ] && { basename="${p}"; } # override if set in profile!
 
-  SILENT=1 main_single $p # always run main_single silently
+  SILENT=1 main_single $item # always run main_single silently
   rc="$?"
 
   # wget appears to return 1 on success.......(!?)
@@ -494,11 +522,7 @@ srcall()
 
  [ "$okcnt" -gt 0 ] && { echo "There have been ${okcnt} successful downloads."; }
  [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
- [ "$errcnt" -gt 1 ] &&
- {
-   echo "There have been $errcnt failed downloads: $fails"
-   return 1
- }
+ [ "$errcnt" -gt 1 ] && { echo "There have been $errcnt failed downloads: $fails" return 1; }
 
  return 0
 }
@@ -516,12 +540,10 @@ listall()
 
  [ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; return 20; }
 
- for item in $profilesDir/*
+ for item in $profilesDir/*/*.profile
  do
   bitem=$(basename $item)
   withoutprofile=${bitem%.profile}
-
-  [ "$withoutprofile" == "$bitem" ] && { continue; } # ignore files that do not have .profile
 
   echo "$withoutprofile"
  done
@@ -595,6 +617,14 @@ geturl()
 
 [ -z "$*" ] && { usage; exit 0; }
 
+[ ! -d "$profilesDir" ] &&
+{
+ typeset srcHome=$(getlinkdir "$0")
+ typeset profilesDir="$srcHome/profiles"
+}
+
+[ ! -d "$profilesDir" ] && { echo "Can't find profiles directory!: $profilesDir"; exit 20; }
+
 profileList=""
 export main="main"
 export FORCEFILTER=""
@@ -602,6 +632,7 @@ export DEBUG=""
 export SILENT=""
 export NAMEONLY=0
 export NODOWNLOAD=0
+export DELETEFILE=0
 
 while [ ! -z "$1" ]
 do
@@ -613,6 +644,7 @@ do
  [ "$1" == "-L" ] && { main="listall"; shift; continue; }
  [ "$1" == "-I" ] && { main="infoall"; shift; continue; }
  [ "$1" == "-q" ] && { SILENT=1; shift; continue; }
+ [ "$1" == "-d" ] && { DELETEFILE=1; shift; continue; }
  [ "$1" == "-N" ] && { NODOWNLOAD=1; shift; continue; }
  [ "$1" == "-n" ] && { NAMEONLY=1; shift; continue; }
  [ "$1" == "-h" ] && { usage; main=""; shift; continue; }
@@ -624,13 +656,13 @@ do
  shift
 done
 
- [ ! -z "$main" ] &&
- {
-  eval $main $profileList
-  rc=$?
-  cleanup
+[ ! -z "$main" ] &&
+{
+ eval $main $profileList
+ rc=$?
+ cleanup
 
-  exit $rc
- }
+ exit $rc
+}
 
 ### EOF ###

@@ -1,37 +1,40 @@
 #
 # bind.latest.awk
 #
-# created: 1834 150614
+# created: 150614
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
 BEGIN {
         vers=""
         state = 0
+        print ""
       }
 
-# custom rules
-
-/BIND Software Version/ && state == 0 { state = 1; } 
-
-state == 1 && /[0-9]+\.[0-9]+\.[0-9]/ \
+$0 ~ ext && /[0-9]+\.[0-9]+\.[0-9]/ && vers == "" \
 {
    line = $0
    gsub(/[<>]/, " ", line);
    split(line, line_a, " ");
+   print "#DEBUG: version pattern match: "$0
 
    for (idx in line_a)
    {
      item = line_a[idx]
-     if (vers == "" && item ~ /[0-9]+\.[0-9]+\.[0-9]/)
+     if (vers == "" && item ~ /^BIND[0-9]+\.[0-9]+\.[0-9]/)
      {
-       vers = item
+       print "#DEBUG: version "item
+       split(item, vers_a, ".");
+
+       #ignore odd releases
+       if (vers_a[2] % 2 != 1)
+       {
+         vers = item
+       }
      }
    }
-  
+
    state = 2
    next
 }
@@ -42,8 +45,8 @@ END \
 {
  if (vers != "")
  {
-  gsub(/\./, "-", vers);
-  vers=tolower(vers)
-  print vers;
+  sub(/BIND/, "", vers);
+  sub("."ext, "", vers);
+  print "latest="vers;
  }
 }

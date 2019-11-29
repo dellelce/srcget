@@ -16,7 +16,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
-  gsub(/[<>]/, " ", line);
+  gsub(/[<>\/]/, " ", line);
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
@@ -31,7 +31,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
       vers = item
       lightvers = vers
 
-      if (vers ~ /\.sig/ || vers ~ /\.asc/) continue;
+      if (vers ~ /\.sig/ || vers ~ /\.asc/ || vers ~ /alpha/)  { print "# DEBUG skipped: "vers; vers=""; continue; }
 
       sub("."ext, "", lightvers)
       lv_cnt = split(lightvers, lightvers_a, "-");
@@ -69,7 +69,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
       print "# DEBUG: version path found: "vers
       next
     }
-  }
+  } # for
 }
 
 ### end rule ###
