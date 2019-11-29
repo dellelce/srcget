@@ -158,7 +158,6 @@ current_version()
  typeset tmpid="currentversion_${RANDOM}${RANDOM}"
  get_output="$TMP/${tmpid}.get.txt" # not local so it can be picked by cleanup function
 
-<<<<<<< HEAD
  # setup awk args
  [ ! -z "$DEBUG" ] && { _awk="${_awk} -vdebug=1"; }
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
@@ -187,8 +186,9 @@ current_version()
 
  export opt_match
  export opt_nonmatch
- ${_awk} ${_args} -vbaseurl="${baseurl}" \
-                    -f "$fp_filter" < "$getoutput"  |
+ ${_awk} ${_args} \
+         -vbaseurl="${baseurl}" \
+         -f "$fp_filter" < "$get_output"  |
  awk ' FNR == 1 && !/^$/ && $1 !~ /^#/ { print "legacy_version=\""$0"\""; next; }
        FNR > 1 { print }'
  rc=$?
