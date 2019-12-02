@@ -163,7 +163,6 @@ current_version()
  [ ! -z "$skipvers" ] && { _awk="${_awk} -vskipvers=$skipvers"; }
  [ ! -z "$extension_input" ] && { _awk="${_awk} -vext=$extension_input"; }
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
- [ ! -z "$opt_match" ] && { _awk="${_awk} -vopt_match=$opt_match"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
  [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$pkgprofile"; }
  [ ! -z "$pkgbase" ] && { _awk="${_awk} -vpkgbase=$pkgbase"; }
