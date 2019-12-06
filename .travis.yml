@@ -1,6 +1,6 @@
 language: c
 before_script:
-   - ( ( while true; do echo -e  "\e[31mtravis ping $(date +%H%M%S)\e[0m"; ps -eo args | awk '/wget/&&!/awk/'; sleep 30; [ -f end ] && break; done; ) & )
+   - ( ( while true; do echo -e  "\e[31mtravis ping $(date +%H%M%S)\e[0m"; sleep 30; [ -f end ] && break; done; ) & )
 script: wget --version && echo && cat /proc/meminfo && awk --version && echo && ./srcget.sh -A -d
 notifications:
    slack: skydreams:1FLUnEeqaNLinKq1p0lJf9F5
