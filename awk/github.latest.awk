@@ -63,7 +63,7 @@ state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ &&
         next
       }
 
-      if (vers ~ /-rc/)
+      if (vers ~ /-rc/ || vers ~ /RC/)
       {
         print "# DEBUG: filter out rc"
         vers = ""
