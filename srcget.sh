@@ -201,7 +201,11 @@ current_version()
 }
 
 # function: is_valid_url: mini-sanity check
-is_valid_url() { [ $(echo "$1" | grep -c '://') -eq 0 ] && return 1; }
+is_valid_url()
+{
+  [ $(echo "$1" | grep -c '://') -eq 0 ] && return 1
+  return 0
+}
 
 # function: load_profile: load a single profile
 # return codes:
