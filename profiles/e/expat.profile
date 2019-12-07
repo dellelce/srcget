@@ -1,10 +1,14 @@
 # vim:syntax=sh
 
-latest="expat"
 srcurl="https://sourceforge.net/projects/expat/files/expat/"
 extension_input="tar.bz2"
+latest="firstaftermatchword-trim"
+opt_match="Parent folder"
+opt_nonmatch="svg"
+basename="expat"
 #
-#https://downloads.sourceforge.net/project/expat/expat/2.2.2/expat-2.2.2.tar.bz2
-custom_url_prefix="https://netix.dl.sourceforge.net/project/expat/expat/"
-custom_url_postfix=".${extension_input}"
+#https://sourceforge.net/projects/expat/files/expat/2.2.9/expat-2.2.9.tar.xz/download
+version_holder="#version#"
+custom_url="https://sourceforge.net/projects/expat/files/expat/#version#/expat-#version#.${extension_input}/download"
+custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
