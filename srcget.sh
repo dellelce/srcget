@@ -518,7 +518,7 @@ srcall()
 
  [ "$okcnt" -gt 0 ] && { echo "There have been ${okcnt} successful downloads."; }
  [ "$errcnt" -eq 1 ] && { echo "There download for $fails has failed."; return 1; }
- [ "$errcnt" -gt 1 ] && { echo "There have been $errcnt failed downloads: $fails" return 1; }
+ [ "$errcnt" -gt 1 ] && { echo "There have been $errcnt failed downloads: $fails"; return 1; }
 
  return 0
 }
