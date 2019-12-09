@@ -16,7 +16,7 @@ BEGIN {
 
 $0 ~ opt_match { state=1; }
 
-state == 1 && $0 ~ /[0-9]+\_[0-9]+/ && vers == "" && $0 !~ /ALPHA/ \
+state == 1 && $0 ~ /[0-9]+\_[0-9]+/ && vers == "" && $0 !~ /ALPHA/ && $0 !~ /BETA/ \
 {
   line=$0
   gsub(/"/, " ", line);
@@ -47,7 +47,7 @@ END \
   print "# DEBUG: END FNR = " FNR
   #extra trim
   sub("."ext,"",vers);
-  hyphen_cnt = split(vers,vers_a,"-"); if (hyphen_cnt == 2) vers = vers_a[2];
+  hyphen_cnt = split(vers,vers_a,"_"); if (hyphen_cnt == 2) vers = vers_a[2];
   sub(/\.$/, "", vers); #trailing dots not part of a version
   sub(/^v/, "", vers); #don't need an initial v
   if (vers != "")
