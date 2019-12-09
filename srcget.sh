@@ -226,7 +226,7 @@ load_profile()
  } ||
  {
   export pfp="$profilesDir/${profile}.profile"
-  export pfch="${profile:0:1}"
+  export pfch="${profile:0:1}"; pfch=${pfch,,[a-z]}
   export altpfp="$profilesDir/${pfch}/${profile}.profile"
 
   [ ! -f "$pfp" -a ! -f "${altpfp}" ] && { srcecho "cannot find profile: $profile"; return 2; }
