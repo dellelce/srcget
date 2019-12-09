@@ -10,11 +10,13 @@ BEGIN {
         print ""
         state=0
         opt_match=ENVIRON["opt_match"]
+        opt_nonmatch=ENVIRON["opt_nonmatch"]
       }
 
 # custom rules
 
 $0 ~ opt_match { state=1; }
+opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 
 state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 {
