@@ -1,10 +1,12 @@
 # vim:syntax=sh
 
-latest="swig"
-srcurl="https://sourceforge.net/projects/swig/files/swig/"
+latest="firstaftermatchword-trim"
+basename="swig"
+srcurl="http://www.swig.org/download.html"
+opt_match="The latest release"
 extension_input="tar.gz"
-#https://netix.dl.sourceforge.net/project/swig/swig/swig-3.0.12/swig-3.0.12.tar.gz
-# /swig/swig-3.0.12/swig-3.0.12.tar.gz
-custom_url_prefix="https://netix.dl.sourceforge.net/project/swig/swig/"
-custom_url_postfix=".${extension_input}"
+# http://prdownloads.sourceforge.net/swig/swig-4.0.1.tar.gz
+version_holder="#version#"
+custom_url="http://prdownloads.sourceforge.net/swig/swig-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
