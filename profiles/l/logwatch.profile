@@ -1,13 +1,12 @@
 # vim:syntax=sh
 
-latest="logwatch"
-srcurl="http://sourceforge.net/projects/logwatch/files/"
+latest="firstaftermatchword-trim"
+basename="logwatch"
+srcurl="https://sourceforge.net/projects/logwatch/files/"
+opt_match="Download Latest Version"
 extension_input="tar.gz"
-# if set will be used to generate url
-sep='/'
-comment="very out of date and no other official website found"
-#https://datapacket.dl.sourceforge.net/project/logwatch/logwatch-7.4.3/logwatch-7.4.3.tar.gz
-custom_url_prefix="https://datapacket.dl.sourceforge.net/project/logwatch/logwatch-"
-custom_url_postfix=".${extension_input}"
+#https://sourceforge.net/projects/logwatch/files/logwatch-7.5.2/logwatch-7.5.2.tar.gz/download
+version_holder="#version#"
+custom_url="https://sourceforge.net/projects/logwatch/files/logwatch-#version#/logwatch-#version#.${extension_input}/download"
+custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
-
