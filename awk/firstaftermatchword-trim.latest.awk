@@ -49,13 +49,22 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 END \
 {
   print "# DEBUG: END FNR = " FNR
-  #extra trim
+
+  #extra trim: remove extension
   sub("."ext,"",vers);
-  hyphen_cnt = split(vers,vers_a,"-"); if (hyphen_cnt == 2) vers = vers_a[2];
+  print "# DEBUG: version after extension trim: "vers
+
+  # remove "name-" prefix
+  hyphen_cnt = split(vers, vers_a, "-"); if (hyphen_cnt == 2) vers = vers_a[2];
   sub(/\.$/, "", vers); #trailing dots not part of a version
   sub(/^v/, "", vers); #don't need an initial v
+
   if (vers != "")
   {
     print "latest="vers
+
+    split(vers, vers_a, ".")
+    print "major=\""vers_a[1]"\""
+    print "minor=\""vers_a[2]"\""
   }
 }

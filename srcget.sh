@@ -251,6 +251,11 @@ load_profile()
  unset comment
  unset bulkenabled
  unset version_holder
+ unset major_holder
+ unset major
+ unset minor_holder
+ unset minor
+ unset minor_holder
  unset custom_url
  unset opt_match
  unset opt_nonmatch
@@ -361,6 +366,18 @@ main_single()
  {
   typeset vh_latest=${version:-${latest}}
   fn="${fn//${version_holder}/${vh_latest}}"
+ }
+
+ # replace "major_holder" with "major" version if found
+ [ ! -z "$major_holder" -a -z "$major" ] &&
+ {
+  fn="${fn//${major_holder}/${major}}"
+ }
+
+ # replace "minor_holder" with "minor" version if found
+ [ ! -z "$minor_holder" -a -z "$minor" ] &&
+ {
+  fn="${fn//${minor_holder}/${minor}}"
  }
 
  [ -z "$custom_url"  ] &&
