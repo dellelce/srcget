@@ -1,8 +1,8 @@
 # vim:syntax=sh
 
 latest="firstaftermatchword-trim"
-opt_match="latest_stable"
-opt_nonmatch="json"
+opt_match="version"
+opt_nonmatch="lts_branch"
 srcurl="https://cfengine.com/release-data/community/releases.json"
 comment="Configuration management written in C"
 extension_input="tar.gz"
