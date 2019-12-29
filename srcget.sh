@@ -20,7 +20,7 @@ NAMEONLY=0
 ERR4SLEEP=2  # time to sleep before error 4 (can be a temporary network issue)
 
 # User Agent: sourceforge sends us html if we use anything Mozilla/5.0 so this was changed
-srcget_version=$( wget --version 2>&1| awk '
+wget_version=$( wget --version 2>&1| awk '
  /[0-9]+\.[0-9]+/ { c=split($0,a);
                     if (a[1] == "GNU") { print a[3]; }
                     else
@@ -29,7 +29,7 @@ srcget_version=$( wget --version 2>&1| awk '
 )
 
 homePage="http://github.com/dellelce/srcget/"
-UA="Wget/${srcget_version} (+${homePage})"
+UA="Wget/${wget_version} (+${homePage})"
 
 unset SILENT DEBUG
 
