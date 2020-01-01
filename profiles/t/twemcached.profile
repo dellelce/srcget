@@ -1,9 +1,10 @@
 # vim:syntax=sh
 
 latest="github"
-srcurl="https://github.com/twitter/twemcache/releases"
+baseurl="https://github.com/twitter/twemcache"
+srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="https://github.com/twitter/twemcache/archive/"
-basename="twemcached"
+custom_url_prefix="${baseurl}/archive/"
+basename="twemcache"
 custom_file_prefix="${basename}-"
+comment="twitter fork of memcached"
