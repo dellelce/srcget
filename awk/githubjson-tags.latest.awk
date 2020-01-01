@@ -18,7 +18,7 @@ BEGIN \
 }
 
 $1 ~ /name/ \
-{ 
+{
   print "#DEBUG: name: " $0
   name=$2
 
@@ -26,9 +26,9 @@ $1 ~ /name/ \
   {
     print "#DEBUG: got version: " name
     vers = name
+    gsub(/"/, "", vers)
     sub(/^v/, "", vers)
     gsub(/_/, ".", vers)
-    gsub(/"/, "", vers)
   }
 
   next
