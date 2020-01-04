@@ -21,11 +21,14 @@ ERR4SLEEP=2  # time to sleep before error 4 (can be a temporary network issue)
 
 # User Agent: sourceforge sends us html if we use anything Mozilla/5.0 so this was changed
 wget_version=$( wget --version 2>&1| awk '
- /[0-9]+\.[0-9]+/ { c=split($0,a);
-                    if (a[1] == "GNU") { print a[3]; }
+ BEGIN { v=""; }
+ /[0-9]+\.[0-9]+/ && v=="" { c=split($0,a);
+                    if (a[1] == "GNU") { v=a[3]; }
                     else
-                                       { sub(/^v/,"",a[2]); print a[2]; }
-                  } '
+                                       { sub(/^v/,"",a[2]); v=a[2]; }
+                  }
+END { print v; }
+'
 )
 
 homePage="http://github.com/dellelce/srcget/"
