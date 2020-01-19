@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+latest="firstaftermatchword-trim"
+srcurl="https://www.open-mpi.org/software/"
+opt_match="Current stable release"
+opt_nonmatch="sha1sum"
+basename="openmpi"
+extension_input="tar.bz2"
+comment=""
+version_holder="#version#"
+major_holder="#major#"
+minor_holder="#minor#"
+custom_url="https://download.open-mpi.org/release/open-mpi/v#major#.#minor#/openmpi-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
