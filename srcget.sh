@@ -261,9 +261,8 @@ load_profile()
  unset comment
  unset bulkenabled
  unset version_holder
- unset major_holder
  unset major
- unset minor_holder
+ unset major_holder
  unset minor
  unset minor_holder
  unset custom_url
@@ -379,15 +378,17 @@ main_single()
  }
 
  # replace "major_holder" with "major" version if found
- [ ! -z "$major_holder" -a -z "$major" ] &&
+ [ ! -z "$major_holder" -a ! -z "$major" ] &&
  {
-  fn="${fn//${major_holder}/${major}}"
+  fullurl="${fullurl//${major_holder}/${major}}"
+  custom_url="${custom_url//${major_holder}/${major}}"
  }
 
  # replace "minor_holder" with "minor" version if found
- [ ! -z "$minor_holder" -a -z "$minor" ] &&
+ [ ! -z "$minor_holder" -a ! -z "$minor" ] &&
  {
-  fn="${fn//${minor_holder}/${minor}}"
+  fullurl="${fullurl//${minor_holder}/${minor}}"
+  custom_url="${custom_url//${minor_holder}/${minor}}"
  }
 
  [ -z "$custom_url"  ] &&
