@@ -1,9 +1,9 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword"
-srcurl="https://www.mpich.org/"
+latest="firstaftermatchword-trim"
+srcurl="http://www.mpich.org/downloads/"
 comment="Implementation of Messaging Passing Interface (MPI) standard"
-opt_match="released"
+opt_match="stable release"
 extension_input="tar.gz"
 basename="mpich"
 version_holder="#version#"
