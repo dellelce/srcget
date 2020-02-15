@@ -1,6 +1,7 @@
 # vim:syntax=sh
 
 latest="github"
+opt_nonmatch="openvino"
 baseurl="https://github.com/itseez/opencv"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
