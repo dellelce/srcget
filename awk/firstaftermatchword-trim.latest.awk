@@ -9,13 +9,15 @@ BEGIN {
         vers=""
         print ""
         state=0
+        substate=0
         opt_match=ENVIRON["opt_match"]
+        opt_2ndmatch=ENVIRON["opt_2ndmatch"]
         opt_nonmatch=ENVIRON["opt_nonmatch"]
       }
 
 # custom rules
 
-$0 ~ opt_match { state=1; }
+$0 ~ opt_match { print "# DEBUG: change state to 1; LINE = " FNR; state=1; }
 opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 
 state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
@@ -34,13 +36,29 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   print "# DEBUG: line array cnt: " cnt
   print "# DEBUG: " line
 
+  # no "2nd keyword" to match switch to 1
+  if (opt_2ndmatch == "") { print "# DEBUG: opt_2ndmatch is empty."; substate = 1; }
+
   for (idx in line_a)
   {
     item = line_a[idx]
     print "# DEBUG: item = "item " index = "idx
+    if (opt_2ndmatch != "" && substate == 0)
+    {
+      if  (item ~ opt_2ndmatch)
+      {
+        print "# DEBUG: 2nd keyword matched: LINE = " FNR " keyword = " item
+        substate = 1
+      }
+      else
+      {
+        continue;  # we need substate == 1 to allow match of main keyword
+      }
+    }
 
     if (item ~ /[0-9]+\.[0-9]+/ && vers == "")
     {
+      # if set make sure we match second condition
       vers = item
 
       print "# DEBUG: version path found: "vers

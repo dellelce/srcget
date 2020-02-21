@@ -195,6 +195,7 @@ current_version()
 
  export opt_match
  export opt_nonmatch
+ export opt_2ndmatch
  ${_awk} ${_args} \
          -vbaseurl="${baseurl}" \
          -f "$fp_filter" < "$get_output"  |
@@ -268,6 +269,7 @@ load_profile()
  unset custom_url
  unset opt_match
  unset opt_nonmatch
+ unset opt_2ndmatch
  unset pkgprofile
  unset pkgbase
  unset customout
