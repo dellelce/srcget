@@ -33,7 +33,7 @@ state == 2 && /Latest release/ \
   next
 }
 
-$0 ~ opt_nonmatch { next; }
+opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 
 state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ && $0 !~ /-dev/ && vers == "" \
 {
