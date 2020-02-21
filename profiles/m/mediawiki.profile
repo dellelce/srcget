@@ -1,9 +1,16 @@
 # vim:syntax=sh
 
-latest="firstin-mediawiki"
-srcurl="https://www.mediawiki.org/wiki/MediaWiki"
+latest="firstaftermatchword-trim"
+srcurl="https://www.mediawiki.org/wiki/Download"
+opt_match="Download MediaWiki"
+opt_2ndmatch="mediawiki-"
+opt_nonmatch=""
+basename="mediawiki"
 extension_input="tar.gz"
-#http://download.wikimedia.org/mediawiki/1.21/mediawiki-1.21.1.tar.gz
-# if set will be used to generate url
-baseurl="http://releases.wikimedia.org/mediawiki"
-sep='>'
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="http://download.wikimedia.org/mediawiki/#major#.#minor#/mediawiki-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
