@@ -82,6 +82,7 @@ END \
   sub(/\.$/, "", vers); #trailing dots not part of a version
   sub(/:/, "", vers); # unneeded character in version
   sub(/^v/, "", vers); #don't need an initial v
+  gsub(/[()]/, "", vers); # not part of version
 
   if (vers != "")
   {
