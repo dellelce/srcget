@@ -1,5 +1,15 @@
 # vim:syntax=sh
 
-latest="firstinbody-notrim"
-extension_input="tar.gz"
+latest="firstaftermatchword-trim"
 srcurl="https://vtk.org/download/"
+opt_match="latest release"
+opt_nonmatch="candidate"
+basename="vtk"
+extension_input="tar.gz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://www.vtk.org/files/release/#major#.#minor#/VTK-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
