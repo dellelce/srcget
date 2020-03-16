@@ -1,6 +1,6 @@
 # vim:syntax=sh
 
-latest="firstinbody"
+latest="lastinbody"
 srcurl="https://postgis.net/source/"
 baseurl="https://download.osgeo.org/postgis/source"
 comment=""
