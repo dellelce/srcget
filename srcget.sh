@@ -19,7 +19,7 @@ wgetArgs="-T ${timeout} -q --no-check-certificate ${cookieOptions}"
 NAMEONLY=0
 ERR4SLEEP=2  # time to sleep before error 4 (can be a temporary network issue)
 
-# User Agent: sourceforge sends us html if we use anything Mozilla/5.0 so this was changed
+# User Agent: sourceforge sends us html if we use anything like Mozilla/5.0 so this was changed
 wget_version=$( wget --version 2>&1| awk '
  BEGIN { v=""; }
  /[0-9]+\.[0-9]+/ && v=="" { c=split($0,a);
@@ -133,6 +133,7 @@ rawget()
  [ -z "$url" ] && return 1
  [ -z "$wgetHeaders" ] && { wget -U "$UA" -O - ${wgetArgs} "$url"; return $?; }
 
+ LANG="en_GB.UTF-8" \
  wget -U "$UA" -O - ${wgetArgs} ${wgetHeaders} "$url"
 
  # keep wget return code
