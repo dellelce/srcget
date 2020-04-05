@@ -46,7 +46,7 @@ fileType()
  typeset fn="$1"
  [ -z "$fn" ] && return 1
 
- file -b "$fn" |awk ' { print $1 } '
+ file -b -- "$fn" |awk ' { print $1 } '
  return 0
 }
 
