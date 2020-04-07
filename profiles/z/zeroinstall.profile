@@ -1,15 +1,9 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword"
-srcurl="http://0install.net/"
-extension_input="tar.bz2"
-sep='"'
-opt_match="released"
-opt_nonmatch="0release"
-version_holder="#version#"
-custom_url="https://sourceforge.net/projects/zero-install/files/0install/#version#/0install-#version#.${extension_input}/download"
-basename="zeroinstall"
+latest="github"
+baseurl="https://github.com/0install/0install"
+srcurl="${baseurl}/releases"
+extension_input="tar.gz"
+custom_url_prefix="${baseurl}/archive/"
+basename="0install"
 custom_file_prefix="${basename}-"
-custom_file_postfix=".${extension_input}"
-
-## EOF ##
