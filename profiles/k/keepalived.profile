@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+latest="firstaftermatchword-trim"
+srcurl="https://www.keepalived.org"
+opt_match="Download"
+opt_nonmatch=""
+basename="keepalived"
+extension_input="tar.gz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://www.keepalived.org/software/keepalived-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
