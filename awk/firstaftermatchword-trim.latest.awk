@@ -36,7 +36,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   print "# DEBUG: line array cnt: " cnt
   print "# DEBUG: " line
 
-  # no "2nd keyword" to match switch to 1
+  # no "2nd keyword" to match: change substate to 1
   if (opt_2ndmatch == "") { print "# DEBUG: opt_2ndmatch is empty."; substate = 1; }
 
   for (idx in line_a)
@@ -58,7 +58,6 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 
     if (item ~ /[0-9]+\.[0-9]+/ && vers == "")
     {
-      # if set make sure we match second condition
       vers = item
 
       print "# DEBUG: version path found: "vers
