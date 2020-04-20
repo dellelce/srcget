@@ -3,6 +3,7 @@
 latest="github"
 baseurl="https://github.com/helm/helm"
 srcurl="${baseurl}/releases"
+opt_nonmatch="v2\."
 extension_input="tar.gz"
 custom_url_prefix="${baseurl}/archive/"
 basename="helm"
