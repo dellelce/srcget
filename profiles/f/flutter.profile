@@ -1,12 +1,14 @@
 # vim:syntax=sh
 
-latest="github"
+latest="firstaftermatchword-trim"
 basename="flutter"
-baseurl="https://github.com/${basename}/${basename}"
-srcurl="${baseurl}/releases"
+srcurl="https://storage.googleapis.com/flutter_infra/releases/releases_linux.json"
+opt_matchword="stable"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
+version_holder="#version#"
+custom_url="https://github.com/flutter/flutter/archive/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-comment="Open source browser"
+custom_file_postfix=".${extension_input}"
+comment="UI toolkit for building mobile, web & desktop application"
 
 ## EOF ##
