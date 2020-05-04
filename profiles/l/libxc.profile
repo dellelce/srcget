@@ -1,15 +1,15 @@
 # vim:syntax=sh
 
 latest="firstaftermatchword-trim"
-srcurl="https://www.tddft.org/programs/libxc/download/"
-comment=""
-opt_match="latest stable release"
-extension_input="tar.gz"
 basename="libxc"
+baseurl="https://gitlab.com/libxc/libxc"
+srcurl="${baseurl}/-/tags"
+extension_input="tar.bz2"
+sep='"'
+opt_match="Release"
 version_holder="#version#"
-custom_url="http://www.tddft.org/programs/libxc/down.php?file=#version#/libxc-#version#.${extension_input}"
+custom_url="${baseurl}/-/archive/#version#/${basename}-#version#.${extension_input}"
 custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
-
 
 ## EOF ##
