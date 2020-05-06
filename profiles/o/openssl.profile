@@ -1,10 +1,12 @@
 # vim:syntax=sh
 
-latest="openssl"
-baseurl="https://github.com/openssl/openssl"
-srcurl="${baseurl}/releases"
+latest="firstaftermatchword-trim"
+srcurl="https://www.openssl.org/source/old/1.0.2/"
+opt_match="KBytes"
+basename="openssl"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-
-## EOF ##
+comment=""
+version_holder="#version#"
+custom_url="https://www.openssl.org/source/openssl-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
