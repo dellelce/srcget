@@ -32,6 +32,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   gsub(/\.html/, " ", line);
   gsub(/\.json/, " ", line);
   gsub(/\.asc/, " ", line);
+  gsub(/\.sha/, " ", line);
   cnt = split(line, line_a, " ");
 
   print "# DEBUG: line array cnt: " cnt
