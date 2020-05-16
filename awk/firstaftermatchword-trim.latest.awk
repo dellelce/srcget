@@ -17,7 +17,13 @@ BEGIN {
 
 # custom rules
 
-$0 ~ opt_match { print "# DEBUG: change state to 1; LINE = " FNR; state=1; }
+$0 ~ opt_match \
+{
+  if (state != 1)
+  {
+    print "# DEBUG: change state from " state " to 1; LINE = " FNR; state=1;
+  }
+}
 opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 
 state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
@@ -79,7 +85,22 @@ END \
   print "# DEBUG: version after extension trim: "vers
 
   # remove "name-" prefix
-  hyphen_cnt = split(vers, vers_a, "-"); if (hyphen_cnt == 2) vers = vers_a[2];
+  gsub(/_/, "-", vers)
+  cnt = split(vers, vers_a, "-");
+  nvers = ""
+
+  for (idx in vers_a)
+  {
+    item = vers_a[idx]
+
+    if (item ~ /[0-9]+\.[0-9]+/ && nvers == "")
+    {
+      nvers = item
+    }
+  }
+  if (vers != nvers) print "# DEBUG: version after extra sanity check: "nvers
+  vers = nvers
+
   sub(/\.$/, "", vers); #trailing dots not part of a version
   sub(/:/, "", vers); # unneeded character in version
   sub(/^v/, "", vers); #don't need an initial v
