@@ -1,6 +1,6 @@
 # vim:syntax=sh
 latest="haproxy"
-srcurl="http://www.haproxy.org"
+srcurl="https://www.haproxy.org"
 baseurl="${srcurl}/download/"
 extension_input="tar.gz"
 custom_url_prefix="${baseurl}"
