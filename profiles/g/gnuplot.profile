@@ -1,10 +1,12 @@
 # vim:syntax=sh
 
-latest="gnuplot"
-srcurl="http://sourceforge.net/projects/gnuplot/files/gnuplot/"
+latest="firstaftermatchword-trim"
+basename="gnuplot"
+srcurl="https://sourceforge.net/projects/gnuplot/files/"
+opt_match="with-sub-label"
 extension_input="tar.gz"
-#http://tenet.dl.sourceforge.net/project/gnuplot/gnuplot/5.0.3/gnuplot-5.0.3.tar.gz
-#https://netcologne.dl.sourceforge.net/project/gnuplot/gnuplot/5.0.5/gnuplot-5.0.5.tar.gz
-custom_url_prefix="https://netcologne.dl.sourceforge.net/project/gnuplot/gnuplot/"
-custom_url_postfix=".${extension_input}"
+version_holder="#version#"
+#https://sourceforge.net/projects/gnuplot/files/gnuplot/5.2.8/gnuplot-5.2.8.tar.gz/download
+custom_url="https://sourceforge.net/projects/gnuplot/files/gnuplot/#version#/gnuplot-#version#.${extension_input}/download"
+custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
