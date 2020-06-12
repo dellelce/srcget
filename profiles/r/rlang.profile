@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+latest="firstaftermatchword-trim"
+srcurl="https://cloud.r-project.org/sources.html"
+opt_match="latest release"
+opt_nonmatch=""
+basename="rlang"
+extension_input="tar.gz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://cloud.r-project.org/src/base/R-#major#/R-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
