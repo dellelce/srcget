@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+latest="firstaftermatchword-trim"
+srcurl="http://www.squid-cache.org/Versions/"
+opt_match="Latest Release"
+opt_nonmatch=""
+basename="squid"
+extension_input="tar.xz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="http://www.squid-cache.org/Versions/v#major#/squid-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
