@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+latest="firstaftermatchword-trim"
+srcurl="http://www.openntpd.org/"
+opt_match="released"
+opt_nonmatch=""
+basename="openntpd"
+extension_input="tar.gz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://mirror.exonetric.net/pub/OpenBSD/OpenNTPD/openntpd-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
