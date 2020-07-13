@@ -33,12 +33,13 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   gsub(/[<>\/,=']/, " ", line);
   gsub(/&nbsp;/, " ", line);
 
-  # The next three lines are a bit kludgy
+  # The next few lines are a bit kludgy
   #  and should be replaced by an array in the profile
   gsub(/\.html/, " ", line);
   gsub(/\.json/, " ", line);
   gsub(/\.asc/, " ", line);
   gsub(/\.sha/, " ", line);
+  gsub(/\.txt/, " ", line);
   cnt = split(line, line_a, " ");
 
   print "# DEBUG: line array cnt: " cnt
