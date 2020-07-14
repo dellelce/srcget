@@ -1,9 +1,9 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword"
+latest="firstaftermatchword-trim"
 srcurl="https://www.neuron.yale.edu/neuron/"
 comment="empirically-based simulations of neurons and networks of neurons"
-opt_match="is now available"
+opt_match="block-bean-download-block"
 extension_input="tar.gz"
 basename="neuron"
 version_holder="#version#"

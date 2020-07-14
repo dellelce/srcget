@@ -2,7 +2,7 @@
 
 latest="firstaftermatchword-trim"
 srcurl="https://www.ffmpeg.org/download.html"
-opt_match="btn-download-wrapper"
+opt_match="was released"
 opt_nonmatch=""
 basename="ffmpeg"
 extension_input="tar.bz2"
