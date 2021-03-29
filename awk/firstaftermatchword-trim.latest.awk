@@ -41,6 +41,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   gsub(/\.sha/, " ", line);
   gsub(/\.txt/, " ", line);
   gsub(/\.pdf/, " ", line);
+  gsub(/\.zip/, " ", line);
   cnt = split(line, line_a, " ");
 
   print "# DEBUG: line array cnt: " cnt
