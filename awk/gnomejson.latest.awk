@@ -57,6 +57,7 @@ BEGIN {
 
     if (item ~ /LATEST-IS-/)
     {
+      print("#DEBUG: LATEST: "item)
       sub(/LATEST-IS-/, "", item);
       good_vers = compare_versions(item, good_vers)
     }
@@ -71,6 +72,8 @@ END \
  {
   split(good_vers, vers_a, ".")
   base_vers=vers_a[1]"."vers_a[2]
+  print "major="vers_a[1]
+  print "minor="vers_a[2]
   print "version="good_vers
   print "latest="base_vers"/"pkgprofile"-"good_vers"."ext
  }
