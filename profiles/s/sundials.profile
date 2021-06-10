@@ -2,7 +2,7 @@
 
 latest="firstaftermatchword-trim"
 srcurl="https://computing.llnl.gov/projects/sundials/sundials-software"
-opt_match="Software Releases"
+opt_match="latest release"
 basename="sundials"
 extension_input="tar.gz"
 comment=""
