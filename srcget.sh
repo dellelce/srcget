@@ -323,6 +323,8 @@ main_single()
  #TODO: error management needs to be reviewed
  [ "$output_cnt" -eq 0 ] &&
  {
+   [ $latest_rc -eq 0 ] && latest_rc=1  # we need to return an error code in case of failure....
+
    srcecho "${profile}: couldn't process website: rc = $latest_rc"
    return $latest_rc
  }
