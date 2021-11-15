@@ -9,7 +9,7 @@
 
 BEGIN { print ""; }
 
-/-stable/ { stable = 1; }
+/LTS/ { stable = 1; }
 
 ver == "" && stable == 1 && $0 ~ prefix && $0 ~ ext && !/\.asc/ && !/\.md5/ && !/-dev/ \
 {
