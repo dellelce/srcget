@@ -1,14 +1,15 @@
 # vim:syntax=sh
 
-latest="libxml2"
-srcurl="http://www.xmlsoft.org/news.html"
-baseurl=""
-extension="tar.gz"
-# if set will be used to generate url
-#ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz
-#ftp://xmlsoft.org/libxml2/libxml2-sources-2.9.3.tar.gz
-#ftp://xmlsoft.org/libxml2/libxml2-2.9.4.tar.gz
-custom_url_prefix="ftp://xmlsoft.org/libxml2/libxml2-"
-custom_url_postfix=".${extension}"
-custom_file_prefix="libxml2-"
-custom_file_postfix=".${extension}"
+latest="firstaftermatchword-trim"
+basename="libxml2"
+baseurl="https://gitlab.gnome.org/GNOME/${basename}"
+srcurl="${baseurl}/-/tags"
+extension_input="tar.bz2"
+sep='"'
+opt_match="Download source code"
+version_holder="#version#"
+custom_url="${baseurl}/-/archive/v#version#/${basename}-v#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
+
+## EOF ##
