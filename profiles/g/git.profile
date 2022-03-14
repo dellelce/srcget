@@ -2,7 +2,7 @@
 
 latest="github"
 baseurl="https://github.com/git/git"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 comment="that's git!"
 extension_input="tar.gz"
 sep='"'

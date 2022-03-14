@@ -2,7 +2,7 @@
 
 latest="github"
 baseurl="https://github.com/nginx/njs"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
 basename="njs"
 sep='"'

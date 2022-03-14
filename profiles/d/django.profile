@@ -2,7 +2,7 @@
 
 latest="github"
 baseurl="https://github.com/django/django"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 comment=""
 extension_input="tar.gz"
 sep='"'

@@ -2,7 +2,7 @@
 
 latest="github"
 baseurl="https://github.com/Supervisor/supervisor"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
 basename="supervisord"
 custom_url_prefix="${baseurl}/archive/"

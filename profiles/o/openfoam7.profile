@@ -2,7 +2,7 @@
 
 latest="github"
 baseurl="https://github.com/OpenFOAM/OpenFOAM-7"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
 custom_url_prefix="${baseurl}/archive/"
 basename="openfoam7"

@@ -2,7 +2,7 @@
 
 latest="github"
 baseurl="https://github.com/ghc/ghc"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 comment="Glasgow Haskell Compiler"
 extension_input="tar.gz"
 sep='"'
