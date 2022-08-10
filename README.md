@@ -1,7 +1,7 @@
 # Tool to download latest *stable* source
 
 [![Join the chat at https://gitter.im/srcget/Lobby](https://badges.gitter.im/srcget/Lobby.svg)](https://gitter.im/srcget/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/dellelce/srcget.svg?branch=master)](https://travis-ci.org/dellelce/srcget)
+<br>
 Usage:
 
     ./srcget.sh <name>
@@ -28,11 +28,11 @@ i.e.:
   - Improve version checking, most of the filters rely on very simple checks
   - Python migration: not to be done, but instead a new fork (srcgetpy) to happen
   - Signal handling: control-c is to be improved
-  - Support for: Content-Disposition header 
+  - Support for: Content-Disposition header
 
 ## Todo Build:
 
-  - dependency work is needed for 
+  - dependency work is needed for
 
 ## Options:
 
