@@ -26,7 +26,7 @@ state == 1 { next } # found our "release" skip everything else
   next
 }
 
-state == 2 && /Latest release/ \
+state == 2 && /Latest/ \
 {
   state = 0
   print "#DEBUG: found Latest"
@@ -35,10 +35,42 @@ state == 2 && /Latest release/ \
 
 opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 
+# "new" style
+state == 0 && /Link--primary/ \
+{
+  line=$0
+  gsub(/"/, " ", line);
+  gsub(/[<>]/, " ", line);
+  cnt = split(line, line_a, " ");
+
+  for (idx in line_a)
+  {
+    item = line_a[idx]
+
+    if (item  ~ /[0-9]\./ && item ~ /\/tag/)
+    {
+      print "# DEBUG: link-primary: "item
+      item_cnt = split(item, item_a, "/")
+
+      cand_vers = item_a[item_cnt]
+      print "#DEBUG tag = " item_a[item_cnt]
+
+      if (cand_vers  ~ /[0-9]\./ && cand_vers !~ /-rc/)
+      {
+         # candidate version passed checks
+         vers = cand_vers
+         state = 1
+      }
+    }
+ }
+}
+
+# "old" style
 state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ && $0 !~ /-dev/ && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
+  gsub(/[<>]/, " ", line);
   cnt = split(line, line_a, " ");
   print "# DEBUG: state = " state " cnt = " cnt " line = " line
 
