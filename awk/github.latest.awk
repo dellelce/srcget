@@ -57,6 +57,13 @@ state == 0 && /Link--primary/ \
 
       if (cand_vers  ~ /[0-9]\./ && cand_vers !~ /-rc/)
       {
+         if (cand_vers ~ /-/)
+         {
+             split(cand_vers, cv_a, "-")
+             cand_vers = cv_a[2]
+             print("#DEBUG: cand_vers after hyphen check: " cand_vers)
+         }
+
          # candidate version passed checks
          vers = cand_vers
          state = 1
