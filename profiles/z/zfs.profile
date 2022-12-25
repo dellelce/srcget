@@ -1,9 +1,11 @@
 # vim:syntax=sh
 
 latest="github"
-baseurl="https://github.com/zfsonlinux/zfs"
+baseurl="https://github.com/openzfs/zfs"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
 basename="zfs"
-custom_file_prefix=""
+version_holder="#version#"
+custom_url="${baseurl}/releases/download/${basename}-#version#/${basename}-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
