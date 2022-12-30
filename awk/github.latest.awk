@@ -55,6 +55,7 @@ state == 0 && /Link--primary/ \
 
       cand_vers = item_a[item_cnt]
       print "#DEBUG tag = " cand_vers
+      sub(/^v/, "", cand_vers)
 
       if (cand_vers ~ /-rc/ || cand_vers ~ /beta/ || cand_vers ~ /alpha/)
       {
