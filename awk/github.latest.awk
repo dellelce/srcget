@@ -29,7 +29,7 @@ state == 1 { next } # found our "release" skip everything else
 state == 2 && /Latest/ \
 {
   state = 0
-  print "#DEBUG: found Latest"
+  print "#DEBUG: found Latest: " NR
   next
 }
 
@@ -42,6 +42,7 @@ state == 0 && /Link--primary/ \
   gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
   cnt = split(line, line_a, " ");
+  print "# DEBUG: link-primary line: " NR
 
   for (idx in line_a)
   {
@@ -53,9 +54,15 @@ state == 0 && /Link--primary/ \
       item_cnt = split(item, item_a, "/")
 
       cand_vers = item_a[item_cnt]
-      print "#DEBUG tag = " item_a[item_cnt]
+      print "#DEBUG tag = " cand_vers
 
-      if (cand_vers  ~ /[0-9]\./ && cand_vers !~ /-rc/)
+      if (cand_vers ~ /-rc/ || cand_vers ~ /beta/ || cand_vers ~ /alpha/)
+      {
+         print "#DEBUG tag skipped."
+         continue
+      }
+
+      if (cand_vers  ~ /[0-9]\./)
       {
          if (cand_vers ~ /-/)
          {
