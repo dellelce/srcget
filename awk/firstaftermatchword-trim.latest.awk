@@ -29,8 +29,15 @@ opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 {
   line=$0
-  gsub(/"/, " ", line);
-  gsub(/[<>\/,=']/, " ", line);
+
+  # bake in skipping of beta & alpha versions
+  # WARNING: side effects: if multiple version are on the same line all versions will be skipped.
+  if ($0 ~ /beta/ || $0 ~ /alpha/)
+  {
+    print("# DEBUG: skipped alpha/beta at "FNR);
+    next
+  }
+
   gsub(/&nbsp;/, " ", line);
 
   # The next few lines are a bit kludgy
