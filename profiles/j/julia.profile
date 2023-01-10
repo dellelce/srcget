@@ -1,12 +1,15 @@
 # vim:syntax=sh
 
 latest="github"
-basename="julialang"
+basename="julia"
 baseurl="https://github.com/JuliaLang/julia"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}"
 extension_input="tar.gz"
 sep='"'
-custom_url_prefix="${baseurl}/archive/"
+#https://github.com/JuliaLang/julia/releases/download/v1.8.4/julia-1.8.4.tar.gz
+version_holder="#version#"
+custom_url="${baseurl}/releases/download/v#version#/${basename}-#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
 
 ## EOF ##
