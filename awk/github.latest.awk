@@ -18,11 +18,20 @@ BEGIN \
 
 state == 1 { next } # found our "release" skip everything else
 
+# "new style" from home page
+state == 0 && /Link--primary/ && /\/releases\// \
+{
+  # we are on the home page and we found the latest release
+  print "#DEBUG: new version on home page: " $0
+  print "#DEBUG: new version on home page: line = " FNR
+}
+
 # try to filter out "Pre-release"s; this needs to introduce "multi-page" github traversal
 /Pre-release/ \
 {
   state = 2
-  print "#DEBUG: skipped Pre-release"
+  print "#DEBUG: skipped Pre-release: " FNR
+  print "#DEBUG: line: " $0
   next
 }
 
