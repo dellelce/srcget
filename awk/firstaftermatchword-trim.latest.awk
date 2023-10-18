@@ -39,7 +39,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   }
 
   gsub(/&nbsp;/, " ", line);
-  gsub(/[<>"/]/, " ", line);
+  gsub(/[<>"\/]/, " ", line);
 
   # The next few lines are a bit kludgy
   #  and should be replaced by an array in the profile
