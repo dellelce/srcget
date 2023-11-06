@@ -50,6 +50,7 @@ state == 0 && /Link--primary/ \
   line=$0
   gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
+  print("# DEBUG: line after gsub: ", line);
   cnt = split(line, line_a, " ");
   print "# DEBUG: link-primary line: " NR
 
@@ -57,7 +58,7 @@ state == 0 && /Link--primary/ \
   {
     item = line_a[idx]
 
-    if (item  ~ /[0-9]\./ && item ~ /\/tag/)
+    if (item  ~ /[0-9]\./) # removed "tag" check here: why was it here?
     {
       print "# DEBUG: link-primary: "item
       item_cnt = split(item, item_a, "/")
