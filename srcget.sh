@@ -178,6 +178,7 @@ current_version()
  [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$pkgprofile"; }
  [ ! -z "$pkgbase" ] && { _awk="${_awk} -vpkgbase=$pkgbase"; }
  [ ! -z "$customout" ] && { _awk="${_awk} -vcustomout=$customout"; }
+ [ ! -z "$underscorevers" ] && { _awk="${_awk} -vunderscorevers=$underscorevers"; }
 
  rawget "$srcurl" > "$get_output"
  rc=$?
@@ -197,6 +198,7 @@ current_version()
  export opt_match
  export opt_nonmatch
  export opt_2ndmatch
+ export underscorevers
  ${_awk} ${_args} \
          -vbaseurl="${baseurl}" \
          -f "$fp_filter" < "$get_output"  |
@@ -472,7 +474,7 @@ info_single()
  typeset profile="$1"
  typeset profileRc=0
  typeset aList="basename baseurl custom_file_postfix
-                custom_file_prefix custom_url_postfix custom_url_prefix extension
+                custom_file_prefix custom_url_postfix custom_url_prefix extension underscorevers
 		extension_input extension_url filter sep skipvers srcurl comment bulkenabled"
  typeset aItem
 
