@@ -149,7 +149,6 @@ state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ &&
 
 END \
 {
-  if (underscorevers != "") { print "# DEBUG: underscorvers option set"; gsub(/\./, "_", vers); }
   if (vers != "") print "latest="vers
 }
 
