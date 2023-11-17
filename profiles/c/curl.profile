@@ -4,12 +4,11 @@ latest="github"
 basename="curl"
 baseurl="https://github.com/curl/curl"
 srcurl="${baseurl}/releases"
-extension_input="tar.gz"
+extension_input="tar.bz2"
 sep='"'
-#https://github.com/curl/curl/archive/refs/tags/curl-8_4_0.tar.gz
-underscorevers="please"
+#https://github.com/curl/curl/releases/download/curl-8_4_0/curl-8.4.0.tar.bz2
 version_holder="#version#"
-custom_url_prefix="${baseurl}/archive/refs/tags/curl-"
-custom_url_postfix=".${extension_input}"
+uscore_version_holder="#uversion#"
+custom_url="${baseurl}/releases/download/curl-#uversion#/curl-#version#.${extension_input}"
 custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
