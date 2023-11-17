@@ -465,8 +465,6 @@ main_single()
   rc=$?
  }
 
- echo "#DEBUG rawget: fullurl = $fullurl"
-
  [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "$fn"; }  # print only-name and successful
  [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } # print only-name and failed
 
