@@ -178,7 +178,6 @@ current_version()
  [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$pkgprofile"; }
  [ ! -z "$pkgbase" ] && { _awk="${_awk} -vpkgbase=$pkgbase"; }
  [ ! -z "$customout" ] && { _awk="${_awk} -vcustomout=$customout"; }
- [ ! -z "$underscorevers" ] && { _awk="${_awk} -vunderscorevers=$underscorevers"; }
 
  rawget "$srcurl" > "$get_output"
  rc=$?
@@ -198,7 +197,6 @@ current_version()
  export opt_match
  export opt_nonmatch
  export opt_2ndmatch
- export underscorevers
  ${_awk} ${_args} \
          -vbaseurl="${baseurl}" \
          -f "$fp_filter" < "$get_output"  |
@@ -265,6 +263,7 @@ load_profile()
  unset comment
  unset bulkenabled
  unset version_holder
+ unset uscore_version_holder
  unset major
  unset major_holder
  unset minor
@@ -378,10 +377,20 @@ main_single()
   fn="${custom_file_prefix}${fn}${custom_file_postfix}";
  }
 
+ # if set replace its occurences with found version
  [ ! -z "$version_holder" ] &&
  {
   typeset vh_latest=${version:-${latest}}
+  vh_latest=$(echo $vh_latest | tr '_' '.')
   fn="${fn//${version_holder}/${vh_latest}}"
+ }
+
+ [ ! -z "$uscore_version_holder" ] &&
+ {
+  typeset uvh_latest=${version:-${latest}}
+
+  uvh_latest=$(echo $vh_latest | tr '.' '_')
+  fn="${fn//${uscore_version_holder}/${uvh_latest}}"
  }
 
  # replace "major_holder" with "major" version if found
@@ -437,6 +446,10 @@ main_single()
 
   [ "$new_fullurl" != "$fullurl" ] && fullurl="$new_fullurl"
 
+  typeset new_fullurl="${fullurl//${uscore_version_holder}/${uvh_latest}}"
+
+  [ "$new_fullurl" != "$fullurl" ] && fullurl="$new_fullurl"
+
   info_banner
  }
 
@@ -476,8 +489,9 @@ info_single()
  typeset profile="$1"
  typeset profileRc=0
  typeset aList="basename baseurl custom_file_postfix
-                custom_file_prefix custom_url_postfix custom_url_prefix extension underscorevers
-		extension_input extension_url filter sep skipvers srcurl comment bulkenabled"
+                custom_file_prefix custom_url_postfix custom_url_prefix extension
+		extension_input extension_url filter sep
+                skipvers srcurl comment bulkenabled"
  typeset aItem
 
  load_profile $profile
