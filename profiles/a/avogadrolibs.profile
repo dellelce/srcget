@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 latest="github"
-basename="avogadro"
+basename="avogadrolibs"
 baseurl="https://github.com/openchemistry/avogadrolibs"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
