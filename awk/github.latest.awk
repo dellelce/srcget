@@ -50,9 +50,9 @@ state == 0 && /Link--primary/ \
   line=$0
   gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
-  print("# DEBUG: line after gsub: ", line);
+  print("#DEBUG: line after gsub: ", line);
   cnt = split(line, line_a, " ");
-  print "# DEBUG: link-primary line: " NR
+  print "#DEBUG: link-primary line: " NR
 
   for (idx in line_a)
   {
@@ -60,7 +60,7 @@ state == 0 && /Link--primary/ \
 
     if (item  ~ /[0-9]\./) # removed "tag" check here: why was it here?
     {
-      print "# DEBUG: link-primary: "item
+      print "#DEBUG: link-primary: "item
       item_cnt = split(item, item_a, "/")
 
       cand_vers = item_a[item_cnt]
@@ -77,9 +77,20 @@ state == 0 && /Link--primary/ \
       {
          if (cand_vers ~ /-/)
          {
-             split(cand_vers, cv_a, "-")
-             cand_vers = cv_a[2]
-             print("#DEBUG: cand_vers after hyphen check: " cand_vers)
+            print("#DEBUG: cand_vers hyphen check: " cand_vers)
+            cv_cnt = split(cand_vers, cv_a, "-")
+
+            for (pos = 1; pos <= cv_cnt; pos += 1)
+            {
+               cv_item = cv_a[pos]
+               print("#DEBUG: cand_vers hyphen loop: " cv_item)
+
+               if (cv_item ~ /[0-9]\./)
+               {
+                 cand_vers = cv_item;
+                 print("#DEBUG: cand_vers after hyphen check: " cand_vers)
+               }
+            }
          }
 
          # candidate version passed checks
