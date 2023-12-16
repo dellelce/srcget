@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="openvpn"
 latest="github"
 baseurl="https://github.com/OpenVPN/openvpn"
-srcurl="${baseurl}/tags"
+srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-basename="openvpn"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

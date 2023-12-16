@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="psycopg"
 latest="github"
 baseurl="https://github.com/psycopg/psycopg2"
 srcurl="${baseurl}/tags"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-basename="psycopg2"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
