@@ -237,6 +237,7 @@ load_profile()
   pfp="$profile"
  } ||
  {
+  #build "standard" full profile path (=pfp)
   export pfp="$profilesDir/${profile}.profile"
   export pfch="${profile:0:1}"; pfch=${pfch,,[a-z]}
   export altpfp="$profilesDir/${pfch}/${profile}.profile"
@@ -499,6 +500,7 @@ info_single()
   aValue=$(eval echo \$$aItem)
   [ ! -z "$aValue" ] && printf "%-20s %s\n" "$aItem" "$aValue"
  done
+ printf "%-20s %s\n" "profile_path" "$altpfp" #set by load_profile (and never unset)
 }
 
 # function: srcall: download all profiles
