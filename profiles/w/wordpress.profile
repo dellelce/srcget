@@ -1,8 +1,13 @@
 # vim:syntax=sh
 
-sep="\""
-latest="wp"
-srcurl="http://wordpress.org/download/release-archive/"
+basename="wordpress"
+latest="firstaftermatchword"
 extension_input="tar.gz"
-#full url returned by awk
-baseurl=""
+opt_match="${extension_input}"
+srcurl="https://wordpress.org/download/releases/"
+version_holder="#version#"
+
+#https://wordpress.org/wordpress-6.4.2.tar.gz
+custom_url="https://wordpress.org/wordpress-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
