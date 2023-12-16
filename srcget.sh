@@ -359,13 +359,7 @@ main_single()
  {
   [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] &&
   {
-   [ -z "$baseurl" ] &&
-   {
-    fullurl="$latest"
-   } ||
-   {
-     fullurl="$baseurl/$latest"
-   }
+   [ -z "$baseurl" ] && { fullurl="$latest"; } || { fullurl="$baseurl/$latest"; }
   } ||
   {
    fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
