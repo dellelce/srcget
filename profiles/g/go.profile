@@ -12,5 +12,5 @@ minor_holder="#minor#"
 major_holder="#major#"
 # https://go.dev/dl/go1.21.5.src.tar.gz
 custom_url="https://go.dev/dl/#version#.src.${extension_input}"
-custom_file_prefix=""
+custom_file_prefix="${basename}"
 custom_file_postfix=".${extension_input}"

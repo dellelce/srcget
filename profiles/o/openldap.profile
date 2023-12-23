@@ -2,7 +2,7 @@
 
 latest="firstaftermatchword-trim"
 srcurl="https://www.openldap.org/software/download/"
-opt_match="Our latest release"
+opt_match="Feature Release"
 opt_nonmatch=""
 basename="openldap"
 extension_input="tgz"

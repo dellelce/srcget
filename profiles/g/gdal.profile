@@ -1,8 +1,7 @@
 # vim:syntax=sh
 
 latest="firstaftermatchword-trim"
-opt_match="#current-releases"
-#opt_match="Latest Stable Release"
+opt_match="Current Release"
 srcurl="https://gdal.org/download.html"
 comment="Translator library for raster and vector geospatial data formats"
 extension_input="tar.xz"
