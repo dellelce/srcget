@@ -1,8 +1,8 @@
 # vim:syntax=sh
 
-basename="django"
+basename="jsonc"
 latest="github"
-baseurl="https://github.com/django/django"
+baseurl="https://github.com/json-c/json-c"
 srcurl="${baseurl}/tags"
 extension_input="tar.gz"
 version_holder="#version#"

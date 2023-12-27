@@ -237,6 +237,7 @@ load_profile()
   pfp="$profile"
  } ||
  {
+  #build "standard" full profile path (=pfp)
   export pfp="$profilesDir/${profile}.profile"
   export pfch="${profile:0:1}"; pfch=${pfch,,[a-z]}
   export altpfp="$profilesDir/${pfch}/${profile}.profile"
@@ -359,13 +360,7 @@ main_single()
  {
   [ -z "$custom_url_prefix" -a -z "$custom_url_postfix" ] &&
   {
-   [ -z "$baseurl" ] &&
-   {
-    fullurl="$latest"
-   } ||
-   {
-     fullurl="$baseurl/$latest"
-   }
+   [ -z "$baseurl" ] && { fullurl="$latest"; } || { fullurl="$baseurl/$latest"; }
   } ||
   {
    fullurl="${custom_url_prefix}${latest}${custom_url_postfix}"
@@ -505,6 +500,7 @@ info_single()
   aValue=$(eval echo \$$aItem)
   [ ! -z "$aValue" ] && printf "%-20s %s\n" "$aItem" "$aValue"
  done
+ printf "%-20s %s\n" "profile_path" "$altpfp" #set by load_profile (and never unset)
 }
 
 # function: srcall: download all profiles

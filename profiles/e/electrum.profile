@@ -1,7 +1,7 @@
 # vim:syntax=sh
 
 latest="firstaftermatchword-trim"
-srcurl="https://electrum.org/panel-download.html"
+srcurl="https://electrum.org/#download"
 opt_match="Latest release"
 opt_nonmatch=""
 basename="electrum"

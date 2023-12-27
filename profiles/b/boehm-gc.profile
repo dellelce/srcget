@@ -2,7 +2,7 @@
 
 latest="firstaftermatchword-trim"
 srcurl="https://www.hboehm.info/gc/"
-opt_match="fairly recent stable version"
+opt_match="stable version"
 opt_nonmatch=""
 basename="boehm-gc"
 extension_input="tar.gz"

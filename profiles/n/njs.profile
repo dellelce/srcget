@@ -1,12 +1,11 @@
 # vim:syntax=sh
 
+basename="njs"
 latest="github"
 baseurl="https://github.com/nginx/njs"
 srcurl="${baseurl}/tags"
 extension_input="tar.gz"
-basename="njs"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"
