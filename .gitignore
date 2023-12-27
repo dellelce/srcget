@@ -12,3 +12,4 @@ archives
 *.warc.gz
 *.swp
 tmp
+*.log
