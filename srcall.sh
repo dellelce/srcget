@@ -29,8 +29,10 @@ srcgetDir="$(dirname $0)"
   exit 2
 }
 
-for x in $srcgetDir/profiles/*.profile;
+for x in $srcgetDir/profiles/*/*.profile;
 do
+ [ ! -s "$x" ] && continue
+
  b=$(basename $x);
  p=${b%.profile};
 
