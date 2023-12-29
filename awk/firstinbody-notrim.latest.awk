@@ -20,7 +20,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
-  print "# DEBUG: " line
+  print "#DEBUG: " ine
 
   for (idx in line_a)
   {
@@ -31,12 +31,12 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
       vers = item
       lightvers = vers
 
-      if (vers ~ /\.sig/ || vers ~ /\.asc/ || vers ~ /alpha/)  { print "# DEBUG skipped: "vers; vers=""; continue; }
+      if (vers ~ /\.sig/ || vers ~ /\.asc/ || vers ~ /alpha/)  { print "#DEBUG: skipped: "vers; vers=""; continue; }
 
       sub("."ext, "", lightvers)
       lv_cnt = split(lightvers, lightvers_a, "-");
-      print "# DEBUG: light vers:" lightvers
-      print "# DEBUG: light vers base:" lightvers_a[lv_cnt-1]
+      print "#DEBUG: light vers:" lightvers
+      print "#DEBUG: light vers base:" lightvers_a[lv_cnt-1]
 
       # this test is only if pkgbasse is set
       if (pkgbase != "")
@@ -46,7 +46,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
 
        if (pkgbase !~ base)
        {
-        print "# DEBUG: base test failed: base ="base
+        print "#DEBUG: base test failed: base ="base
         vers=""
         next
        }
@@ -56,17 +56,17 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
       {
        lv_test = lightvers_a[item_lv]
 
-       print "# DEBUG: testing lv item = "lv_test
+       print "#DEBUG: testing lv item = "lv_test
 
        if (lv_test ~ /[0-9]+\.[0-9]+/)
        {
          lv = lv_test
-         print "# DEBUG: version found: "lv
+         print "#DEBUG: version found: "lv
          next
        }
       }
 
-      print "# DEBUG: version path found: "vers
+      print "#DEBUG: version path found: "vers
       next
     }
   } # for
@@ -76,7 +76,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" \
 
 END \
 {
-  print "# DEBUG: END FNR = " FNR
+  print "#DEBUG: END FNR = " FNR
   if (lv != "")
   {
     print "version="lv

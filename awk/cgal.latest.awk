@@ -65,7 +65,7 @@ BEGIN {
 {
   gsub(/[<>"]/, " ", $0);
   cnt = split($0, a, " ");
-  print "#DEBUG" $0
+  print "#DEBUG: " $0
 
   for (i in a)
   {

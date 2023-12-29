@@ -64,12 +64,12 @@ state == 0 && /Link--primary/ \
       item_cnt = split(item, item_a, "/")
 
       cand_vers = item_a[item_cnt]
-      print "#DEBUG tag = " cand_vers
+      print "#DEBUG: tag = " cand_vers
       sub(/^v/, "", cand_vers)
 
       if (cand_vers ~ /-rc/ || cand_vers ~ /beta/ || cand_vers ~ /alpha/)
       {
-         print "#DEBUG tag skipped."
+         print "#DEBUG: tag skipped."
          continue
       }
 
@@ -108,12 +108,12 @@ state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ &&
   gsub(/"/, " ", line);
   gsub(/[<>]/, " ", line);
   cnt = split(line, line_a, " ");
-  print "# DEBUG: state = " state " cnt = " cnt " line = " line
+  print "#DEBUG: state = " state " cnt = " cnt " line = " line
 
   for (idx in line_a)
   {
     item = line_a[idx]
-    print "# DEBUG: item = "item " idx = "idx
+    print "#DEBUG: item = "item " idx = "idx
 
     #
     if (cnt == 8 && /systemd/)
@@ -125,25 +125,25 @@ state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ &&
     if (item ~ ext)
     {
       vers = item
-      print "# DEBUG: "vers " ext = "ext " idx = "idx
+      print "#DEBUG: "vers " ext = "ext " idx = "idx
 
       if (vers ~ /-alpha/)
       {
-        print "# DEBUG: filter out alphas!"
+        print "#DEBUG: filter out alphas!"
         vers = ""
         next
       }
 
       if (vers ~ /-rc/ || vers ~ /RC/)
       {
-        print "# DEBUG: filter out rc"
+        print "#DEBUG: filter out rc"
         vers = ""
         next
       }
 
       if (vers ~ /beta/)
       {
-        print "# DEBUG: filter out beta"
+        print "#DEBUG: filter out beta"
         vers = ""
         next
       }

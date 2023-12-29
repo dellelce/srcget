@@ -23,12 +23,12 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-r
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
-  print "# DEBUG: " line
-  if (line ~ /\.md5/ || line ~ /\.sha256/ || line ~ /\.sig/) { print "#DEBUG skipping line"; next; }
+  print "#DEBUG: " line
+  if (line ~ /\.md5/ || line ~ /\.sha256/ || line ~ /\.sig/) { print "#DEBUG: skipping line"; next; }
 
   if (pkgprofile != "" && line !~ pkgprofile)
   {
-   print "# DEBUG: filtering out line as missing pkgprofile="pkgprofile
+   print "#DEBUG: filtering out line as missing pkgprofile="pkgprofile
    next
   }
 
@@ -38,7 +38,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.sig/ && $0 !~ /\.asc/ && $0 !~ /-r
     if (item ~ ext && item ~ /[0-9]+\./ && item !~ /\.sig/ && $0 ~ !/\.asc/)
     {
       vers = item
-      print "# DEBUG: version found: "vers
+      print "#DEBUG: version found: "vers
       next
     }
   }

@@ -22,7 +22,7 @@ $0 ~ ext && ($0 ~ !/snapshot/ && !/\.sig/ && !/\.sha256/) \
     item = a[idx]
     if (item ~ /[0-9]+.[0-9]+/ && item ~ ext)
     {
-      print "# DEBUG: match: " item
+      print "#DEBUG: match: " item
       ver = item
       next
     }

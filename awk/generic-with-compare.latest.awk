@@ -54,19 +54,19 @@ $0 ~ ext && $0 !~ /\.sha256/ \
   {
     if ($0 !~ opt_match)
     {
-      print("#DEBUG No opt_match: "$0)
+      print("#DEBUG: No opt_match: "$0)
       next
     }
   }
 
-  print "#DEBUG line: " line
+  print "#DEBUG: line: " line
   gsub(/[-<>:,{}\"]/, " ", line)
   split(line, line_a, " ")
 
   for (idx in line_a)
   {
     item = line_a[idx]
-    print "#DEBUG " item
+    print "#DEBUG: " item
 
     if (item ~ /[0-9]+\.[0-9]+/)
     {

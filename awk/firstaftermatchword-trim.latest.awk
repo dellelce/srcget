@@ -21,7 +21,7 @@ $0 ~ opt_match \
 {
   if (state != 1)
   {
-    print "# DEBUG: change state from " state " to 1; LINE = " FNR; state=1;
+    print "#DEBUG: change state from " state " to 1; LINE = " FNR; state=1;
   }
 }
 opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
@@ -34,7 +34,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   # WARNING: side effects: if multiple version are on the same line all versions will be skipped.
   if ($0 ~ /beta/ || $0 ~ /alpha/)
   {
-    print("# DEBUG: skipped alpha/beta at "FNR);
+    print("#DEBUG: skipped alpha/beta at "FNR);
     next
   }
 
@@ -46,21 +46,21 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
   gsub(/\.[a-z]+/, " ", line);
   cnt = split(line, line_a, " ");
 
-  print "# DEBUG: line array cnt: " cnt
-  print "# DEBUG: " line
+  print "#DEBUG: line array cnt: " cnt
+  print "#DEBUG: " line
 
   # no "2nd keyword" to match: change substate to 1
-  if (opt_2ndmatch == "") { print "# DEBUG: opt_2ndmatch is empty."; substate = 1; }
+  if (opt_2ndmatch == "") { print "#DEBUG: opt_2ndmatch is empty."; substate = 1; }
 
   for (idx = 1; idx <= cnt; idx += 1)
   {
     item = line_a[idx]
-    print "# DEBUG: item = "item " index = "idx
+    print "#DEBUG: item = "item " index = "idx
     if (opt_2ndmatch != "" && substate == 0)
     {
       if  (item ~ opt_2ndmatch)
       {
-        print "# DEBUG: 2nd keyword matched: LINE = " FNR " keyword = " item
+        print "#DEBUG: 2nd keyword matched: LINE = " FNR " keyword = " item
         substate = 1
       }
       else
@@ -73,7 +73,7 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
     {
       vers = item
 
-      print "# DEBUG: version path found: "vers
+      print "#DEBUG: version path found: "vers
       next
     }
   }
@@ -83,13 +83,13 @@ state == 1 && $0 ~ /[0-9]+\.[0-9]+/ && vers == "" \
 
 END \
 {
-  print "# DEBUG: END FNR = " FNR
+  print "#DEBUG: END FNR = " FNR
 
   #extra trim: remove extension
-  print "# DEBUG: version before trims: "vers
+  print "#DEBUG: version before trims: "vers
   sub("."ext,"",vers);
   gsub(/[a-z,:]+/,"",vers)
-  print "# DEBUG: version after trims: "vers
+  print "#DEBUG: version after trims: "vers
 
   # remove "name-" prefix
   gsub(/_/, "-", vers)
@@ -105,7 +105,7 @@ END \
       nvers = item
     }
   }
-  if (vers != nvers) print "# DEBUG: version after extra sanity check: "nvers
+  if (vers != nvers) print "#DEBUG: version after extra sanity check: "nvers
   vers = nvers
 
   sub(/\.$/, "", vers); #trailing dots not part of a version

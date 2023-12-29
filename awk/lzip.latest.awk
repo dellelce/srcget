@@ -20,18 +20,18 @@ $0 ~ /[0-9]+\.[0-9]+/ && /lzip-/ && !/-pre/ && !/-rc/ && !/\.sig/ && $0 ~ ext \
   gsub(/[<>]/, " ", line);
   split(line, line_a, " ");
 
-  print "# DEBUG: " line
+  print "#DEBUG: " line
 
   for (idx in line_a)
   {
     item=line_a[idx]
-    #print "# DEBUG : iterating line: item= "item
+    #print "#DEBUG: iterating line: item= "item
     if (item ~ /lzip-/)
     {
       sub("."ext, "", item);
       sub("lzip-", "", item);
       vers = item
-      print "# DEBUG: version found: "vers
+      print "#DEBUG: version found: "vers
       next
     }
   }

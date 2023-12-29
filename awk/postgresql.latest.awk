@@ -26,7 +26,7 @@ version=="" && state == 1 && !/beta/ && /[0-9]+\.[0-9]+/ \
 
  if (opt_match != "" && $0 !~ opt_match)
  {
-  print "#DEBUG opt_match="opt_match" not matched."
+  print "#DEBUG: opt_match="opt_match" not matched."
   next
  }
 

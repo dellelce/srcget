@@ -17,35 +17,35 @@ BEGIN \
 
 state == 1 { next }
 
-$0 ~ ext { print "# DEBUG: " $0; }
+$0 ~ ext { print "#DEBUG: " $0; }
 
 $0 ~ ext && $0 ~ /[0-9]_/ && /\/archive\// && vers == "" \
 {
   line=$0
   gsub(/"/, " ", line);
   cnt = split(line, line_a, " ");
-  print "# DEBUG: cnt = " cnt " line = " line
+  print "#DEBUG: cnt = " cnt " line = " line
 
   for (idx in line_a)
   {
     item = line_a[idx]
-    print "# DEBUG: item = "item " idx = "idx
+    print "#DEBUG: item = "item " idx = "idx
 
     if (item ~ ext)
     {
       vers = item
-      print "# DEBUG: "vers " ext = "ext " idx = "idx
+      print "#DEBUG: "vers " ext = "ext " idx = "idx
 
       if (vers ~ /-rc/)
       {
-        print "# DEBUG: filter out rc"
+        print "#DEBUG: filter out rc"
         vers = ""
         next
       }
 
       if (vers ~ /beta/)
       {
-        print "# DEBUG: filter out beta"
+        print "#DEBUG: filter out beta"
         vers = ""
         next
       }

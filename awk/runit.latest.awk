@@ -23,7 +23,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 ~ !/\.sig/ \
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
-  print "# DEBUG: " line
+  print "#DEBUG: " line
 
   for (idx in line_a)
   {
@@ -31,7 +31,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && vers == "" && $0 ~ !/\.sig/ \
     if (item ~ ext && item ~ /[0-9]+\.[0-9]+/ && item !~ /\.sig/)
     {
       vers = item
-      print "# DEBUG: version found: "vers
+      print "#DEBUG: version found: "vers
       next
     }
   }

@@ -41,7 +41,7 @@ BEGIN \
 
   gsub(/[<>"]/, " ", line);
   cnt = split (line, line_a, " ");
-  print "# DEBUG: "line
+  print "#DEBUG: "line
 
   for (idx in line_a)
   {

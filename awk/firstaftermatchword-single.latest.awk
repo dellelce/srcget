@@ -24,7 +24,7 @@ state == 1 && $0 ~ /[0-9]+/ && vers == "" \
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
-  print "# DEBUG: " line
+  print "#DEBUG: " line
 
   for (idx in line_a)
   {
@@ -34,7 +34,7 @@ state == 1 && $0 ~ /[0-9]+/ && vers == "" \
     {
       vers = item
 
-      print "# DEBUG: version path found: "vers
+      print "#DEBUG: version path found: "vers
       next
     }
   }
@@ -44,7 +44,7 @@ state == 1 && $0 ~ /[0-9]+/ && vers == "" \
 
 END \
 {
-  print "# DEBUG: END FNR = " FNR "; final state = "state
+  print "#DEBUG: END FNR = " FNR "; final state = "state
   sub(/\.$/, "", vers); #trailing dots not part of a version
   if (vers != "")
   {
