@@ -23,11 +23,11 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.md5sum/ && $0 !~ /[ab]\./  && !/li
   gsub(/&nbsp;/, " ", line);
   split(line, line_a, " ");
 
-  print "# DEBUG: " line
+  print "#DEBUG: " line
 
   if (pkgprofile != "" && line !~ pkgprofile)
   {
-   print "# DEBUG: filtering out line as missing pkgprofile="pkgprofile
+   print "#DEBUG: filtering out line as missing pkgprofile="pkgprofile
    next
   }
 
@@ -37,7 +37,7 @@ $0 ~ /[0-9]+\.[0-9]+/ && $0 ~ ext && $0 !~ /\.md5sum/ && $0 !~ /[ab]\./  && !/li
     if (item ~ ext && item ~ /[0-9]+\./ && item !~ /\.sig/ && $0 ~ !/\.asc/)
     {
       vers = item
-      print "# DEBUG: version found: "vers
+      print "#DEBUG: version found: "vers
       next
     }
   }

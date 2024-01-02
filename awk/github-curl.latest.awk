@@ -31,9 +31,9 @@ state == 0 && /Link--primary/ \
   for (line_pos = 1; line_pos <= line_cnt; line_pos += 1)
   {
     v = line_a[line_pos]
-    print "#DBEUG lp: word check = " v
+    print "#DBEUG: lp: word check = " v
 
-    if (v ~ /[0-9]+\.[0-9]+/) { print "#DEBUG vers through Link-primary:" vers; vers = v; state = 1; next; } 
+    if (v ~ /[0-9]+\.[0-9]+/) { print "#DEBUG: vers through Link-primary:" vers; vers = v; state = 1; next; } 
   }
 }
 
@@ -59,12 +59,12 @@ state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ &&
   line=$0
   gsub(/"/, " ", line);
   cnt = split(line, line_a, " ");
-  print "# DEBUG: state = " state " cnt = " cnt " line = " line
+  print "#DEBUG: state = " state " cnt = " cnt " line = " line
 
   for (idx in line_a)
   {
     item = line_a[idx]
-    print "# DEBUG: item = "item " idx = "idx
+    print "#DEBUG: item = "item " idx = "idx
 
     #
     if (cnt == 8 && /systemd/)
@@ -76,25 +76,25 @@ state == 0 && $0 ~ ext && $0 ~ /[0-9]\./ && /\/archive\// && $0 !~ /-windows/ &&
     if (item ~ ext)
     {
       vers = item
-      print "# DEBUG: "vers " ext = "ext " idx = "idx
+      print "#DEBUG: "vers " ext = "ext " idx = "idx
 
       if (vers ~ /-alpha/)
       {
-        print "# DEBUG: filter out alphas!"
+        print "#DEBUG: filter out alphas!"
         vers = ""
         next
       }
 
       if (vers ~ /-rc/ || vers ~ /RC/)
       {
-        print "# DEBUG: filter out rc"
+        print "#DEBUG: filter out rc"
         vers = ""
         next
       }
 
       if (vers ~ /beta/)
       {
-        print "# DEBUG: filter out beta"
+        print "#DEBUG: filter out beta"
         vers = ""
         next
       }

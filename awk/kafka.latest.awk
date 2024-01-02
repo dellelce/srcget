@@ -23,18 +23,18 @@ BEGIN {
   gsub(/[<>]/, " ", line);
   cnt = split(line, line_a, " ");
 
-  print "# DEBUG: previous line: " other
-  print "# DEBUG: ("cnt " tokens): " line
+  print "#DEBUG: previous line: " other
+  print "#DEBUG: ("cnt " tokens): " line
 
   for (idx in line_a)
   {
     item=line_a[idx]
-    print "# DEBUG : iterating line: idx= " idx " item= "item
+    print "#DEBUG: iterating line: idx= " idx " item= "item
     if (item ~ /[0-9]+\.[0-9]+\.[0-9]+/ && !/\.$/)
     {
       sub(/\.$/,"",item)
       vers = item
-      print "# DEBUG: version found: "vers
+      print "#DEBUG: version found: "vers
       next
     }
   }

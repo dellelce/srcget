@@ -18,7 +18,7 @@ $0 ~ /[0-9]+\.[0-9]+\.[0-9]+/ && /span/ && vers==""\
   line = $0;
   gsub(/[<>]/, " ", line); 
   split(line,a, " ");
-  print "#DEBUG "line
+  print "#DEBUG: "line
 
   for (x in a)
   {
