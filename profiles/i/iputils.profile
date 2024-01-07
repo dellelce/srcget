@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="iputils"
 latest="github"
 baseurl="https://github.com/iputils/iputils"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
-basename="iputils"
-custom_url_prefix="${baseurl}/archive/"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/#version#"
 custom_file_prefix="${basename}-"
-sep='"'
+custom_file_postfix=""

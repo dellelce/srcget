@@ -1,13 +1,11 @@
 # vim:syntax=sh
 
+basename="scrapy"
 latest="github"
 baseurl="https://github.com/scrapy/scrapy"
-srcurl="${baseurl}/releases"
-comment="python bot"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
-sep='"'
-basename="scrapy"
-custom_url_prefix="${baseurl}/archive/"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"

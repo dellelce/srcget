@@ -1,12 +1,11 @@
 # vim:syntax=sh
 
+basename="packer"
 latest="github"
 baseurl="https://github.com/hashicorp/packer"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-basename="packer"
-custom_url_prefix="${baseurl}/archive/"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-#custom_url_prefix="http://www.bzip.org"
-#custom_file_prefix="${custom_file_prefix}"
-sep='"'
+custom_file_postfix=".${extension_input}"
