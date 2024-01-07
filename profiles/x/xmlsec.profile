@@ -3,7 +3,7 @@
 basename="xmlsec"
 latest="github"
 baseurl="https://github.com/lsh123/xmlsec"
-srcurl="${baseurl}/tags"
+srcurl="${baseurl}/releases"
 extension_input="tar.gz"
 version_holder="#version#"
 custom_url="${baseurl}/archive/refs/tags/#version#.${extension_input}"
