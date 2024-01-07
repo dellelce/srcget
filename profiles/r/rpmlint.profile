@@ -1,8 +1,11 @@
 # vim:syntax=sh
 
+basename="rpmlint"
 latest="github"
 baseurl="https://github.com/rpm-software-management/rpmlint"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="rpmlint"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
