@@ -1,12 +1,11 @@
 # vim:syntax=sh
 
+basename="geant4"
 latest="github"
 baseurl="https://github.com/Geant4/geant4"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="geant4"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-comment="Platform for the simulation of the passage of particles through matter"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"

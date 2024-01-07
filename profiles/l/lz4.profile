@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="lz4"
 latest="github"
 baseurl="https://github.com/lz4/lz4"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-basename="lz4"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

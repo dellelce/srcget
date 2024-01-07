@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="ppsspp"
 latest="github"
 baseurl="https://github.com/hrydgard/ppsspp"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="ppsspp"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-comment="A PSP emulator for Android, Windows, Mac and Linux, written in C++"
+custom_file_postfix=".${extension_input}"

@@ -1,9 +1,11 @@
 # vim:syntax=sh
 
+basename="kubespray"
 latest="github"
 baseurl="https://github.com/kubernetes-sigs/kubespray"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="kubespray"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

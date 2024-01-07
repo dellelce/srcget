@@ -1,11 +1,11 @@
 # vim:syntax=sh
 
+basename="bbolt"
 latest="github"
 baseurl="https://github.com/etcd-io/bbolt"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="bbolt"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"

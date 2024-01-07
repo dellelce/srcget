@@ -1,9 +1,11 @@
 # vim:syntax=sh
 
+basename="zeroinstall"
 latest="github"
 baseurl="https://github.com/0install/0install"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="0install"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

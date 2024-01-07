@@ -1,11 +1,11 @@
 # vim:syntax=sh
 
+basename="kubernetes"
 latest="github"
 baseurl="https://github.com/kubernetes/kubernetes"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="kubernetes"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"

@@ -1,13 +1,11 @@
 # vim:syntax=sh
 
+basename="helm"
 latest="github"
 baseurl="https://github.com/helm/helm"
 srcurl="${baseurl}/releases"
-opt_nonmatch="v2\."
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="helm"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-comment="Package manager for kubernetes"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"

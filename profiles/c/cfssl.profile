@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="cfssl"
 latest="github"
 baseurl="https://github.com/cloudflare/cfssl"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-basename="cfssl"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

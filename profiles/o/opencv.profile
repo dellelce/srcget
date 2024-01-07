@@ -1,11 +1,11 @@
 # vim:syntax=sh
 
-latest="github"
-opt_nonmatch="openvino"
-baseurl="https://github.com/itseez/opencv"
-srcurl="${baseurl}/releases"
-extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
 basename="opencv"
+latest="github"
+baseurl="https://github.com/itseez/opencv"
+srcurl="${baseurl}/tags"
+extension_input="tar.gz"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

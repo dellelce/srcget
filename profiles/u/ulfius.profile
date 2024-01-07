@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="ulfius"
 latest="github"
 baseurl="https://github.com/babelouest/ulfius"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="ulfius"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-comment="Web Framework to build REST APIs, Webservices or any HTTP endpoint in C language"
+custom_file_postfix=".${extension_input}"

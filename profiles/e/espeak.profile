@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="espeak"
 latest="github"
 baseurl="https://github.com/espeak-ng/espeak-ng"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-basename="espeak"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/#version#.${extension_input}"
 custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

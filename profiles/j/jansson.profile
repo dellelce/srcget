@@ -1,10 +1,11 @@
 # vim:syntax=sh
 
+basename="jansson"
 latest="github"
 baseurl="https://github.com/akheron/jansson"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="jansson"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-comment="C library for encoding, decoding and manipulating JSON data"
+custom_file_postfix=".${extension_input}"

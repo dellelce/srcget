@@ -1,8 +1,11 @@
 # vim:syntax=sh
 
+basename="libfuse"
 latest="github"
 baseurl="https://github.com/libfuse/libfuse"
-srcurl="${baseurl}/releases"
+srcurl="${baseurl}/tags"
 extension_input="tar.gz"
-custom_url_prefix="${baseurl}/archive/"
-basename="libfuse"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/fuse-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"

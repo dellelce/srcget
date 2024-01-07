@@ -1,12 +1,11 @@
 # vim:syntax=sh
 
+basename="blosc"
 latest="github"
 baseurl="https://github.com/Blosc/c-blosc"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-sep='"'
-custom_url_prefix="${baseurl}/archive/"
-basename="blosc"
+version_holder="#version#"
+custom_url="${baseurl}/archive/refs/tags/v#version#.${extension_input}"
 custom_file_prefix="${basename}-"
-
-## EOF ##
+custom_file_postfix=".${extension_input}"
