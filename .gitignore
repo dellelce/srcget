@@ -13,3 +13,4 @@ archives
 *.swp
 tmp
 *.log
+.profile
