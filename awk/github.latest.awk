@@ -35,6 +35,12 @@ state == 0 && /Link--primary/ && /\/releases\// \
   next
 }
 
+state == 2 && /<\/section/ \
+{
+  state = 0
+  print "#DEBUG: end release candidate section: " NR
+}
+
 state == 2 && /Latest/ \
 {
   state = 0
