@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+basename="abduco"
+latest="firstaftermatchword-trim"
+srcurl="https://www.brain-dump.org/projects/abduco/"
+opt_match="id=news"
+opt_nonmatch=""
+extension_input="tar.gz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://www.brain-dump.org/projects/abduco/abduco-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
