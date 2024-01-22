@@ -1,8 +1,8 @@
 # vim:syntax=sh
 
-basename="xz"
+basename="libgphoto2"
 latest="github"
-baseurl="https://github.com/tukaani-project/xz"
+baseurl="https://github.com/gphoto/libgphoto2"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
 version_holder="#version#"
