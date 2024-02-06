@@ -60,7 +60,7 @@ state == 0 && /Link--primary/ \
   cnt = split(line, line_a, " ");
   print "#DEBUG: link-primary line: " NR
 
-  for (idx in line_a)
+  for (idx = 0; idx <= cnt; idx++)
   {
     item = line_a[idx]
 
@@ -76,7 +76,7 @@ state == 0 && /Link--primary/ \
       if (cand_vers ~ /-rc/ || cand_vers ~ /beta/ || cand_vers ~ /alpha/)
       {
          print "#DEBUG: tag skipped."
-         continue
+         break
       }
 
       if (cand_vers  ~ /[0-9]\./)
