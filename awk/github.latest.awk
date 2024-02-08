@@ -54,7 +54,7 @@ opt_nonmatch != "" && $0 ~ opt_nonmatch { next; }
 state == 0 && /Link--primary/ \
 {
   line=$0
-  gsub(/"/, " ", line);
+  gsub(/[:"]/, " ", line);
   gsub(/[<>]/, " ", line);
   print("#DEBUG: line after gsub: ", line);
   cnt = split(line, line_a, " ");
