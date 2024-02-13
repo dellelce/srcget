@@ -1,9 +1,9 @@
 # vim:syntax=sh
 
 latest="firstaftermatchword-trim"
-srcurl="https://collectd.org/"
-opt_match="downloads"
-opt_nonmatch="min.js"
+srcurl="https://www.collectd.org/download.html"
+opt_match="tar.bz2"
+opt_nonmatch="rc"
 basename="collectd"
 extension_input="tar.bz2"
 comment=""
