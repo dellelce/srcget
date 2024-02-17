@@ -1,9 +1,13 @@
 # vim:syntax=sh
 #
-latest="tcl"
+
+basename="tcl"
+latest="firstaftermatchword"
+opt_match="id=\"downloads\""
 srcurl="http://www.tcl.tk/software/tcltk/download.html"
-sep='/'
 extension_url="tar.gz"
-custom_url_prefix="ftp://ftp.tcl.tk/pub/tcl/tcl"
-custom_url_postfix="-src.${extension_url}"
-custom_file_postfix="-src.${extension_url}"
+version_holder="#version#"
+#https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tcl8.6.13-src.tar.gz
+custom_url="https://downloads.sourceforge.net/project/tcl/Tcl/#version#/tcl#version#-src.tar.gz"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_url}"
