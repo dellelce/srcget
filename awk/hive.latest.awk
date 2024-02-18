@@ -1,23 +1,26 @@
 #
 # hive.latest.awk
 #
-# created: 1355 270314
+# created: 270314
 #
-
-### FUNCTIONS ###
 
 ### MAIN RULE ###
 
 BEGIN {
         vers=""
+        print ""
       }
 
 # custom rules
 
 /release/&&/available/&&/[0-9]+.[0-9]+.[0-9]+/&&vers=="" \
 {
-  gsub(/[<>]/," ");
+  if ($0 ~ /alpha/ || $0 ~ /beta/) next;
+
+  gsub(/[\/<>]/," ");
   split($0, array);
+
+  print "#DEBUG: found = "$0
 
   for (item in array)
   {
@@ -34,6 +37,6 @@ END   {
 	#0.12.0/hive-0.12.0  ... I don't like the following lines ...
 	if (vers != "")
         {
-         print vers"/apache-hive-"vers
+         print "latest="vers
         }
       }

@@ -1,15 +1,18 @@
 # vim:syntax=sh
 
+basename="hive"
 latest="hive"
-srcurl="http://hive.apache.org/downloads.html"
-baseurl="http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-"
+srcurl="https://hive.apache.org/general/downloads/"
 comment=""
 extension_input="tar.gz"
-basename="hive"
-custom_url_prefix="${baseurl}"
-#http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-0.13.0/apache-hive-0.13.0-src.tar.gz
-custom_url_postfix="-src.${extension_input}"
-#custom_file_prefix="${basename}-"
+#baseurl="http://mirror.ox.ac.uk/sites/rsync.apache.org/hive/hive-"
+#https://dlcdn.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-src.tar.gz
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://dlcdn.apache.org/hive/hive-#version#/apache-hive-#version#-src.${extension_input}"
+custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
+
 
 ## EOF ##

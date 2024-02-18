@@ -1,13 +1,12 @@
 # vim:syntax=sh
 
+basename="astrometry"
 latest="github"
 baseurl="https://github.com/dstndstn/astrometry.net"
 srcurl="${baseurl}/releases"
 extension_input="tar.gz"
-basename="astrometry.net"
-# https://github.com/dstndstn/astrometry.net/archive/refs/tags/0.94.tar.gz
-custom_url_prefix="${baseurl}/archive/refs/tags/"
-custom_url_postfix=".${extension_input}"
+version_holder="#version#"
+#https://github.com/dstndstn/astrometry.net/releases/download/0.94/astrometry.net-0.94.tar.gz
+custom_url="${baseurl}/releases/download/#version#/astrometry.net-#version#.${extension_input}"
 custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
-sep='"'

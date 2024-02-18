@@ -1,12 +1,17 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword"
-srcurl="http://www.kicad-pcb.org/download/source/"
+basename="kicad"
+latest="firstaftermatchword-trim"
+opt_match="Stable release"
+opt_nonmatch="release candidate"
+baseurl="https://gitlab.com/kicad/code/kicad"
+srcurl="${baseurl}/-/tags"
 extension_input="tar.bz2"
-opt_match="Current Version:"
+sep='"'
 version_holder="#version#"
-custom_url="https://gitlab.com/kicad/code/kicad-i18n/-/archive/#version#/kicad-#version#.${extension_input}"
-custom_file_prefix="kicad-"
+#https://gitlab.com/kicad/code/kicad/-/archive/7.0.10/kicad-7.0.10.tar.bz2
+custom_url="${baseurl}/-/archive/#version#/${basename}-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
 custom_file_postfix=".${extension_input}"
 
 ## EOF ##
