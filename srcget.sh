@@ -182,6 +182,12 @@ current_version()
  rawget "$srcurl" > "$get_output"
  rc=$?
 
+ [ $(file "$get_output" | grep -c "gzip compressed") -gt 0 ] &&
+ {
+   mv "$get_output" "${get_output}.gz"
+   gunzip "${get_output}.gz"
+ }
+
  [ $rc -ne 0 ] && return $rc
 
  # setup awk args
@@ -452,12 +458,23 @@ main_single()
  rawget "$fullurl" > "$fn"
  rc=$?
 
+ [ $(file "$fn" | grep -c "gzip compressed") -gt 0 ] &&
+ {
+    mv "$fn" "${fn}.gz"
+    gunzip "${fn}.gz"
+ }
+
  # rc=4 can be a temporary network issue: try again
  [ "$rc" -eq 4 ] &&
  {
   sleep $ERR4SLEEP
   rawget "$fullurl" > "$fn"
   rc=$?
+  [ $(file "$fn" | grep -c "gzip compressed") -gt 0 ] &&
+  {
+    mv "$fn" "${fn}.gz"
+    gunzip "${fn}.gz"
+  }
  }
 
  [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "$fn"; }  # print only-name and successful
