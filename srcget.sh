@@ -458,23 +458,12 @@ main_single()
  rawget "$fullurl" > "$fn"
  rc=$?
 
- [ $(file "$fn" | grep -c "gzip compressed") -gt 0 ] &&
- {
-    mv "$fn" "${fn}.gz"
-    gunzip "${fn}.gz"
- }
-
  # rc=4 can be a temporary network issue: try again
  [ "$rc" -eq 4 ] &&
  {
   sleep $ERR4SLEEP
   rawget "$fullurl" > "$fn"
   rc=$?
-  [ $(file "$fn" | grep -c "gzip compressed") -gt 0 ] &&
-  {
-    mv "$fn" "${fn}.gz"
-    gunzip "${fn}.gz"
-  }
  }
 
  [ "$NAMEONLY" -eq 1 -a "$rc" -eq 0 ] && { echo "$fn"; }  # print only-name and successful
