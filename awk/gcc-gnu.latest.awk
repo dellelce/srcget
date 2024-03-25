@@ -65,7 +65,9 @@ BEGIN {
 # custom rules
 $0 ~ pkgprofile && $0 ~ /[0-9]+\.[0-9]+/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
 {
-  gsub(/[<>"/-]/, " ", $0);
+  gsub(/\//, " ", $0);
+  gsub(/"/, " ", $0);
+  gsub(/[<>-]/, " ", $0);
   cnt = split($0, a, " ");
 
   print "#DEBUG: matched line: "$0
