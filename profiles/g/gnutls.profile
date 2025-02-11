@@ -1,12 +1,12 @@
 # vim:syntax=sh
 
-latest="firstaftermatchword-underscorevers"
+latest="firstaftermatchword-trim"
 basename="gnutls"
 baseurl="https://gitlab.com/gnutls/gnutls"
 srcurl="${baseurl}/-/tags"
 extension_input="tar.bz2"
 sep='"'
-opt_match="release"
+opt_match="tag-icon"
 version_holder="#version#"
 #https://gitlab.com/gnutls/gnutls/-/archive/gnutls_3_6_8/gnutls-gnutls_3_6_8.tar.bz2
 custom_url="${baseurl}/-/archive/#version#/${basename}-#version#.${extension_input}"
