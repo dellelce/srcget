@@ -16,7 +16,7 @@ BEGIN {
 
 $0 ~ opt_match { state=1; }
 
-state == 1 && $0 ~ /[0-9]+\_[0-9]+/ && vers == "" && $0 !~ /ALPHA/ && $0 !~ /BETA/ \
+state == 1 && $0 ~ /[0-9]+_[0-9]+/ && vers == "" && $0 !~ /ALPHA/ && $0 !~ /BETA/ \
 {
   line=$0
   gsub(/"/, " ", line);
@@ -30,7 +30,7 @@ state == 1 && $0 ~ /[0-9]+\_[0-9]+/ && vers == "" && $0 !~ /ALPHA/ && $0 !~ /BET
   {
     item = line_a[idx]
 
-    if (item ~ /[0-9]+\_[0-9]+/)
+    if (item ~ /[0-9]+_[0-9]+/)
     {
       vers = item
 
