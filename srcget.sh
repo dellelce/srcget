@@ -35,10 +35,9 @@ homePage="http://github.com/dellelce/srcget/"
 UA="Wget/${wget_version} (+${homePage})"
 
 unset SILENT DEBUG
-
 export LANG="en_GB.UTF-8" # to have more consitence in output across all platforms
 
-### FUNCTIONS ###
+## FUNCTIONS ##
 
 # function: fileType: return initial portion of "file"
 fileType()
@@ -311,7 +310,7 @@ main_single()
  typeset latest="" legacy_version="" # set by current_version function
  fn="" # needs to be empty but cannot be local
 
- [ ! -z "$DEBUG" ] && { echo "DEBUG: profile: $profile"; }
+ [ ! -z "$DEBUG" ] && echo "DEBUG: profile: $profile"
 
  load_profile $profile
  profileRc=$?
@@ -419,15 +418,12 @@ main_single()
  }
 
  # issue with "||" as "else" will use two test blocks for now
- [ ! -z "$custom_url" ] &&
- {
-  fullurl="$custom_url"
- }
+ [ ! -z "$custom_url" ] && fullurl="$custom_url"
 
  # check if: NO Download Option has been chosen
  [ "$NODOWNLOAD" -eq 1 ] &&
  {
-  [ "$NAMEONLY" -ne 0 ] && { echo "$fn"; }
+  [ "$NAMEONLY" -ne 0 ] && echo "$fn"
   return 0
  }
 
@@ -470,14 +466,14 @@ main_single()
  [ "$NAMEONLY" -eq 1 -a "$rc" -ne 0 ] && { echo "${profile}: failed to download: $fn"; } # print only-name and failed
 
  [ $rc -ne 0 ] && { srcecho "${profile}: wget failed with return code: $rc"; rm -f -- "$fn"; return $rc; }
- # test empty file
 
+ # test empty file
  [ ! -s "$fn" ] && { srcecho "${profile}: downloaded empty file"; rm -f -- "$fn"; return 10; }
  [ $(fileType $fn |awk  '{ print $1 } ' ) == "HTML" ] &&
   { srcecho "${profile}: invalid output format: HTML"; rm -- "$fn"; return 11; }
 
  # Delete file if asked (used for bulk testing)
- [ "$DELETEFILE" -eq 1 ] && { rm -f "$fn"; }
+ [ "$DELETEFILE" -eq 1 ] && rm -f "$fn"
 
  return $rc
 }
@@ -499,7 +495,7 @@ info_single()
  # Sanity checks
  [ -z "$srcurl" -o -z "$fp_filter" ] && { return $profileRc; } # just return if any of these are empty
  [ ! -f "$fp_filter" ] && { srcecho "invalid filter file: $fp_filter"; return 4; }
- [ $profileRc -ne 0 ] && { return 5; }
+ [ $profileRc -ne 0 ] && return 5
 
  for aItem in $aList
  do
@@ -550,7 +546,7 @@ srcall()
    continue
   }
 
-  [ $rc -eq 2 ] && { continue; } # = Ignore rc=2 as it is not a real error...
+  [ $rc -eq 2 ] && continue; # = Ignore rc=2 as it is not a real error...
 
   typeset msg="${p}: error: $rc"
 
@@ -644,7 +640,7 @@ main()
 geturl()
 {
  typeset url="$1"
- typeset profileRc=0
+ typeset profileRc=
 
  is_valid_url "$url" ||
  {
@@ -712,4 +708,4 @@ done
  exit $rc
 }
 
-### EOF ###
+## EOF ##
