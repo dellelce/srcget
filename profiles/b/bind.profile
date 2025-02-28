@@ -2,7 +2,7 @@
 
 latest="firstaftermatchword-trim"
 srcurl="https://www.isc.org/download/"
-opt_match="Current-Stable"
+opt_match="New Stable"
 opt_nonmatch="ARM"
 basename="bind9"
 extension_input="tar.xz"
