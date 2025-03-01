@@ -64,18 +64,18 @@ usage()
  cat  << EOF
 $0 [options] program_name
 
- -h  Display this help message
- -A  Download all packages
- -L  List all 'packages'
- -I  Information about package
- -x  Turn on debug mode
- -n  Quiet mode: show filename only
- -q  Quiet mode: don't show anything
- -d  Delete file after download (for testing)
- -F  Force specific Filter
- -H  Debug: return server HTTP headers
- -D  Testing: download remote url only
- -N  Do not download: used to check latest version
+   -h  Display this help message
+   -A  Download all packages
+   -L  List all 'packages'
+   -I  Information about package
+   -x  Turn on debug mode
+   -n  Quiet mode: show filename only
+   -q  Quiet mode: don't show anything
+   -d  Delete file after download (for testing)
+   -F  Force specific Filter
+   -H  Debug: return server HTTP headers
+   -D  Testing: download remote url only
+   -N  Do not download: used to check latest version
 
 EOF
 }
@@ -421,11 +421,7 @@ main_single()
  [ ! -z "$custom_url" ] && fullurl="$custom_url"
 
  # check if: NO Download Option has been chosen
- [ "$NODOWNLOAD" -eq 1 ] &&
- {
-  [ "$NAMEONLY" -ne 0 ] && echo "$fn"
-  return 0
- }
+ [ "$NODOWNLOAD" -eq 1 ] && { [ "$NAMEONLY" -ne 0 ] && echo "$fn"; return 0; }
 
  # check if file already exists and is not empty
  [ -s "$fn" ] &&
