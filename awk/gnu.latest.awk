@@ -65,7 +65,7 @@ BEGIN {
       }
 
 # custom rules
-$0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
+$0 ~ ext && $0 ~ pkgprofile && $0 !~ opt_nonmatch && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
 {
   if (customout != "" && $0 ~ customout)
   {
