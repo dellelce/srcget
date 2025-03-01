@@ -175,6 +175,7 @@ current_version()
  [ ! -z "$extension_url" ] && { _awk="${_awk} -vexturl=$extension_url"; }
  [ ! -z "$sep" ] && { _awk="${_awk} -F${sep}"; }
  [ ! -z "$pkgprofile" ] && { _awk="${_awk} -vpkgprofile=$pkgprofile"; }
+ [ ! -z "$opt_nonmatch" ] && { _awk="${_awk} -vopt_nonmatch=$opt_nonmatch"; }
  [ ! -z "$pkgbase" ] && { _awk="${_awk} -vpkgbase=$pkgbase"; }
  [ ! -z "$customout" ] && { _awk="${_awk} -vcustomout=$customout"; }
 
