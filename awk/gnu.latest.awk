@@ -102,7 +102,7 @@ END \
  if (initial_vers != good_vers)
  {
   print "version="good_vers
-  print "latest="fullvers
+  print "latest="vers
  }
 }
 
