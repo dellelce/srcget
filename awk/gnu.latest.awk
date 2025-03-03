@@ -64,9 +64,15 @@ BEGIN {
         print ""
       }
 
-# custom rules
-$0 ~ ext && $0 ~ pkgprofile && $0 !~ opt_nonmatch && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
+# main rule
+$0 ~ ext && $0 ~ pkgprofile && !/\.sig/ && !/latest/ && !/beta/ && !/alpha/ && !/-rc/ && !/_patchset/ \
 {
+  # filter out opt_nonmatch
+  if (opt_nonmatch != "" && $0 ~ opt_nonmatch)
+  {
+    print("#DEBUG: opt_nonmatch: skipped FNR = "FNR)
+    next
+  }
   if (customout != "" && $0 ~ customout)
   {
     next
@@ -94,8 +100,6 @@ $0 ~ ext && $0 ~ pkgprofile && $0 !~ opt_nonmatch && !/\.sig/ && !/latest/ && !/
     print "#DEBUG: new fullvers: "fullvers_temp
   }
 }
-
-### end rule ###
 
 END \
 {
