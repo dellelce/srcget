@@ -1,0 +1,15 @@
+# vim:syntax=sh
+
+latest="firstaftermatchword-trim"
+srcurl="https://musl.libc.org/"
+opt_match="Latest release"
+opt_nonmatch=""
+basename="musl"
+extension_input="tar.gz"
+comment=""
+version_holder="#version#"
+minor_holder="#minor#"
+major_holder="#major#"
+custom_url="https://musl.libc.org/releases/musl-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
