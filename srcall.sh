@@ -9,12 +9,12 @@
 
 srcget()
 {
- typeset srcget="$srcgetDir/srcget.sh"
+  typeset srcget="$srcgetDir/srcget.sh"
 
- [ ! -f "$srcget" ] && return 1
- [ ! -x "$srcget" ] && return 2
+  [ ! -f "$srcget" ] && return 1
+  [ ! -x "$srcget" ] && return 2
 
- $srcget $*
+  $srcget $*
 }
 
 ### ENV ###
@@ -24,31 +24,32 @@ srcgetDir="$(dirname $0)"
 ### MAIN ###
 
 [ ! -d "$srcgetDir/profiles" ] &&
-{
-  echo "Can't find profiles directory!: $srcgetDir/profiles"
-  exit 2
-}
+  {
+    echo "Can't find profiles directory!: $srcgetDir/profiles"
+    exit 2
+  }
 
-for x in $srcgetDir/profiles/*/*.profile;
-do
- [ ! -s "$x" ] && continue
+for x in $srcgetDir/profiles/*/*.profile; do
+  [ ! -s "$x" ] && continue
 
- b=$(basename $x);
- p=${b%.profile};
+  b=$(basename $x)
+  p=${b%.profile}
 
- basename=""
- . "$x" 
- b="$basename"
- [ -z "$b" ] && b="$p"
+  basename=""
+  . "$x"
+  b="$basename"
+  [ -z "$b" ] && b="$p"
 
-# printf "Checking ${p}..."
- srcget -n $p
- rc="$?"
+  # printf "Checking ${p}..."
+  srcget -n $p
+  rc="$?"
 
- # 2 = file already exiests
- [ $rc -eq 2 -o $rc -eq 0 ] && { continue; }
+  # 2 = file already exiests
+  [ $rc -eq 2 -o $rc -eq 0 ] && {
+    continue
+  }
 
- echo "${p}: error: $rc"
+  echo "${p}: error: $rc"
 
 done
 
