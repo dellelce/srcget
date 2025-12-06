@@ -284,8 +284,7 @@ load_profile()
     {
       #build "standard" full profile path (=pfp)
       export pfp="$profilesDir/${profile}.profile"
-      export pfch="${profile:0:1}"
-      pfch=${pfch,,[a-z]}
+      export pfch="$(echo ${profile} | awk ' { print tolower(substr($1,1,1)); }')"
       export altpfp="$profilesDir/${pfch}/${profile}.profile"
 
       [ ! -f "$pfp" -a ! -f "${altpfp}" ] && {
