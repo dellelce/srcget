@@ -1,7 +1,10 @@
 # vim:syntax=sh
 
 latest="gnu"
-srcurl="http://ftp.gnu.org/pub/gnu/ncurses"
+basename="ncurses"
+srcurl="http://ftp.gnu.org/gnu/ncurses/"
 extension_input="tar.gz"
-baseurl="$srcurl"
-sep='"'
+version_holder="#version#"
+custom_url="http://ftp.gnu.org/gnu/ncurses/ncurses-#version#.${extension_input}"
+custom_file_prefix="${basename}-"
+custom_file_postfix=".${extension_input}"
